@@ -1,0 +1,74 @@
+/* .card-header{
+        /* background-color: rgb(71, 163, 243); 
+        border-bottom: 1px solid rgba(71, 92, 243, 0.58);
+        color: white;
+    } */
+
+  .label_head
+  {
+   
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #9f2ab3;
+ text-align:center;
+  }
+
+  .mybtn {
+    text-align:center
+}
+.head_clr
+{
+	text-align:center;
+	color: rgb(71, 163, 243);
+	line-height:5.2;
+}
+.exbtn
+{   margin-left: 8px;
+
+}
+.img_icon
+{
+  height:10px;
+  width:10px;
+  align-items: center;
+}
+.add_icon
+{
+  height: 30px;
+  width:30px;
+  margin-left: 750px;
+  left: auto;
+}
+
+/* .table-header
+{ 
+    background-color:#346a7d!important;; 
+    color:#ffffff; 
+  -webkit-print-color-adjust: exact;
+    /* display: table-header-group;
+    -webkit-print-color-adjust: exact;  
+} */
+
+.logo_id
+{
+  height:70px;
+  width:70px;
+}
+.btncls{
+  width: 230px;
+  background-color: #47a3f3;
+  color: white;
+}
+.img_styl
+{
+background-repeat: no-repeat;
+background-color: #ffffff;
+color : #333333;
+font-family : Arial, Verdana, Helvetica,Sans-Serife;
+text-align:right;
+left-padding:35px;
+}
+.dtlc{
+
+  line-height: 0.625;
+}
