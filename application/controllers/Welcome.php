@@ -12,7 +12,7 @@ class Welcome extends Layout_Controller {
 	{
 		// echo $this->session->userdata('logged_in')['username'];
 		// return false;
-		if($this->session->userdata('logged_in')['username'] != ''){
+		if(isset($this->session->userdata('logged_in')['username']) && $this->session->userdata('logged_in')['username'] != ''){
 			// $this->load->view('welcome/header_menu.php');
 
 			$this->data['title'] = "Dashboard";
