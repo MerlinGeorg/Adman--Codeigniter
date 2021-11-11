@@ -1,0 +1,8 @@
+.table-header
+{ 
+    background-color:#c8ccd0;
+    color:#0a0909; 
+  -webkit-print-color-adjust: exact;
+    /* display: table-header-group;
+    -webkit-print-color-adjust: exact;  */
+}

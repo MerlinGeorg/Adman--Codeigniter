@@ -1,0 +1,7 @@
+@import "yourprintcss.css";
+
+#printDiv
+       {
+        margin: 0 auto;
+         width:500px;
+       }
