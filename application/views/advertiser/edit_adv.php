@@ -45,7 +45,7 @@
                 <div id="page-wrapper">
             <div class="card">
                 <div class="card-header">
-                    Create Advertiser
+                    Edit Advertiser
                 </div>
  <!-- /////////////////////////////////////////////////////////.panel-body -->     
    <!-- <div class="row"> -->

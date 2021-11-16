@@ -57,7 +57,7 @@
                                            
                                             <td><?php echo $estrow->est_id;	 ?></td>
                                             <td><?php echo $estrow->name; ?></td>
-											 <td><?php echo $estrow->cr_date; ?></td>
+											 <td><?php echo $estrow->est_cr_date; ?></td>
 											 <td><?php echo $estrow->adv_name; ?></td>
 											  <td><?php echo $estrow->duration; ?></td>
                                            

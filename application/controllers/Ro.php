@@ -30,7 +30,7 @@ public function create_ro()
 		$this->data = $advdata;
 		$this->page = "ro/create_ro";
 		$this->layout(); 
-
+ 
 		// $this->load->view('ro/create_ro',$advdata);
 	}
 	else
@@ -48,7 +48,9 @@ public function add_ro()
 		$start_date  = $this->input->post('camp_date');
 		$end_date = $this->input->post('end_date');
 		$detail = $this->romodel->get_campdetail($camp_id,$asp_id);
+	
 		$ro = $detail->result();
+	
 		$cr_date = date("Y-m-d");
 
 		
@@ -57,12 +59,14 @@ public function add_ro()
 			'adv_id' => $ro[0]->adv_id,
 			   'asp' => $ro[0]->asp,
 		  'est_name' => $ro[0]->name,
-		  'duration' => $ro[0]->duration,
+		  //'duration' => $ro[0]->duration,
+		  'duration' =>$this->input->post('duration'),
 		'content_id' => $ro[0]->content_id,
 		   'package' => $ro[0]->package,
 		   'cr_date' => $cr_date,
 			'status' => 1
 		);
+		//return $ro_data;
 		$ro_id = $this->romodel->insert_get_ro($ro_data);
 		// return true;
 		// $end_date = '+'.$ro[0]->pack_date.' day';
@@ -71,7 +75,7 @@ public function add_ro()
 		// echo "<pre>";
 		// print_r($ro);
 		// return $ro;
-        foreach ($ro as $rorow) 
+        /* foreach ($ro as $rorow) 
         {
         	$est_data = array(
 					'ro_id'=>$ro_id,	
@@ -99,7 +103,7 @@ public function add_ro()
 				// print_r($est_data);
 			$this->romodel->insert_ro_data($est_data);
 			
-		}
+		} */
 		// return false;
 
         	$url = base_url()."ro/ro_generate/".$ro_id;
@@ -145,8 +149,20 @@ if(isset($this->session->userdata['logged_in'])){
 		 $ro_id = $this->uri->segment(3);
 	
 		 $ro_list['ro_reg'] = $this->romodel->get_roreglist($ro_id);
+		
+		 $ro_list['username'] = $this->session->userdata('logged_in')['username'];
+		 $ro_list['email'] = $this->session->userdata('logged_in')['email'];
+		 $ro_list['rolist'] = $this->romodel->get_releaselist();
+		 $ro_list['adv'] = $this->campmodel->getadv();
+	 $ro_list['asp'] = $this->campmodel->getasp();
+	$ro_list['data'] =  $this->romodel->getEditData($ro_id); 
+	//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
 	
-		 $this->load->view('ro/ro_edit', $ro_list);
+		 $ro_list['title'] = "Edit Release Order";
+
+		 $this->data = $ro_list;
+		 $this->page = "ro/ro_edit";
+		 $this->layout();
 	 
 		 
 		 
@@ -160,6 +176,43 @@ if(isset($this->session->userdata['logged_in'])){
 						}
 					else { $this->sess_out();	}		
 					}
+
+					public function ro_update()
+					{
+				
+						$id = $this->input->post('ro_id');
+						$camp_id  =$this->input->post('campId');
+						$asp_id = $this->input->post('aspId');
+						
+						$start_date  = $this->input->post('camp_date');
+						$end_date = $this->input->post('end_date');
+						
+						$estreg=$this->campmodel->get_estdata($camp_id);
+						$estline=$this->campmodel->get_estlinedata($camp_id);
+						$invoicereg=$this->romodel->get_contentId($camp_id);
+						
+						$cr_date = date("Y-m-d");
+						$duration=$this->input->post('duration');
+						
+						$ro_data = array(
+							'est_id' => $camp_id,
+							'adv_id' => $this->input->post('adv_id'),
+							   'asp' => $asp_id,
+						  'est_name' => $estreg->result()[0]->name,
+						  'duration' => $duration,
+						'content_id' => $invoicereg->result()[0]->content_id,
+						   'package' => $estline->result()[0]->package,
+						   'cr_date' => $cr_date,
+							'status' => 1
+						);
+						
+						$this->romodel->update_id('ro_reg', $id, $ro_data);
+						$this->romodel->update_camp('est_reg', $camp_id, $start_date,$duration);
+						$this->romodel->update_estline('est_line', $camp_id, $start_date,$duration);
+						
+						$url = base_url()."ro/list_ro";
+						redirect($url);
+					}			
 //////////////////////////
 function update_discount()
 {
