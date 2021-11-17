@@ -115,7 +115,7 @@
                                      <div class="form-group">
                                             <label>End Date</label>
                                             
-                                            <input class="form-control" name="end_date" id="end_date" readonly disabled>
+                                            <input class="form-control" name="end_date" id="end_date" placeholder="Select Publishing Date" readonly disabled required>
                                             <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>
                                                 

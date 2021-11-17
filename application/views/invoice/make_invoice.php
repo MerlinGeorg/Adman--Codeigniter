@@ -72,7 +72,7 @@ function youFunction() {
             <!-- /.navbar-static-side -->
                 <div id="page-wrapper">
 	<!-- /////////////////////////////////////////////////////////.panel-body -->    
-	<form method="post" action="<?php echo site_url('camp/content_new') ; ?>" >  
+	<form role="form" method="post" action="<?php echo site_url('camp/content_new') ; ?>" >  
             <div class="row" id="divnew">
                 <div class="col-lg-12">
                     <h4 class="page-header"> New</h4>
@@ -80,24 +80,26 @@ function youFunction() {
 				<div class="col-lg-6">
    							<div class="form-group">
                                             <label>Content Name</label>
-            <input class="form-control" placeholder="Content Name" name="content_name"  >
+            <input class="form-control" placeholder="Content Name" name="content_name" required="required" >
+            <div style="color: red;"><?php echo form_error('content_name'); ?></div>
                                         </div>
 										 <input  name="nest_id" value="<?php echo $inest_id ; ?>" style="display:none;" >
 										
 									<div class="form-group"> 
 									 <label>Content Type</label>
-       <select class="form-control" name="content_type">
+       <select class="form-control" name="content_type" required="required">
 	    <?php  foreach ($c_type->result() as $crow) {  ?>
 
                                             			<option ><?php echo $crow->content_type; ?></option>
                                           			<?php } ?>
                                           	     
-          </select> 
+          </select> <div style="color: red;"><?php echo form_error('content_type'); ?></div>
 </div>	
-			<input type="submit" class="btn btn-info" value="Submit"></form>
+			<!-- <input type="submit" class="btn btn-info" value="Submit"> -->
+            <button type="submit" class="btn mt-4 btn-submit" style="width: 230px">Save</button>
 										</div>
 										
-               </div>
+               </div></form>
 		 <!-- ////////////////////////////////////////////////////////////////.panel-body -->
 <!-- /////////////////////////////////////////////////////////.panel-body -->   
 	<form method="post" action="<?php echo site_url('camp/content_exist') ; ?>" >  

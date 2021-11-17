@@ -101,12 +101,12 @@ $(document).ready(function(){
         <div class="col-lg-12 ">
            <div class="form-group">
              <label>Content Name</label>
-             <input class="form-control" placeholder="Content Name" name="content_name"  >
+             <input class="form-control" placeholder="Content Name" name="content_name" required="required" >
            </div>
         <input  name="nest_id" value="<?php echo $inest_id ; ?>" style="display:none;" >
        <div class="form-group"> 
            <label>Content Type</label>
-           <select class="form-control" name="content_type">
+           <select class="form-control" name="content_type" required="required">
                <?php  foreach ($c_type->result() as $crow) {  ?>
 
                          <option ><?php echo $crow->content_type; ?></option>

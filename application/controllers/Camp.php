@@ -75,7 +75,7 @@ if(($customer!='')&&($duration!='')&&($adv!==''))
 $cr_date = date("Y/m/d") ;
 $est_data = array(	'name'=>$customer,
 					'duration' => $duration,
-					'cr_date' => $cr_date,
+					'est_cr_date' => $cr_date,
 					'lst_date' => $cr_date,
 					'status' => 1,
 					'adv_id' => $adv
@@ -506,7 +506,7 @@ $cr_date = date("Y/m/d") ;
 					'content_id' => $content_inid,
 					'cr_date' => $cr_date,
 					'status' => 1,
-					'play' => preshow
+					'play' => "preshow"
 				        			);
 $invoice_id = $this->campmodel->create_invo_data($invo_reg);
 $est_line_data = $this->campmodel->get_estlinedata($estimate_id);
@@ -551,10 +551,10 @@ $this->campmodel->create_invo_ldata($invo_reg_line);
 	 
 		 
 $this->campmodel->invoiced_est($estimate_id);		
-						
-	 echo  "<script type='text/javascript'>";
-    echo "window.close();";
-    echo "</script>";
+	echo "<script type='text/javascript'>alert('Campaign Invoiced Successfully.Please Check Invoiced List');</script>";					
+	 echo  "<script type='text/javascript'>window.close();</script>";
+	// $url = base_url()."camp/list_outward_invoiced";
+	// redirect($url);	
 
 }
 ///////////////////////////////

@@ -65,6 +65,7 @@ if (uri.indexOf("?") > 0) {
                     <div class="card-header">
                         Create New Campaign
                     </div>
+                    
 					<?php if($msg==1) { $a = "block";} else { $a = "none" ;} ?>
 					<div class="alert alert-success" style="display:<?php echo $a ; ?>;" >
 						<h5>Estimate has been saved</h5>
@@ -75,6 +76,7 @@ if (uri.indexOf("?") > 0) {
   
   <!-- <div class="row">  -->
         <div class="card-body">
+        <div style="color:mediumseagreen;padding: 10px;">*All Fields Must Be Filled*</div>
                 <form>
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -90,7 +92,7 @@ if (uri.indexOf("?") > 0) {
 				                        <div class="form-group">
 				                            <label>Campaign Date</label>
                                             <input class="form-control" type="date" name="cr_date"  value="<?php print(date("Y-m-d")); ?>" readonly >
-
+                                            
                                         </div>
                                 </div>
                                         
@@ -122,14 +124,14 @@ if (uri.indexOf("?") > 0) {
 
   <?php //}	?>  
    <!-- <div class="form-group" >  -->
-       <select class="form-control" id="b" name="b" >
+       <select class="form-control" id="b" name="b" required="required">
                                             <?php 
 foreach ($adv->result() as $advrow)
 				{
 			?>
 			<option value="<?php echo $advrow->adv_id;	 ?>"><?php echo $advrow->adv_name;	 ?></option>
                                           	<?php }	?>     
-                                            </select>       
+                                            </select>
   </div>
 </div>
                                 
@@ -146,7 +148,7 @@ foreach ($adv->result() as $advrow)
                     <!-- /.panel -->
                 <!-- </div> -->
                 <!-- /.col-lg-12 -->
- <div class="row" style="padding: 25px;">
+ <div class="row" id="secadd" style="padding: 25px;">
                 <div class="col-lg-12 box">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -154,14 +156,14 @@ foreach ($adv->result() as $advrow)
                                 <div class="col-lg-4">
  <div class="form-group" > 
                    <select class="form-control" id="a" name="a" onChange="outputValue(this), get_batch()" required>
-                   <option selected >Select ASP</option>
+                   <option value="">Select ASP</option>
                                             <?php 
 foreach ($asp->result() as $asprow)
 				{
 			?>
 			<option value="<?php echo $asprow->asp_id;	 ?>"><?php echo $asprow->asp_name;	 ?></option>
                                           	<?php }	?>     
-                                            </select> 
+                                            </select>
                                             <input type="text" name="aspname" id="aspname" style="display : none ;" />
 </div>
 </div>
@@ -170,8 +172,7 @@ foreach ($asp->result() as $asprow)
 <div class="form-group" id="output_batch" > 
                    <select class="form-control" name="batch" onChange="outputscreen(this)" required>
                                           
-   			<option value="">Select Screen</option>
-                                           
+   			<option value="">Select Screen</option>                                           
                                            </select>                                        
 </div>
                       <input type="text" name="scname" id="scname" style=" display:  none;" />            
@@ -179,7 +180,7 @@ foreach ($asp->result() as $asprow)
                                 <div class="col-lg-4">
                          <div class="form-group" > 
                    <select class="form-control" name="pol" required>
-                                      <option selected >Campaign Duration</option>
+                                      <option value="" >Campaign Duration</option>
                                             <?php 
 foreach ($tpolicy->result() as $tprow)
 				{
@@ -289,9 +290,8 @@ document.getElementById('scname').value =screen.options[screen.selectedIndex].te
 
  function addRow(tableID, a, du, aspname, scname, batch, pol) 
 {
-	
-///////////////////
-        var table = document.getElementById(tableID);
+   
+         var table = document.getElementById(tableID);
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
 //////////////////////
@@ -330,8 +330,7 @@ function get_batch()
 	
 	
 function gatherData(du, camp_name, b) {
-
-
+    
  	 var data = [];
          var table = document.getElementById('dataTable');
 
@@ -354,9 +353,9 @@ function gatherData(du, camp_name, b) {
  
 	}
 
-var mydatas = JSON.stringify(data)
+    var mydatas = JSON.stringify(data)
 
-window.location.href ='<?php echo site_url('camp/create_estimate'); ?>/?mdata='+encodeURI(mydatas);
+    window.location.href ='<?php echo site_url('camp/create_estimate'); ?>/?mdata='+encodeURI(mydatas);
 
 }
 
