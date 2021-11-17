@@ -71,7 +71,7 @@
                                 <div class="col-lg-4">
 				                    <div class="form-group">
                                             <label>Campaign Date</label>
-                                            <input class="form-control" name="camp_date" id="camp_date" readonly>
+                                            <input class="form-control" name="camp_date" id="camp_date" readonly disabled>
                                         </div>
 
                                 </div>
@@ -98,7 +98,7 @@
                                 <div class="col-lg-4">
 				                    <div class="form-group">
                                             <label>Publishing Date</label>
-                                            <input class="form-control" name="ad_date" id="ad_date" required disabled>
+                                            <input class="form-control" name="ad_date" id="ad_date"  >
                                         </div>
 
                                 </div>
@@ -114,7 +114,8 @@
                             <div class="col-lg-4">
                                      <div class="form-group">
                                             <label>End Date</label>
-                                            <input class="form-control" name="end_date" id="end_date" readonly >
+                                            
+                                            <input class="form-control" name="end_date" id="end_date" readonly disabled>
                                             <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>
                                                 
@@ -164,7 +165,7 @@ $(document).ready(function(){
             url:"<?php echo site_url('ro/get_camdata')?>",
             success : function(response){
                 // console.log(response);
-                    $('#camp_date').val(response[0]['cr_date']);    
+                    $('#camp_date').val(response[0]['est_cr_date']);    
                     $('#ro_adv').val(response[0]['adv_name']);    
                     // $('#ro_asp').val(response[0]['asp_name']);    
                     $('#duration').val(response[0]['duration']);
@@ -176,7 +177,7 @@ $(document).ready(function(){
                     option += '<option value="'+ Id +'">'+ aspname +'</option>';
                 });
                 $('#aspId').append('<option value="">Select</option>'+option);
-
+                
             }
 
         })
@@ -185,20 +186,21 @@ $(document).ready(function(){
     $('#campId').on('change',function(){
         if($('#campId').val()!=''){
             $('#aspId').prop('disabled',false);
-            $('#ad_date').prop('disabled',false);
+            $('#camp_date').prop('disabled',false);
         }
         else{
             $('#aspId').prop('disabled',true);
-            $('#ad_date').prop('disabled',true);
+            $('#camp_date').prop('disabled',true);
         }
     });
     
-    $('#savero').on('click',function(){
+    /*  $('#savero').on('click',function(){
        
         window.location.href = "<?php echo site_url('ro/list_ro'); ?>";
-    })
+    }) 
+ */
 
-    $('#ad_date').datepicker({
+    $('#camp_date').datepicker({
 	autoclose: true,
 	showOnFocus: true,
 	todayHighlight: true,

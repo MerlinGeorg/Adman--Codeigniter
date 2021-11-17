@@ -241,9 +241,12 @@ function invo_edit()
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($invo_id);
 	   $this->load->view('camp/invoice_edit', $invo_list);
+	//   $this->load->view('camp/invoice_edittest', $invo_list);
 						}
 					else { $this->sess_out();	}		
 					}
+
+
 /////////////////////////////
 function camp_cancel()
 {
@@ -369,6 +372,8 @@ $invo_list['n_asp'] = $this->campmodel->getasp();
 $invo_list['n_package'] = $this->invomodel->gettpolicy();
 $invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($nestid);
 $this->load->view('camp/invoice_edit', $invo_list);
+//$this->load->view('camp/invoice_edittest', $invo_list);
+//$this->load->view('camp/print', $invo_list);
 	
 }
 else{
@@ -415,6 +420,7 @@ if(isset($this->session->userdata['logged_in'])){
 	$est_edit['invo_reg'] = $this->campmodel->get_estedit($rowestid);
 	$est_edit['involineedit'] = $this->campmodel->get_estline_edit($rowestid);
 	$this->load->view('camp/invoice_edit', $est_edit);
+	//$this->load->view('camp/invoice_edittest', $est_edit);
 
 
 // 	$invo_list['invo_reg'] = $this->campmodel->get_invoedreglist($invo_id);

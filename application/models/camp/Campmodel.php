@@ -23,6 +23,7 @@ class Campmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('asp');
+		$this->db->order_by("asp_id", "desc");
 		return $this->db->get();
 	}
 
@@ -162,6 +163,7 @@ class Campmodel extends CI_Model
 		$this->db->from('est_reg');
 		$this->db->where('est_id', $id);
 		return $this->db->get();
+		die();
 	}
 
 	public function create_invo_data($data)

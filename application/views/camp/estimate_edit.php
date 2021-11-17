@@ -107,86 +107,88 @@ padding-right:40px;
 
 
 
-@media print
-    {
-         .addrow {
-           display:none
-       }
-        .list_div{
-           width: 100%;
-           /* padding-left:250px; */
-           overflow-x: auto;
-           border: 1px ;
-           
-       }
-       .address
-       {   
-                float:right;
-                
-                word-wrap: break-word;
+@media print {
+                                .addrow {
+                                    display: none;
+                                }
 
-       }
-       .address2
-       {
-           padding-left:50px;
-                 float:left;
-          
-       }
-       .date-div
-       {
-           padding-top:180px;
-           /* float:left; */
-          
-       }
-       .bill-table
-       {
-        padding-left:250px; 
-      
-        box-sizing: border-box;
-        
-       }
-       .bill-tab 
-       {
-       
-        border-spacing: 2px;
-        border: 1px solid #dee2e6;
-        max-width: 100%;
-       }
-       td  th
-       {
-          display: table-cell;
-       }
-       .table-head
-       {
-           padding:12px;
-       }
-       .table-result
-       {
-           padding:1px;
-       }
-       .table-total
-       {
-        font-weight: bolder;
-        font-size: 1.5rem;
-           padding:15px;
-       } 
-      
-      .div-cal
+                                .list_div {
+                                    width: 100%;
+                                    /* padding-left:250px; */
+                                    overflow-x: auto;
+                                    border: 1px;
 
-       {
-           padding:12px;
-        text-align: right!important;
-       }
-       .table-des:
-       {
-        border-bottom-width: 2px;
-        vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-    padding: .75rem;
-    text-align: inherit;
-    font-weight: bold;
+                                }
 
-       }
+                                .address {
+                                    float: right;
+
+                                    word-wrap: break-word;
+
+                                }
+
+                                .address2 {
+
+                                    padding-left: 50px;
+                                    float: left;
+
+                                }
+
+                                .date-div {
+                                    padding-top: 180px;
+                                    /* float:left; */
+
+                                }
+
+                                .bill-table {
+                                   /*  padding-left: 150px;
+                                    padding-right: 150px; */
+                                    overflow-x: auto;
+                                    box-sizing: border-box;
+
+                                }
+
+                                .bill-tab {
+                                    overflow-x: auto;
+                                    border-spacing: 2px;
+                                    border: 1px solid #dee2e6;
+                                    max-width: 100%;
+                                }
+
+                                td th {
+                                    display: table-cell;
+                                }
+
+                                .table-head {
+                                    padding: 12px;
+                                }
+
+                                .table-result {
+                                    padding: 1px;
+                                }
+
+                                .table-total {
+                                    font-weight: bolder;
+                                    font-size: 1.5rem;
+                                    padding: 15px;
+                                }
+
+                                .div-cal {
+                                    padding: 12px;
+                                    text-align: right !important;
+                                }
+
+                                .table-des: {
+                                    border-bottom-width: 2px;
+                                    vertical-align: bottom;
+                                    border-bottom: 2px solid #dee2e6;
+                                    padding: .75rem;
+                                    text-align: inherit;
+                                    font-weight: bold;
+
+                                }
+                                
+                            }
 
     }
 
@@ -279,7 +281,7 @@ padding-right:40px;
                         <div class="row col-sm-8 date-div" style="padding-left:30px;">
                  <div >
                         <div><strong>Est Date:</strong>
-                        <?php echo $est_date = $estrow->cr_date; ?><br></div>
+                        <?php echo $est_date = $estrow->est_cr_date; ?><br></div>
                       
                       <div><strong>Content Duration:</strong>
                       <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
@@ -455,8 +457,8 @@ foreach ($estlineedit->result() as $estlrow) { $i++;
 <div id="printDiv">
 
 
-                    <div class="col-md-8 offset-md-4 bill-table ">
-                        <table class="table text-centered table-responsive table-bordered bill-tab">
+                    <div class="bill-table">
+                        <table class="table text-centered table-bordered bill-tab">
                             <thead class="table-header" id="theader">
                                 <tr>
                                     <th class="left table-des">

@@ -10,6 +10,9 @@ function get_rolist()
 $this->db->select('DISTINCT(R.ro_id),R.duration,E.name AS camp_ame,R.est_id');
 $this->db->from('ro_reg R');
 $this->db->where('R.status', 1);
+$this->db->where('R.duration !=' ,'0');
+$this->db->where('R.asp !=' ,'0');
+$this->db->where('R.package !=' ,'0');
 $this->db->join('est_reg E ', 'R.est_id = E.est_id');
 
 
@@ -172,8 +175,66 @@ function insert_get_ro($ro_data)
 	return $insertId;
 }
 
-function insert_ro_data($data)
+function getEditData($id){
+	$this->db->select('*');
+	$this->db->from('ro_reg R');
+	$this->db->where('R.ro_id', $id);
+	$this->db->where('R.status', 1);
+	$this->db->join('est_reg', 'R.est_id = est_reg.est_id');
+	$this->db->join('asp', 'R.asp = asp.asp_id');
+	//$this->db->join('screen', 'Rl.screen = screen.sc_id');
+	$this->db->join('adv_reg', 'R.adv_id = adv_reg.adv_id');
+	$query = $this->db->get();
+	return $query;
+}
+
+function update_id($table, $id, $data)
+	
+												{
+													$this->db->select('*');
+													$this->db->from($table);
+													$this->db->where('ro_id', $id);
+													$this->db->update($table, $data);
+													
+												}
+function getCampData($id)
 {
+	$this->db->select('est_reg.cr_date AS cr_date');
+	//$this->db->from('est_reg');
+	$this->db->join('est_reg', 'ro_reg.est_id = est_reg.est_id');
+	$this->db->where('ro_reg.ro_id', $id);
+	$this->db->where('ro_reg.status', 1);
+	$query = $this->db->get();
+	return $query;	
+}
+
+function get_contentId($id)
+	{
+		$this->db->select('*');
+		$this->db->from('invoice_reg');
+		$this->db->where('est_id', $id);
+		return $this->db->get();
+	}
+	function update_camp($table, $id, $start_date,$duration)
+	
+	{
+		$this->db->where('est_id', $id);
+		$this->db->set('est_cr_date', $start_date);
+		$this->db->set('duration', $duration);
+		$this->db->update($table);
+		
+	}
+	function update_estline($table, $id, $start_date,$duration)
+	
+	{
+		$this->db->where('est_id', $id);
+		$this->db->set('est_cr_date', $start_date);
+		$this->db->set('duration', $duration);
+		$this->db->update($table);
+		
+	}	
+function insert_ro_data($data)
+{ 
 	$table = 'ro_line';
 	$this->db->insert($table, $data);
 	$error = $this->db->error();
@@ -324,7 +385,7 @@ public function getcampaignasplist($campId){
 public function adscontact($invoiceId)
 {
 	//$this->db->select('A.c_person,A.adv_name,A.add1,A.phone_1,A.email,A.gst,A.pan,E.cr_date,E.name,R.duration AS Contentdur,R.camp_id');
-	$this->db->select('A.asp_name,A.asp_add,A.asp_person,E.cr_date,E.name,R.duration AS Contentdur,R.est_id');
+	$this->db->select('A.asp_name,A.asp_add,A.asp_person,E.est_cr_date,E.name,R.duration AS Contentdur,R.est_id');
 	$this->db->from('ro_reg R');
 	$this->db->join('est_reg E', 'R.est_id = E.est_id');
 	$this->db->join('asp A', 'R.asp = A.asp_id');
@@ -356,6 +417,4 @@ public function get_screens($campId)
 }
 
 ////////////////////////								
-}	
-?>
-
+}

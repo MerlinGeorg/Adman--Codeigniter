@@ -1,3 +1,5 @@
+<script src="<?php echo base_url()?>Assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
 <?php //$this->load->view('advertiser/advheader_menu.php'); ?>
 <style>
     .card-header{
@@ -46,6 +48,11 @@
             <div class="row card">
                 <!-- <div class="col-lg-12"> -->
                     <div class="card-header">Create Advertiser</div>
+                    <?php if($msg==1) { $a = "block";} else { $a = "none" ;} ?>
+					<div class="alert alert-success" style="display:<?php echo $a ; ?>;" >
+						<h5>Advertiser has been saved</h5>
+                         
+                            </div>
                 <!-- </div> -->
  <!-- /////////////////////////////////////////////////////////.panel-body -->     
    <!-- <div class="row"> -->
@@ -60,17 +67,17 @@
                                 <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Advertiser Name</label>
-                                            <input class="form-control" placeholder="Enter event name" name="adv_name" value="<?php echo set_value('adv_name'); ?>" >
+                                            <input class="form-control" placeholder="Enter event name" name="adv_name" value="<?php echo set_value('adv_name'); ?>" required="required">
                                             <div style="color: red;"><?php echo form_error('adv_name'); ?></div>	
                                         </div>
                                         <div class="form-group">
                                             <label>Contact Person</label>
-                                            <input class="form-control"  name="c_person" value="<?php echo set_value('c_person'); ?>" >
+                                            <input class="form-control"  name="c_person" value="<?php echo set_value('c_person'); ?>" required="required">
                                                 <div style="color: red;"><?php echo form_error('c_person'); ?></div>	
                                         </div>
                                         <div class="form-group">
                                             <label>Contact Number-1</label>
-                                            <input class="form-control"  name="phone_1" value="<?php echo set_value('phone_1'); ?>" >
+                                            <input class="form-control"  name="phone_1" value="<?php echo set_value('phone_1'); ?>" required="required">
                                         <div style="color: red;"><?php echo form_error('phone_1'); ?></div>	
                                         </div> 
 					<div class="form-group">
@@ -85,11 +92,11 @@
                                         </div>  
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input class="form-control"  name="email" value="<?php echo set_value('email'); ?>">
+                                            <input class="form-control"  name="email" >
                                         </div> 
                                         <div class="form-group">
                                             <label>City</label>
-                                            <input class="form-control"  name="city" value="<?php echo set_value('city'); ?>">
+                                            <input class="form-control"  name="city" value="<?php echo set_value('city'); ?>" required="required">
                                      <div style="color: red;"><?php echo form_error('city'); ?></div>	
                                         </div>  
                                          <div class="form-group">
@@ -174,4 +181,19 @@
                
 
    
+                    <script type="text/javascript">
+    $(document).ready(function(){
 
+var timeout = 3000; // in miliseconds (3*1000)
+
+$('.alert').delay(timeout).fadeOut(300,function(){
+  $('.alert').css({display:"none"})
+
+});
+
+
+  
+});
+
+
+  </script>
