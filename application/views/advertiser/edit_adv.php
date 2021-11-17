@@ -1,27 +1,32 @@
-<?php //$this->load->view('advertiser/advheader_menu.php'); ?>
+<?php //$this->load->view('advertiser/advheader_menu.php'); 
+?>
 <style>
-    .card-header{
+    .card-header {
         background-color: rgb(71, 163, 243);
         border-bottom: 1px solid rgba(71, 92, 243, 0.58);
         color: white;
     }
-    .card-footer{
+
+    .card-footer {
         background-color: initial;
     }
-    .btn-submit{
+
+    .btn-submit {
         width: 230px;
         background-color: #47a3f3;
         color: white;
     }
-    .form-control:disabled, .form-control[readonly]{
+
+    .form-control:disabled,
+    .form-control[readonly] {
         background-color: #fbfbfb;
     }
 </style>
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+    <!-- Navigation -->
+
+    <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -155,27 +160,24 @@
                                             </div>
                                               </form>
                                 <!-- /.col-lg-6 (nested) -->
-                            <!-- </div> -->
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
+                                
+                        <!-- /.col-lg-6 (nested) -->
+                        <!-- </div> -->
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
             <!-- </div> -->
             <!-- /.row -->
             <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
         </div>
 
 
-                    <div class="panel-heading">
+        <div class="panel-heading">
 
-                        </div>
-                        
-                    </div>
-                  
-               
+        </div>
 
-   
-
+    </div>

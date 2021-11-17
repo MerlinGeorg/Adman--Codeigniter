@@ -1,11 +1,12 @@
 <body>
 
-<?php //$this->load->view('camp/header_menu.php'); ?>
- <div id="wrapper">
+    <?php //$this->load->view('camp/header_menu.php'); 
+    ?>
+    <div id="wrapper">
 
         <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+
+        <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -20,16 +21,16 @@
                    </ul>
                                              
                 </div> -->
-                <!-- /.sidebar-collapse -->
-            <!-- </div> -->
-            <!-- /.navbar-static-side -->
-                <div id="page-wrapper">
+        <!-- /.sidebar-collapse -->
+        <!-- </div> -->
+        <!-- /.navbar-static-side -->
+        <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-5 m-b-35 text-center">Estimates</div>
-					                </div>
- <!-- /////////////////////////////////////////////////////////.panel-body -->     
-  <div class="col-lg-12">
+                </div>
+                <!-- /////////////////////////////////////////////////////////.panel-body -->
+                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <!-- <div class="panel-heading">Listed All Estimates</div> -->
                         <div class="panel-body">
@@ -69,10 +70,8 @@
                                                                           </tbody>
                                 </table>
                             </div>
-                           
-                        </div>
-                    
-                                <!-- /.col-lg-6 (nested) -->
+
+                            <!-- /.col-lg-6 (nested) -->
                             <!-- </div> -->
                             <!-- /.row (nested) -->
                         </div>
@@ -80,8 +79,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
- 
+
             </div>
- 
+
 </body>
-     

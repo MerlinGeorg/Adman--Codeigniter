@@ -1,18 +1,19 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/frm_style.css') ?>">
 
-
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/frm_style.css') ?>">
-
-<?php //$this->load->view('asp/header_menu.php'); ?>
+<?php //$this->load->view('asp/header_menu.php'); 
+?>
 <style>
-    .card-header{
+    .card-header {
         background-color: rgb(71, 163, 243);
         border-bottom: 1px solid rgba(71, 92, 243, 0.58);
         color: white;
     }
-    .card-footer{
+
+    .card-footer {
         background-color: initial;
     }
-    button[type=submit]{
+
+    button[type=submit] {
         width: 230px;
         background-color: #47a3f3;
         color: white;
@@ -22,162 +23,165 @@
 
 
 <div id="wrapper">
- <div id="page-wrapper"> 
- <div class="card">
-<div class="card-header">
-               Add Logo
+    <div id="page-wrapper">
+        <div class="card">
+            <div class="card-header">
+                Add Logo
             </div>
-            <!-- <?php if($msg==1) { $a = "block";} else { $a = "none" ;} ?>
-            <div class="alert alert-success" style="display:<?php echo $a ; ?>;" >
+            <!-- <?php if ($msg == 1) {
+                        $a = "block";
+                    } else {
+                        $a = "none";
+                    } ?>
+            <div class="alert alert-success" style="display:<?php echo $a; ?>;" >
                 <h5>Estimate has been saved</h5>
                  
                     </div> -->
-    
-<div class="card-body">
-        <form action="addLogo" name="logofrm" id="logofrm"  method="post"  enctype="multipart/form-data">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                    <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Company Name </label>
-                                    <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname"  >
+
+            <div class="card-body">
+                <form action="addLogo" name="logofrm" id="logofrm" method="post" enctype="multipart/form-data">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Company Name </label>
+                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname">
 
 
+                                    </div>
                                 </div>
-                                </div>
-                        <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Address </label>
-                                    <textarea placeholder="Enter Address" class="form-control" name="adrs" id="adrs" required>    </textarea>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Address </label>
+                                        <textarea placeholder="Enter Address" class="form-control" name="adrs" id="adrs" required>    </textarea>
 
+                                    </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input class="form-control" placeholder="Enter Phone Number" type="number" name="phone" id="phone">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input class="form-control" placeholder="Enter Email" id="email" name="email" type="email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>PAN Number</label>
+                                        <input class="form-control" name="pan" id="pan" type="number" placeholder="Enter Pan Number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <div class="form-group">
+                                        <label>CSTIN</label>
+                                        <input class="form-control" name="cstin" id="cstin" type="text" placeholder="Enter CSTIN">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>SAC CODE</label>
+                                        <input class="form-control" name="sac" id="sac" type="text" placeholder="Enter SAC CODE">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>DESCRIPTION</label>
+                                        <textarea class="form-control" name="des" id="des" type="text" placeholder="Enter CSTIN"></textarea>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Choose Your Logo</label></label>
+                                        <input class="form-control" name="file" id="imgInp" type="file">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                    <div class="form-group">
+                                        <img name="logo_img" id="logo_id" class="logo_id">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                    <div class="form-group">
+                                        <input type="submit" name="save" value="Save" id="addlogo" class="btncls">
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
                         </div>
-                        <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input class="form-control" placeholder="Enter Phone Number" type="number" name="phone" id="phone"  >
-
-                                </div>
-                        </div>
-                                
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                  <label>Email</label>
-                                    <input class="form-control" placeholder="Enter Email" id="email" name="email" type="email" >
-                            </div> 
-                        </div> 
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                  <label>PAN Number</label>
-                                    <input class="form-control"  name="pan" id="pan" type="number" placeholder="Enter Pan Number" >
-                            </div> 
-                        </div> 
-                        <div class="col-lg-6 ">
-                             <div class="form-group">
-                             <label>CSTIN</label>
-                                    <input class="form-control"  name="cstin" id="cstin" type="text" placeholder="Enter CSTIN" >
-                            </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                  <label>SAC CODE</label>
-                                    <input class="form-control"  name="sac" id="sac" type="text" placeholder="Enter SAC CODE" >
-                            </div> 
-                        </div> 
-                        <div class="col-lg-6">
-                             <div class="form-group">
-                             <label>DESCRIPTION</label>
-                                    <textarea class="form-control" name="des" id="des" type="text" placeholder="Enter CSTIN" ></textarea>
-                            </div>
-                            </div>
-
-
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                  <label>Choose Your Logo</label></label>
-                                    <input class="form-control"  name="file" id="imgInp" type="file" >
-                            </div> 
-                        </div> 
-                        <div class="col-lg-6 text-center">
-                             <div class="form-group">
-                                 <img  name="logo_img" id="logo_id" class="logo_id">
-                            </div>
-                            </div>
-
-                        <div class="col-lg-12 text-center">
-                             <div class="form-group">
-                             <input type="submit"  name="save" value="Save" id="addlogo" class="btncls">
-     
-</div>
-</div>
-
-
-
-
-                    
-                                      
-                        </div>
-                        <!-- /.col-lg-6 (nested) -->
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.row (nested) -->
-                </div>
 
-                <script src="<?php echo base_url('Assets/js/jquery.min.js'); ?>"></script> 
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script>
-          $('#addlogo').on('click',function(){
-              alert('fgh')
-            $("#logofrm").validate({
-                rules: {
-                    name: {
-                        required: true,
-                    },
-                },
-                });
+                    <script src="<?php echo base_url('Assets/js/jquery.min.js'); ?>"></script>
+                    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+                    <script>
+                        $('#addlogo').on('click', function() {
+                            alert('fgh')
+                            $("#logofrm").validate({
+                                rules: {
+                                    name: {
+                                        required: true,
+                                    },
+                                },
+                            });
 
-                })
-                </script>
+                        })
+                    </script>
 
 
 
 
 
 
-    
-
- 
-               
-  <script>
-  $('document').ready(function()
-{
-    $('textarea').each(function(){
-            $(this).val($(this).val().trim());
-        }
-    );
-});
 
 
 
 
-  </script>
-  <script type="text/javascript">
-     function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-                $('#logo_id').attr('src', e.target.result);
-            }
-            
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
-  </script>
-  
+                    <script>
+                        $('document').ready(function() {
+                            $('textarea').each(function() {
+                                $(this).val($(this).val().trim());
+                            });
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    $('#logo_id').attr('src', e.target.result);
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+
+                        $("#imgInp").change(function() {
+                            readURL(this);
+                        });
+                    </script>
+                    <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
+                </form>
+        </div>
+        </div>
+    </div>
+</div>

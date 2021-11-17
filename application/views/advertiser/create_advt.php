@@ -2,28 +2,32 @@
 <script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
 <?php //$this->load->view('advertiser/advheader_menu.php'); ?>
 <style>
-    .card-header{
+    .card-header {
         background-color: rgb(71, 163, 243);
         border-bottom: 1px solid rgba(71, 92, 243, 0.58);
         color: white;
     }
-    .card-footer{
+
+    .card-footer {
         background-color: initial;
     }
-    .btn-submit{
+
+    .btn-submit {
         width: 230px;
         background-color: #47a3f3;
         color: white;
     }
-    .form-control:disabled, .form-control[readonly]{
+
+    .form-control:disabled,
+    .form-control[readonly] {
         background-color: #fbfbfb;
     }
 </style>
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+    <!-- Navigation -->
+
+    <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -38,10 +42,13 @@
                        
                                           
                      </ul> -->
-                            <!-- /.nav-second-level -->
-                       
-                <!-- </div> -->
-                <!-- /.sidebar-collapse -->
+    <!-- /.nav-second-level -->
+
+    <!-- </div> -->
+    <!-- /.sidebar-collapse -->
+    <!-- </div> -->
+    <!-- /.navbar-static-side -->
+    
             <!-- </div> -->
             <!-- /.navbar-static-side -->
                 <div id="page-wrapper">
@@ -109,70 +116,73 @@
                                         </div>                          
                                       
                                 </div>
-                                <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
+                                
                                      
-											<div class="form-group">
-                                            <label>Web</label>
-                                            <input class="form-control" type="text"  name="web" >
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Pancard</label>
-                                            <input class="form-control"  name="pan" >
-                                        </div>
-                                         <div class="form-group">
-                                            <label>GST</label>
-                                            <input class="form-control"  name="gst" >
-                                        </div>
-                                         <div class="form-group">
-                                            <label>SAC Code</label>
-                                            <input class="form-control"  name="sac" >
-                                        </div>
-                                               <div class="form-group">
-                                              <label>Category</label>
-                                         <select class="form-control" name="cat">
-                                            <?php     foreach ($cat->result() as $catrow)
-                       			{ ?>  
-                                                <option  value="<?php echo $catrow->cat_id;  ?>"><?php echo $catrow->cat_name;  ?></option>
-                                                    <?php } ?>                                     
-                                            </select></div>
-                                            <div class="form-group">
-                                              <label>State</label>
-                                         <select class="form-control" name="state">
-                                            <?php     foreach ($state->result() as $srow)
-                       			{ ?>  
-                                                <option  value="<?php echo $srow->code;  ?>"><?php echo $srow->name;  ?></option>
-                                                    <?php } ?>                                     
-                                            </select></div>
-                                          <div class="form-group">
-                                            <label>Advertiser Info</label>
-                                            <textarea class="form-control" rows="8" name="adv_info" style="padding-bottom: 13px"></textarea>
-                                        </div>
+											
+                                        <!-- /.col-lg-6 (nested) -->
+                                        <div class="col-lg-6">
 
-				
-                                </div>
-                                <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn mt-4 btn-submit" style="width: 230px">Save Event</button>
-                                </div>
-                                   </div>
-                                              </form>
+                                            <div class="form-group">
+                                                <label>Web</label>
+                                                <input class="form-control" type="text" name="web">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Pancard</label>
+                                                <input class="form-control" name="pan">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>GST</label>
+                                                <input class="form-control" name="gst">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>SAC Code</label>
+                                                <input class="form-control" name="sac">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Category</label>
+                                                <select class="form-control" name="cat">
+                                                    <?php foreach ($cat->result() as $catrow) { ?>
+                                                        <option value="<?php echo $catrow->cat_id;  ?>"><?php echo $catrow->cat_name;  ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <select class="form-control" name="state">
+                                                    <?php foreach ($state->result() as $srow) { ?>
+                                                        <option value="<?php echo $srow->code;  ?>"><?php echo $srow->name;  ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Advertiser Info</label>
+                                                <textarea class="form-control" rows="8" name="adv_info" style="padding-bottom: 13px"></textarea>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-12 text-center">
+                                            <button type="submit" class="btn mt-4 btn-submit" style="width: 230px">Save Event</button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
-                            </div>
-                            <!-- /.row (nested) -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
             <!-- </div> -->
             <!-- /.row -->
             <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
         </div>
 
 
-                    <div class="panel-heading">
+        <div class="panel-heading">
 
                         </div>
                         
