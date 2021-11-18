@@ -162,7 +162,7 @@ class Advertiser extends Layout_Controller
 	public function adv_update()
 	{
 
-		echo	$advid = $this->input->post('adv_id');
+			$advid = $this->input->post('adv_id');
 
 		$cr_date = date("Y/m/d");
 		$adv_dataup = array(

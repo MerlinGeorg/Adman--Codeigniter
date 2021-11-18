@@ -5,6 +5,7 @@ class Asp extends Layout_Controller {
 public function __construct() {
 parent::__construct();
 $this->load->model('asp/aspmodel');
+$this->load->helper('security');
 }
 
 public function index()
@@ -195,7 +196,9 @@ public function list_asp()
 										 		'cr_date' => $cr_date 
 										 		);
 					$this->aspmodel->update_id('asp', $aspid, $asp_data);
-					redirect('asp/list_asp');
+					//redirect('asp/list_asp');
+					$url = 'asp/list_asp';
+		echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';							 
 													
 				}	
 					else
