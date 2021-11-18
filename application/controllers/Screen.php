@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Screen extends Layout_Controller {
 
-public function __construct() {
+public function __construct() 
+{
 parent::__construct();
 $this->load->model('screen/screenmodel');
 }
@@ -12,8 +13,12 @@ if(isset($this->session->userdata['logged_in'])){
 				
 						$this->load->view('screen/screen_dash');
 					}
-					else { $this->sess_out();	}		
+					else {
+						echo "no";
 					}
+				}
+					// else { $this->sess_out();	}		
+					// }
 /////////////////////////////////////////////////////////////////////////////////////////////
 public function create_screen()
 					{
@@ -24,18 +29,21 @@ if(isset($this->session->userdata['logged_in'])){
  						$sdata['state'] = $this->screenmodel->getstate();	
 						$sdata['asp'] = $this->screenmodel->getasp();
 						$sdata['title'] = "Create Screen";
-		 
+		                $sdata['msg'] = 0;
 						$this->data = $sdata;
 						$this->page = "screen/create_screen";
 						$this->layout();
 
 						// $this->load->view('screen/create_screen', $sdata);
 						}
-					else { $this->sess_out();	}		
+						else{
+							echo "no";
+						}
+						
 					}
 ////////////////////////////////////////////////////////////////////////////////////////////
 public function screen_save()
-					{
+	{
 			if(isset($this->session->userdata['logged_in'])){
 ///////////////////////////////////////////////////////			
 						
@@ -62,12 +70,14 @@ $this->form_validation->set_rules('price','Price','numeric|required');
 										 		'sc_cr_date' => $cr_date 
 										 		);
 					$this->screenmodel->insert_screen_data('screen', $sc_data);
-					redirect($_SERVER['HTTP_REFERER']);
+					// redirect($_SERVER['HTTP_REFERER']);
 					//$ttdata['infomsg'] = "yes" ;	
  					//$this->load->view('create_asp',$ttdata);
-									
+					 $sdata['msg'] = 1;			
 					}	
 				else{ 
+					$sdata['msg'] = 0;
+				}
 					$sdata['username'] = $this->session->userdata('logged_in')['username'];
 						$sdata['email'] = $this->session->userdata('logged_in')['email'];
  						$sdata['state'] = $this->screenmodel->getstate();	
@@ -84,10 +94,13 @@ $this->form_validation->set_rules('price','Price','numeric|required');
 				// 		$this->load->view('screen/create_screen', $sdata);
 				}
 ///////////////////////////////////////////////////////////////////				
-								}
-					else { $this->sess_out();	}	
+								
+					else 
+					{ $this->sess_out();	
+					}	
+							}
 					
-					}
+					
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function _alpha_dash_space($str_in = '')
 {
@@ -102,6 +115,13 @@ function _alpha_dash_space($str_in = '')
     }
 }
 ////////////////////////////////////////screen-list////////////////////////////////////////////
+public function sess_out()
+{
+
+
+echo "sess out" ;
+
+}
 public function list_screen()
 					{
 if(isset($this->session->userdata['logged_in'])){
@@ -116,7 +136,7 @@ if(isset($this->session->userdata['logged_in'])){
 
 						// $this->load->view('screen/list_screen', $sc_list);
 					}
-					else { $this->sess_out();	}		
+					else { echo "no";	}		
 					}
 					
 public function screen_edit()
@@ -178,13 +198,7 @@ $this->form_validation->set_rules('price','Price','numeric|required|xss_clean');
 					else { $this->sess_out();	}		
 					}					
 //////////////////////////////////////////////////////////////////////////////////////////////
-public function sess_out()
-{
 
-
-echo "sess out" ;
-
-}
 
 }
 ?>

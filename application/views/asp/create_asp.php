@@ -1,3 +1,5 @@
+<script src="<?php echo base_url()?>Assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
 <?php //$this->load->view('asp/header_menu.php'); ?>
 <style>
     .card-header{
@@ -12,6 +14,10 @@
         width: 230px;
         background-color: #47a3f3;
         color: white;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #fbfbfb;
     }
 </style>
  <div id="wrapper">
@@ -44,10 +50,10 @@
                 <div class="card-header">
                     Create ASP
                 </div>
-                <!-- <?php if($infomsg==1){ $a = "block";}else {$a = "none" ;}?>
+                <?php if($msg==1){ $a = "block";}else {$a = "none" ;}?>
                 <div class="alert alert-success" style="display:<?php echo $a ;?>">
                 <h5>Asp has been saved</h5>
-                </div> -->
+                </div>
  <!-- /////////////////////////////////////////////////////////.panel-body -->     
   
   <!-- <div class="row"> -->

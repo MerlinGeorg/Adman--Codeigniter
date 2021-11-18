@@ -48,10 +48,7 @@
     <!-- /.sidebar-collapse -->
     <!-- </div> -->
     <!-- /.navbar-static-side -->
-    <div id="page-wrapper">
-        <div class="row card">
-            <!-- <div class="col-lg-12"> -->
-            <div class="card-header">Create Advertiser</div>
+    
             <!-- </div> -->
             <!-- /.navbar-static-side -->
                 <div id="page-wrapper">
@@ -119,21 +116,9 @@
                                         </div>                          
                                       
                                 </div>
-                                <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
+                                
                                      
-											<div class="form-group">
-                                            <label>Web</label>
-                                            <input class="form-control" type="text"  name="web" >
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Pancard</label>
-                                            <input class="form-control"  name="pan" >
-                                        </div>
-                                         <div class="form-group">
-                                            <label>GST</label>
-                                            <input class="form-control"  name="gst" >
-                                        </div>
+											
                                         <!-- /.col-lg-6 (nested) -->
                                         <div class="col-lg-6">
 
@@ -199,12 +184,6 @@
 
         <div class="panel-heading">
 
-<<<<<<< HEAD
-        </div>
-
-    </div>
-</div>
-=======
                         </div>
                         
                     </div>
@@ -228,4 +207,3 @@ $('.alert').delay(timeout).fadeOut(300,function(){
 
 
   </script>
->>>>>>> 70359ea85c7fd6b6862749950466964e8c1deb32

@@ -160,46 +160,7 @@
                                             </div>
                                               </form>
                                 <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>City</label>
-                                        <input class="form-control" name="city" value="<?php echo $asprow->city; ?>">
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Web</label>
-                                        <input class="form-control" type="text" name="web" value="<?php echo $asprow->web; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Pancard</label>
-                                        <input class="form-control" name="pan" value="<?php echo $asprow->pan; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>GST</label>
-                                        <input class="form-control" name="gst" value="<?php echo $asprow->gst; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>SAC Code</label>
-                                        <input class="form-control" name="sac" value="<?php echo $asprow->sac; ?>">
-                                    </div>
-                                </div>
-
-
-
-                                <br><br>
-                                <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn mt-4 btn-submit" style="width: 230px">Save Event</button>
-                                </div>
-                            </div>
-                        </form>
+                                
                         <!-- /.col-lg-6 (nested) -->
                         <!-- </div> -->
                         <!-- /.row (nested) -->

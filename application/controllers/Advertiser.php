@@ -102,11 +102,9 @@ class Advertiser extends Layout_Controller
 				);
 				$this->advertisermodel->insert_adv_data('adv_reg', $adv_data);
 				$advdata['msg'] = 1;
-				
 			} else {
-				
+
 				$advdata['msg'] = 0;
-				
 			}
 			$advdata['username'] = $this->session->userdata('logged_in')['username'];
 			$advdata['email'] = $this->session->userdata('logged_in')['email'];
@@ -185,8 +183,7 @@ class Advertiser extends Layout_Controller
 
 
 		$this->advertisermodel->update_id('adv_reg', $advid, $adv_dataup);
-		$url = base_url()."advertiser/list_advt";
+		$url = base_url() . "advertiser/list_advt";
 		redirect($url);
-
 	}
 }
