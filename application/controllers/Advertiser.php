@@ -184,7 +184,9 @@ class Advertiser extends Layout_Controller
 
 
 		$this->advertisermodel->update_id('adv_reg', $advid, $adv_dataup);
-		$url = base_url() . "advertiser/list_advt";
-		redirect($url);
+	    //$url = base_url() . "advertiser/list_advt";
+		//redirect($url);
+		$url = 'advertiser/list_advt';
+		echo '<script>window.location.href = "' . base_url() . '/' . $url . '";</script>';
 	}
 }
