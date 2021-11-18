@@ -187,6 +187,6 @@ class Advertiser extends Layout_Controller
 	    //$url = base_url() . "advertiser/list_advt";
 		//redirect($url);
 		$url = 'advertiser/list_advt';
-		echo '<script>window.location.href = "' . base_url() . '/' . $url . '";</script>';
+		echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 	}
 }
