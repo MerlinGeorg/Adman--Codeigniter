@@ -69,5 +69,4 @@ function update_id($table, $id, $data)
 												}
 																																																
 }	
-?>
 
