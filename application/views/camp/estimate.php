@@ -35,43 +35,40 @@
                         <!-- <div class="panel-heading">Listed All Estimates</div> -->
                         <div class="panel-body">
                             <!-- <div class="row"> -->
-
-                            <div class="panel-body">
-
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead style="font-size: 12px;">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>CAMP NAME</th>
-                                                <th>CREATED</th>
-                                                <th>ADVERTISER</th>
-                                                <th>DURATION</th>
-                                                <th>EDIT</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($estlist->result() as $estrow) { ?>
-                                                <tr>
-
-                                                    <td><?php echo $estrow->est_id;     ?></td>
-                                                    <td><?php echo $estrow->name; ?></td>
-                                                    <td><?php echo $estrow->cr_date; ?></td>
-                                                    <td><?php echo $estrow->adv_name; ?></td>
-                                                    <td><?php echo $estrow->duration; ?></td>
-
-                                                    <td><a href="<?php echo site_url('camp/camp_edit') . '/' . $estrow->est_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                           
+                        <div class="panel-body">
+                            
+                            <div class="table-responsive m-b-40">
+                                <table class="table table-borderless table-data3">
+                                    <thead style="font-size: 12px;">
+                                        <tr>
+                                          <th>ID</th>       
+                                            <th>CAMP NAME</th>                                               
+                                            <th>CREATED</th>
+                                            <th>ADVERTISER</th>
+                                            <th>DURATION</th>
+                                             <th>EDIT</th>
+                                               
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+      <?php  foreach ($estlist->result() as $estrow) { ?>
+                                        <tr>
+                                           
+                                            <td><?php echo $estrow->est_id;	 ?></td>
+                                            <td><?php echo $estrow->name; ?></td>
+											 <td><?php echo $estrow->est_cr_date; ?></td>
+											 <td><?php echo $estrow->adv_name; ?></td>
+											  <td><?php echo $estrow->duration; ?></td>
+                                           
+                  <td><a href="<?php  echo site_url('camp/camp_edit').'/'.$estrow->est_id ; ?>" target="_blank"><i class="fas fa-edit"></i></a>
+                                        </td></tr>
+	  <?php } ?>
+                                        
+                                     
+                                                                          </tbody>
+                                </table>
                             </div>
 
                             <!-- /.col-lg-6 (nested) -->
