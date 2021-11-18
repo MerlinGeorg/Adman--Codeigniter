@@ -8,6 +8,7 @@ class Advertiser extends Layout_Controller
 	{
 		parent::__construct();
 		$this->load->model('advertiser/advertisermodel');
+		$this->load->helper('security');
 	}
 	//////////////////////////////////////////////////////////////dash/////////////////////////////////////	
 	public function index()
