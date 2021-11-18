@@ -168,8 +168,7 @@ $this->form_validation->set_rules('asp_email','Email','required|valid_email');
 										 		'cr_date' => $cr_date 
 										 		);
 					$this->aspmodel->update_id('asp', $aspid, $asp_data);
-					// redirect($_SERVER['HTTP_REFERER']);
-					redirect('asp/list_asp');
+					redirect($_SERVER['HTTP_REFERER']);
 													
 					}	
 					else{ 

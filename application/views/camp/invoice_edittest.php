@@ -219,7 +219,7 @@
                         <div class="card-header">
                             <h5>INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->est_id; ?></strong>
 
-                            <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
+                            <a class="float-right mr-1 d-print-none" href="#" onclick="location.href='<?php echo base_url();?>camp/invo_print'" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
                             <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
@@ -303,7 +303,7 @@
 
 
                                     <div><strong>Est Date:</strong>
-                                        <?php echo $est_date = $estrow->est_cr_date; ?><br></div>
+                                        <?php echo $est_date = $estrow->cr_date; ?><br></div>
                                     <!-- <div><strong>Content Name:</strong>
                         <?php echo $contentname = $estrow->content_name ?><br></div>
                        <div><strong>Campaign Name:</strong>

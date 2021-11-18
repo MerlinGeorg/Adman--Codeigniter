@@ -1,539 +1,261 @@
-<!doctype html>
-                        <html>
-                            <head>
-                                <meta charset='utf-8'>
-                                <meta name='viewport' content='width=device-width, initial-scale=1'>
-                                <title>Edit RO</title>
-                                <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href= "<?php echo base_url('vendor/bootstrap-4.1/bootstrap.min.css' );?>" rel="stylesheet" media="all">
-<link href= "<?php echo base_url('vendor/font-awesome-4.7/css/font-awesome.min.css');?>" rel="stylesheet" media="all">
-  <link href= "<?php echo base_url('vendor/font-awesome-5/css/fontawesome-all.min.css');?>" rel="stylesheet" media="all">
-                                <style>.card {
-    margin-bottom: 1.5rem
-}
-
-.card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid #c8ced3;
-    border-radius: .25rem
-}
-
-.card-header:first-child {
-    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
-}
-
-.card-header {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #39678c;
-    border-bottom: 1px solid #c8ced3;
-    color:#ffffff;
-}
-
-.body-main {
-     background: #ffffff;
-     /* border-bottom: 15px solid #1E1F23;
-     border-top: 15px solid #1E1F23; */
-     margin-top: 30px;
-     margin-left: 306px;
-     padding: 40px 30px !important;
-     position: relative;
-     /* box-shadow: 0 1px 21px #808080; */
-     font-size: 10px
- }
- th{
-    background-color: #39678c;
-    color:#ffffff;
- }
-
-</style>
-                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-                                <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-                                <script type='text/javascript'></script>
-                            </head>
-                            <body>
-                            <div class="container-fluid">
-    <div id="ui-view" data-select2-id="ui-view">
-        <div>
-            <div class="card" >
-           
-
-
-            <div class="card-header"><h5 style="margin-left: 24px;">Release Order</h5><div style="margin-left: 24px;">RO-ID # 
-            <?php 
-              
-             
-              if(!empty($ro_reg))
-              {
-              ?>
-                    <strong><?php echo $estimate_num = $ro_reg[0]->ro_id; ?></strong>
-                    <?php }  else{ echo "<i>ERROR: RELASE NUMBER IS EMPTY<i>" ;} ?></div>
-                    
-                   <span class="btn btn-info float-right" style="margin-left: 10px; width: 185px;"><a style="color: white;" href="printpage" onClick="printthis(); return false;">Print</a>  </span>
-              <span class="btn btn-info float-right" style="width: 185px;"><a style="color: white;" href="<?php if(!empty($ro_reg)){ echo site_url('ro/make_ro').'/'.$ro_reg[0]->ro_id ;} else { ?>#<?php } ?>" >Post Invoice</a>  </span>
-                        
-             
-                </div>
-
-
-
-                <div class="card-body">
-                    <div class="row mb-5">
-                        <div class="col-sm-4" style="margin-left: 24px;">
-                            <h6 class="mb-3">Billed To:</h6>
-                            <?php if(!empty($ro_reg)){ ?>
-                            <div>
-                                <strong> <?php echo $advertiser = $ro_reg[0]->adv_name; ?></strong>
-                            </div>
-                            <div><?php echo $adv_cp = $ro_reg[0]->c_person; ?></div>
-                            <!-- <div><?php  echo $adv_phone = $ro_reg[0]->phone_1; ?></div> -->
-                            <div>Email: <?php echo $adv_email = $ro_reg[0]->email; ?></div>
-                            <div>Phone: <?php  echo $adv_phone = $ro_reg[0]->phone_1; ?></div>
-                            <?php } else { echo "<i>ERROR : DETAIL IS EMPTY <i>"; }?>
-                        </div>
-                        
-                        <div class="col-sm-3 ml-auto mt-4">
-                            
-                            <div><strong>Est Date:</strong>
-                            <?php if(!empty($ro_reg)){ ?>
-                               <?php echo $est_date = $ro_reg[0]->cr_date;  ?>
-                            </div>
-                            
-                            <div><strong>Camp Name:</strong>
-                                <?php echo $campname = $ro_reg[0]->est_name; ?>
-                            </div>
-                            <div><strong>Content Duration:</strong>
-                                <?php echo $ad_duration = $ro_reg[0]->duration; ?>/sec
-                            </div>
-                           <?php } else { echo"ERROR : NO DATE"; } ?>
-                        </div>
-                            
-                    </div>
-
-
-
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th class="column1" width="-5px">ASP</th>
-                                                  <th class="column2">Screen</th>
-                                                  <th class="column3">Date</th>
-                                                  <th class="column4">Package</th>
-                                                  <th class="column5">Rate</th>
-                                                  <th class="column6">Amount</th>
-                                                  <th class="column7">Discount</th>
-                                                  <th class="column8">IGST</th>
-                                                  <th class="column9">CGST</th>
-                                                  <th class="column10">SGST</th>
-                                                  <th class="column11">L-Tax</th>
-                                                  <th class="column12">Total</th>
-                                                  <th class="column13">ASP Disc</th>
-                                                  <th class="column14">Amount</th>
-                                                  <th class="column15">Invoice No.</th>
-                                                  <th class="column16">Invoice Date</th>
-                                                  <th class="column17">Save</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($ro_reg as $estrow) { ?>
-                                <tr>
-                                    <form method="post" action="<?php echo site_url('ro/update_discount') ; ?>" >
-                                     
-                                    <td class="column1"><?php echo $estrow->asp_name; ?></td>
-                                    <td class="column2"><?php echo $estrow->sc_name; ?></td>
-                                    <td class="column3"><?php echo $estrow->start_date; ?>
-                                       </br>
-                                        <?php echo $estrow->end_date; ?>	</td>
-                                    <td class="column4"><?php echo $estrow->tp_name; ?> </td>
-                                    <td class="column5"><?php echo $estrow->price; ?></td>
-                                    <td class="column6"> <?php echo $amount = ($ad_duration*$estrow->price)*$estrow->package; ?></td>
-                                    <td class="column7"> <?php echo $dis = $estrow->ro_discount; ?>%</br>
-                                                  <?php echo $x = ($amount*$dis)/100 ;?></br><?php echo $y = $amount-$x ;?>
-                                                  </td>
-                                    <td class="column8"><?php echo $igst = $estrow->igst; ?>%</br>
-                                                  <?php echo $igst_val = ($y*$igst)/100 ;?></br>
-                                                  
-                                                  </td>  
-                                   <td class="column9"><?php echo $cgst = $estrow->cgst; ?>%</br>
-                                                  <?php echo $cgst_val = ($y*$cgst)/100 ;?>
-                                                  </td>
-                                  <td class="column10"><?php echo $sgst = $estrow->sgst; ?>%</br>
-                                                  <?php echo $sgst_val = ($y*$sgst)/100 ;?></td>
-                                  <td class="column11"><?php echo $ltax = $estrow->local_tax; ?>%</br>
-                                                  <?php echo $ltax_val = ($y*$ltax)/100 ;?></td>
-                                  <td class="column12"><h5><?php echo $totalval = $y+$igst_val+$cgst_val+$sgst_val+$ltax_val ; ?></h5></td>
-                                  <td class="column13">
-                                      <input type="hidden" name="ro_ids" maxlength="2"  value="<?php echo $estrow->ro_id; ?>">
-                                         <input type="hidden" name="ro_lid" maxlength="2"  value="<?php echo $estrow->ro_lid; ?>">
-                                     <div class="d-flex">
-                                      <input type="text" name="ro_discount" maxlength="2"  value="<?php echo $aspdis = $estrow->asp_discount; ?>" style="width: 27px;outline: 1px solid #7d7b7b6b;"><span>%</span></div></br>
-                                      <?php echo $fdisval = ($totalval*$aspdis)/100 ;?>
-                                              
-
-                                </td>
-                                <td class="column14" ><?php echo $roactval = $totalval-$fdisval ; ?>
-                                 <input type="number" name="final_amount"  value="<?php echo $roactval ; ?>" style="display:none;">
-
-                              </td>
-                              <td class="column15" ><input type="text" name="invo_no" value="<?php echo $estrow->invo_no; ?>" style="width: 70px;outline: 1px solid #7d7b7b6b;"></br></td>
-                              <td class="column16" ><input type="text" name="invo_date" value="<?php echo $estrow->invo_date; ?>" style="width: 70px;outline: 1px solid #7d7b7b6b;"></br></td>
-                              <td class="column17" > <button type="submit" style="font-size: 20px; color:#2283d8;"><i class="fas fa-save"></i></button></td>
-
-
-
-
-
-
-
-
-                                </tr>
-                                <?php
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-
-                        <div id="printthis" style="display:none;" >
-
-
-
-
-
+<?php //$this->load->view('asp/header_menu.php'); ?>
 <style>
-  .invoice-box {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-      font-size: 16px;
-      line-height: 24px;
-      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-      color: #555;
-  }
-  
-  .invoice-box table {
-      width: 100%;
-      line-height: inherit;
-      text-align: left;
-  }
-  
-  .invoice-box table td {
-      padding: 5px;
-      vertical-align: top;
-  }
-  
-  .invoice-box table tr td:nth-child(2) {
-      text-align: right;
-  }
-  
-  .invoice-box table tr.top table td {
-      padding-bottom: 20px;
-  }
-  
-  .invoice-box table tr.top table td.title {
-      font-size: 45px;
-      line-height: 45px;
-      color: #333;
-  }
-  
-  .invoice-box table tr.information table td {
-      padding-bottom: 40px;
-  }
-  
-  .invoice-box table tr.heading td {
-      background: #eee;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
-  }
-  
-  .invoice-box table tr.details td {
-      padding-bottom: 20px;
-  }
-  
-  .invoice-box table tr.item td{
-      border-bottom: 1px solid #eee;
-  }
-  
-  .invoice-box table tr.item.last td {
-      border-bottom: none;
-  }
-  
-  .invoice-box table tr.total td:nth-child(2) {
-      border-top: 2px solid #eee;
-      font-weight: bold;
-  }
-  
-  @media only screen and (max-width: 600px) {
-      .invoice-box table tr.top table td {
-          width: 100%;
-          display: block;
-          text-align: center;
-      }
-      
-      .invoice-box table tr.information table td {
-          width: 100%;
-          display: block;
-          text-align: center;
-      }
-  }
-  
-  /** RTL **/
-  .rtl {
-      direction: rtl;
-      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-  }
-  
-  .rtl table {
-      text-align: right;
-  }
-  
-  .rtl table tr td:nth-child(2) {
-      text-align: left;
-  }
-  #customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+    .card-header{
+        background-color: rgb(71, 163, 243);
+        border-bottom: 1px solid rgba(71, 92, 243, 0.58);
+        color: white;
+    }
+    .card-footer{
+        background-color: initial;
+    }
+    .btn-submit{
+        width: 230px;
+        background-color: #47a3f3;
+        color: white;
+    }
+    .form-control:disabled, .form-control[readonly]{
+        background-color: #fbfbfb;
+    }
+</style>
+<body onload="getData();">
+ <div id="wrapper">
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+        <!-- Navigation -->
+   
+            <!-- <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                      <li>                
+                    <div class="fa fa-dashboard fa-fw"><h4 style="text-align:center;  color: #9f2ab3;">RO</h4></div>
+                    </li>
+                        <li><a href="<?php echo site_url('ro/create_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>Create Release Orders</a>                          
+                        </li>
+                        <li><a href="<?php echo site_url('ro/list_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>List Release Orders</a>                          
+                        </li>
+                       <li><a href="<?php echo site_url('ro/oldlist_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>Old Release Orders</a>                          
+                        </li>
+                        
+                       
+                                          
+                     </ul> -->
+                            <!-- /.nav-second-level -->
+                       
+                <!-- </div> -->
+                <!-- /.sidebar-collapse -->
+            <!-- </div> -->
+            <!-- /.navbar-static-side -->
+                <div id="page-wrapper">
+            <div class="row card">
+                <div class="card-header">
+                    Edit RO
+                </div>
+ <!-- /////////////////////////////////////////////////////////.panel-body -->     
+  
+  <!-- <div class="row"> -->
+                <div class="col-lg-12 card-body">
+                    <div class="panel panel-default">
+                        <!-- <div class="panel-heading">Release Order</div> -->
+                        <div class="panel-body">
+                        <?php foreach ($data->result() as $row)
+                                        {           }?> 
+                            <form role="form" method="post" action="<?php echo site_url('ro/ro_update');  ?>" target="_blank"  >
+                            <input  name="ro_id"  value="<?php echo $row->ro_id;   ?>" style="display : none ;" >
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label>Campaign Name</label>
+                                             <select class="form-control" id="campId" name="campId" >
+                                              <option value="<?php echo $row->est_id;   ?>"><?php echo $row->name;   ?></option>
+                                                <?php foreach ($rolist->result() as $rorow): ?>
+                                              <option value="<?php echo $rorow->est_id;     ?>"><?php echo $rorow->name;   ?></option>
+                                                <?php endforeach; ?>
+                                             </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+				                    <div class="form-group">
+                                            <label>Campaign Date</label>
+                                            
+                                            <input class="form-control" name="camp_date" id="camp_date" value="<?php echo $row->est_cr_date;   ?>">
+                                            
+                                        </div>
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+                                </div>
+                                <div class="col-lg-4">
+                                     <div class="form-group">
+                                            <label>Advertiser Name</label>
+                                            
+                                            <select class="form-control" id="ro_adv" name="ro_adv" >
+                                                <option value="<?php echo $row->adv_id;     ?>"><?php echo $row->adv_name;   ?></option>
+                                                <?php foreach ($adv->result() as $rorow): 
+                                                  ?>
+                                              <option value="<?php echo $rorow->adv_id;     ?>"><?php echo $rorow->adv_name;   ?></option>
+                                                <?php endforeach; ?>
+                                                
+                                                </select>
+                                        </div> 
+                                
+                            </div>
+                            <div class="col-lg-4">
+                                     <div class="form-group">
+                                            <label>ASP Name</label>
+                                            <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
+                                            <select class="form-control" id="aspId" name="aspId"  >
+                                                <option value="<?php echo $row->asp_id;     ?>"><?php echo $row->asp_name;   ?></option>
+                                                <?php foreach ($asp->result() as $rorow): 
+                                                  ?>
+                                              <option value="<?php echo $rorow->asp_id;     ?>"><?php echo $rorow->asp_name;   ?></option>
+                                                <?php endforeach; ?>
+                                                
+                                                </select>
+                                        </div> 
+                                
+                            </div>
+                                <div class="col-lg-4">
+				                    <div class="form-group">
+                                            <label>Publishing Date</label>
+                                            <input class="form-control" name="ad_date" id="ad_date"  >
+                                        </div>
 
-#customers tr:hover {background-color: #ddd;}
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-4">
+                                     <div class="form-group">
+                                            <label>Duration</label>
+                                            <input class="form-control" name="duration" id="duration" value="<?php echo $row->duration;   ?>" >
+                                            
+                                        </div> 
+                                
+                            </div>
+                            <div class="col-lg-4">
+                                     <div class="form-group">
+                                            <label>End Date</label>
+                                            <?php
+                                            $date=$row->est_cr_date;
+                                             $duartion=$row->duration;
+                                            
+                                            $date = strtotime($date);
+                                          
+                                           $date = strtotime("+ ".$duartion."day", $date);
+                                            $endDate = date('Y-m-d', $date);
 
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #d4d4d5;
-  color:#000000;
-}
-  </style>
-
-
-<?php
-                           $img= $this->session->userdata('image_name');
-                           $companyname=$this->session->userdata('company_nam');
-                           $cmpadrs=$this->session->userdata('company_adrs');
-                           $email=$this->session->userdata('email');
-                           $phone=$this->session->userdata('phone');
-                            ?>
-
-<div class="invoice-box">
-      <table cellpadding="0" cellspacing="0" style="
-  max-width: 101%;
-">
-          <tr class="top">
-              <td colspan="2">
-                  <table>
-                   <tr >
-              <p style="color: #b1aeae;font-weight: 600;font-size: 21px;text-align:  center;"> Release Order </p>               
-          </tr>
-                      <tr>
-                          <td class="title">
-                          <?php
-                            if(!empty($img))
-                            {
-                            ?>
-
-                              <img src='<?=base_url("Assets/img/logo/$img") ?>' style="height : 76px;">
-                            <?php } 
-                            ?>
-                          </td>
-                   
-                          <td>
-                              RO #: <?php echo $estimate_num ; ?><br>
-                             <?php echo $est_date ;?>
-                            
-                          </td>
-                      </tr>
-                  </table>
-              </td>
-          </tr>
-          
-          <tr class="information">
-           <tr class="heading">
-              <td>
-               
-              </td>
-              
-              <td>
-                 Billed To:
-              </td>
-          </tr>
-              <td colspan="2">
-                  <table>
-                      <tr>
-                          <td>
-                          
-       <?php echo $companyname ?><br>
-       <?php echo $cmpadrs ?><br>
-       <!-- <?php echo $companyname ?><br> -->
-       <!-- <?php echo $companyname ?><br> -->
-       Email :  <?php echo $email ?><br>
-       Phone :  <?php echo $phone ?><br>
-
-                             
-                          </td>
-                          
-                          <td>
-                             <?php echo $adv_cp ; ?><br>
-                              <?php  echo $adv_phone ; ?><br>
-                             <?php echo $adv_email ; ?>
-                          </td>
-                      </tr>
-                  </table>
-              </td>
-          </tr>
-          
-          <tr class="heading">
-              <td>
-                 Camp Name
-              </td>
-              
-              <td>
-                  Content Duration
-              </td>
-          </tr>
-          
-          <tr class="details">
-              <td>
-                  <?php echo $campname  ; ?>
-              </td>
-              
-              <td>
-                   <?php echo $ad_duration  ; ?>/sec
-              </td>
-          </tr>
-                   
-      </table>
-<div class="container-table100">
-  <div class="wrap-table100">
-      <div class="table100">		
-          <table id="customers">
-              <thead>
-                  <tr class="table100-head" style="font-size: 12px;">
-                                              <th class="column1">ASP</th>
-                                              <th class="column2">SCREEN</th>
-                                              <th class="column3">Package</th>
-                                              <th class="column4">Rate</th>
-                                              <th class="column5">Discount</th>
-                                              <th class="column6">IGST</th>
-                                              <th class="column7">CGST</th>
-                                              <th class="column8">SGST</th>
-                                              <th class="column9">L-Tax</th>
-                                              <th class="column10">Total</th>
-                  </tr>
-              </thead>
-          <?php 
-          $sub_total = 0 ;
-          if(!empty($ro_reg))
-          
-
-          foreach ($ro_reg as $estlrow) { ?>
-          <tr>
-              <td class="column1"><?php echo $estlrow->asp_name; ?></td>
-              <td class="column2"><?php echo $estlrow->sc_name; ?></td>
-              <td class="column3"><?php echo $estlrow->tp_name; ?></td>
-              <td class="column4"><?php echo $estlrow->price; ?></td>
-                              <td class="column5"><?php echo $dis = $estlrow->asp_discount; ?>%<br>
-              <?php	$dcamount = ($ad_duration*$estlrow->price)*$estlrow->package; 
-              
-              echo $x = ($dcamount*$dis)/100 ;
-              $acval = $dcamount-$x ;
-              
-              ?></td>
-
-                          <td class="column6"><?php echo $igst = $estlrow->igst; ?>%<br><?php echo $igst_value = ($acval*$igst)/100 ;?></td>
-
-                              <td class="column7"><?php echo $cgst = $estlrow->cgst; ?>%</br>
-                                              <?php echo $cgst_value = ($acval*$cgst)/100 ;?></td>
-
-                                  <td class="column8"><?php echo $sgst = $estlrow->sgst; ?>%</br>
-                                              <?php echo $sgst_value = ($acval*$sgst)/100 ;?></td>
-
-                                      <td class="column9"><?php echo $ltax = $estlrow->local_tax; ?>%</br>
-                                              <?php echo $ltax_value = ($acval*$ltax)/100 ;?></td>
+                                             ?>
+                                            <input class="form-control" name="end_date" id="end_date" value="<?php echo $endDate;   ?>" readonly >
+                                            <!-- <select class="form-control" id="end_date" name="end_date" required>
+                                                <option value="">Select</option>
+                                                
+                                                
+                                                </select> -->
+                                        </div> 
+                                
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>  
+                            </div>         
+                            </form>
                                               
-                                              <td class="column10"><?php echo $line_total = $acval+$igst_value+$cgst_value+$sgst_value+$ltax_value ; ?></td>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                <!-- </div> -->
+                <!-- /.col-lg-12 -->
+            <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
+            </div>
+            <!-- /.row -->
+        </div>
 
 
-          </tr>
-          <?php
+                    <div class="panel-heading">
 
-          $sub_total += $line_total;
-
-          } ?>
-          </table>
-      </div>
-  </div>
-</div>
-<table>
-       
-           <tr class="information">
-           <tr class="heading">
-              <td>
-              Total Amount
-              </td>
-              
-              <td>
-                <?php echo $sub_total ; ?>/-
-              </td>
-          </tr>
-          <tr >
-              <td style=" font-size: 11px;">
-Paymet By Cheque/Bank transfer to the name MEHARALI P.I
-              <td>
-                
-              </td>
-          </tr>
-          <tr >
-              <td style=" font-weight: 100;font-size: 10px;">
-              Account Number : 0250073000050159<br>
-IFSC Code SIBL0000250                </td>
-              
-            
-          </tr>
-          </tr>
-      </table>
-  </div>
-        
-</div>
-
-
+                        </div>
                         
                     </div>
-                    <script>
-
-                        
-function printthis()
-
-{
-var w = window.open('', '', 'width=500,height=800,resizeable,scrollbars');
-w.document.write($("#printthis").html());
-w.document.close(); // needed for chrome and safari
-javascript:w.print();
-w.close();
-return false;
-}
-function makeinvoice()
-
-{
-alert("please wait") ;
-}
-</script>
+                  
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+   // body.onload = function() {
+   // $(window).on('load', function() {
+  
+function getData(){
+   
+     //   $(window).on('load', function() {
+         $('#camp_date').datepicker({
+	autoclose: true,
+	showOnFocus: true,
+	todayHighlight: true,
+	format: "yyyy-mm-dd",
+	startDate:new Date("<?= date('Y-m-d') ?>")
+    }).on('changeDate', function(e){
+        var endDate = new Date(Date.parse(e.date));
+        endDate.setDate(endDate.getDate() + parseInt($('#duration').val()));
+        $('#end_date').val(formatDate(endDate));
+    }); 
+   
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+//}
+    }
+
+
+    var campId =  $('#campId').val();
+        $.ajax({
+            type:"post",
+            dataType: "json",
+            data:{camp_id:campId},
+            url:"<?php echo site_url('ro/get_camdata')?>",
+            success : function(response){
+                // console.log(response);
+                    $('#camp_date').val(response[0]['est_cr_date']);    
+                 //   $('#ro_adv').val(response[0]['adv_name']);    
+                    // $('#ro_asp').val(response[0]['asp_name']);    
+                    $('#duration').val(response[0]['duration']);
+                $('#aspId').empty();
+                var option = "";
+                $.each(response['asp'],function(index){
+                    var Id = response['asp'][index].asp_id;
+                    var aspname = response['asp'][index].asp_name;
+                    option += '<option value="'+ Id +'">'+ aspname +'</option>';
+                });
+                $('#aspId').append('<option value="">Select</option>'+option);
+
+            }
+
+        });
+    // $('#ad_date').datepicker();
+    
+    
+    /*  $('#savero').on('click',function(){
+       
+        window.location.href = "<?php echo site_url('ro/list_ro'); ?>";
+    }) 
+ */
+//$('#campId').change(function(){
+        
+  //  });
+  $(document).ready(function(){
+
+
+    $('#campId').on('change',function(){
+       
+    });
+})
+</script>

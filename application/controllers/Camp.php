@@ -75,7 +75,7 @@ if(($customer!='')&&($duration!='')&&($adv!==''))
 $cr_date = date("Y/m/d") ;
 $est_data = array(	'name'=>$customer,
 					'duration' => $duration,
-					'cr_date' => $cr_date,
+					'est_cr_date' => $cr_date,
 					'lst_date' => $cr_date,
 					'status' => 1,
 					'adv_id' => $adv
@@ -241,9 +241,12 @@ function invo_edit()
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($invo_id);
 	   $this->load->view('camp/invoice_edit', $invo_list);
+	//   $this->load->view('camp/invoice_edittest', $invo_list);
 						}
 					else { $this->sess_out();	}		
 					}
+
+
 /////////////////////////////
 function camp_cancel()
 {
@@ -369,6 +372,8 @@ $invo_list['n_asp'] = $this->campmodel->getasp();
 $invo_list['n_package'] = $this->invomodel->gettpolicy();
 $invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($nestid);
 $this->load->view('camp/invoice_edit', $invo_list);
+//$this->load->view('camp/invoice_edittest', $invo_list);
+//$this->load->view('camp/print', $invo_list);
 	
 }
 else{
@@ -415,6 +420,7 @@ if(isset($this->session->userdata['logged_in'])){
 	$est_edit['invo_reg'] = $this->campmodel->get_estedit($rowestid);
 	$est_edit['involineedit'] = $this->campmodel->get_estline_edit($rowestid);
 	$this->load->view('camp/invoice_edit', $est_edit);
+	//$this->load->view('camp/invoice_edittest', $est_edit);
 
 
 // 	$invo_list['invo_reg'] = $this->campmodel->get_invoedreglist($invo_id);
@@ -500,7 +506,7 @@ $cr_date = date("Y/m/d") ;
 					'content_id' => $content_inid,
 					'cr_date' => $cr_date,
 					'status' => 1,
-					'play' => preshow
+					'play' => "preshow"
 				        			);
 $invoice_id = $this->campmodel->create_invo_data($invo_reg);
 $est_line_data = $this->campmodel->get_estlinedata($estimate_id);
@@ -545,10 +551,10 @@ $this->campmodel->create_invo_ldata($invo_reg_line);
 	 
 		 
 $this->campmodel->invoiced_est($estimate_id);		
-						
-	 echo  "<script type='text/javascript'>";
-    echo "window.close();";
-    echo "</script>";
+	echo "<script type='text/javascript'>alert('Campaign Invoiced Successfully.Please Check Invoiced List');</script>";					
+	 echo  "<script type='text/javascript'>window.close();</script>";
+	// $url = base_url()."camp/list_outward_invoiced";
+	// redirect($url);	
 
 }
 ///////////////////////////////
