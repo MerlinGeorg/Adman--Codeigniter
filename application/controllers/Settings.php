@@ -18,7 +18,8 @@ $this->load->model('settingmodel/Settingmodel');
 						$stdata['title'] = "Settings" ;
 						$stdata['logodata'] = $this->Settingmodel->list_logo();
 						
-
+					//	print_r($stdata['logodata']->result());
+					//	die();
 						$this->data = $stdata;
 						$this->page = "settings/setting_view";
 						$this->layout();
@@ -158,13 +159,15 @@ public function addLogo()
 
 			$id=$this->input->post('lgo_id');
 		
-			
+			//echo $id;
+			//die();
 			$stdata['username'] = $this->session->userdata('logged_in')['username'];
 			$stdata['email'] = $this->session->userdata('logged_in')['email'];
 			$stdata['infomsg'] = "no" ;
 			$stdata['title'] = "Settings" ;
 			$lgdata = $this->setting_model->get_data($id);
 			echo json_encode($lgdata);
+			//die();
 			
 
 			// $this->data = $stdata;
