@@ -63,8 +63,18 @@ $this->form_validation->set_rules('asp_phone_2','Phone','numeric|max_length[10]|
 										
 					}	
 				else{ 
-				$ttdata['infomsg'] = "no" ;	
-				$this->load->view('asp/create_asp', $ttdata);
+				
+				$ttdata['username'] = $this->session->userdata('logged_in')['username'];
+				$ttdata['email'] = $this->session->userdata('logged_in')['email'];
+				$ttdata['infomsg'] = "no" ;
+				$ttdata['title'] = "Create ASP" ;
+				 
+				$this->data = $ttdata;
+				$this->page = "asp/create_asp";
+				$this->layout();	
+
+
+				// $this->load->view('asp/create_asp', $ttdata);
 				}
 ///////////////////////////////////////////////////////////////////				
 								}
@@ -158,7 +168,8 @@ $this->form_validation->set_rules('asp_email','Email','required|valid_email');
 										 		'cr_date' => $cr_date 
 										 		);
 					$this->aspmodel->update_id('asp', $aspid, $asp_data);
-					redirect($_SERVER['HTTP_REFERER']);
+					// redirect($_SERVER['HTTP_REFERER']);
+					redirect('asp/list_asp');
 													
 					}	
 					else{ 

@@ -44,6 +44,10 @@
                 <div class="card-header">
                     Create ASP
                 </div>
+                <!-- <?php if($infomsg==1){ $a = "block";}else {$a = "none" ;}?>
+                <div class="alert alert-success" style="display:<?php echo $a ;?>">
+                <h5>Asp has been saved</h5>
+                </div> -->
  <!-- /////////////////////////////////////////////////////////.panel-body -->     
   
   <!-- <div class="row"> -->
@@ -141,6 +145,7 @@
                         </div>
                         
                     </div>
+ </div>
                   
                
 

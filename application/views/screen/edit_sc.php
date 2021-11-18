@@ -68,8 +68,10 @@ foreach ($scdataedit->result() as $scrow)
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label>Screen Name</label>
-                                                    <input class="form-control" style="display : none;" name="sc_id"  value="<?php echo $scrow->sc_id;  ?>" >
-                                                    <input class="form-control"  name="screen_name"  value="<?php echo $scrow->sc_name;  ?>" >
+                                                    <input name="sc_id" value="<?php echo  $scrow->sc_id; ?>" style="display : none ;">
+                                                    <input class="form-control" placeholder="Enter Screen Name" name="screen_name"  value="<?php echo $scrow->sc_name;  ?>" >
+                                                    <!-- <input class="form-control" style="display : none;" name="sc_id"  value="<?php echo $scrow->sc_id;  ?>" >
+                                                    <input class="form-control"  name="screen_name"  value="<?php echo $scrow->sc_name;  ?>" > -->
                                                                 <div style="color: red;"><?php echo form_error('screen_name'); ?></div>			
                                                 </div>
                                             </div>
@@ -106,12 +108,13 @@ foreach ($scdataedit->result() as $scrow)
                                             <div class="col-lg-6">                   
                                                 <div class="form-group">
                                                     <label>Status</label>
+                                                    <select class="form-control" name="status">
                                                     <?php $status = $scrow->sc_status; 
                                                     if($status==1) { $a = "selected" ; $d = "" ; } else { $d = "selected" ; $a = "" ;}
                                                     
                                                     
                                                     ?> 
-                                                    <select class="form-control" name="status">
+                                                    
                                                         <option <?php echo $a ; ?> value="1">Active</option>
                                                         <option  <?php echo $d ; ?> value="0">Deactive</option>
                                                     

@@ -41,9 +41,6 @@ public function list_advt()
 
 if(isset($this->session->userdata['logged_in'])){
 	
-	
-	
-	
 		$advldata['username'] = $this->session->userdata('logged_in')['username'];
 		$advldata['email'] = $this->session->userdata('logged_in')['email'];
 		$advldata['list_advdata'] = $this->advertisermodel->getadvlist();
@@ -102,7 +99,8 @@ $this->form_validation->set_rules('wphone', 'Wphone', 'numeric|xss_clean');
 				else{ 
 
 				  $advdata['state'] = $this->advertisermodel->getstate();	
-				      $advdata['cat'] = $this->advertisermodel->getcat();		
+				      $advdata['cat'] = $this->advertisermodel->getcat();	
+					  
 						$this->load->view('advertiser/create_advt', $advdata);
 				}
 ///////////////////////////////////////////////////////////////////				

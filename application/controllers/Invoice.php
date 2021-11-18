@@ -207,16 +207,19 @@ else{
 ////////////////////////////
 function row_del()
 {
+	$rowid = $this->input->get('var1');
+	$rowestid = $this->input->get('var2');	
 if(isset($this->session->userdata['logged_in'])){
 
-	$rowid = $this->input->post('row_id');
-	$rowestid = $this->input->post('row_invoid');	
+	// $rowid = $this->input->post('row_id');
+	// $rowestid = $this->input->post('row_invoid');	
 	$this->invomodel->did_delete_row($rowid);
 	$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($rowestid);
 		$invo_list['n_asp'] = $this->invomodel->getasp();	
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($rowestid);
 		$this->load->view('invoice/invoice_edit', $invo_list);
+		// redirect('invoice/list_outward_invoice');
 	
 }
 else{

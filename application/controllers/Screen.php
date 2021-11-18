@@ -68,10 +68,20 @@ $this->form_validation->set_rules('price','Price','numeric|required');
 									
 					}	
 				else{ 
+					$sdata['username'] = $this->session->userdata('logged_in')['username'];
+						$sdata['email'] = $this->session->userdata('logged_in')['email'];
+ 						$sdata['state'] = $this->screenmodel->getstate();	
+						$sdata['asp'] = $this->screenmodel->getasp();
+						$sdata['title'] = "Create Screen";
+		 
+						$this->data = $sdata;
+						$this->page = "screen/create_screen";
+						$this->layout();
 
-				$sdata['state'] = $this->screenmodel->getstate();	
- 						$sdata['asp'] = $this->screenmodel->getasp();								
-						$this->load->view('screen/create_screen', $sdata);
+
+				// $sdata['state'] = $this->screenmodel->getstate();	
+ 				// 		$sdata['asp'] = $this->screenmodel->getasp();								
+				// 		$this->load->view('screen/create_screen', $sdata);
 				}
 ///////////////////////////////////////////////////////////////////				
 								}
@@ -79,6 +89,19 @@ $this->form_validation->set_rules('price','Price','numeric|required');
 					
 					}
 ////////////////////////////////////////////////////////////////////////////////////////////////
+function _alpha_dash_space($str_in = '')
+{
+    if (! preg_match("/^([-a-z0-9_ ])+$/i", $str_in))
+    {
+        $this->form_validation->set_message('_alpha_dash_space', 'The %s field may only contain alpha-numeric characters, spaces, underscores, and dashes.');
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+////////////////////////////////////////screen-list////////////////////////////////////////////
 public function list_screen()
 					{
 if(isset($this->session->userdata['logged_in'])){
@@ -118,8 +141,9 @@ if(isset($this->session->userdata['logged_in'])){
 					}
 public function screen_update()
 					{
+						$scid =$this->input->post('sc_id');
 if(isset($this->session->userdata['logged_in'])){
- $scid =$this->input->post('sc_id');
+//  $scid =$this->input->post('sc_id');
 $this->form_validation->set_rules('screen_name', 'Screen name', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 $this->form_validation->set_rules('city', 'City', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 $this->form_validation->set_rules('price','Price','numeric|required|xss_clean');
@@ -131,7 +155,7 @@ $this->form_validation->set_rules('price','Price','numeric|required|xss_clean');
 					$sc_data = array(	'sc_name'=>$this->input->post('screen_name'),
 										 		'city' => $this->input->post('city'),
 										 		'state' => $this->input->post('state'),
-							   		 		'asp' => $this->input->post('asp'),
+							   		 		    'asp' => $this->input->post('asp'),
 										 		'uom_qty' => $this->input->post('uom_qty'),
 										 		'sc_price' => $this->input->post('price'),
 										 		'sc_info' => $this->input->post('screen_info'),
@@ -143,7 +167,9 @@ $this->form_validation->set_rules('price','Price','numeric|required|xss_clean');
 										 		'sc_cr_date' => $cr_date 
 										 		);
 				   $this->screenmodel->update_screen_data('screen', $scid, $sc_data);
-					redirect($_SERVER['HTTP_REFERER']); }
+					// redirect($_SERVER['HTTP_REFERER']); 
+					redirect('screen/list_screen');
+				}
 					else{ 
 						$sc_list['scdata'] = $this->screenmodel->screen_list_profile();
 						$this->load->view('screen/list_screen', $sc_list);
