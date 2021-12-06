@@ -38,14 +38,14 @@ class Campmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from($table_name);
-		$this->db->where('asp',$course_id);
+		$this->db->where('asp', $course_id);
 		return $this->db->get();
 	}
 
 	public function insert_est_data($table, $data)
 	{
 		$this->db->insert($table, $data);
-	    $insertId = $this->db->insert_id();
+		$insertId = $this->db->insert_id();
 		return  $insertId;
 	}
 
@@ -54,17 +54,17 @@ class Campmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('est_reg');
 		$this->db->where('status', 1);
-		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id','inner');
+		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
 		$this->db->order_by("name", "asc");
 		return $this->db->get();
 	}
 
 	public function get_estedit($id)
-	{ 
+	{
 		$this->db->select('*');
 		$this->db->from('est_reg');
 		$this->db->where('est_id', $id);
-		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id','inner');
+		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
 		return $this->db->get();
 	}
 
@@ -76,20 +76,20 @@ class Campmodel extends CI_Model
 		$this->db->from('est_reg');
 		$this->db->where('est_id', $id);
 		//$this->db->where('status', 1);
-		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id','inner');
-	//	$this->db->join('content_reg', 'est_reg.content_id = est_reg.con_id','inner');
-		
+		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
+		//	$this->db->join('content_reg', 'est_reg.content_id = est_reg.con_id','inner');
+
 		return $this->db->get();
 	}
 
 	public function get_estline_edit($id)
 	{
 		$this->db->select('*');
-		$this->db->from('est_line'); 
+		$this->db->from('est_line');
 		$this->db->where('est_id', $id);
-		$this->db->join('asp', 'est_line.asp = asp.asp_id','inner');
-		$this->db->join('screen', 'est_line.screen = screen.sc_id','inner');
-		$this->db->join('time_policy', 'est_line.package = time_policy.tpc','inner');
+		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
+		$this->db->join('screen', 'est_line.screen = screen.sc_id', 'inner');
+		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
 		$this->db->order_by("asp_name", "asc");
 		return $this->db->get();
 	}
@@ -101,18 +101,18 @@ class Campmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('est_line');
 		$this->db->where('est_id', $id);
-		$this->db->join('asp', 'est_line.asp = asp.asp_id','inner');
-		$this->db->join('screen', 'est_line.screen = screen.sc_id','inner');
-		$this->db->join('time_policy', 'est_line.package = time_policy.tpc','inner');
+		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
+		$this->db->join('screen', 'est_line.screen = screen.sc_id', 'inner');
+		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
 		$this->db->order_by("sc_name", "asc");
 		return $this->db->get();
-	}	
+	}
 
 	public function get_screen($table, $id)
 	{
 		$this->db->select('*');
 		$this->db->from($table);
-		$this->db->where('sc_id',$id);
+		$this->db->where('sc_id', $id);
 		return $this->db->get();
 	}
 
@@ -153,7 +153,7 @@ class Campmodel extends CI_Model
 	public function insert_invo_data($data)
 	{
 		$this->db->insert('content_reg', $data);
-	    $insertId = $this->db->insert_id();
+		$insertId = $this->db->insert_id();
 		return  $insertId;
 	}
 
@@ -169,7 +169,7 @@ class Campmodel extends CI_Model
 	public function create_invo_data($data)
 	{
 		$this->db->insert('invoice_reg', $data);
-	    $invoiceId = $this->db->insert_id();
+		$invoiceId = $this->db->insert_id();
 		return $invoiceId;
 	}
 
@@ -186,7 +186,7 @@ class Campmodel extends CI_Model
 	{
 		$this->db->select('status');
 		$this->db->from('est_reg');
-		$this->db->where('est_id',$id);
+		$this->db->where('est_id', $id);
 		return $this->db->get();
 	}
 
@@ -201,7 +201,7 @@ class Campmodel extends CI_Model
 
 	public function create_invo_ldata($data)
 	{
-		$this->db->insert('invo_reg_line', $data);	
+		$this->db->insert('invo_reg_line', $data);
 	}
 
 	public function get_involist()
@@ -209,7 +209,7 @@ class Campmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('est_reg');
 		$this->db->where('status', 2);
-		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id','inner');
+		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
 		$this->db->order_by("name");
 		return $this->db->get();
 	}
@@ -220,5 +220,18 @@ class Campmodel extends CI_Model
 		$this->db->from('time_policy');
 		$this->db->where('tpc', $packid);
 		return $this->db->get();
+	}
+
+	public function getLogo($id)
+	{
+		$this->db->select('E.logo_id,l.*,a.*');
+		$this->db->from('est_reg E');
+		$this->db->join('adman_logo l', 'E.logo_id = l.logo_id');
+		$this->db->join('adman_company_address a', 'l.logo_id = a.logo_id');
+		$this->db->where('E.est_id', $id);
+		$ro = $this->db->get();
+		$res = $ro->result();
+		return $res;
+		//return $this->db->get();
 	}
 }
