@@ -113,13 +113,14 @@
                     </div>
 
                     <?php
-                    $img = $this->session->userdata('image_name');
-                    $companyname = $this->session->userdata('company_nam');
-                    $cmpadrs = $this->session->userdata('company_adrs');
+                    // $img = $this->session->userdata('image_name');
+                    //   $companyname = $this->session->userdata('company_nam');
+                    //  $cmpadrs = $this->session->userdata('company_adrs');
                     $email = $this->session->userdata('email');
                     $phone = $this->session->userdata('phone');
                     ?>
-
+                    <?php foreach ($logo as $estrow) {
+                    } ?>
 
                     <div class="card-body" style="margin-bottom: -53px;">
                         <div>
@@ -128,24 +129,24 @@
 
                                     <div>
                                         <?php
-                                        if (!empty($img)) {
+                                        if (!empty($estrow->logo_image)) {
                                         ?>
-                                            <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$img") ?>'> <strong><?php echo $companyname ?></strong></h6>
+                                            <h6><img name="logo_img" id="logo_id" class="logo_id" src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'> <strong><?php echo $estrow->company_name ?></strong></h6>
                                         <?php
                                         } else {
 
                                         ?>
-                                            <h6> <strong><?php echo $companyname ?></strong></h6>
+                                            <h6> <strong><?php echo $estrow->company_name ?></strong></h6>
                                         <?php
                                         }
                                         ?>
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div><?php echo $cmpadrs ?></div>
+                                        <div><?php echo $estrow->address ?></div>
                                         <!-- <div>New York City, New york, 10394</div> -->
-                                        <div>Email: <?php echo $email ?></div>
-                                        <div>Phone: <?php echo $phone ?></div>
+                                        <div>Email: <?php echo $estrow->email ?></div>
+                                        <div>Phone: <?php echo $estrow->phone ?></div>
                                     </div>
                                 </div>
                                 <!-- <div class="col-sm-4">
