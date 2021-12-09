@@ -1,4 +1,5 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Advertiser extends Layout_Controller
 {
@@ -7,6 +8,7 @@ class Advertiser extends Layout_Controller
 	{
 		parent::__construct();
 		$this->load->model('advertiser/advertisermodel');
+		$this->load->helper('security');
 	}
 	//////////////////////////////////////////////////////////////dash/////////////////////////////////////	
 	public function index()
@@ -160,7 +162,7 @@ class Advertiser extends Layout_Controller
 	public function adv_update()
 	{
 
-		echo	$advid = $this->input->post('adv_id');
+			$advid = $this->input->post('adv_id');
 
 		$cr_date = date("Y/m/d");
 		$adv_dataup = array(
@@ -183,7 +185,9 @@ class Advertiser extends Layout_Controller
 
 
 		$this->advertisermodel->update_id('adv_reg', $advid, $adv_dataup);
-		$url = base_url() . "advertiser/list_advt";
-		redirect($url);
+	    //$url = base_url() . "advertiser/list_advt";
+		//redirect($url);
+		$url = 'advertiser/list_advt';
+		echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 	}
 }

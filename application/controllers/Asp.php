@@ -7,20 +7,27 @@ class Asp extends Layout_Controller
 	{
 		parent::__construct();
 		$this->load->model('asp/aspmodel');
+		$this->load->helper('security');
 	}
+	/////////////////////////////////////////////////////////////////////
 
 	public function index()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) 
+		{
 
 			$this->load->view('asp/asp_dash');
-		} else {	
+		} 
+		else 
+		{
 			echo "no";
 		}
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 	public function create_asp()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) 
+		{
 			$ttdata['username'] = $this->session->userdata('logged_in')['username'];
 			$ttdata['email'] = $this->session->userdata('logged_in')['email'];
 			// $ttdata['infomsg'] = "no" ;
@@ -29,23 +36,25 @@ class Asp extends Layout_Controller
 			$this->data = $ttdata;
 			$this->page = "asp/create_asp";
 			$this->layout();
-
-			
-		} else {
+		} 
+		else 
+		{
 			echo "no";
 		}
 	}
 	public function asp_save()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
-			///////////////////////////////////////////////////////			
+		if (isset($this->session->userdata['logged_in'])) 
+		{
+			///////////////////////////////////////////////////////////////////////////////////////////	
 
 			$this->form_validation->set_rules('asp_name', 'Asp name', 'trim|required|callback__alpha_dash_space|min_length[5]|xss_clean');
 			$this->form_validation->set_rules('asp_person', 'Asp person', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('person_desig', 'Person_desig', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('asp_phone_1', 'Phone number', 'numeric|required|max_length[10]|min_length[10]|xss_clean');
 			$this->form_validation->set_rules('asp_phone_2', 'Phone', 'numeric|max_length[10]|min_length[10]|xss_clean');
-			if ($this->form_validation->run() == true) {
+			if ($this->form_validation->run() == true) 
+			{
 				$cr_date = date("Y/m/d");
 				$asp_data = array(
 					'asp_name' => $this->input->post('asp_name'),
@@ -61,22 +70,23 @@ class Asp extends Layout_Controller
 					'cr_date' => $cr_date
 				);
 				$this->aspmodel->insert_asp_data('asp', $asp_data);
-
 				$ttdata['msg'] = 1;
-			} else {
+			} 
+			else 
+			{
 				$ttdata['msg'] = 0;
 			}
 			$ttdata['username'] = $this->session->userdata('logged_in')['username'];
 			$ttdata['email'] = $this->session->userdata('logged_in')['email'];
 			// $ttdata['infomsg'] = "no" ;
 			$ttdata['title'] = "Create ASP";
-
 			$this->data = $ttdata;
 			$this->page = "asp/create_asp";
-			$this->layout();	
-
-			///////////////////////////////////////////////////////////////////				
-		} else {
+			$this->layout();
+           ////////////////////////////////////////////////////////////////////////////////////				
+		} 
+		else 
+		{
 			$this->sess_out();
 		}
 	}
@@ -84,15 +94,17 @@ class Asp extends Layout_Controller
 
 	function _alpha_dash_space($str_in = '')
 	{
-		if (!preg_match("/^([-a-z0-9_ ])+$/i", $str_in)) {
+		if (!preg_match("/^([-a-z0-9_ ])+$/i", $str_in)) 
+		{
 			$this->form_validation->set_message('_alpha_dash_space', 'The %s field may only contain alpha-numeric characters, spaces, underscores, and dashes.');
 			return FALSE;
-		} else {
+		} 
+		else 
+		{
 			return TRUE;
 		}
 	}
-
-	////////////////////////////////////////asp-list////////////////////////////////////////////
+////////////////////////////////////////asp-list////////////////////////////////////////////
 	public function sess_out()
 	{
 		echo "sess out";
@@ -100,7 +112,8 @@ class Asp extends Layout_Controller
 
 	public function list_asp()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) 
+		{
 
 			$asp_list['username'] = $this->session->userdata('logged_in')['username'];
 			$asp_list['email'] = $this->session->userdata('logged_in')['email'];
@@ -110,19 +123,18 @@ class Asp extends Layout_Controller
 			$this->data = $asp_list;
 			$this->page = "asp/list_asp";
 			$this->layout();
-
-			
-		} 
-		else 
-		{
-			echo "no";
 		}
+		 else 
+		 {
+			echo "no";
+		 }
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////
 
 	public function asp_edit()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) 
+		{
 			$asp_id = $this->uri->segment(3);
 			$edit_asp['username'] = $this->session->userdata('logged_in')['username'];
 			$edit_asp['email'] = $this->session->userdata('logged_in')['email'];
@@ -131,8 +143,7 @@ class Asp extends Layout_Controller
 
 			$this->data = $edit_asp;
 			$this->page = "asp/edit_asp";
-			$this->layout();	
-
+			$this->layout();
 		} 
 		else 
 		{
@@ -144,9 +155,17 @@ class Asp extends Layout_Controller
 
 	public function asp_update()
 	{
-		 echo $aspid = $this->input->post('asp_id');
-		
-			
+		$aspid = $this->input->post('asp_id');
+		if (isset($this->session->userdata['logged_in'])) 
+		{
+			$this->form_validation->set_rules('asp_name', 'Asp name', 'trim|required|callback__alpha_dash_space|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('asp_person', 'Asp person', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('person_desig', 'Person_desig', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('asp_phone_1', 'Phone number', 'numeric|required|max_length[10]|min_length[10]|xss_clean');
+			$this->form_validation->set_rules('asp_phone_2', 'Phone', 'numeric|max_length[10]|min_length[10]|xss_clean');
+			if ($this->form_validation->run() == true)
+			{
+			 
 				$cr_date = date("Y/m/d");
 				$asp_data = array(
 					'asp_name' => $this->input->post('asp_name'),
@@ -162,10 +181,19 @@ class Asp extends Layout_Controller
 					'cr_date' => $cr_date
 				);
 				$this->aspmodel->update_id('asp', $aspid, $asp_data);
-				redirect('asp/list_asp');
-			 
-			
+				//redirect('asp/list_asp');
+				$url = 'asp/list_asp';
+				echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
+			}
+			else
+			 {
+				$asp_list['aspdata'] = $this->aspmodel->asp_list_profile();
+				$this->load->view('asp/list_asp', $asp_list);
+			 }
+		} 
+		else 
+		{
+			$this->sess_out();
+		}
 	}
-	/////////////////////////////////////////////////////////////////////////////////////////////
-
 }
