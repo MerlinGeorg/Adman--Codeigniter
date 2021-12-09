@@ -53,8 +53,18 @@ function getasp()
 													$this->db->where('status', 1);
 													$query = $this->db->get();
 													return $query;
-												}												
+												}	
+function getscreen()
+	
+												{
+													$this->db->select('*');
+													$this->db->from('screen');
+													$this->db->where('status', 1);
+													$query = $this->db->get();
+													return $query;
+												}											
 
 }	
+
 ?>
 

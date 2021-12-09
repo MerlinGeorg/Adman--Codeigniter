@@ -224,7 +224,7 @@
                             <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 
-                            <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span>
+                            <!-- <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span> -->
                             <a href="<?php echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a>
 
 

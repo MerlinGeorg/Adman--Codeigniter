@@ -148,6 +148,16 @@ function gettpolicy()
 	$this->db->from('time_policy');
 			return $this->db->get();
 	}
+	public function get_batch($table_name, $course_id)
+	{
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where('asp',$course_id);
+		return $this->db->get();
+	}
+
+
+
 //////////////////////////////////////////////////
 function get_screen($table, $id)
 	
@@ -407,13 +417,20 @@ public function campdata($campId)
 
 public function get_screens($campId)
 {
-	$this->db->select('S.sc_name');
+	$this->db->select('S.sc_name,S.city,S.web_code,S.sc_status');
 	$this->db->from('est_line E');
 	$this->db->join('screen S', 'E.screen = S.sc_id');
 	$this->db->where('E.est_id', $campId);
+	$this->db->where('sc_status', 1);
 	$ro = $this->db->get();
 	$res = $ro->result();
 	return $res;
+}
+public function update_screen($sc_id)
+{
+	$this->db->set('sc_status',0);
+	$this->db->where('sc_id',$sc_id);
+	$this->db->update('screen');
 }
 
 ////////////////////////								

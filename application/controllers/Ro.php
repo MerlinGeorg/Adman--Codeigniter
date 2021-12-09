@@ -23,6 +23,7 @@ public function create_ro()
 		$advdata['username'] = $this->session->userdata('logged_in')['username'];
 		$advdata['email'] = $this->session->userdata('logged_in')['email'];
 		$advdata['rolist'] = $this->romodel->get_releaselist();
+		// $advdata['sclist'] = $this->romodel->get_sclist();
 		$advdata['adv'] = $this->campmodel->getadv();
 		$advdata['asp'] = $this->campmodel->getasp();
 		$advdata['title'] = "Create Release Order";
@@ -39,12 +40,25 @@ public function create_ro()
 	}
 }
 
+function get_batch()
+	{
+		 $asp_id = $this->input->post('course_id');
+		$data['batch'] =$this->romodel->get_batch('screen',$asp_id);
+
+		$this->load->view('ro/batch_list',$data);
+
+	
+		
+	}
 public function add_ro()
 {
 	if (isset($this->session->userdata['logged_in'])) {
 
 		$camp_id  = $this->input->post('campId');
 		$asp_id = $this->input->post('aspId');
+		$scid = $this->input->post('batch');
+		// echo $scid;
+		// die();
 		$start_date  = $this->input->post('camp_date');
 		$end_date = $this->input->post('end_date');
 		$detail = $this->romodel->get_campdetail($camp_id,$asp_id);
@@ -52,7 +66,6 @@ public function add_ro()
 		$ro = $detail->result();
 	
 		$cr_date = date("Y-m-d");
-
 		
 		$ro_data = array(
 			'est_id' => $ro[0]->est_id,
@@ -67,7 +80,10 @@ public function add_ro()
 			'status' => 1
 		);
 		//return $ro_data;
+		// print_r($ro_data);
+		// Die();
 		$ro_id = $this->romodel->insert_get_ro($ro_data);
+		$sc_id = $this->romodel->update_screen($scid);
 		// return true;
 		// $end_date = '+'.$ro[0]->pack_date.' day';
 		// $newdate = strtotime ($end_date , strtotime ( $cr_date ) ) ;
@@ -120,6 +136,8 @@ public function ro_generate($invoiceId)
 	$campid =  $adsdata->est_id;
 	$data['campdata'] = $this->romodel->campdata($campid); 
 	$data['screens']  = $this->romodel->get_screens($campid); 
+	// print_r($data['screens']);
+	// die();
 	$this->load->view('ro/ro_invoice',$data);
 }
 public function list_ro()

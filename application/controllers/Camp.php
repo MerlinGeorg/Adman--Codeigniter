@@ -47,7 +47,8 @@ function get_batch()
 	{
 		 $asp_id = $this->input->post('course_id');
 		$data['batch'] =$this->campmodel->get_batch('screen',$asp_id);
-
+// print_r('batch');
+// die();
 		$this->load->view('camp/batch_list',$data);
 
 	

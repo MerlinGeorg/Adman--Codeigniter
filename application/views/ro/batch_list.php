@@ -1,6 +1,6 @@
         <div style="display :none; ">
 		
-<?php $this->load->view('ro/header_menu.php'); ?>
+<?php // $this->load->view('ro/header_menu.php');?>
 
 </div>
 
@@ -9,7 +9,7 @@
 
 
 <select name="batch" id="batch" class="form-control" onChange="outputscreen(this)" >
-<option value="">select screen</option>
+<option value="">Select Pending Screen</option>
 <?php foreach($batch->result() as $row) {?>
 	<option value="<?php echo $row->sc_id?>"><?php echo $row->sc_name;?></option>
 <?php }?>

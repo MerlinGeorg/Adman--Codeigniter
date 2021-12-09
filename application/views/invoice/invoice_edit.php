@@ -162,14 +162,14 @@
                                 }
 
                                 .bill-table {
-                                    padding-left: 250px;
-
+                                    /* padding-left: 250px; */
+                                    overflow-x: auto;
                                     box-sizing: border-box;
 
                                 }
 
                                 .bill-tab {
-
+                                    overflow-x: auto;
                                     border-spacing: 2px;
                                     border: 1px solid #dee2e6;
                                     max-width: 100%;
@@ -207,6 +207,7 @@
                                     font-weight: bold;
 
                                 }
+                                
 
                             }
                             }
@@ -346,8 +347,9 @@
 
 
                                         </div>
-                                        <input style="width: 40%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                                        <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -34px;">Add Row</button>
+                                        <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
+                                        <br><br>
+                                        <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
                                     </div>
                                 </div>
 
@@ -390,7 +392,7 @@
                                   <input name="row_invoid" value="<?php echo  $estlrow->invo_id; ?>" style="display :none ;">
                   <td class="text-left"><button type="submit" class="btn btn-warning">Remove</button></td></form> -->
                                             <td class="text-left"><?php echo $estlrow->asp_name; ?></td>
-                                            <td class="text-right"><?php echo $estlrow->sc_name; ?></td>
+                                            <td class="text-center"><?php echo $estlrow->sc_name; ?></td>
                                             <td class="text-right"><?php echo $duration = $estlrow->tp_name; ?></br>
                                                 <?php echo $invo_sdate = $estlrow->start_date; ?></br>
                                                 <?php echo $invo_edate = $estlrow->end_date; ?></br>
@@ -420,7 +422,8 @@
                                                 <form method="post">
                                                     <input name="pk" value="<?php echo $estlrow->package; ?>" style="display :none ;">
                                                     <input name="pkdate" value="<?php echo $estlrow->pack_date; ?>" style="display :none ;">
-                                                    <input type="date" class="start_date" name="start_date" value="<?php echo $estlrow->start_date; ?>">
+                                                    <input type="date" class="start_date" value="<?php echo $estlrow->start_date; ?>">
+                                                    <!-- <?php echo $estlrow->start_date; ?> -->
                                                     <input name="invo_id" value="<?php echo $estimate_num; ?>" style="display :none ;">
                                                     <input name="invo_lid" value="<?php echo $estlrow->invo_reg_lineid; ?>" style="display :none ;">
                                                     <!-- <input type="submit" class="btn btn-info" value="Refresh"  > -->
@@ -525,7 +528,7 @@
                                         <th class="left table-des">
                                             <h5>Description</h5>
                                         </th>
-                                        <th calss="table-des">
+                                        <th class="table-des">
                                             <h5>Amount</h5>
                                         </th>
                                     </tr>
