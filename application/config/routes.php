@@ -61,8 +61,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 
-
-
+$route['reports'] = 'Reports';
 $route['settings'] = 'Settings';
 $route['newlogo'] = 'Settings/add_logo';
 $route['addLogo']='Settings/addLogo';

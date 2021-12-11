@@ -489,6 +489,9 @@ class camp extends Layout_Controller
 		);
 		$invoice_id = $this->campmodel->create_invo_data($invo_reg);
 		$est_line_data = $this->campmodel->get_estlinedata($estimate_id);
+		$est_reg_data = $this->campmodel->get_estdata($estimate_id);
+		$estreg_result=$est_reg_data->result()[0];
+		$publish_date=$estreg_result->publish_date;
 		foreach ($est_line_data->result() as $estlinedata) {
 
 			$pack_id =  $estlinedata->package;
@@ -500,9 +503,9 @@ class camp extends Layout_Controller
 
 			//$next_date = $estlinedata->package ;
 			$en_d = '+' . $next_date . ' day';
-			$newdate = strtotime($en_d, strtotime($cr_date));
+			$newdate = strtotime($en_d, strtotime($publish_date));
 			$newdate = date('Y-m-d', $newdate);
-
+		
 			$est_id = $estlinedata->est_id;
 			$invo_reg_line = array(
 				'invo_id' => $invoice_id,

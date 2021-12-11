@@ -60,9 +60,9 @@ class Settings extends Layout_Controller
 
 		if (isset($this->session->userdata['logged_in'])) {
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('adrs', 'Adress', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-			$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+			$this->form_validation->set_rules('adrs', 'Adress', 'required|xss_clean');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
+			$this->form_validation->set_rules('phone', 'Phone', 'trim|required|xss_clean');
 
 			if ($this->form_validation->run() != false) {
 				$data['company_name'] = $this->input->post('cmpname');

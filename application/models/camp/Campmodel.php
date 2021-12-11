@@ -163,7 +163,6 @@ class Campmodel extends CI_Model
 		$this->db->from('est_reg');
 		$this->db->where('est_id', $id);
 		return $this->db->get();
-		die();
 	}
 
 	public function create_invo_data($data)
