@@ -205,7 +205,7 @@ class camp extends Layout_Controller
 				$est_edit['estedit'] = $this->campmodel->get_estedit($est_id);
 				$est_edit['estlineedit'] = $this->campmodel->get_estline_edit($est_id);
 				$est_edit['logo']  = $this->campmodel->getLogo($est_id);
-				$est_edit['asp'] = $this->campmodel->getaspByEstId($est_id);
+				//$est_edit['asp'] = $this->campmodel->getaspByEstId($est_id);
 				$this->load->view('camp/estimate_edit', $est_edit);
 			} else {
 
