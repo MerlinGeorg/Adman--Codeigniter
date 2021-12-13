@@ -39,6 +39,7 @@ function myFunction() {
         x.style.display = "block";
 		y.style.display = "none";
     } 
+    $("#newbutton").prop('disabled',false);
 }
 function youFunction() {
 
@@ -53,6 +54,7 @@ function youFunction() {
 
 $(document).ready(function(){
     $("#newbutton").trigger('click');  
+    $("#newbutton").prop('disabled',true);
 });
 
 

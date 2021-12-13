@@ -46,8 +46,8 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Company Name </label>
-                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname">
-
+                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname" required>
+                                        <div style="color: red;"><?php echo form_error('cmpname'); ?></div>
 
                                     </div>
                                 </div>
@@ -104,7 +104,8 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Choose Your Logo</label></label>
-                                        <input class="form-control" name="file" id="imgInp" type="file">
+                                        <input class="form-control" name="file" id="imgInp" type="file" >
+                                        <div style="color: red;"><?php echo form_error('file'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-center">
