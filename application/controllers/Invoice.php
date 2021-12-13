@@ -7,7 +7,7 @@ public function __construct() {
 parent::__construct();
 $this->load->model('invoice/invomodel');
 $this->load->library('numbertowords');
-
+$this->load->model('camp/campmodel');
 }
 	
 public function index()
@@ -67,6 +67,9 @@ if(isset($this->session->userdata['logged_in'])){
 		$invo_list['n_asp'] = $this->invomodel->getasp();	
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);
+		$estId=$this->campmodel->getEstId($invo_id);
+		$invo_list['asp'] = $this->campmodel->getaspByInvoId($estId->est_id);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
 				$this->load->view('invoice/invoice_edit', $invo_list);
 						}
 					else { $this->sess_out();	}		
@@ -150,7 +153,7 @@ $pack_dates = $this->invomodel->get_packdate($nr_pack);
 foreach ($pack_dates->result() as $pdate) 
 {
 $next_date = $pdate->days ;
-}
+} 
 
 $en_d = '+'.$next_date.' day' ;
 $newdate = strtotime ($en_d , strtotime ( $cr_date ) ) ;
@@ -196,6 +199,8 @@ $this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
 		$invo_list['n_asp'] = $this->invomodel->getasp();	
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
+		$estId=$this->campmodel->getEstId($nestid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
 		$this->load->view('invoice/invoice_edit', $invo_list);
 
 }
@@ -218,6 +223,8 @@ if(isset($this->session->userdata['logged_in'])){
 		$invo_list['n_asp'] = $this->invomodel->getasp();	
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($rowestid);
+		$estId=$this->campmodel->getEstId($rowestid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
 		$this->load->view('invoice/invoice_edit', $invo_list);
 		// redirect('invoice/list_outward_invoice');
 	
@@ -334,6 +341,8 @@ function pl_involine()
 		$invo_list['n_asp'] = $this->invomodel->getasp();	
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($plinvoid);
+		$estId=$this->campmodel->getEstId($plinvoid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
 				$this->load->view('invoice/invoice_edit', $invo_list);
 }
 
