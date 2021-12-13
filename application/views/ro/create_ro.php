@@ -122,8 +122,8 @@
                                     <div class="form-group">
                                         <label>End Date</label>
 
-                                        <input class="form-control" name="end_date" id="end_date" placeholder="Select Publishing Date" readonly disabled required>
-                                        <div style="color: red;"><?php echo form_error('end_date'); ?></div>
+                                        <input class="form-control" name="end_date" id="end_date" placeholder="Select Publishing Date" readonly>
+                                       
                                         <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>
                                                 
