@@ -233,4 +233,70 @@ class Campmodel extends CI_Model
 		return $res;
 		//return $this->db->get();
 	}
+public function getEstId($id){
+	$this->db->select('est_id');
+		$this->db->from('invoice_reg E');
+		$this->db->where('E.invo_id', $id);
+		$ro = $this->db->get();
+		$res = $ro->result()[0];
+	//echo $this->db->last_query();
+	//	print_r($res);die();
+		return $res;
+}
+	public function getInvoLogo($id)
+	{
+		$this->db->select('E.logo_id,l.*,a.*');
+		$this->db->from('est_reg E');
+		$this->db->join('adman_logo l', 'E.logo_id = l.logo_id');
+		$this->db->join('adman_company_address a', 'l.logo_id = a.logo_id');
+		$this->db->where('E.est_id', $id);
+		//$ro = $this->db->get();
+	//	$res = $ro->result();
+	//	return $res;
+		return $this->db->get();
+	}
+
+	public function getaspByInvoId($id)
+	{
+		/* $this->db->select('asp.asp_name,asp.asp_id');
+		$this->db->from('invo_reg_line');
+		$this->db->join('asp', 'asp.asp_id = invo_reg_line.asp');
+		$this->db->where('invo_id', $id);
+		$ro=$this->db->get();
+	echo $this->db->last_query();
+	echo '<pre>';
+	
+	//$res=$ro->result()[0];
+	print_r($ro->result());
+	exit();
+	return $res; */
+	$this->db->select('asp');
+		$this->db->from('est_reg');
+		$this->db->where('est_id', $id);
+		$ro=$this->db->get();
+	//echo $this->db->last_query();
+	//echo '<pre>';
+	
+	$res=$ro->result()[0];
+	//print_r($ro->result());
+	//exit();
+	return $res; 
+	}
+public function update_estData($data,$id){
+	$this->db->set('asp', $data);
+		$this->db->where('est_id', $id);
+		$this->db->update('est_reg');
+}
+	public function getaspByEstId($id)
+	{
+		$this->db->select('est_line.asp,asp.asp_name');
+		$this->db->from('est_reg');
+		$this->db->join('est_line', 'est_reg.est_id = est_line.est_id');
+		$this->db->join('asp', 'asp.asp_id = est_line.asp');
+		$this->db->where('est_reg.est_id', $id);
+	$ro=$this->db->get();
+	$res=$ro->result()[0];
+	//print_r($res);exit();
+	return $res;
+	}
 }

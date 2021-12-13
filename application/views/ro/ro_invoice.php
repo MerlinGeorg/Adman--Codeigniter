@@ -100,8 +100,7 @@
 
                         <a class="float-right mr-1 d-print-none" href="#" onclick="javascript:window.print();" data-abc="true">
                             <i class="fa fa-print " title="Print"></i></a></span>
-                        <a class="float-right mr-1 d-print-none" href="<?php echo site_url('ro/list_ro'); ?>" data-abc="true">
-                            <i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a>
+                        
                         <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 

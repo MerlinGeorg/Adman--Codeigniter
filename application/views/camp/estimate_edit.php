@@ -203,7 +203,7 @@ border-top: 15px solid #1E1F23; */
                         <i class="fa fa-save"></i> Save</a> -->
 
                         <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span>
-                        <a href="<?php echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a>
+                        <!-- <a href="<?php //echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a> -->
 
 
                     </div>
@@ -299,15 +299,19 @@ border-top: 15px solid #1E1F23; */
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
+                                        <label>ASP Name</label> 
                                             <div class="form-group">
                                                 <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
-                                                    <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                                <option value="">SELECT</option>
+                                                <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                                     
                                                         <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
                                                     <?php } ?>
                                                 </select>
 
                                             </div>
+                                            <input type="hidden" value="<?php echo $asp->asp;?>" name="aspHid">
                                             <div class="form-group d-print-none " id="output_batch">
                                             </div>
                                         </div>
@@ -575,8 +579,12 @@ border-top: 15px solid #1E1F23; */
                 else
                     $('#autoUpdate').hide();
             });
+           // $('#aspDiv').show();
         });
-
+        function editAsp(){
+                        $('#editAsp').show();
+                        $('#aspDiv').hide();
+                    }
         $('.chDiscount').on('keyup', function() {
             var tstvalu = $(this).val();
             //   alert(sal.value);

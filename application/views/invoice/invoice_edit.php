@@ -222,45 +222,43 @@
                             <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 
-                            <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span>
-                            <a href="<?php echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a>
-
+                          
 
                         </div>
 
                         <?php
-                        $img = $this->session->userdata('image_name');
-                        $companyname = $this->session->userdata('company_nam');
-                        $cmpadrs = $this->session->userdata('company_adrs');
+                      
                         $email = $this->session->userdata('email');
                         $phone = $this->session->userdata('phone');
                         ?>
 
-
+<?php foreach ($logo->result() as $row) {  ?>
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-sm-8 address2">
 
                                     <div>
                                         <?php
-                                        if (!empty($img)) {
+                                        if (!empty($row->logo_image)) {
                                         ?>
-                                            <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$img") ?>'> <strong><?php echo $companyname ?></strong></h6>
+                                            <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name; ?></strong></h6>
                                         <?php
                                         } else {
 
                                         ?>
-                                            <h6> <strong><?php echo $companyname ?></strong></h6>
+                                            <h6> <strong><?php echo $row->company_name; ?></strong></h6>
                                         <?php
                                         }
                                         ?>
 
                                     </div>
                                     <div class="col-sm-4 ">
-                                        <div><?php echo $cmpadrs ?></div>
+                                        <div><?php echo $row->address;
+                                            }
+                                                ?></div>
                                         <!-- <div>New York City, New york, 10394</div> -->
-                                        <div>Email: <?php echo $email ?></div>
-                                        <div>Phone: <?php echo $phone ?></div>
+                                         <div>Email:<?php echo  $row->email; ?></div>
+                                        <div>Phone: <?php echo $row->phone; ?></div> 
                                     </div>
                                 </div>
                                 <div class="col-sm-4 ml-auto address">
@@ -323,13 +321,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
-                                                <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                            
+                                            <?php foreach ($n_asp->result() as $nasprow) {  ?>
                                                     <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
                                                 <?php } ?>
                                             </select>
-
-                                        </div>
+                                             </div>
                                         <div class="form-group" id="output_batch">
 
                                         </div>

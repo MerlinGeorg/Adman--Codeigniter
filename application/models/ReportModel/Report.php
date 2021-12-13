@@ -26,7 +26,7 @@ class Report extends CI_Model
 		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
 		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
 		$this->db->order_by("asp_name", "asc");
-
+//	$this->db->from('ro_reg');
 		$res = $this->db->get();
 		return $res->result()[0];
 	}

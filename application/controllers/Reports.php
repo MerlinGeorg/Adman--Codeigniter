@@ -74,7 +74,8 @@ class Reports extends Layout_Controller
                    
                     foreach ($est_id as $item) {
 
-                        $estlineedit[] = $this->Report->get_estline_edit($item);
+                       // $estlineedit[] = $this->Report->get_estline_edit($item);
+                       $estlineedit[] = $this->Report->get_estline_edit($item);
                     }
                    
                     $key['estlineedit'] = $estlineedit;

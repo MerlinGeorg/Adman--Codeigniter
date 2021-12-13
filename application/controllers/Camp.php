@@ -68,8 +68,9 @@ class camp extends Layout_Controller
 				$adv = $estim->adv;
 				$user = $estim->user;
 				$publish = $estim->publish_date;
+				$asp= $estim->aspId;
 			}
-
+		
 			if (($customer != '') && ($duration != '') && ($adv !== '')) {
 
 				/////////////////////////////////////////////////////
@@ -82,7 +83,8 @@ class camp extends Layout_Controller
 					'status' => 1,
 					'adv_id' => $adv,
 					'logo_id' => $user,
-					'publish_date' => $publish
+					'publish_date' => $publish,
+					'asp' => $asp
 				);
 				$est_id = $this->campmodel->insert_est_data('est_reg', $est_data);
 				//////////////////////////////////////////////////////////
@@ -203,6 +205,7 @@ class camp extends Layout_Controller
 				$est_edit['estedit'] = $this->campmodel->get_estedit($est_id);
 				$est_edit['estlineedit'] = $this->campmodel->get_estline_edit($est_id);
 				$est_edit['logo']  = $this->campmodel->getLogo($est_id);
+				$est_edit['asp'] = $this->campmodel->getaspByEstId($est_id);
 				$this->load->view('camp/estimate_edit', $est_edit);
 			} else {
 
@@ -234,6 +237,9 @@ class camp extends Layout_Controller
 			$invo_list['n_asp'] = $this->campmodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($invo_id);
+			$invo_list['logo']  = $this->campmodel->getLogo($invo_id);
+		//	$estId=$this->campmodel->getEstId($invo_id);
+			$invo_list['asp']=$this->campmodel->getaspByInvoId($invo_id);
 			$this->load->view('camp/invoice_edit', $invo_list);
 			//   $this->load->view('camp/invoice_edittest', $invo_list);
 		} else {
@@ -261,6 +267,9 @@ class camp extends Layout_Controller
 			$nestid = $this->input->post('nr_estid');
 			$nr_duration = $this->input->post('nr_duration');
 			$nr_asp = $this->input->post('nr_asp');
+			if($nr_asp==''){
+				$nr_asp=$this->input->post('aspHid');
+			}
 			$nrs = $this->input->post('nr_screen');
 			$cr_date = date("Y/m/d");
 			$nr_pack = $this->input->post('nr_pack');
@@ -292,13 +301,15 @@ class camp extends Layout_Controller
 				'cr_date' => $cr_date,
 				'discount' => $nr_discount
 			);
-
+			$this->campmodel->update_estData($nestid, $nr_asp);
 			$this->campmodel->insert_est_data('est_line', $newest_ldata);
 			//////////////////////////////////////////////////////////////////
 			$est_edit['n_package'] = $this->campmodel->gettpolicy();
 			$est_edit['n_asp'] = $this->campmodel->getasp();
 			$est_edit['estedit'] = $this->campmodel->get_estedit($nestid);
 			$est_edit['estlineedit'] = $this->campmodel->get_estline_edit($nestid);
+			$invo_list['logo']  = $this->campmodel->getLogo($nestid);
+			redirect($_SERVER['HTTP_REFERER']);
 			$this->load->view('camp/estimate_edit', $est_edit);
 		} else {
 			$this->sess_out();
@@ -313,6 +324,10 @@ class camp extends Layout_Controller
 			$nestid = $this->input->post('nr_estid');
 			$nr_duration = $this->input->post('nr_duration');
 			$nr_asp = $this->input->post('nr_asp');
+			if($nr_asp==''){
+				$nr_asp=$this->input->post('aspHid');
+			}
+			
 			$nrs = $this->input->post('nr_screen');
 			$cr_date = date("Y/m/d");
 			$nr_pack = $this->input->post('nr_pack');
@@ -358,7 +373,10 @@ class camp extends Layout_Controller
 			$invo_list['n_asp'] = $this->campmodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($nestid);
+			$invo_list['logo']  = $this->campmodel->getLogo($nestid);
+			redirect($_SERVER['HTTP_REFERER']); // to avoid form submit on page refresh
 			$this->load->view('camp/invoice_edit', $invo_list);
+		//	redirect('camp/invoice_edit',$invo_list);
 			//$this->load->view('camp/invoice_edittest', $invo_list);
 			//$this->load->view('camp/print', $invo_list);
 
@@ -383,6 +401,8 @@ class camp extends Layout_Controller
 			$est_edit['n_asp'] = $this->campmodel->getasp();
 			$est_edit['estedit'] = $this->campmodel->get_estedit($rowestid);
 			$est_edit['estlineedit'] = $this->campmodel->get_estline_edit($rowestid);
+			$est_edit['logo']  = $this->campmodel->getLogo($rowestid);
+			$est_edit['asp'] = $this->campmodel->getaspByEstId($rowestid);
 			$this->load->view('camp/estimate_edit', $est_edit);
 		} else {
 			$this->sess_out();
@@ -402,6 +422,8 @@ class camp extends Layout_Controller
 			$est_edit['n_asp'] = $this->campmodel->getasp();
 			$est_edit['invo_reg'] = $this->campmodel->get_estedit($rowestid);
 			$est_edit['involineedit'] = $this->campmodel->get_estline_edit($rowestid);
+			$est_edit['logo']  = $this->campmodel->getLogo($rowestid);
+			$est_edit['asp'] = $this->campmodel->getaspByInvoId($rowestid);
 			$this->load->view('camp/invoice_edit', $est_edit);
 			//$this->load->view('camp/invoice_edittest', $est_edit);
 
@@ -474,6 +496,8 @@ class camp extends Layout_Controller
 		$content_inid = $this->campmodel->insert_invo_data($new_content);
 		$est_data = $this->campmodel->get_estdata($estimate_id);
 		$cr_date = date("Y/m/d");
+		// $estId=$this->campmodel->getEstId($estimate_id);
+		// $asp=$this->campmodel->getaspByInvoId($estId->est_id);
 		foreach ($est_data->result() as $estdata) {
 		}
 
@@ -485,7 +509,8 @@ class camp extends Layout_Controller
 			'content_id' => $content_inid,
 			'cr_date' => $cr_date,
 			'status' => 1,
-			'play' => "preshow"
+			'play' => "preshow",
+			//'asp'=>$asp
 		);
 		$invoice_id = $this->campmodel->create_invo_data($invo_reg);
 		$est_line_data = $this->campmodel->get_estlinedata($estimate_id);

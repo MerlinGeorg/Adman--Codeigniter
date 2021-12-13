@@ -231,7 +231,6 @@ border-top: 15px solid #1E1F23; */
                         $i++;
                        // echo json_encode($estlrow);
                       // print_r($estlrow);
-                       // $i++;
                       //   foreach ($estedit as $estrow) {
                             $ad_duration = $estlrow->duration;
                       
