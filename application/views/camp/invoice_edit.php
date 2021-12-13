@@ -346,14 +346,14 @@
                                         
                                             <div class="form-group" >
                                                 <select class="form-control d-print-none addrow " onchange="get_batch()" name="nr_asp" id="a" >
-                                                <option value="">SELECT</option>
+                                                <!-- <option value="">SELECT</option> -->
                                                     <?php foreach ($n_asp->result() as $nasprow) {  ?>
                                                       
                                                         <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
                                                     <?php } ?>
                                                 </select>
-<input type="hidden" value="<?php echo $asp->asp;?>" name="aspHid">
+<!-- <input type="hidden" value="<?php //echo $asp->asp;?>" name="aspHid"> -->
                                             </div>
                                             <div class="form-group d-print-none " id="output_batch">
                                             </div>
