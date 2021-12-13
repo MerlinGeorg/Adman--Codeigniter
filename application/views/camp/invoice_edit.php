@@ -346,14 +346,14 @@
                                         
                                             <div class="form-group" >
                                                 <select class="form-control d-print-none addrow " onchange="get_batch()" name="nr_asp" id="a" >
-                                                <option value="">SELECT</option>
+                                                <!-- <option value="">SELECT</option> -->
                                                     <?php foreach ($n_asp->result() as $nasprow) {  ?>
                                                       
                                                         <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
                                                     <?php } ?>
                                                 </select>
-<input type="hidden" value="<?php echo $asp->asp;?>" name="aspHid">
+<!-- <input type="hidden" value="<?php //echo $asp->asp;?>" name="aspHid"> -->
                                             </div>
                                             <div class="form-group d-print-none " id="output_batch">
                                             </div>
@@ -666,7 +666,7 @@
 
                 {
                     var divToPrint2 = document.getElementById('printthis_bill').style.display = 'block';
-                    var w = window.open('', '', 'width=1500,height=800,resizeable,scrollbars');
+                    var w = window.open('', '', 'width=500,height=800,resizeable,scrollbars');
 
                     w.document.write($("#printthis").html());
                     w.document.close(); // needed for chrome and safari

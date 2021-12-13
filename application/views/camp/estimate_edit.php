@@ -20,7 +20,12 @@
 <body>
     <?php foreach ($estedit->result() as $estrow) {
     } ?>
-    <div class="container-fluid" id="printthis">
+    <div id="printthis">
+    <div class="container-fluid">
+    <!-- <div class="container-fluid" id="printthis"> -->
+    <div id="ui-view" data-select2-id="ui-view">
+            <div>
+                <div class="card">
         <style>
             .card {
                 margin-bottom: 1.5rem
@@ -96,6 +101,10 @@ border-top: 15px solid #1E1F23; */
                 padding-right: 40px;
 
             }
+             #printOnly {
+   display : none;
+} 
+
 
             /* NOTE: This style tag can go anywhere in the email. */
 
@@ -104,6 +113,19 @@ border-top: 15px solid #1E1F23; */
 
 
             @media print {
+                #dis,#discountDiv{
+                    display: none;
+                }
+                .no-outline{
+                    border-bottom-style: hidden;
+                    border-top-style: hidden;
+                    border-left-style: hidden;
+                    border-right-style: hidden;
+                    outline: none;
+                }
+                #printOnly{
+                    display: block;
+                }
                 .addrow {
                     display: none;
                 }
@@ -189,9 +211,7 @@ border-top: 15px solid #1E1F23; */
             }
         </style>
 
-        <div id="ui-view" data-select2-id="ui-view">
-            <div>
-                <div class="card">
+      
 
                     <div class="card-header">
                         <h5>PROPOSAL</h5>Est #
@@ -299,10 +319,10 @@ border-top: 15px solid #1E1F23; */
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                        <label>ASP Name</label> 
+                                        <label class="d-print-none">ASP Name</label> 
                                             <div class="form-group">
                                                 <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
-                                                <option value="">SELECT</option>
+                                                <!-- <option value="">SELECT</option> -->
                                                 <?php foreach ($n_asp->result() as $nasprow) {  ?>
                                                      
                                                         <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
@@ -311,7 +331,7 @@ border-top: 15px solid #1E1F23; */
                                                 </select>
 
                                             </div>
-                                            <input type="hidden" value="<?php echo $asp->asp;?>" name="aspHid">
+                                            <!-- <input type="hidden" value="<?php //echo $asp->asp;?>" name="aspHid"> -->
                                             <div class="form-group d-print-none " id="output_batch">
                                             </div>
                                         </div>
@@ -371,7 +391,8 @@ border-top: 15px solid #1E1F23; */
                                                 <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
                                             <td class="left">
                                                 <form method="post" name="disfrm" id="disfrm_<?= $estlrow->discount ?>">
-                                                    <input type="text" name="dis_value" maxlength="2" class="chDiscount" value="<?php echo $dis = $estlrow->discount; ?>" style="width: 40px;">%</br>
+                                                <span id="printOnly">     <input class="no-outline" id="printDiscount" name="" maxlength="2" value="<?php echo $dis = $estlrow->discount; ?>" style="width: 40px;">%</br></span>
+                                                  <input id="discountDiv" type="text" name="dis_value" maxlength="2" class="chDiscount" value="<?php echo $dis = $estlrow->discount; ?>" style="width: 40px;"> <span id="dis">%</br></span>
                                                     <?php echo $x = ($amount * $dis) / 100; ?></br><?php echo $y = $amount - $x; ?>
                                             </td>
                                             <td class="centert"><?php echo $igst = $estlrow->igst; ?>%</br>
@@ -463,7 +484,7 @@ border-top: 15px solid #1E1F23; */
 
 
                                 <div class="bill-table">
-                                    <table class="table text-centered table-bordered bill-tab">
+                                     <table class="table text-centered table-bordered bill-tab"> 
                                         <thead class="table-header" id="theader">
                                             <tr>
                                                 <th class="left table-des">
@@ -589,8 +610,9 @@ border-top: 15px solid #1E1F23; */
             var tstvalu = $(this).val();
             //   alert(sal.value);
             // alert($(this).parent('form').html());
+            $('#printDiscount').val(tstvalu);
             var disvalues = $(this).parent('form').serialize();
-            //   alert(disvalues);
+             //  alert(tstvalu);
             $.ajax({
                 type: "POST",
                 url: "<?php echo site_url('camp/update_discount'); ?>",
