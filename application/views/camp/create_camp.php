@@ -160,7 +160,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Publishing Date</label>
-                                        <input class="form-control" type="date" name="publish_date" id="publish_date">
+                                        <input class="form-control" name="publish_date" id="publish_date">
 
                                     </div>
                                 </div>

@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label>Company Name </label>
                                         <input class="form-control" placeholder="Enter Company Name" type="type" value="<?php echo $estrow->company_name; ?>" name="cmpname" id="cmpname">
-
+                                        <div style="color: red;"><?php echo form_error('cmpname'); ?></div>
 
                                     </div>
                                 </div>
@@ -56,14 +56,14 @@
                                     <div class="form-group">
                                         <label>Address </label>
                                         <input type="text" class="form-control" value="<?php echo $estrow->address; ?>" name="adrs" id="adrs" required>   
-
+                                        <div style="color: red;"><?php echo form_error('adrs'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
                                         <input class="form-control" placeholder="Enter Phone Number" value="<?php echo $estrow->phone; ?>" type="number" name="phone" id="phone">
-
+                                        <div style="color: red;"><?php echo form_error('phone'); ?></div>
                                     </div>
                                 </div>
 
@@ -71,6 +71,7 @@
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input class="form-control" placeholder="Enter Email" value="<?php echo $estrow->email; ?>" id="email" name="email" type="email">
+                                        <div style="color: red;"><?php echo form_error('email'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -107,6 +108,7 @@
                                         <input class="form-control" name="image_file" id="imgInp" type="file" >
                                         <input type="hidden" name="image1" id="image1">
                                         <div id="imagefill"></div>
+                                        <div style="color: red;"><?php echo form_error('image_file'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-center">

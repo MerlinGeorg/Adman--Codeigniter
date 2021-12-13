@@ -8,6 +8,7 @@ class Settings extends Layout_Controller
 		parent::__construct();
 		//$this->load->library('form_validation');
 		$this->load->model('settingmodel/Settingmodel');
+		$this->load->helper('security');
 	}
 
 
@@ -20,8 +21,7 @@ class Settings extends Layout_Controller
 			$stdata['title'] = "Settings";
 			$stdata['logodata'] = $this->Settingmodel->list_logo();
 
-			//	print_r($stdata['logodata']->result());
-			//	die();
+			
 			$this->data = $stdata;
 			//	$this->page = "settings/setting_view";
 			$this->page = "settings/list_logo";
@@ -40,8 +40,6 @@ class Settings extends Layout_Controller
 			$stdata['email'] = $this->session->userdata('logged_in')['email'];
 			$stdata['infomsg'] = "no";
 			$stdata['title'] = "Settings";
-			//$asp_list['logodata'] = $this->Settingmodel->list_logo();
-
 
 			$this->data = $stdata;
 			$this->page = "settings/add_logo";
@@ -59,12 +57,16 @@ class Settings extends Layout_Controller
 
 
 		if (isset($this->session->userdata['logged_in'])) {
-			$this->load->library('form_validation');
+			
+			$this->form_validation->set_rules('cmpname', 'CompanyName', 'required|xss_clean');
 			$this->form_validation->set_rules('adrs', 'Adress', 'required|xss_clean');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required|xss_clean');
-
-			if ($this->form_validation->run() != false) {
+			if(empty($_FILES['file']['name'])){
+				$this->form_validation->set_rules('file', 'Logo Image', 'required');
+			}
+			
+			if ($this->form_validation->run() == true) {
 				$data['company_name'] = $this->input->post('cmpname');
 				$data['address'] = $this->input->post('adrs');
 				$data['phone'] = $this->input->post('phone');
@@ -79,6 +81,7 @@ class Settings extends Layout_Controller
 				$data['des_service	'] = $this->input->post('des');
 
 				$fileName = $_FILES['file']['name'];
+				//echo $fileName;die();
 				$new_name = time() . $fileName;
 
 				$logo['logo_image'] = $fileName;
@@ -107,6 +110,21 @@ class Settings extends Layout_Controller
 				}
 				return redirect('settings');
 			}
+			else{
+				$stdata['username'] = $this->session->userdata('logged_in')['username'];
+			$stdata['email'] = $this->session->userdata('logged_in')['email'];
+			$stdata['infomsg'] = "no";
+			$stdata['title'] = "Settings";
+
+			$this->data = $stdata;
+			$this->page = "settings/add_logo";
+			$this->layout();
+			}
+				
+			
+			
+		} else {
+			$this->sess_out();
 		}
 	}
 
@@ -203,12 +221,15 @@ class Settings extends Layout_Controller
 
 			$logoId = $address['logo_id'] = $this->input->post('lgo_id');
 
-			$this->load->library('form_validation');
+			$this->form_validation->set_rules('cmpname', 'CompanyName', 'required|xss_clean');
 			$this->form_validation->set_rules('adrs', 'Adress', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+			if (empty($_FILES['image_file']['name'])) {
+			$this->form_validation->set_rules('image_file', 'Logo Image', 'required|xss_clean');
+			}
 
-			if ($this->form_validation->run() != false) {
+			if ($this->form_validation->run() == true) {
 				$address['company_name'] = $this->input->post('cmpname');
 				$address['address'] = $this->input->post('adrs');
 				$address['phone'] = $this->input->post('phone');
@@ -269,10 +290,22 @@ class Settings extends Layout_Controller
 
 				$this->Settingmodel->update_address($address, $logoId);
 
-				return redirect('settings');
+				
+			
 			}
+			return redirect('settings');
 			//	$url = 'settings';
 			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		}
+		else {
+			$this->sess_out();
+		}
+	}
+
+	public function sess_out()
+	{
+
+
+		echo "sess out";
 	}
 }

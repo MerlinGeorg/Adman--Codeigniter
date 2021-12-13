@@ -46,6 +46,9 @@ class Ro extends Layout_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 
+			$this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean');
+if($this->form_validation->run()==true){
+
 			$camp_id  = $this->input->post('campId');
 			$asp_id = $this->input->post('aspId');
 			$start_date  = $this->input->post('camp_date');
@@ -109,9 +112,24 @@ class Ro extends Layout_Controller
 			
 		} */
 			// return false;
-
+	
 			$url = base_url() . "ro/ro_generate/" . $ro_id;
 			redirect($url);
+	}
+
+else{
+	$advdata['username'] = $this->session->userdata('logged_in')['username'];
+			$advdata['email'] = $this->session->userdata('logged_in')['email'];
+			$advdata['rolist'] = $this->romodel->get_releaselist();
+			$advdata['adv'] = $this->campmodel->getadv();
+			$advdata['asp'] = $this->campmodel->getasp();
+			$advdata['user'] = $this->Settingmodel->list_logo();
+			$advdata['title'] = "Create Release Order";
+
+			$this->data = $advdata;
+			$this->page = "ro/create_ro";
+			$this->layout();
+}
 			//	$url = 'ro/ro_generate/'.$ro_id;
 			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		} else {
@@ -154,6 +172,8 @@ class Ro extends Layout_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 
+			//$this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean');
+			//if($this->form_validation->run()==true){
 
 			$ro_id = $this->uri->segment(3);
 
@@ -174,7 +194,9 @@ class Ro extends Layout_Controller
 			$this->layout();
 
 
-
+			//}else{
+			//	redirect($_SERVER['HTTP_REFERER']);
+			//}
 
 
 
