@@ -105,7 +105,7 @@
                                 margin-top: 30px;
                                 margin-left: 306px;
                                 padding: 40px 30px !important;
-                                position: relative;
+                                /* position: relative; */
                                 /* box-shadow: 0 1px 21px #808080; */
                                 font-size: 10px
                             }
@@ -162,14 +162,14 @@
                                 }
 
                                 .bill-table {
-                                    padding-left: 250px;
-
+                                    /* padding-left: 250px; */
+                                    overflow-x: auto;
                                     box-sizing: border-box;
 
                                 }
 
                                 .bill-tab {
-
+                                    overflow-x: auto;
                                     border-spacing: 2px;
                                     border: 1px solid #dee2e6;
                                     max-width: 100%;
@@ -291,14 +291,14 @@
                                             <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
                                         <div><strong>Position</strong>
                                             <?php echo $WF = $estrow->play; ?>
-                                            <form method="post" action="<?php echo site_url('invoice/pl_involine'); ?>">
+                                            <form method="post" action="<?php echo site_url('invoice/pl_involine'); ?>" >
                                                 <input style="display:none;" type="number" name="pl_invoid" value="<?php echo $estrow->invo_id; ?>">
                                                 <input type="radio" class="d-print-none addrow" name="play" value="Preshow" <?php if ($WF == 'Preshow') {
                                                                                                                                 echo ' checked ';
-                                                                                                                            } ?> />Preshow</label>
+                                                                                                                            } ?> /><label class="d-print-none addrow">Preshow</label>
                                                 <input type="radio" class="d-print-none addrow" name="play" value="During intravel" <?php if ($WF == 'During intravel') {
                                                                                                                                         echo ' checked ';
-                                                                                                                                    } ?> />During intravel</label>
+                                                                                                                                    } ?> /><label class="d-print-none addrow">During intravel</label>
                                                 <button type="submit" class="d-print-none addrow">Save</button>
                                             </form>
                                         </div>
@@ -307,7 +307,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        
 
 
                         <form method="post" action="<?php echo site_url('invoice/nr_involine'); ?>">
@@ -357,7 +357,7 @@
 
 
 
-                        <div class="table-responsive printdiv" style=" padding-right: 3px;  padding-left: 3px;">
+                        <div class="table-responsive" style=" padding-right: 3px;  padding-left: 3px;">
                             <table class="table table-striped list_div ">
                                 <thead class="table-header">
                                     <tr>
@@ -373,7 +373,7 @@
                                         <th class="text-center"><strong>SGST</strong></td>
                                         <th class="text-center"><strong>L-Tax</strong></td>
                                         <th class="text-center"><strong>Total</strong></td>
-                                        <th class="text-center"><strong>Start Date</strong></td>
+                                        <!-- <th class="text-center"><strong>Start Date</strong></td> -->
                                         <th class="d-print-none addrow"><strong>CLR</strong></td>
 
                                     </tr>
@@ -414,18 +414,18 @@
                                                 <?php echo $ltax_val = ($y * $ltax) / 100; ?></td>
 
                                             <td class="text-right" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
-                                            <td class="text-left" style="width: 1px;">
+                                            <!-- <td class="text-left" style="width: 1px;">
                                                 <form method="post">
                                                     <input name="pk" value="<?php echo $estlrow->package; ?>" style="display :none ;">
                                                     <input name="pkdate" value="<?php echo $estlrow->pack_date; ?>" style="display :none ;">
-                                                    <input type="date" class="start_date" name="start_date" value="<?php echo $estlrow->start_date; ?>">
+                                                    <input type="date" class="start_date" name="start_date" value="<?php echo $estlrow->start_date; ?>" style="display :none ;">
                                                     <input name="invo_id" value="<?php echo $estimate_num; ?>" style="display :none ;">
                                                     <input name="invo_lid" value="<?php echo $estlrow->invo_reg_lineid; ?>" style="display :none ;">
-                                                    <!-- <input type="submit" class="btn btn-info" value="Refresh"  > -->
+                                                    <input type="submit" class="btn btn-info" value="Refresh"  >
 
                                                 </form>
 
-                                            </td>
+                                            </td> -->
 
 
 
@@ -441,7 +441,8 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                        </div>
+                   
 
                     <?php
                     $sub_total = 0;
@@ -498,7 +499,7 @@
 
 
 
-                    <div id="printthis_bill" class="showTopDetailsContent" style="display: none; page-break-before: always; ">
+                    <div id="printthis_bill" class="showTopDetailsContent" style=" page-break-before: always; ">
 
                         <link rel="stylesheet" type="text/css" media="print" href="<?php echo base_url('Assets/css/print/style.css') ?>" />
 
@@ -516,8 +517,8 @@
 
 
 
-                        <div class="col-md-8 offset-md-4 bill-table">
-                            <table class="table text-centered table-responsive table-bordered bill-tab">
+                        <div class=" bill-table">
+                            <table class="table text-centered  table-bordered bill-tab">
                                 <thead class="table-header" id="theader">
                                     <tr>
                                         <th class="left table-des">
@@ -619,6 +620,7 @@
 
 
 
+                    </div>
                     </div>
                 </div>
             </div>

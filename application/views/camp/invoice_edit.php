@@ -666,7 +666,7 @@
 
                 {
                     var divToPrint2 = document.getElementById('printthis_bill').style.display = 'block';
-                    var w = window.open('', '', 'width=1500,height=800,resizeable,scrollbars');
+                    var w = window.open('', '', 'width=500,height=800,resizeable,scrollbars');
 
                     w.document.write($("#printthis").html());
                     w.document.close(); // needed for chrome and safari
