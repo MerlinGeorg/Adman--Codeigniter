@@ -48,19 +48,43 @@ class Ro extends Layout_Controller
 		$this->load->view('ro/batch_list', $data);
 	}
 
+	public function valid_date($date) {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
+    }
+
 	public function add_ro()
 	{
 		if (isset($this->session->userdata['logged_in'])) {
+			$end_date = $this->input->post('end_date');
+			
+			if(empty($end_date)){
+				
+				echo "<script type='text/javascript'>";
+				echo "alert('End date has empty value!Select Publish Date')";
+				echo "</script>";
+				
+			$advdata['username'] = $this->session->userdata('logged_in')['username'];
+			$advdata['email'] = $this->session->userdata('logged_in')['email'];
+			$advdata['rolist'] = $this->romodel->get_releaselist();
+			$advdata['adv'] = $this->campmodel->getadv();
+			$advdata['asp'] = $this->campmodel->getasp();
+			$advdata['user'] = $this->Settingmodel->list_logo();
+			$advdata['title'] = "Create Release Order";
 
-			$this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean');
-if($this->form_validation->run()==true){
+			$this->data = $advdata;
+			$this->page = "ro/create_ro";
+			$this->layout();
+			}
+			else{
 
 			$camp_id  = $this->input->post('campId');
 			$asp_id = $this->input->post('aspId');
 			$scid = $this->input->post('batch');
 		//echo $scid;die();
 			$start_date  = $this->input->post('camp_date');
-			$end_date = $this->input->post('end_date');
+			
+
 			$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
 			$ro = $detail->result();
 			$cr_date = date("Y-m-d");
@@ -124,21 +148,9 @@ if($this->form_validation->run()==true){
 	
 			$url = base_url() . "ro/ro_generate/" . $ro_id;
 			redirect($url);
+
 	}
 
-else{
-	$advdata['username'] = $this->session->userdata('logged_in')['username'];
-			$advdata['email'] = $this->session->userdata('logged_in')['email'];
-			$advdata['rolist'] = $this->romodel->get_releaselist();
-			$advdata['adv'] = $this->campmodel->getadv();
-			$advdata['asp'] = $this->campmodel->getasp();
-			$advdata['user'] = $this->Settingmodel->list_logo();
-			$advdata['title'] = "Create Release Order";
-
-			$this->data = $advdata;
-			$this->page = "ro/create_ro";
-			$this->layout();
-}
 			//	$url = 'ro/ro_generate/'.$ro_id;
 			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		} else {

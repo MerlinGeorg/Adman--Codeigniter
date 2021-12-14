@@ -316,16 +316,21 @@ class Romodel extends CI_Model
 	//////////////////////////////
 	function get_rolist_old()
 	{
-		$this->db->select('Rl.*,R.content_id,C.content_name,A.adv_name');
+		$this->db->select('R.content_id,C.content_name,A.adv_name');
 		$this->db->from('ro_reg R');
 		$this->db->where('R.status', 2);
-		$this->db->join('ro_line Rl', 'R.ro_id = Rl.ro_id', 'inner');
-		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
-		$this->db->join('content_reg C', 'R.content_id = C.con_id', 'inner');
+		//$this->db->join('ro_line Rl', 'R.ro_id = Rl.ro_id','inner');
+		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id','inner');
+		$this->db->join('content_reg C', 'R.content_id = C.con_id','inner');
 		$this->db->group_by("A.adv_name");
 		$this->db->order_by("A.adv_name");
 		return $this->db->get();
-	}
+	//	$res=$this->db->get();
+		//echo $this->db->last_query();
+		//echo '<pre>';
+		
+		//print_r($res->result());exit();
+	}		
 	//////////////////////////////////////
 	function get_roasplist($id)
 	{
