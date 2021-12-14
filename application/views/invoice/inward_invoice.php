@@ -66,7 +66,7 @@
                                                 <td><?php echo $estrow->ro_id;     ?></td>
                                                 <!-- <td><?php //echo $estrow->est_id; 
                                                             ?></td> -->
-                                                <td><?php echo $estrow->est_name; ?></td>
+                                                <td><?php echo $estrow->camp_name; ?></td>
                                                 <td><?php echo $estrow->duration; ?></td>
                                                 <td><?php echo $estrow->adv_name; ?></td>
                                                 <!-- <td><?php //echo $estrow->screen; 

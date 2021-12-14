@@ -343,7 +343,7 @@
 
                                 
                                 <?php $i = 0;
-                                foreach ($screens as $screen) : $i++; print_r($screen);?>
+                                foreach ($screens as $screen) : $i++; ?>
                                    <th scope="row" class="text-center"> <?php echo $i; ?> </th>
                                         <td class="text-center"><?php echo $screen->sc_name; ?></td>
 

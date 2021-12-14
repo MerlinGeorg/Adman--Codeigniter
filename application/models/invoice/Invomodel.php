@@ -3,6 +3,60 @@ class Invomodel extends CI_Model
 {
 
 	///////////////////////////////////////////////	
+	function insert_inward_invoice($table, $data)
+	{
+		$this->db->insert($table, $data);
+		return $this->db->get();
+		
+
+	}
+
+	function get_ro_re_list($camp_id)
+	{
+		$this->db->select('est_name,ro_id');
+		$this->db->from('ro_reg');
+		$this->db->where('est_id', $camp_id);
+		// return $this->db->get();
+
+		$re = $this->db->get();
+		$var = $re->result()[0];
+		return $var;
+		
+	}
+
+
+	function get_adv_list($adv_name)
+	{
+		$this->db->select('adv_id');
+		$this->db->from('adv_reg');
+		$this->db->where('adv_name', $adv_name);
+		// return $this->db->get();
+
+		$resu = $this->db->get();
+		$var = $resu->result()[0];
+		return $var;
+	}
+	function get_ro_id($camp_id)
+	{
+		$this->db->select('ro_id');
+		$this->db->from('ro_reg');
+		$this->db->where('est_id', $camp_id);
+
+
+		$resu = $this->db->get();
+		$var = $resu->result();
+		return $var;
+	}
+
+	function list_inward_invoices()
+	{
+		$this->db->select('*');
+		$this->db->from('inward_invoice');
+		return $this->db->get();
+	}
+
+
+
 	function get_involist()
 	{
 		$this->db->select('*');

@@ -8,6 +8,8 @@ class Invoice extends Layout_Controller
 	{
 		parent::__construct();
 		$this->load->model('invoice/invomodel');
+		$this->load->model('camp/campmodel');
+		$this->load->model('ro/romodel');
 		$this->load->library('numbertowords');
 	}
 
@@ -23,31 +25,90 @@ class Invoice extends Layout_Controller
 		}
 	}
 
-	// public function create_inward_invoice()
-	// {
-	// 	if (isset($this->session->userdata['logged_in']))
-	// 	{
-	// 		$ttdata['username'] = $this->session->userdata('logged_in')['username'];
-	// 		$ttdata['email'] = $this->session->userdata('logged_in')['email'];
-	// 		// $ttdata['infomsg'] = "no" ;
-	// 		$ttdata['title'] = "Create Inward Invoices";
-	// 		$ttdata['msg'] = 0;
-	// 		$this->data = $ttdata;
-	// 		$this->page = "invoice/create_inward_invoice";
-	// 		$this->layout();
-	// 	}
-	// 	else
-	// 	{
-	// 		echo "no";
-	// 	}
-	// }
-	// public function inward_invoice_save()
-	// {
-	// 	if (isset($this->session->userdata['logged_in'])) 
-	// 	{
+	public function create_inward_invoice()
+	{
+		if (isset($this->session->userdata['logged_in']))
+		{
+			$invodata['username'] = $this->session->userdata('logged_in')['username'];
+			$invodata['email'] = $this->session->userdata('logged_in')['email'];
+			// $invodata['camp'] = $this->romodel->get_releaselist();
+			$invodata['camp'] = $this->romodel->get_ro_reg_list();
+			$invodata['adv'] = $this->campmodel->getadv();
+			$invodata['title'] = "Create Inward Invoices";
+			$invodata['msg'] = 0;
+			$this->data = $invodata;
+			$this->page = "invoice/create_inward_invoice";
+			$this->layout();
+		}
+		else
+		{
+			echo "no";
+		}
+	}
+	public function inward_invoice_save()
+	{
+		if (isset($this->session->userdata['logged_in'])) 
+		{
+			// $this->form_validation->set_rules('ro_id', 'ro_id', 'numeric|required');
+			$this->form_validation->set_rules('content_name', 'content_name', 'trim|required');
 
-	// 	}
-	// }
+			if ($this->form_validation->run() == true) 
+			{
+				$cr_date = date("Y/m/d");
+				
+				$camp_id= $this->input->post('campId');				
+				$camp_name= $this->invomodel->get_ro_re_list($camp_id);			
+				$adv_name= $this->input->post('ro_adv');				
+				$adv_id=$this->invomodel->get_adv_list($adv_name);
+				
+				$invo_data = array(
+					'ro_id' => $camp_name->ro_id,
+					'adv_id' => $adv_id->adv_id,
+					'camp_id' => $camp_id,
+					'camp_name' => $camp_name->est_name,
+					'duration' => $this->input->post('duration'),
+					'adv_name' => $adv_name,
+					'content_name' => $this->input->post('content_name'),
+					'cr_date' => $cr_date
+				);
+				// print_r($invo_data);
+				// exit();
+				$this->invomodel->insert_inward_invoice('inward_invoice', $invo_data);
+
+				$invodata['msg'] = 1;
+			}
+			else
+			{
+				$invodata['msg'] = 0;
+			}
+			$invodata['username'] = $this->session->userdata('logged_in')['username'];
+			$invodata['email'] = $this->session->userdata('logged_in')['email'];
+			$invodata['camp'] = $this->romodel->get_releaselist();
+			$invodata['adv'] = $this->campmodel->getadv();
+			$invodata['title'] = "Create Inward Invoices";
+			
+			$this->data = $invodata;
+			$this->page = "invoice/create_inward_invoice";
+			$this->layout();
+		}
+		else
+		{
+			$this->sess_out();
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////
+	function _alpha_dash_space($str_in = '')
+	{
+		if (!preg_match("/^([-a-z0-9_ ])+$/i", $str_in)) 
+		{
+			$this->form_validation->set_message('_alpha_dash_space', 'The %s field may only contain alpha-numeric characters, spaces, underscores, and dashes.');
+			return FALSE;
+		} 
+		else 
+		{
+			return TRUE;
+		}
+	}
 
      ////////////////////////////////////////////////////////// 
 	public function list_outward_invoice()
@@ -77,9 +138,9 @@ class Invoice extends Layout_Controller
 		{
 			$invo_list['username'] = $this->session->userdata('logged_in')['username'];
 			$invo_list['email'] = $this->session->userdata('logged_in')['email'];
-			$invo_list['involist'] = $this->invomodel->get_inward_involist();
+			// $invo_list['involist'] = $this->invomodel->get_inward_involist();
 			$invo_list['title'] = "Inward Invoices";
-
+			$invo_list['involist']    = $this->invomodel->list_inward_invoices();
 			$this->data = $invo_list;
 			$this->page = "invoice/inward_invoice";
 			$this->layout();
@@ -102,6 +163,7 @@ class Invoice extends Layout_Controller
 
 			$invo_id = $this->uri->segment(3);
 			$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invo_id);
+			// $invo_list['invo_reg'] = $this->invomodel->list_inward_invoices();
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);

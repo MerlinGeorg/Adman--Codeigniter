@@ -66,9 +66,9 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-file-alt"></i>Invoice</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                               <!-- <li>
+                               <li>
                                     <a href="<?php echo site_url('invoice/create_inward_invoice'); ?>">Create Inward Invoices</a>
-                                </li> -->
+                                </li>
                                 <li>
                                     <a href="<?php echo site_url('invoice/list_inward_invoice'); ?>">Inward Invoices</a>
                                 </li>
