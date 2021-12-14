@@ -52,7 +52,7 @@
  <th>Content Name</th> 	
  <!-- <th>Edit</th> 												  -->
  
-                                         
+ <th>EDIT</th>        
                                           
                                         </tr>
                                     </thead>
@@ -71,6 +71,7 @@
 <!-- <td><?php //echo $estrow->content_id; ?></td> -->
 									        <td><?php echo $estrow->content_name; ?></td>
                                        <!-- <td><a href="#">Print</a></td> -->
+                                       <td><a href="<?php echo site_url('ro/oldro_edit').'/'.$estrow->ro_id ; ?>"><i class="fas fa-edit"></i></a>
                                     </tr>
 	  <?php } ?>
                                         

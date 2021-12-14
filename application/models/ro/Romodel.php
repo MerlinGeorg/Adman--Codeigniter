@@ -51,6 +51,10 @@ class Romodel extends CI_Model
 		$this->db->where('E.est_id', $campId);
 		$this->db->where('El.asp', $aspId);
 		return $this->db->get();
+	//$res=$this->db->get();
+	//echo $this->db->last_query();
+	//print_r($res);
+	//exit();
 	}
 	/////////////////////////////
 	function get_invoreglist($id)
@@ -315,7 +319,7 @@ class Romodel extends CI_Model
 	}
 	function get_rolist_old($id)
 	{
-		$this->db->select('R.duration,R.content_id,C.content_name,A.adv_name,I.invo_id,I.est_name');
+		$this->db->select('R.ro_id,R.duration,R.content_id,C.content_name,A.adv_name,I.invo_id,I.est_name');
 		$this->db->from('ro_reg R');
 		$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
 		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
@@ -447,6 +451,37 @@ class Romodel extends CI_Model
 		$ro = $this->db->get();
 		$res = $ro->result();
 		return $res;
+	}
+
+	function getOldRoEditData($id)
+	{
+		$this->db->select('*');
+		$this->db->from('ro_reg R');
+		$this->db->where('R.ro_id', $id);
+		$this->db->where('R.status', 2);
+		$this->db->join('est_reg', 'R.est_id = est_reg.est_id');
+		$this->db->join('asp', 'R.asp = asp.asp_id');
+		//$this->db->join('screen', 'Rl.screen = screen.sc_id');
+		$this->db->join('adv_reg', 'R.adv_id = adv_reg.adv_id');
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+	//	print_r($query->result());exit();
+		return $query->result();
+	}
+	function updateScreenStatus($id){
+		$this->db->set('sc_status', 1);
+		$this->db->where('sc_id', $id);
+		$this->db->update('screen');
+	}
+
+	function updateoldRo($data,$id){
+	//	$this->db->select('*');
+	//	$this->db->from('ro_reg');
+		$this->db->where('ro_id', $id);
+		$this->db->update('ro_reg', $data);
+		//$res=$this->db->get();
+//echo $this->db->last_query();
+	//	print_r($res);exit();
 	}
 
 	////////////////////////								
