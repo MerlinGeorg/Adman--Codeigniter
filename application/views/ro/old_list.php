@@ -62,7 +62,7 @@
        foreach ($involist->result() as $estrow) { ?>
                                         <tr>
                                            
-                                            <td><?php echo $estrow->ro_lid;	 ?></td>
+                                            <td><?php echo $estrow->invo_id;	 ?></td>
                                             <!-- <td><?php //echo $estrow->est_id; ?></td> -->
 											<td><?php echo $estrow->est_name; ?></td>
 									        <td><?php echo $estrow->adv_name; ?></td>
