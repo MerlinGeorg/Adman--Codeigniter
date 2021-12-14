@@ -59,6 +59,8 @@
                                     </thead>
                                     <tbody>
       <?php 
+       if(!empty($involist->result())){
+
     //   echo"<pre>";print_r($involist->result());exit;
        foreach ($involist->result() as $estrow) { ?>
                                         <tr>
@@ -74,7 +76,8 @@
                                        <!-- <td><a href="#">Print</a></td> -->
                                        <td><a href="<?php echo site_url('ro/oldro_edit').'/'.$estrow->ro_id ; ?>"><i class="fas fa-edit"></i></a>
                                     </tr>
-	  <?php } ?>
+	  <?php }
+    } ?>
                                         
                                      
                                                                           </tbody>
