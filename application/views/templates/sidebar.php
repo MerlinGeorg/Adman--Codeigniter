@@ -103,7 +103,7 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="<?php echo site_url('Reports'); ?>">
                                 <i class="fas fa-copy"></i>Reports</a>
                         </li>
                         <!-- <li class="has-sub">

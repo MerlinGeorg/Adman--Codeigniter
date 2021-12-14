@@ -2,7 +2,7 @@
 
 
 class Invoice extends Layout_Controller
-{
+{ 
 
 	public function __construct()
 	{
@@ -443,6 +443,9 @@ class Invoice extends Layout_Controller
 		$invo_list['n_asp'] = $this->invomodel->getasp();
 		$invo_list['n_package'] = $this->invomodel->gettpolicy();
 		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($plinvoid);
-		$this->load->view('invoice/invoice_edit', $invo_list);
-	}
+		$estId=$this->campmodel->getEstId($plinvoid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
+				$this->load->view('invoice/invoice_edit', $invo_list);
+}
+
 }

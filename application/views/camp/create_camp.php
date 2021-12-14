@@ -160,7 +160,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Publishing Date</label>
-                                        <input class="form-control" type="date" name="publish_date" id="publish_date">
+                                        <input class="form-control" name="publish_date" id="publish_date">
 
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@
 
                     </div>
                     <div class="col-lg-12 text-center">
-                        <input class="btn btn-info mt-5" style="width: 230px" type="button" value="Save" onclick="gatherData(du, camp_name, b,user, publish_date)">
+                        <input class="btn btn-info mt-5" style="width: 230px" type="button" value="Save" onclick="gatherData(a,du, camp_name, b,user, publish_date)">
                     </div>
             </div>
             </form>
@@ -354,7 +354,7 @@
 
 
 
-        function gatherData(du, camp_name, b, user, publish_date) {
+        function gatherData(a,du, camp_name, b, user, publish_date) {
 
             var data = [];
             var table = document.getElementById('dataTable');
@@ -366,7 +366,7 @@
                 var cells = row.cells;
 
                 data.push({
-
+                    aspId:(a.value),
                     asp: cells[1].innerHTML,
                     sid: cells[3].innerHTML,
                     pol: cells[5].innerHTML,

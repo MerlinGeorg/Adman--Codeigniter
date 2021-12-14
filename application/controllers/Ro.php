@@ -52,17 +52,26 @@ class Ro extends Layout_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 
+			$this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean');
+if($this->form_validation->run()==true){
+
 			$camp_id  = $this->input->post('campId');
 			$asp_id = $this->input->post('aspId');
 			$scid = $this->input->post('batch');
+		//echo $scid;die();
 			$start_date  = $this->input->post('camp_date');
 			$end_date = $this->input->post('end_date');
 			$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
 			$ro = $detail->result();
 			$cr_date = date("Y-m-d");
 			$user = $this->input->post('user');
+			if(empty($scid)){
+				$status=1;
+			}
+			else{
+				$status=2;
+			}
 			
-
 			$ro_data = array(
 				'est_id' => $ro[0]->est_id,
 				'adv_id' => $ro[0]->adv_id,
@@ -72,7 +81,7 @@ class Ro extends Layout_Controller
 				'content_id' => $ro[0]->content_id,
 				'package' => $ro[0]->package,
 				'cr_date' => $cr_date,
-				'status' => 1,
+				'status' => $status,
 				'logo_id' => $user
 			);
 			$ro_id = $this->romodel->insert_get_ro($ro_data);
@@ -112,9 +121,26 @@ class Ro extends Layout_Controller
 				$this->romodel->insert_ro_data($est_data);
 			}
 			// return false;
-
+	
 			$url = base_url() . "ro/ro_generate/" . $ro_id;
 			redirect($url);
+	}
+
+else{
+	$advdata['username'] = $this->session->userdata('logged_in')['username'];
+			$advdata['email'] = $this->session->userdata('logged_in')['email'];
+			$advdata['rolist'] = $this->romodel->get_releaselist();
+			$advdata['adv'] = $this->campmodel->getadv();
+			$advdata['asp'] = $this->campmodel->getasp();
+			$advdata['user'] = $this->Settingmodel->list_logo();
+			$advdata['title'] = "Create Release Order";
+
+			$this->data = $advdata;
+			$this->page = "ro/create_ro";
+			$this->layout();
+}
+			//	$url = 'ro/ro_generate/'.$ro_id;
+			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		} else {
 			$this->sess_out();
 		}
@@ -154,12 +180,31 @@ class Ro extends Layout_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 
+			//$this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean');
+			//if($this->form_validation->run()==true){
 
 			$ro_id = $this->uri->segment(3);
 
 			$ro_list['ro_reg'] = $this->romodel->get_roreglist($ro_id);
 
-			$this->load->view('ro/ro_edit', $ro_list);
+			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
+			$ro_list['email'] = $this->session->userdata('logged_in')['email'];
+			$ro_list['rolist'] = $this->romodel->get_releaselist();
+			$ro_list['adv'] = $this->campmodel->getadv();
+			$ro_list['asp'] = $this->campmodel->getasp();
+			$ro_list['data'] =  $this->romodel->getEditData($ro_id);
+			//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
+
+			$ro_list['title'] = "Edit Release Order";
+
+			$this->data = $ro_list;
+			$this->page = "ro/ro_edit";
+			$this->layout();
+
+
+			//}else{
+			//	redirect($_SERVER['HTTP_REFERER']);
+			//}
 
 
 

@@ -35,19 +35,26 @@
     var x = document.getElementById("divexist");
     var y = document.getElementById("divnew");
     if (x.style.display === "none") {
-      x.style.display = "block";
-      y.style.display = "none";
-    }
-  }
-
-  function youFunction() {
+        x.style.display = "block";
+		y.style.display = "none";
+    } 
+    $("#newbutton").prop('disabled',false);
+}
+function youFunction() {
 
     var x = document.getElementById("divexist");
     var y = document.getElementById("divnew");
     if (y.style.display === "none") {
-      y.style.display = "block";
-      x.style.display = "none";
-    }
+        y.style.display = "block";
+		x.style.display = "none";
+    } 
+
+}
+
+$(document).ready(function(){
+    $("#newbutton").trigger('click');  
+    $("#newbutton").prop('disabled',true);
+});
 
   }
 

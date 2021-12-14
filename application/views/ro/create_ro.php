@@ -115,7 +115,7 @@
                                         <label>Publishing Date</label>
                                         <input class="form-control" name="ad_date" id="ad_date" required>
                                     </div>
-
+ 
                                 </div>
 
 
@@ -135,6 +135,7 @@
                                         <label>End Date</label>
 
                                         <input class="form-control" name="end_date" id="end_date" placeholder="Select Publishing Date" readonly disabled required>
+                                        <div style="color: red;"><?php echo form_error('end_date'); ?></div>
                                         <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>
                                                 
@@ -402,5 +403,5 @@
 
             return [year, month, day].join('-');
         }
-    })
+    });
 </script>

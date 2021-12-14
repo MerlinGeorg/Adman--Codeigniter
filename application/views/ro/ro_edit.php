@@ -1,3 +1,5 @@
+<script src="<?php echo base_url() ?>Assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
 <?php //$this->load->view('asp/header_menu.php'); ?>
 <style>
     .card-header{
@@ -102,10 +104,10 @@
                                             <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
                                             <select class="form-control" id="aspId" name="aspId"  >
                                                 <option value="<?php echo $row->asp_id;     ?>"><?php echo $row->asp_name;   ?></option>
-                                                <?php foreach ($asp->result() as $rorow): 
+                                                <!-- <?php //foreach ($asp->result() as $rorow): 
                                                   ?>
-                                              <option value="<?php echo $rorow->asp_id;     ?>"><?php echo $rorow->asp_name;   ?></option>
-                                                <?php endforeach; ?>
+                                              <option value="<?php //echo $rorow->asp_id;     ?>"><?php //echo $rorow->asp_name;   ?></option>
+                                                <?php //endforeach; ?> -->
                                                 
                                                 </select>
                                         </div> 
@@ -114,7 +116,7 @@
                                 <div class="col-lg-4">
 				                    <div class="form-group">
                                             <label>Publishing Date</label>
-                                            <input class="form-control" name="ad_date" id="ad_date"  >
+                                            <input class="form-control" name="ad_date" id="ad_date"  value="<?php echo $row->publish_date;?>" required >
                                         </div>
 
                                 </div>
@@ -141,6 +143,7 @@
 
                                              ?>
                                             <input class="form-control" name="end_date" id="end_date" value="<?php echo $endDate;   ?>" readonly >
+                                            <div style="color: red;"><?php echo form_error('end_date'); ?></div>
                                             <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>
                                                 
@@ -254,8 +257,34 @@ function getData(){
   $(document).ready(function(){
 
 
-    $('#campId').on('change',function(){
+    /* $('#campId').on('change',function(){
        
     });
-})
+ */
+    $('#ad_date').datepicker({
+            autoclose: true,
+            showOnFocus: true,
+            todayHighlight: true,
+            format: "yyyy-mm-dd",
+            startDate: new Date("<?= date('Y-m-d') ?>")
+        }).on('changeDate', function(e) {
+            var endDate = new Date(Date.parse(e.date));
+            endDate.setDate(endDate.getDate() + parseInt($('#duration').val()));
+            $('#end_date').val(formatDate(endDate));
+        });
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+});
 </script>

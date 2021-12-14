@@ -46,8 +46,8 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Company Name </label>
-                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname">
-
+                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname" required>
+                                        <div style="color: red;"><?php echo form_error('cmpname'); ?></div>
 
                                     </div>
                                 </div>
@@ -55,14 +55,14 @@
                                     <div class="form-group">
                                         <label>Address </label>
                                         <textarea placeholder="Enter Address" class="form-control" name="adrs" id="adrs" required>    </textarea>
-
+                                        <div style="color: red;"><?php echo form_error('adrs'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
                                         <input class="form-control" placeholder="Enter Phone Number" type="number" name="phone" id="phone">
-
+                                        <div style="color: red;"><?php echo form_error('phone'); ?></div>
                                     </div>
                                 </div>
 
@@ -70,6 +70,7 @@
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input class="form-control" placeholder="Enter Email" id="email" name="email" type="email">
+                                        <div style="color: red;"><?php echo form_error('email'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -103,7 +104,8 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Choose Your Logo</label></label>
-                                        <input class="form-control" name="file" id="imgInp" type="file">
+                                        <input class="form-control" name="file" id="imgInp" type="file" >
+                                        <div style="color: red;"><?php echo form_error('file'); ?></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-center">
