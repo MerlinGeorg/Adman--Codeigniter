@@ -42,19 +42,19 @@
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
                                     <thead>
-                                        <tr>
-                                            <th>Invo ID</th>
-                                            <th>CAMPAIGN NAME</th>
-                                            <th>ADVERTISER</th>
-                                            <th>DURATION</th>
-                                            <!-- <th>Advertiser</th>  -->
-                                            <!-- <th>Screen</th>  -->
-                                            <!-- <th>Content ID</th>  -->
-                                            <th>Content Name</th>
-                                            <!-- <th>Edit</th> 												  -->
-
-
-
+                                    <tr>
+                                          <th>Invo ID</th>       
+                                            <th>CAMPAIGN NAME</th> 
+											 <th>ADVERTISER</th> 			
+											 <th>DURATION</th> 	
+												 <!-- <th>Advertiser</th>  -->
+														 <!-- <th>Screen</th>  -->
+												 <!-- <th>Content ID</th>  -->
+ <th>Content Name</th> 	
+ <!-- <th>Edit</th> 												  -->
+ 
+ <th>EDIT</th>        
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,6 +72,7 @@
 <!-- <td><?php //echo $estrow->content_id; ?></td> -->
 									        <td><?php echo $estrow->content_name; ?></td>
                                        <!-- <td><a href="#">Print</a></td> -->
+                                       <td><a href="<?php echo site_url('ro/oldro_edit').'/'.$estrow->ro_id ; ?>"><i class="fas fa-edit"></i></a>
                                     </tr>
 	  <?php } ?>
                                         
