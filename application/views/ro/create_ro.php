@@ -89,7 +89,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Advertiser Name</label>
                                         <input class="form-control" name="ro_adv" id="ro_adv" readonly>
@@ -97,7 +97,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>ASP Name</label>
                                         <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
@@ -113,7 +113,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Publishing Date</label>
-                                        <input class="form-control" name="ad_date" id="ad_date">
+                                        <input class="form-control" name="ad_date" id="ad_date" required>
                                     </div>
 
                                 </div>
@@ -128,7 +128,7 @@
                                     </div>
 
                                 </div>
-                             
+
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -145,6 +145,19 @@
                                 </div>
 
 
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select class="form-control" id="user" name="user" required>
+                                            <option value="">Select</option>
+                                            <?php foreach ($user->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->logo_id;     ?>"><?php echo $rorow->company_name;   ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -155,8 +168,6 @@
                                 <div class="panel-body">
                                     <div class="row">
 
-
-
                                         <div class="col-lg-12">
 
                                             <div class="form-group" id="output_batch">
@@ -164,12 +175,11 @@
                                                 <select class="form-control" name="batch" onChange="outputscreen(this)">
 
                                                     <option value="">Select Screen</option>
-                                                
+
                                                 </select>
                                             </div>
                                             <input type="text" name="scname" id="scname" style=" display:  none;" />
                                         </div>
-
 
                                         <div class="col-lg-12 mt-4 text-center">
                                             <button type="button" class="btn" style="border-radius: 50%;" onclick="addRow('dataTable',aspId, aspname, scname, batch)"><i style="font-size: 38px; color: #47a3f3;" class="fa fa-plus-circle" aria-hidden="true"></i></button>
@@ -178,7 +188,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>         
+                    </div>
 
                     <div class="panel-heading">
                         <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="font-size: 10px;">
@@ -188,7 +198,7 @@
                                     <th>ASP</th>
                                     <th>ASP Name</th>
                                     <th>SID</th>
-                                    <th>Screen Name</th>                  
+                                    <th>Screen Name</th>
 
                             </thead>
                             </tr>
@@ -198,7 +208,6 @@
 
                         </table>
                     </div>
-
 
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>
@@ -245,7 +254,6 @@
         var row = table.insertRow(rowCount);
 
 
-
         var cell0 = row.insertCell(0);
         cell0.innerHTML = rowCount;
 
@@ -290,7 +298,6 @@
                 asp: cells[1].innerHTML,
                 sid: cells[3].innerHTML,
 
-
                 cname: (campId.value),
 
             });
@@ -317,10 +324,8 @@
         });
 
 
-
     });
 </script>
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -341,6 +346,7 @@
                     $('#ro_adv').val(response[0]['adv_name']);
                     // $('#ro_asp').val(response[0]['asp_name']);    
                     $('#duration').val(response[0]['duration']);
+                    $('#ad_date').val(response[0]['publish_date']);
                     $('#aspId').empty();
                     var option = "";
                     $.each(response['asp'], function(index) {
@@ -371,7 +377,7 @@
     }) 
  */
 
-        $('#camp_date').datepicker({
+        $('#ad_date').datepicker({
             autoclose: true,
             showOnFocus: true,
             todayHighlight: true,

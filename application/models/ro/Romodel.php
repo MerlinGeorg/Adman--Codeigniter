@@ -405,6 +405,18 @@ public function adscontact($invoiceId)
 	$res = $ro->result();
 	return $res[0];
 }
+public function getLogo($invoiceId)
+{
+	$this->db->select('R.logo_id,l.*,a.*');
+	$this->db->from('ro_reg R');
+	$this->db->join('adman_logo l', 'R.logo_id = l.logo_id');
+	$this->db->join('adman_company_address a', 'l.logo_id = a.logo_id');
+	$this->db->where('R.ro_id', $invoiceId);
+	$ro = $this->db->get();
+	$res = $ro->result();
+	return $res;
+	//return $this->db->get();
+}
 public function campdata($campId)
 {
 	$this->db->select('*');

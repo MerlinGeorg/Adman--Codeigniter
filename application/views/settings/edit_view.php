@@ -26,7 +26,7 @@
     <div id="page-wrapper">
         <div class="card">
             <div class="card-header">
-                Add Logo
+               Edit Logo
             </div>
             <!-- <?php if ($msg == 1) {
                         $a = "block";
@@ -37,16 +37,17 @@
                 <h5>Estimate has been saved</h5>
                  
                     </div> -->
-
+                    <?php   foreach ($data->result() as $estrow) { }?>
             <div class="card-body">
-                <form action="addLogo" name="logofrm" id="logofrm" method="post" enctype="multipart/form-data">
-                    <div class="panel panel-default">
+                <form action="<?php echo site_url('settings/updateLogo');?>" name="logofrm" id="logofrm" method="post" enctype="multipart/form-data">
+                <input name="lgo_id" value="<?php echo $estrow->logo_id;?>" style="display : none ;">
+                <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Company Name </label>
-                                        <input class="form-control" placeholder="Enter Company Name" type="type" name="cmpname" id="cmpname">
+                                        <input class="form-control" placeholder="Enter Company Name" type="type" value="<?php echo $estrow->company_name; ?>" name="cmpname" id="cmpname">
 
 
                                     </div>
@@ -54,14 +55,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Address </label>
-                                        <textarea placeholder="Enter Address" class="form-control" name="adrs" id="adrs" required>    </textarea>
+                                        <input type="text" class="form-control" value="<?php echo $estrow->address; ?>" name="adrs" id="adrs" required>   
 
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input class="form-control" placeholder="Enter Phone Number" type="number" name="phone" id="phone">
+                                        <input class="form-control" placeholder="Enter Phone Number" value="<?php echo $estrow->phone; ?>" type="number" name="phone" id="phone">
 
                                     </div>
                                 </div>
@@ -69,32 +70,32 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input class="form-control" placeholder="Enter Email" id="email" name="email" type="email">
+                                        <input class="form-control" placeholder="Enter Email" value="<?php echo $estrow->email; ?>" id="email" name="email" type="email">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>PAN Number</label>
-                                        <input class="form-control" name="pan" id="pan" type="number" placeholder="Enter Pan Number">
+                                        <input class="form-control" name="pan" id="pan" value="<?php echo $estrow->pan; ?>" type="number" placeholder="Enter Pan Number">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 ">
                                     <div class="form-group">
                                         <label>CSTIN</label>
-                                        <input class="form-control" name="cstin" id="cstin" type="text" placeholder="Enter CSTIN">
+                                        <input class="form-control" name="cstin" id="cstin" value="<?php echo $estrow->cstin; ?>" type="text" placeholder="Enter CSTIN">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>SAC CODE</label>
-                                        <input class="form-control" name="sac" id="sac" type="text" placeholder="Enter SAC CODE">
+                                        <input class="form-control" name="sac" id="sac" value="<?php echo $estrow->sac_code; ?>" type="text" placeholder="Enter SAC CODE">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>DESCRIPTION</label>
-                                        <textarea class="form-control" name="des" id="des" type="text" placeholder="Enter CSTIN"></textarea>
+                                        <input class="form-control" value="<?php echo $estrow->des_service; ?>" name="des" id="des" type="text" placeholder="Enter CSTIN"></textarea>
                                     </div>
                                 </div>
 
@@ -103,12 +104,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Choose Your Logo</label></label>
-                                        <input class="form-control" name="file" id="imgInp" type="file">
+                                        <input class="form-control" name="image_file" id="imgInp" type="file" >
+                                        <input type="hidden" name="image1" id="image1">
+                                        <div id="imagefill"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-center">
                                     <div class="form-group">
-                                        <img name="logo_img" id="logo_id" class="logo_id">
+                                        <img name="logo_img" id="logo_id" class="logo_id" src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'>                                       
                                     </div>
                                 </div>
 
@@ -130,55 +133,8 @@
                         <!-- /.row (nested) -->
                     </div>
 
-                    <script src="<?php echo base_url('Assets/js/jquery.min.js'); ?>"></script>
-                    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-                    <script>
-                        $('#addlogo').on('click', function() {
-                            
-                            $("#logofrm").validate({
-                                rules: {
-                                    name: {
-                                        required: true,
-                                    },
-                                },
-                            });
-
-                        })
-                    </script>
-
-
-
-
-
-
-
-
-
-
-                    <script>
-                        $('document').ready(function() {
-                            $('textarea').each(function() {
-                                $(this).val($(this).val().trim());
-                            });
-                        });
-                    </script>
-                    <script type="text/javascript">
-                        function readURL(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function(e) {
-                                    $('#logo_id').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-
-                        $("#imgInp").change(function() {
-                            readURL(this);
-                        });
-                    </script>
+                   
+                  
                     <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
                 </form>
         </div>

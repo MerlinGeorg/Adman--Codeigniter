@@ -90,8 +90,17 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="<?php echo site_url('settings'); ?>">
+                            <!-- <a class="js-arrow" href="<?php //echo site_url('settings'); ?>"> -->
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-cog"></i>Settings</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('newlogo'); ?>">Add Users</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('settings'); ?>">List Users</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">

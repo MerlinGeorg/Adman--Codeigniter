@@ -146,7 +146,24 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select class="form-control" id="user" name="user" required>
+                                            <option value="">Select</option>
+                                            <?php foreach ($user->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->logo_id;     ?>"><?php echo $rorow->company_name;   ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Publishing Date</label>
+                                        <input class="form-control" type="date" name="publish_date" id="publish_date">
 
+                                    </div>
+                                </div>
                                 <input type="text" id="adv_id" style="display: none;">
 
 
@@ -236,20 +253,19 @@
                         <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
 
 
-
-
                         </table>
 
                     </div>
                     <div class="col-lg-12 text-center">
-                        <input class="btn btn-info mt-5" style="width: 230px" type="button" value="Save" onclick="gatherData(du, camp_name, b)">
+                        <input class="btn btn-info mt-5" style="width: 230px" type="button" value="Save" onclick="gatherData(du, camp_name, b,user, publish_date)">
                     </div>
             </div>
             </form>
             <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
         </div>
     </div>
-
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $('#b').select2({
             theme: 'bootstrap4',
@@ -338,7 +354,7 @@
 
 
 
-        function gatherData(du, camp_name, b) {
+        function gatherData(du, camp_name, b, user, publish_date) {
 
             var data = [];
             var table = document.getElementById('dataTable');
@@ -356,7 +372,9 @@
                     pol: cells[5].innerHTML,
                     dur: (du.value),
                     cname: (camp_name.value),
-                    adv: (b.value)
+                    adv: (b.value),
+                    user: (user.value),
+                    publish_date: (publish_date.value)
                 });
 
 
@@ -381,7 +399,12 @@
 
             });
 
-
+            $('#publish_date').datepicker({
+                autoclose: true,
+                showOnFocus: true,
+                todayHighlight: true,
+                format: "yyyy-mm-dd"
+            });
 
         });
     </script>
