@@ -14,6 +14,7 @@ class Romodel extends CI_Model
 		$this->db->where('R.asp !=', '0');
 		$this->db->where('R.package !=', '0');
 		$this->db->join('est_reg E ', 'R.est_id = E.est_id');
+		$this->db->order_by("est_name", "asc");
 
 
 
@@ -24,7 +25,7 @@ class Romodel extends CI_Model
 		$this->db->join('content_reg', 'ro_reg.content_id = content_reg.con_id','inner');
 		 */
 
-		$this->db->order_by("E.name");
+		// $this->db->order_by("E.name");
 
 		return $this->db->get();
 		$this->db->from('ro_reg');

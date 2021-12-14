@@ -209,7 +209,7 @@ class Campmodel extends CI_Model
 		$this->db->from('est_reg');
 		$this->db->where('status', 2);
 		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
-		$this->db->order_by("name");
+		$this->db->order_by("name",'asc');
 		return $this->db->get();
 	}
 
