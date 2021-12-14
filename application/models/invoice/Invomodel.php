@@ -52,7 +52,9 @@ class Invomodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('inward_invoice');
+		$this->db->order_by("camp_name", "asc");
 		return $this->db->get();
+		
 	}
 
 
