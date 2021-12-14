@@ -133,6 +133,13 @@ foreach ($scdataedit->result() as $scrow)
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
+                                                    <label>Web Code</label>
+                                                    <input class="form-control" placeholder="Enter Web code" type="text" name="web_code" value="<?php echo $scrow->web_code;  ?>" >
+                                                    <div style="color: red;"><?php echo form_error('webcode'); ?></div>
+                                                </div> 
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
                                                     <label>Price</label>
                                                     <input class="form-control" placeholder="Enter Price" type="number" name="price" value="<?php echo $scrow->sc_price;  ?>" >
                                                     <div style="color: red;"><?php echo form_error('price'); ?></div>

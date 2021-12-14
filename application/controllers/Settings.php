@@ -235,14 +235,11 @@ class Settings extends Layout_Controller
 				$address['phone'] = $this->input->post('phone');
 				$address['email'] = $this->input->post('email');
 
-
 				$address['pan'] = $this->input->post('pan');
 				$address['cstin'] = $this->input->post('cstin');
 
-
 				$address['sac_code	'] = $this->input->post('sac');
 				$address['des_service	'] = $this->input->post('des');
-
 
 
 				if (empty($_FILES['image_file']['name'])) {

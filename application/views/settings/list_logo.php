@@ -35,50 +35,55 @@
                         <!-- <div class="panel-heading">Listed All Estimates</div> -->
                         <div class="panel-body">
                             <!-- <div class="row"> -->
-                           
-                        <div class="panel-body">
-                            
-                            <div class="table-responsive m-b-40">
-                                <table class="table table-borderless table-data3">
-                                    <thead style="font-size: 12px;">
-                                        <tr>
-                                          <th>ID</th>       
-                                            <th>USER</th>                                               
-                                            <th>ADDRESS</th>
-                                            <th>LOGO</th>
-                                             <th>EDIT</th>
-                                               
-                                          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-      <?php  foreach ($logodata->result() as $estrow) {
-         //print_r($estrow);  ?>
-                                        <tr>
-                                           
-                                            <td><?php echo $estrow->logo_id;	 ?></td>
-                                            <td><?php echo $estrow->company_name; ?></td>
-											 <td><?php echo $estrow->address; ?></td>
-											 <td><img src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'></td>
-                                           
-                  <td><a href="<?php  echo site_url('Settings/get_editData').'/'.$estrow->logo_id ; ?>" target="_blank"><i class="fas fa-edit"></i></a>
-                                        </td></tr>
-	  <?php } ?>
-                                        
-                                     
-                                                                          </tbody>
-                                </table>
+
+                            <div class="panel-body">
+
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead style="font-size: 12px;">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>USER</th>
+                                                <th>ADDRESS</th>
+                                                <th>LOGO</th>
+                                                <th>EDIT</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($logodata->result() as $estrow) {
+                                                //print_r($estrow);  
+                                            ?>
+                                                <tr>
+
+                                                    <td><?php echo $estrow->logo_id;     ?></td>
+                                                    <td><?php echo $estrow->company_name; ?></td>
+                                                    <td><?php echo $estrow->address; ?></td>
+                                                    <td><img src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'></td>
+
+                                                    <td><a href="<?php echo site_url('Settings/get_editData') . '/' . $estrow->logo_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- /.col-lg-6 (nested) -->
+                                <!-- </div> -->
+                                <!-- /.row (nested) -->
                             </div>
-
-                            <!-- /.col-lg-6 (nested) -->
-                            <!-- </div> -->
-                            <!-- /.row (nested) -->
+                            <!-- /.panel-body -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.panel -->
                     </div>
-                    <!-- /.panel -->
-                </div>
 
+                </div>
             </div>
+        </div>
+    </div>
 
 </body>

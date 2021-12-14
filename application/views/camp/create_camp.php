@@ -250,10 +250,7 @@
                             </tr>
                         </TABLE>
 
-                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;
-">
-
-
+                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
 
 
                         </table>
@@ -267,6 +264,7 @@
             <div class="card-footer" style="margin-top: -74px; height: 69px;"></div>
         </div>
     </div>
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $('#b').select2({

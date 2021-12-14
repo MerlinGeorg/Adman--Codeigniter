@@ -47,8 +47,6 @@ class Advertiser extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 
 
-
-
 			$advldata['username'] = $this->session->userdata('logged_in')['username'];
 			$advldata['email'] = $this->session->userdata('logged_in')['email'];
 			$advldata['list_advdata'] = $this->advertisermodel->getadvlist();
@@ -77,7 +75,6 @@ class Advertiser extends Layout_Controller
 			$this->form_validation->set_rules('phone_1', 'Phone-1', 'trim|numeric|required|xss_clean');
 			$this->form_validation->set_rules('phone_2', 'Phone-2', 'trim|numeric|xss_clean');
 			$this->form_validation->set_rules('wphone', 'Wphone', 'trim|numeric|xss_clean');
-
 
 			if ($this->form_validation->run() == true) {
 

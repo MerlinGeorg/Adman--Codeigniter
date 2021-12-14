@@ -14,6 +14,7 @@ class Romodel extends CI_Model
 		$this->db->where('R.asp !=', '0');
 		$this->db->where('R.package !=', '0');
 		$this->db->join('est_reg E ', 'R.est_id = E.est_id');
+		$this->db->order_by("est_name", "asc");
 
 
 
@@ -24,10 +25,25 @@ class Romodel extends CI_Model
 		$this->db->join('content_reg', 'ro_reg.content_id = content_reg.con_id','inner');
 		 */
 
-		$this->db->order_by("E.name");
+		// $this->db->order_by("E.name");
 
 		return $this->db->get();
 		$this->db->from('ro_reg');
+	}
+
+
+	function get_ro_reg_list()
+	{
+		$this->db->select('*');
+		$this->db->from('ro_reg');
+		return $this->db->get();
+	}
+	function get_ro()
+	{
+		$this->db->select('ro_id');
+		$this->db->from('ro_reg');
+		$this->db->where("est_id", $est_id);
+		return $this->db->get();
 	}
 
 	function get_releaselist()
@@ -150,6 +166,16 @@ class Romodel extends CI_Model
 		$this->db->from('time_policy');
 		return $this->db->get();
 	}
+	public function get_batch($table_name, $course_id)
+	{
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where('asp', $course_id);
+		return $this->db->get();
+	}
+
+
+
 	//////////////////////////////////////////////////
 	function get_screen($table, $id)
 
@@ -444,13 +470,20 @@ class Romodel extends CI_Model
 
 	public function get_screens($campId)
 	{
-		$this->db->select('S.sc_name');
+		$this->db->select('S.sc_name,S.city,S.web_code,S.sc_status');
 		$this->db->from('est_line E');
 		$this->db->join('screen S', 'E.screen = S.sc_id');
 		$this->db->where('E.est_id', $campId);
+		$this->db->where('sc_status', 1);
 		$ro = $this->db->get();
 		$res = $ro->result();
 		return $res;
+	}
+	public function update_screen($sc_id)
+	{
+		$this->db->set('sc_status', 0);
+		$this->db->where('sc_id', $sc_id);
+		$this->db->update('screen');
 	}
 
 	function getOldRoEditData($id)

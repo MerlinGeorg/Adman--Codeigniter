@@ -207,6 +207,7 @@
                                     font-weight: bold;
 
                                 }
+                                
 
                             }
                             }
@@ -344,8 +345,9 @@
 
 
                                         </div>
-                                        <input style="width: 40%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                                        <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -34px;">Add Row</button>
+                                        <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
+                                        <br><br>
+                                        <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
                                     </div>
                                 </div>
 
@@ -388,7 +390,7 @@
                                   <input name="row_invoid" value="<?php echo  $estlrow->invo_id; ?>" style="display :none ;">
                   <td class="text-left"><button type="submit" class="btn btn-warning">Remove</button></td></form> -->
                                             <td class="text-left"><?php echo $estlrow->asp_name; ?></td>
-                                            <td class="text-right"><?php echo $estlrow->sc_name; ?></td>
+                                            <td class="text-center"><?php echo $estlrow->sc_name; ?></td>
                                             <td class="text-right"><?php echo $duration = $estlrow->tp_name; ?></br>
                                                 <?php echo $invo_sdate = $estlrow->start_date; ?></br>
                                                 <?php echo $invo_edate = $estlrow->end_date; ?></br>
@@ -524,7 +526,7 @@
                                         <th class="left table-des">
                                             <h5>Description</h5>
                                         </th>
-                                        <th calss="table-des">
+                                        <th class="table-des">
                                             <h5>Amount</h5>
                                         </th>
                                     </tr>
