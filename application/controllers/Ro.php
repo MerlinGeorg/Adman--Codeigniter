@@ -66,7 +66,7 @@ class Ro extends Layout_Controller
 				
 			$advdata['username'] = $this->session->userdata('logged_in')['username'];
 			$advdata['email'] = $this->session->userdata('logged_in')['email'];
-			$advdata['rolist'] = $this->romodel->get_releaselist();
+			$advdata['rolist'] = $this->romodel->get_releaselist();	
 			$advdata['adv'] = $this->campmodel->getadv();
 			$advdata['asp'] = $this->campmodel->getasp();
 			$advdata['user'] = $this->Settingmodel->list_logo();
@@ -273,14 +273,20 @@ class Ro extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
 			$ro_list['email'] = $this->session->userdata('logged_in')['email'];
-			$ro_list['involist'] = $this->romodel->get_rolist_old();
+			$roId = $this->romodel->getRoId();
+			foreach($roId as $row){
+			
+				$estId = $this->romodel->getEstId($row->ro_id);
+			
+				$ro_list['involist'] = $this->romodel->get_rolist_old($estId->est_id);
+			}
 			$ro_list['title'] = "Old Release Orders";
 
 			$this->data = $ro_list;
 			$this->page = "ro/old_list";
 			$this->layout();
 
-			// $this->load->view('ro/old_list', $ro_list);
+			
 		} else {
 			$this->sess_out();
 		}

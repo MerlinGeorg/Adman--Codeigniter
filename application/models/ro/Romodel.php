@@ -314,23 +314,43 @@ class Romodel extends CI_Model
 		$this->db->update('invoice_reg');
 	}
 	//////////////////////////////
-	function get_rolist_old()
+	function getEstId($id)
 	{
-		$this->db->select('R.content_id,C.content_name,A.adv_name');
+
+		$this->db->select('est_id');
+		$this->db->from('ro_reg');
+		$this->db->where('ro_id', $id);
+		$this->db->where('status', 2);
+
+		$res = $this->db->get();
+		return $res->result()[0];
+	}
+	function getRoId()
+	{
+		$this->db->select('R.ro_id');
 		$this->db->from('ro_reg R');
+		$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
+		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
+		$this->db->join('content_reg C', 'R.content_id = C.con_id', 'inner');
+
 		$this->db->where('R.status', 2);
-		//$this->db->join('ro_line Rl', 'R.ro_id = Rl.ro_id','inner');
-		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id','inner');
-		$this->db->join('content_reg C', 'R.content_id = C.con_id','inner');
+
+		$res = $this->db->get();
+		return $res->result();
+	}
+	function get_rolist_old($id)
+	{
+		$this->db->select('R.duration,R.content_id,C.content_name,A.adv_name,I.invo_id,I.est_name');
+		$this->db->from('ro_reg R');
+		$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
+		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
+		$this->db->join('content_reg C', 'R.content_id = C.con_id', 'inner');
+		$this->db->where('R.status', 2);
+		$this->db->where('I.est_id', $id);
 		$this->db->group_by("A.adv_name");
 		$this->db->order_by("A.adv_name");
 		return $this->db->get();
-	//	$res=$this->db->get();
-		//echo $this->db->last_query();
-		//echo '<pre>';
-		
-		//print_r($res->result());exit();
-	}		
+	}
 	//////////////////////////////////////
 	function get_roasplist($id)
 	{

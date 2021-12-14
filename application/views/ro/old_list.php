@@ -58,28 +58,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        //   echo"<pre>";print_r($involist->result());exit;
-                                        foreach ($involist->result() as $estrow) { ?>
-                                            <tr>
-
-                                                <td><?php echo $estrow->ro_lid;     ?></td>
-                                                <!-- <td><?php //echo $estrow->est_id; 
-                                                            ?></td> -->
-                                                <td><?php echo $estrow->est_name; ?></td>
-                                                <td><?php echo $estrow->adv_name; ?></td>
-                                                <td><?php echo $estrow->duration; ?></td>
-                                                <!-- <td><?php //echo $estrow->screen; 
-                                                            ?></td> -->
-                                                <!-- <td><?php //echo $estrow->content_id; 
-                                                            ?></td> -->
-                                                <td><?php echo $estrow->content_name; ?></td>
-                                                <!-- <td><a href="#">Print</a></td> -->
-                                            </tr>
-                                        <?php } ?>
-
-
-                                    </tbody>
+      <?php 
+    //   echo"<pre>";print_r($involist->result());exit;
+       foreach ($involist->result() as $estrow) { ?>
+                                        <tr>
+                                           
+                                            <td><?php echo $estrow->invo_id;	 ?></td>
+                                            <!-- <td><?php //echo $estrow->est_id; ?></td> -->
+											<td><?php echo $estrow->est_name; ?></td>
+									        <td><?php echo $estrow->adv_name; ?></td>
+											<td><?php echo $estrow->duration; ?></td>
+									 <!-- <td><?php //echo $estrow->screen; ?></td> -->
+<!-- <td><?php //echo $estrow->content_id; ?></td> -->
+									        <td><?php echo $estrow->content_name; ?></td>
+                                       <!-- <td><a href="#">Print</a></td> -->
+                                    </tr>
+	  <?php } ?>
+                                        
+                                     
+                                                                          </tbody>
                                 </table>
                             </div>
 
