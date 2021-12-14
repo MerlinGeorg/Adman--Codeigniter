@@ -336,59 +336,154 @@ class Invoice extends Layout_Controller
 			$this->sess_out();
 		}
 	}
-	/////////////////////////////////////////////////////
-	function update_sdate()
-	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+}	
 
-			$cr_date = $this->input->post('start_date');
-			$invoid = $this->input->post('invo_id');
-			$involid = $this->input->post('invo_lid');
-			$next_date = $this->input->post('pkdate');
-			$en_d = '+' . $next_date . ' day';
-			$newdate = strtotime($en_d, strtotime($cr_date));
-			$newdate = date('Y-m-d', $newdate);
+///////////////////////////////////
+function nr_involine()
+{
 
-			$invo_linedata = array(
+if(isset($this->session->userdata['logged_in'])){
+	
+$invoid = $this->input->post('nr_invoid');
+$nestid = $this->input->post('nr_estid');
+$nr_asp = $this->input->post('nr_asp');
+$nrs = $this->input->post('nr_screen');
+$nr_duration = $this->input->post('nr_duration');
+$nr_pack = $this->input->post('nr_pack');
+$cr_date = date("Y/m/d") ;
+$nr_discount = $this->input->post('nr_discount');
 
-				'start_date' => $cr_date,
-				'end_date' => $newdate
 
-			);
-
-			$this->invomodel->update_invo_data('invo_reg_line', $invo_linedata,  $involid);
-			$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invoid);
-			$invo_list['n_asp'] = $this->invomodel->getasp();
-			$invo_list['n_package'] = $this->invomodel->gettpolicy();
-			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
-			//$this->load->view('invoice/invoice_edit', $invo_list);
-			echo json_encode($invo_list);
-		} 
-		else
-		 {
-			$this->sess_out();
-		 }
-	}
-	//////////////////////////////////////////////////////////////////
-	function make_ro()
-	{
+$pack_dates = $this->invomodel->get_packdate($nr_pack);
+foreach ($pack_dates->result() as $pdate) 
+{
+$next_date = $pdate->days ;
+} 
 
 
 		if (isset($this->session->userdata['logged_in'])) 
 		{
 			$invo_id = $this->uri->segment(3);
 
-			$adv =	 $this->invomodel->get_involinedata_adv($invo_id);
-			foreach ($adv->result() as $row) 
-			{
+/////////////////////////////////////////////////////////////////
+
+$mscreen_data =$this->invomodel->get_screen('screen',$nrs);
+	 foreach ($mscreen_data->result() as $scdata) 
+	 {
+		$sc_price = $scdata->sc_price;
+		$cgst = $scdata->cgst;
+		$sgst = $scdata->sgst;
+		$igst = $scdata->igst;
+		$ltax = $scdata->local_tax;
+	 }
+$newest_ldata = array(
+					'invo_id'=>$invoid,
+					'est_id'=>$nestid,
+					'asp' => $nr_asp,
+					'screen' => $nrs,
+					'duration' => $nr_duration,
+					'package' => $nr_pack,
+					'price' => $sc_price,
+					'cgst' => $cgst,
+					'sgst' => $sgst,
+					'igst' => $igst,
+					'ltax' => $ltax,
+					'start_date' => $cr_date,
+					'end_date' => $newdate,
+					'pack_date' => $next_date,
+					'status' => 1,
+					'discount' => $nr_discount
+				);
+				
+$this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
+		$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invoid);
+		$invo_list['n_asp'] = $this->invomodel->getasp();	
+		$invo_list['n_package'] = $this->invomodel->gettpolicy();
+		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
+		$estId=$this->campmodel->getEstId($nestid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
+		$this->load->view('invoice/invoice_edit', $invo_list);
 
 				$adv_id = $row->adv_id;
 				$content_id = $row->content_id;
 				$est_name = $row->est_name;
 			}
 
-			$invoice_line_data = $this->invomodel->get_involinedata($invo_id);
+}
+////////////////////////////
+function row_del()
+{
+	$rowid = $this->input->get('var1');
+	$rowestid = $this->input->get('var2');	
+if(isset($this->session->userdata['logged_in'])){
+
+	// $rowid = $this->input->post('row_id');
+	// $rowestid = $this->input->post('row_invoid');	
+	$this->invomodel->did_delete_row($rowid);
+	$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($rowestid);
+		$invo_list['n_asp'] = $this->invomodel->getasp();	
+		$invo_list['n_package'] = $this->invomodel->gettpolicy();
+		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($rowestid);
+		$estId=$this->campmodel->getEstId($rowestid);
+		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
+		$this->load->view('invoice/invoice_edit', $invo_list);
+		// redirect('invoice/list_outward_invoice');
+	
+}
+else{
+	$this->sess_out();
+}	
+}
+////////////////////////////
+function update_sdate()
+{
+if(isset($this->session->userdata['logged_in'])){
+
+	 $cr_date = $this->input->post('start_date');
+	 $invoid = $this->input->post('invo_id');
+     $involid = $this->input->post('invo_lid');
+	 $next_date= $this->input->post('pkdate');
+$en_d = '+'.$next_date.' day' ;
+$newdate = strtotime ($en_d , strtotime ( $cr_date ) ) ;
+$newdate = date ( 'Y-m-d' , $newdate );
+
+$invo_linedata = array(
+					
+					'start_date' => $cr_date,
+					'end_date' => $newdate
+					
+				);
+				
+$this->invomodel->update_invo_data('invo_reg_line', $invo_linedata,  $involid);
+	$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invoid);
+		$invo_list['n_asp'] = $this->invomodel->getasp();	
+		$invo_list['n_package'] = $this->invomodel->gettpolicy();
+		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
+		//$this->load->view('invoice/invoice_edit', $invo_list);
+		echo json_encode( $invo_list );
+	
+}
+else{
+	$this->sess_out();
+}	
+}
+////////////////////////////////////////
+function make_ro()
+{
+	
+
+if(isset($this->session->userdata['logged_in'])){
+		$invo_id = $this->uri->segment(3);
+		
+	$adv =	 $this->invomodel->get_involinedata_adv($invo_id);
+	foreach($adv->result() as $row) {
+		
+		$adv_id = $row->adv_id ;
+		$content_id = $row->content_id ;
+		$est_name = $row->est_name ;
+	}
+	
+		$invoice_line_data = $this->invomodel->get_involinedata($invo_id);
 
 
 			foreach ($invoice_line_data->result() as $involinedata) 
