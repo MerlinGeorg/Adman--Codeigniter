@@ -13,7 +13,7 @@ function asp_list_profile()
 												{
 													$this->db->select('*');
 													$this->db->from('asp');
-													$this->db->order_by("cr_date", "desc");
+													$this->db->order_by("asp_name", "asc");
 													$query = $this->db->get();
 													return $query;
 												}
@@ -37,6 +37,4 @@ function update_id($table, $id, $data)
 													
 												}
 
-}	
-?>
-
+}

@@ -1,11 +1,12 @@
 <!-- <body> -->
 
-<?php //$this->load->view('ro/header_menu.php'); ?>
- <div id="wrapper">
+<?php //$this->load->view('ro/header_menu.php'); 
+?>
+<div id="wrapper">
 
-        <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+    <!-- Navigation -->
+
+    <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -21,39 +22,39 @@
                    </ul>
                                              
                 </div> -->
-                <!-- /.sidebar-collapse -->
-            <!-- </div> -->
-            <!-- /.navbar-static-side -->
-                <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="title-5 m-b-35 text-center">RO List</h4>
-					                </div>
- <!-- /////////////////////////////////////////////////////////.panel-body -->     
-  <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <!-- <div class="panel-heading">Listed All RO</div> -->
+    <!-- /.sidebar-collapse -->
+    <!-- </div> -->
+    <!-- /.navbar-static-side -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="title-5 m-b-35 text-center">RO List</h4>
+            </div>
+            <!-- /////////////////////////////////////////////////////////.panel-body -->
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading">Listed All RO</div> -->
+                    <div class="panel-body">
+                        <!-- <div class="row"> -->
+
                         <div class="panel-body">
-                            <!-- <div class="row"> -->
-                           
-                        <div class="panel-body">
-                            
+
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
                                     <thead>
-                                    <tr>
-                                          <th>Invo ID</th>       
-                                            <th>CAMPAIGN NAME</th> 
-											 <th>ADVERTISER</th> 			
-											 <th>DURATION</th> 	
-												 <!-- <th>Advertiser</th>  -->
-														 <!-- <th>Screen</th>  -->
-												 <!-- <th>Content ID</th>  -->
- <th>Content Name</th> 	
- <!-- <th>Edit</th> 												  -->
- 
-                                         
-                                          
+                                        <tr>
+                                            <th>Invo ID</th>
+                                            <th>CAMPAIGN NAME</th>
+                                            <th>ADVERTISER</th>
+                                            <th>DURATION</th>
+                                            <!-- <th>Advertiser</th>  -->
+                                            <!-- <th>Screen</th>  -->
+                                            <!-- <th>Content ID</th>  -->
+                                            <th>Content Name</th>
+                                            <!-- <th>Edit</th> 												  -->
+
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,19 +79,20 @@
                                                                           </tbody>
                                 </table>
                             </div>
-                           
+
                         </div>
-                    
-                                <!-- /.col-lg-6 (nested) -->
-                            <!-- </div> -->
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
+
+                        <!-- /.col-lg-6 (nested) -->
+                        <!-- </div> -->
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.panel-body -->
                 </div>
- 
+                <!-- /.panel -->
             </div>
- 
-<!-- </body> -->
-     
+
+        </div>
+
+        <!-- </body> -->
+    </div>
+</div>

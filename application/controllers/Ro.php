@@ -1,5 +1,4 @@
-<?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Ro extends Layout_Controller
 {
 
@@ -41,6 +40,13 @@ class Ro extends Layout_Controller
 			$this->sess_out();
 		}
 	}
+	function get_batch()
+	{
+		$asp_id = $this->input->post('course_id');
+		$data['batch'] = $this->romodel->get_batch('screen', $asp_id);
+
+		$this->load->view('ro/batch_list', $data);
+	}
 
 	public function valid_date($date) {
         $d = DateTime::createFromFormat('Y-m-d', $date);
@@ -74,31 +80,36 @@ class Ro extends Layout_Controller
 
 			$camp_id  = $this->input->post('campId');
 			$asp_id = $this->input->post('aspId');
+			$scid = $this->input->post('batch');
+		//echo $scid;die();
 			$start_date  = $this->input->post('camp_date');
 			
 
 			$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
-
 			$ro = $detail->result();
-
 			$cr_date = date("Y-m-d");
 			$user = $this->input->post('user');
-
+			if(empty($scid)){
+				$status=1;
+			}
+			else{
+				$status=2;
+			}
+			
 			$ro_data = array(
 				'est_id' => $ro[0]->est_id,
 				'adv_id' => $ro[0]->adv_id,
 				'asp' => $ro[0]->asp,
 				'est_name' => $ro[0]->name,
-				//'duration' => $ro[0]->duration,
-				'duration' => $this->input->post('duration'),
+				'duration' => $ro[0]->duration,
 				'content_id' => $ro[0]->content_id,
 				'package' => $ro[0]->package,
 				'cr_date' => $cr_date,
-				'status' => 1,
+				'status' => $status,
 				'logo_id' => $user
 			);
-			//return $ro_data;
 			$ro_id = $this->romodel->insert_get_ro($ro_data);
+			$sc_id = $this->romodel->update_screen($scid);
 			// return true;
 			// $end_date = '+'.$ro[0]->pack_date.' day';
 			// $newdate = strtotime ($end_date , strtotime ( $cr_date ) ) ;
@@ -106,11 +117,10 @@ class Ro extends Layout_Controller
 			// echo "<pre>";
 			// print_r($ro);
 			// return $ro;
-			/* foreach ($ro as $rorow) 
-        {
-        	$est_data = array(
-					'ro_id'=>$ro_id,	
-					'est_id'=>$camp_id,
+			foreach ($ro as $rorow) {
+				$est_data = array(
+					'ro_id' => $ro_id,
+					'est_id' => $camp_id,
 					'invo_id' => $rorow->invo_id,
 					'invo_lid' => $rorow->invo_reg_lineid,
 					'screen' => $rorow->screen,
@@ -132,9 +142,8 @@ class Ro extends Layout_Controller
 				);
 
 				// print_r($est_data);
-			$this->romodel->insert_ro_data($est_data);
-			
-		} */
+				$this->romodel->insert_ro_data($est_data);
+			}
 			// return false;
 	
 			$url = base_url() . "ro/ro_generate/" . $ro_id;
@@ -157,7 +166,6 @@ class Ro extends Layout_Controller
 		$data['campdata'] = $this->romodel->campdata($campid);
 		$data['screens']  = $this->romodel->get_screens($campid);
 		$data['logo']  = $this->romodel->getLogo($invoiceId);
-
 		$this->load->view('ro/ro_invoice', $data);
 	}
 	public function list_ro()
@@ -219,43 +227,6 @@ class Ro extends Layout_Controller
 		} else {
 			$this->sess_out();
 		}
-	}
-
-	public function ro_update()
-	{
-
-		$id = $this->input->post('ro_id');
-		$camp_id  = $this->input->post('campId');
-		$asp_id = $this->input->post('aspId');
-
-		$start_date  = $this->input->post('camp_date');
-		$end_date = $this->input->post('end_date');
-
-		$estreg = $this->campmodel->get_estdata($camp_id);
-		$estline = $this->campmodel->get_estlinedata($camp_id);
-		$invoicereg = $this->romodel->get_contentId($camp_id);
-
-		$cr_date = date("Y-m-d");
-		$duration = $this->input->post('duration');
-
-		$ro_data = array(
-			'est_id' => $camp_id,
-			'adv_id' => $this->input->post('adv_id'),
-			'asp' => $asp_id,
-			'est_name' => $estreg->result()[0]->name,
-			'duration' => $duration,
-			'content_id' => $invoicereg->result()[0]->content_id,
-			'package' => $estline->result()[0]->package,
-			'cr_date' => $cr_date,
-			'status' => 1
-		);
-
-		$this->romodel->update_id('ro_reg', $id, $ro_data);
-		$this->romodel->update_camp('est_reg', $camp_id, $start_date, $duration);
-		$this->romodel->update_estline('est_line', $camp_id, $start_date, $duration);
-
-		$url = base_url() . "ro/list_ro";
-		redirect($url);
 	}
 	//////////////////////////
 	function update_discount()

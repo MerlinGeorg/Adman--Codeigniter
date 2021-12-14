@@ -332,18 +332,36 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-center">#</th>
-                                    <th scope="col" class="text-center">Screens</th>
-
+                                    <th scope="col" class="text-center">Screens</th>                    
+                                    <th scope="col" class="text-center">city</th>
+                                    <th scope="col" class="text-center" >Webcode</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <tr>
+
+                                
                                 <?php $i = 0;
                                 foreach ($screens as $screen) : $i++; ?>
-                                    <tr>
-
-                                        <th scope="row" class="text-center"> <?php echo $i; ?> </th>
+                                   <th scope="row" class="text-center"> <?php echo $i; ?> </th>
                                         <td class="text-center"><?php echo $screen->sc_name; ?></td>
 
+                                        <?php $city= $screen->city; 
+                                        if($city!=''){
+                                            ?>
+
+                                        <td class="text-center"><?php echo $screen->city; ?></td>
+                                       <?php }
+                                       $webcode= $screen->web_code; 
+                                       if($webcode!=''){
+
+                                       
+                                       ?>
+
+                                        <td class="text-center"><?php echo $screen->web_code; ?></td>
+                                        <?php
+                                       }
+                                       ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

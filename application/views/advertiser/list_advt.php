@@ -1,18 +1,20 @@
-<?php //$this->load->view('advertiser/advheader_menu.php'); ?>
+<?php //$this->load->view('advertiser/advheader_menu.php'); 
+?>
 <style>
-.table-data3 thead tr th {
-    font-weight: 500;
-    font-size: 13px;
-}
-.table-data3 tbody td{
-    font-size: 13px;
-}
-</style>
-    <div id="wrapper">
+    .table-data3 thead tr th {
+        font-weight: 500;
+        font-size: 13px;
+    }
 
-        <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+    .table-data3 tbody td {
+        font-size: 13px;
+    }
+</style>
+<div id="wrapper">
+
+    <!-- Navigation -->
+
+    <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -27,65 +29,68 @@
                        
                                           
                      </ul> -->
-                            <!-- /.nav-second-level -->
-                       
-                <!-- </div> -->
-                <!-- /.sidebar-collapse -->
-            <!-- </div> -->
-            <!-- /.navbar-static-side -->
-                <div id="page-wrapper">
+    <!-- /.nav-second-level -->
+
+    <!-- </div> -->
+    <!-- /.sidebar-collapse -->
+    <!-- </div> -->
+    <!-- /.navbar-static-side -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-5 m-b-35 text-center">List All Advertisers</div>
+            </div>
+            <!-- /////////////////////////////////////////////////////////.panel-body -->
+
+            <!-- ////////////////////////////////////////////////////////////////.panel-body -->
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-5 m-b-35 text-center">List All Advertisers</div>
-                </div>
- <!-- /////////////////////////////////////////////////////////.panel-body -->     
-  
-  <!-- ////////////////////////////////////////////////////////////////.panel-body -->
-  <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <!-- <div class="panel-heading">Listed All Advertise Service Providers</div> -->
                         <div class="panel-body">
                             <!-- <div class="row"> -->
-                           
-                        <div class="panel-body">
-                            
-                            <div class="table-responsive m-b-40">
-                                <table class="table table-borderless table-data3">
-                                    <thead>
-                                        <tr>
-                                          
-                                            <th>ADV NAME</th>                                               
-                                            <th>PERSON</th>
-                                            <th>PHONE</th>
-                                            <th> EMAIL</th>
-                                            <th>STATUS</th>
-                                             <th>EDIT</th>
-                                               
-                                          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                     <?php     foreach ($list_advdata->result() as $advrow)
-                       			{ ?>  
-                                        <tr>
-                                           
-                                            <td><?php echo $advrow->adv_name;  ?></td>
-                                            <td><?php  echo $advrow->c_person;  ?></td>
-                                            <td><?php echo $advrow->phone_1;  ?></td>
-                                            <td><?php echo $advrow->email;  ?></td>
-                                             <td><?php $status = $advrow->adv_status; 
-                                             if($status=1) { echo "Active" ; } else { echo "Deactive";}
-                                              ?></td>
- <td><a href="<?php echo site_url('advertiser/adv_edit').'/'.$advrow->adv_id ; ?>"><i class="fas fa-edit"></i></a>
-                                           <?php } ?>
-                                    </tbody>
-                                </table>
+
+                            <div class="panel-body">
+
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+
+                                                <th>ADV NAME</th>
+                                                <th>PERSON</th>
+                                                <th>PHONE</th>
+                                                <th> EMAIL</th>
+                                                <th>STATUS</th>
+                                                <th>EDIT</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($list_advdata->result() as $advrow) { ?>
+                                                <tr>
+
+                                                    <td><?php echo $advrow->adv_name;  ?></td>
+                                                    <td><?php echo $advrow->c_person;  ?></td>
+                                                    <td><?php echo $advrow->phone_1;  ?></td>
+                                                    <td><?php echo $advrow->email;  ?></td>
+                                                    <td><?php $status = $advrow->adv_status;
+                                                        if ($status = 1) {
+                                                            echo "Active";
+                                                        } else {
+                                                            echo "Deactive";
+                                                        }
+                                                        ?></td>
+                                                    <td><a href="<?php echo site_url('advertiser/adv_edit') . '/' . $advrow->adv_id; ?>"><i class="fas fa-edit"></i></a>
+                                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
-                           
-                        </div>
-                    
-                                <!-- /.col-lg-6 (nested) -->
+
+                            <!-- /.col-lg-6 (nested) -->
                             <!-- </div> -->
                             <!-- /.row (nested) -->
                         </div>
@@ -99,11 +104,9 @@
         </div>
 
 
-                    <div class="panel-heading">
+        <div class="panel-heading">
 
-                        </div>
-                        
-                    </div>
-                  
-             
+        </div>
 
+    </div>
+</div>
