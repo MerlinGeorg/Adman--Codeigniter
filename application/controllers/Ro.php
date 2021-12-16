@@ -304,7 +304,7 @@ class Ro extends Layout_Controller
 		// $encode_data = json_encode($camplist);
 		echo $encode_data;
 	}
-
+	
 	public function oldro_edit()
 
 	{
@@ -313,7 +313,7 @@ class Ro extends Layout_Controller
 			$ro_id = $this->uri->segment(3);
 
 			$ro_list['ro_reg'] = $this->romodel->get_roreglist($ro_id);
-
+	
 			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
 			$ro_list['email'] = $this->session->userdata('logged_in')['email'];
 			$ro_list['rolist'] = $this->romodel->get_releaselist();
@@ -321,9 +321,9 @@ class Ro extends Layout_Controller
 			$ro_list['asp'] = $this->campmodel->getasp();
 			$ro_list['data'] =  $this->romodel->getOldRoEditData($ro_id);
 			//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
-			$ro_list['user'] = $this->Settingmodel->list_logo();
+			$ro_list['user'] = $this->Settingmodel->list_logo();			
 			$ro_list['title'] = "Edit Release Order";
-
+			
 			$this->data = $ro_list;
 			$this->page = "ro/oldro_edit";
 			$this->layout();

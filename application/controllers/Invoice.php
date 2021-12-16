@@ -83,7 +83,8 @@ class Invoice extends Layout_Controller
 			}
 			$invodata['username'] = $this->session->userdata('logged_in')['username'];
 			$invodata['email'] = $this->session->userdata('logged_in')['email'];
-			$invodata['camp'] = $this->romodel->get_releaselist();
+			// $invodata['camp'] = $this->romodel->get_releaselist();
+			$invodata['camp'] = $this->romodel->get_ro_reg_list();
 			$invodata['adv'] = $this->campmodel->getadv();
 			$invodata['title'] = "Create Inward Invoices";
 			
