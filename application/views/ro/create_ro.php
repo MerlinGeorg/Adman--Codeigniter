@@ -39,7 +39,7 @@
                       <li>                
                     <div class="fa fa-dashboard fa-fw"><h4 style="text-align:center;  color: #9f2ab3;">RO</h4></div>
                     </li>
-                        <li><a href="<?php echo site_url('ro/create_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>Create Release Orders</a>                          
+                        <li><a href="<?php //echo site_url('ro/create_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>Create Release Orders</a>                          
                         </li>
                         <li><a href="<?php echo site_url('ro/list_ro'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i>List Release Orders</a>                          
                         </li>
@@ -64,7 +64,7 @@
 
             <!-- <div class="row"> -->
 
-            <form role="form" method="post" action="<?php echo site_url('ro/add_ro');  ?>" target="_blank">
+            <form role="form" >
                 <div class="col-lg-12 card-body">
                     <div class="panel panel-default">
                         <!-- <div class="panel-heading">Release Order</div> -->
@@ -173,7 +173,7 @@
 
                                             <div class="form-group" id="output_batch">
                                                 <label>Select Pending Screen</label>
-                                                <select class="form-control" name="batch" onChange="outputscreen(this)">
+                                                <select class="form-control" name="batch" id="batch" onChange="outputscreen(this)">
 
                                                     <option value="">Select Screen</option>
 
@@ -211,7 +211,7 @@
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>
+                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user); return false;">Save</button>
                     </div>
 
                 </div>
@@ -283,33 +283,63 @@
         });
     }
 
-    function gatherData(campId) {
+    function gatherData(campId,aspId,duration,user) {
 
         var data = [];
         var table = document.getElementById('dataTable');
-
-
+//  alert(table.rows.length);
+ //   die();  
+if(table.rows.length >1){
+  
         for (r = 0; r < table.rows.length - 1; r++) {
-
+//alert("hi");
+//die();
             var row = table.rows[r + 1];
             var cells = row.cells;
-
+          //  scid=null;
+          //  var scid=cells[3].innerHTML;
+          //  alert(scid);
+         //   die();
             data.push({
 
-                asp: cells[1].innerHTML,
-                sid: cells[3].innerHTML,
-
-                cname: (campId.value),
+              //  asp: cells[1].innerHTML,
+              scid: cells[3].innerHTML,
+            //    camp_id: (camp_name.value),
+              //  scid: (batch.value),
+              camp_id: (campId.value),
+              asp_id: cells[1].innerHTML,
+              duration: (duration.value),
+              logoId:(user.value)
+           //   start_date: (ad_date.value)
 
             });
 
 
         }
+    }
+    else{
+    //    alert("hi");
+      //  var row = table.rows[r + 1];
+       //     var cells = row.cells;
+       //     alert(row);
+           // alert(cells);
+         //   die();
+        data.push({
 
+scid: null,
+camp_id: (campId.value),
+asp_id: (aspId.value),
+duration: (duration.value),
+logoId:(user.value)
+});
+    }
+    // alert(data);
         var mydatas = JSON.stringify(data)
-
-        window.location.href = '<?php echo site_url('ro/ro_generate'); ?>/?mdata=' + encodeURI(mydatas);
-
+      //  alert(mydatas);
+    //  die();
+        window.location.href = '<?php echo site_url('ro/add_ro'); ?>/?mdata=' + encodeURI(mydatas);
+    // alert(window.location.href);//http://localhost/flotilla/Adman/ro/create_ro
+    //http://localhost/flotilla/Adman/ro/add_ro/?mdata=%5B%7B%22scid%22:null,%22camp_id%22:%22%22,%22asp_id%22:%22%22,%22duration%22:%22%22%7D%5D
     }
 </script>
 <script type="text/javascript">

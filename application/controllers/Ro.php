@@ -59,58 +59,64 @@ class Ro extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$end_date = $this->input->post('end_date');
 
-			if (empty($end_date)) {
-
-				echo "<script type='text/javascript'>";
-				echo "alert('End date has empty value!Select Publish Date')";
-				echo "</script>";
-
-				$advdata['username'] = $this->session->userdata('logged_in')['username'];
-				$advdata['email'] = $this->session->userdata('logged_in')['email'];
-				$advdata['rolist'] = $this->romodel->get_releaselist();
-				$advdata['adv'] = $this->campmodel->getadv();
-				$advdata['asp'] = $this->campmodel->getasp();
-				$advdata['user'] = $this->Settingmodel->list_logo();
-				$advdata['title'] = "Create Release Order";
-
-				$this->data = $advdata;
-				$this->page = "ro/create_ro";
-				$this->layout();
-			} else {
-
-				$camp_id  = $this->input->post('campId');
-				$asp_id = $this->input->post('aspId');
-				$start_date  = $this->input->post('camp_date');
+			$scid =null;
+			$camp_id =null;
+			$asp_id =null;
+			$duration =null;
+			$logoId  =null;
+			//	$camp_id  = $this->input->post('campId');
+			//	$asp_id = $this->input->post('aspId');
+			//echo "1";
+		//	exit();
+			$myArray =$_REQUEST['mdata'];
+			$postData =json_decode($myArray);
+			foreach($postData as $row){
+				$scid = $row->scid;
+				$camp_id = $row->camp_id;
+				$asp_id = $row->asp_id;
+				$duration = $row->duration;
+				$logoId  =$row->logoId;
+			}
+		//	print_r($postData);
+		//	die();
+			//	$start_date  = $this->input->post('camp_date');
 
 
 				$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
 
 				$ro = $detail->result();
-				$scid = $this->input->post('batch');
+			//	$scid = $this->input->post('batch');
+			//	echo $scid;
+			
 				$cr_date = date("Y-m-d");
-				$user = $this->input->post('user');
-				if(empty($scid)){
+				//$user = $this->input->post('user');
+				if($scid){
 					$status=1;
+					$sc_id = $this->romodel->update_screen($scid);
 				}
 				else{
 					$status=2;
 				}
+			//	die();
+				if(!empty($ro)){
+
 				$ro_data = array(
 					'est_id' => $ro[0]->est_id,
 					'adv_id' => $ro[0]->adv_id,
 					'asp' => $ro[0]->asp,
 					'est_name' => $ro[0]->name,
 					//'duration' => $ro[0]->duration,
-					'duration' => $this->input->post('duration'),
+					'duration' => $duration,
 					'content_id' => $ro[0]->content_id,
 					'package' => $ro[0]->package,
 					'cr_date' => $cr_date,
 					'status' => $status,
-					'logo_id' => $user
+					'logo_id' => $logoId
 				);
 				//return $ro_data;
 				$ro_id = $this->romodel->insert_get_ro($ro_data);
-				$sc_id = $this->romodel->update_screen($scid);
+				
+			
 				// return true;
 				// $end_date = '+'.$ro[0]->pack_date.' day';
 				// $newdate = strtotime ($end_date , strtotime ( $cr_date ) ) ;
@@ -151,11 +157,14 @@ class Ro extends Layout_Controller
 
 				$url = base_url() . "ro/ro_generate/" . $ro_id;
 				redirect($url);
+	}
+	$url = base_url() . "ro/create_ro/";
+				redirect($url);
 			}
 
 			//	$url = 'ro/ro_generate/'.$ro_id;
 			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
-		} else {
+		 else {
 			$this->sess_out();
 		}
 	}
