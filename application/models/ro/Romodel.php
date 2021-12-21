@@ -67,10 +67,10 @@ class Romodel extends CI_Model
 		$this->db->where('E.est_id', $campId);
 		$this->db->where('El.asp', $aspId);
 		return $this->db->get();
-		//$res=$this->db->get();
-		//echo $this->db->last_query();
-		//print_r($res);
-		//exit();
+	//$res=$this->db->get();
+	//echo $this->db->last_query();
+	//print_r($res);
+	//exit();
 	}
 	/////////////////////////////
 	function get_invoreglist($id)
@@ -147,6 +147,7 @@ class Romodel extends CI_Model
 	}
 
 
+
 	///////////////////////////////	
 	function getasp()
 	{
@@ -169,6 +170,14 @@ class Romodel extends CI_Model
 	}
 
 
+	public function get_newpending($table_name, $course_id)
+	{
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where('asp', $course_id);
+		$this->db->where('sc_status',0);
+		return $this->db->get();
+	}
 
 	//////////////////////////////////////////////////
 	function get_screen($table, $id)
@@ -482,6 +491,10 @@ class Romodel extends CI_Model
 		$this->db->update('screen');
 	}
 
+
+	
+
+
 	function getOldRoEditData($id)
 	{
 		$this->db->select('*');
@@ -494,25 +507,23 @@ class Romodel extends CI_Model
 		$this->db->join('adv_reg', 'R.adv_id = adv_reg.adv_id');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
-		//	print_r($query->result());exit();
+	//	print_r($query->result());exit();
 		return $query->result();
 	}
-	function updateScreenStatus($id)
-	{
+	function updateScreenStatus($id){
 		$this->db->set('sc_status', 1);
 		$this->db->where('sc_id', $id);
 		$this->db->update('screen');
 	}
 
-	function updateoldRo($data, $id)
-	{
-		//	$this->db->select('*');
-		//	$this->db->from('ro_reg');
+	function updateoldRo($data,$id){
+	//	$this->db->select('*');
+	//	$this->db->from('ro_reg');
 		$this->db->where('ro_id', $id);
 		$this->db->update('ro_reg', $data);
 		//$res=$this->db->get();
-		//echo $this->db->last_query();
-		//	print_r($res);exit();
+//echo $this->db->last_query();
+	//	print_r($res);exit();
 	}
 
 	////////////////////////								

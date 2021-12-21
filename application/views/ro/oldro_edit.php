@@ -1,7 +1,12 @@
 <script src="<?php echo base_url() ?>Assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
-<?php //$this->load->view('asp/header_menu.php'); 
-?>
+<script type="text/javascript">
+    var uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+        var clean_uri = uri.substring(0, uri.indexOf("?"));
+        window.history.replaceState({}, document.title, clean_uri);
+    }
+</script>
 <style>
     .card-header {
         background-color: rgb(71, 163, 243);
@@ -112,22 +117,22 @@
                                             <div class="form-group">
                                                 <label>ASP Name</label>
                                                 <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
-                                                <select class="form-control" id="aspId" name="aspId" required>
+                                                <select class="form-control" id="aspId" name="aspId" onChange="outputValue(this),get_newpending()" required>
                                                     <option value="<?php echo $row->asp_id;     ?>"><?php echo $row->asp_name;   ?></option>
                                                     <!-- <?php //foreach ($asp->result() as $rorow): 
                                                             ?>
                                               <option value="<?php //echo $rorow->asp_id;     
                                                                 ?>"><?php //echo $rorow->asp_name;   
-                                                                                                    ?></option>
+                                                                    ?></option>
                                                 <?php //endforeach; 
                                                 ?> -->
 
                                                 </select>
-
+                                                <input type="text" name="aspname" id="aspname" style="display : none ;" />
                                             </div>
 
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>User</label>
                                                 <select class="form-control" id="user" name="user" required>
@@ -138,7 +143,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Publishing Date</label>
                                                 <input class="form-control" name="ad_date" id="ad_date" value="<?php echo $row->publish_date; ?>" required>
@@ -146,7 +151,7 @@
 
                                         </div>
                                         <!-- /.col-lg-6 (nested) -->
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Duration</label>
                                                 <input class="form-control" name="duration" id="duration" value="<?php echo $row->duration;   ?>">
@@ -154,7 +159,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>End Date</label>
                                                 <?php
@@ -177,6 +182,21 @@
                                             </div>
 
                                         </div>
+
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group" id="output_batch">
+                                                <!-- <label>Select Pending Screen</label> -->
+                                                <select class="form-control" id="newpending" name="newpending" onChange="outputscreen(this)">
+
+                                                    <option value="">Select Pending Screen</option>
+
+                                                </select>
+
+                                            </div>
+                                            <input type="text" name="scname" id="scname" style=" display:  none;" />
+                                        </div>
+
 
 
                                         <div class="col-lg-12 text-center">
@@ -276,8 +296,42 @@
 
     });
 
+
+
+    function outputValue(item) {
+
+        document.getElementById('aspname').value = e = item.options[item.selectedIndex].text;
+
+        // document.getElementById('adv_id').value = item.value;
+
+    }
+
+    function outputscreen(screen) {
+
+        document.getElementById('scname').value = e = screen.options[screen.selectedIndex].text;
+        // alert(e);
+
+    }
+
+    function get_newpending() {
+
+        $.ajax({
+            type: "post",
+            data: {
+                course_id: $('#aspId').val(),
+            },
+            url: "<?php echo site_url('ro/get_newpending') ?>",
+            success: function(data) {
+
+                $('#output_batch').html(data);
+            }
+        });
+    }
+
+
     function removeScreen(sc_id) {
-        alert(sc_id);
+        //    var sc= $('#scname').val();
+        //     alert(sc);
 
         $.ajax({
             method: "POST",
@@ -309,6 +363,8 @@
 
     //  });
     $(document).ready(function() {
+
+
 
 
         /* $('#campId').on('change',function(){
