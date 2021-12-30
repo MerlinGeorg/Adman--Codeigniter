@@ -240,6 +240,45 @@ class Ro extends Layout_Controller
 			$this->sess_out();
 		}
 	}
+	function ro_update()
+	{
+		
+		$id = $this->input->post('ro_id');
+		// echo $id;
+		// die();
+		$camp_id = $this->input->post('campId');
+		$adv_id = $this->input->post('ro_adv');
+		$asp_id = $this->input->post('aspId');
+		$duration = $this->input->post('duration');
+		// print_r($duration);
+		// die();
+		$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+
+				$ro = $detail->result();
+		$cr_date = date("Y-m-d");
+
+		
+		$ro_data = array(
+			'est_id' => $camp_id,
+			'adv_id' => $adv_id,
+			'asp' => $asp_id,
+			'est_name' => $ro[0]->name,
+			//'duration' => $ro[0]->duration,
+			'duration' => $duration,
+			'content_id' => $ro[0]->content_id,
+			'package' => $ro[0]->package,
+			'cr_date' => $cr_date,
+			// 'status' => $status,
+			// 'logo_id' => $logoId
+		);
+		 $this->romodel->update_id('ro_reg',$id,$ro_data);
+		// echo $ro_id;
+		// die();
+		$url = base_url() . "ro/ro_generate/" . $id;
+				redirect($url);
+
+
+	}
 	////////////////////////////////////////////////////////////////
 	//////////////////////////
 	function update_discount()

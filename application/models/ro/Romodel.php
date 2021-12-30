@@ -46,6 +46,14 @@ class Romodel extends CI_Model
 		return $this->db->get();
 	}
 
+	function update_get_ro($table,$ro,$ro_data)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->where('ro_id', $ro);
+		$this->db->update($table, $ro_data);
+	}
+
 	function get_releaselist()
 	{
 		$this->db->select('*');
@@ -223,10 +231,16 @@ class Romodel extends CI_Model
 	function update_id($table, $id, $data)
 
 	{
+		
 		$this->db->select('*');
 		$this->db->from($table);
 		$this->db->where('ro_id', $id);
 		$this->db->update($table, $data);
+		
+	// $this->db->get();
+	// echo $this->db->last_query();
+	// return $res;
+	// exit();
 	}
 	function getCampData($id)
 	{

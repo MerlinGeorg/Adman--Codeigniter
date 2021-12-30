@@ -192,12 +192,13 @@
                                                     <option value="">Select Pending Screen</option>
 
                                                 </select>
-
+                                                        
                                             </div>
                                             <input type="text" name="scname" id="scname" style=" display:  none;" />
                                         </div>
-
-
+                                        <a class="js-arrow addrow">
+                                                    <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a>
+                                        <!-- <button name=""  id="" img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></button> -->
 
                                         <div class="col-lg-12 text-center">
                                             <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>

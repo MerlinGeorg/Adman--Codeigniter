@@ -69,7 +69,7 @@
                                         <select class="form-control" id="campId" name="campId" required>
                                             <option value="">Select</option>
                                             <?php foreach ($camp->result() as $rorow) : ?>
-                                                <option value="<?php echo $rorow->est_id;     ?>"><?php echo $rorow->est_name;   ?></option>
+                                                <option value="<?php echo $rorow->est_id;     ?>"><?php echo $rorow->name;   ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                         <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php echo set_value('camp_name') ?>">
