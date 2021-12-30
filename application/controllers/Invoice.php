@@ -183,10 +183,16 @@ class Invoice extends Layout_Controller
 		 {
 
 
-			$ro_id = $this->uri->segment(3);
-			$ro_list['ro_reg'] = $this->invomodel->get_roreglist($ro_id);
+			$invo_id = $this->uri->segment(3);
+		//	$ro_list['ro_reg'] = $this->invomodel->get_roreglist($ro_id);
 
-			$this->load->view('invoice/ro_edit', $ro_list);
+		$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invo_id);
+			// $invo_list['invo_reg'] = $this->invomodel->list_inward_invoices();
+			$invo_list['n_asp'] = $this->invomodel->getasp();
+			$invo_list['n_package'] = $this->invomodel->gettpolicy();
+			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);
+
+			$this->load->view('invoice/inward_invoice_edit', $invo_list);
 		} else 
 		{
 			$this->sess_out();
