@@ -255,10 +255,10 @@
                                     <td>CAMPAIGN DURATION</td>
                                     <td><?php echo $campdata->duration . ' ' . 'Weeks'; ?> </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>CAMPAIGN DURATION</td>
                                     <td> <?php echo $campdata->duration . ' ' . 'Weeks'; ?> </td>
-                                </tr>
+                                </tr> -->
 
 
 

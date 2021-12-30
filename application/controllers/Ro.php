@@ -48,6 +48,7 @@ class Ro extends Layout_Controller
 		$this->load->view('ro/batch_list', $data);
 	}
 
+
 	public function valid_date($date)
 	{
 		$d = DateTime::createFromFormat('Y-m-d', $date);
@@ -239,6 +240,46 @@ class Ro extends Layout_Controller
 			$this->sess_out();
 		}
 	}
+	function ro_update()
+	{
+		
+		$id = $this->input->post('ro_id');
+		// echo $id;
+		// die();
+		$camp_id = $this->input->post('campId');
+		$adv_id = $this->input->post('ro_adv');
+		$asp_id = $this->input->post('aspId');
+		$duration = $this->input->post('duration');
+		// print_r($duration);
+		// die();
+		$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+
+				$ro = $detail->result();
+		$cr_date = date("Y-m-d");
+
+		
+		$ro_data = array(
+			'est_id' => $camp_id,
+			'adv_id' => $adv_id,
+			'asp' => $asp_id,
+			'est_name' => $ro[0]->name,
+			//'duration' => $ro[0]->duration,
+			'duration' => $duration,
+			'content_id' => $ro[0]->content_id,
+			'package' => $ro[0]->package,
+			'cr_date' => $cr_date,
+			// 'status' => $status,
+			// 'logo_id' => $logoId
+		);
+		 $this->romodel->update_id('ro_reg',$id,$ro_data);
+		// echo $ro_id;
+		// die();
+		$url = base_url() . "ro/ro_generate/" . $id;
+				redirect($url);
+
+
+	}
+	////////////////////////////////////////////////////////////////
 	//////////////////////////
 	function update_discount()
 	{
@@ -314,13 +355,19 @@ class Ro extends Layout_Controller
 		echo $encode_data;
 	}
 
+	function get_newpending()
+	{
+		$asp_id = $this->input->post('course_id');
+		$data['newpending'] = $this->romodel->get_newpending('screen', $asp_id);
+		$this->load->view('ro/new_pending', $data);
+	}
+
 	public function oldro_edit()
 
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 
 			$ro_id = $this->uri->segment(3);
-
 			$ro_list['ro_reg'] = $this->romodel->get_roreglist($ro_id);
 
 			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
@@ -358,7 +405,7 @@ class Ro extends Layout_Controller
 			$sc_id = $this->input->post('sc_id');
 			$ro_list =  $this->romodel->updateScreenStatus($sc_id);
 			$encode_data = json_encode($ro_list);
-		echo $encode_data;
+			echo $encode_data;
 		} else {
 			$this->sess_out();
 		}
@@ -371,37 +418,36 @@ class Ro extends Layout_Controller
 			$ro_id = $this->input->post('ro_id');
 			$end_date = $this->input->post('end_date');
 
-				$camp_id  = $this->input->post('campId');
-				$asp_id = $this->input->post('aspId');
+			$camp_id  = $this->input->post('campId');
+			$asp_id = $this->input->post('aspId');
 			//	echo $asp_id;die();
-				$start_date  = $this->input->post('camp_date');
+			$start_date  = $this->input->post('camp_date');
 
-				$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+			$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
 
-				$ro = $detail->result();
-				//print_r($ro);die();
-				$cr_date = date("Y-m-d");
-				$user = $this->input->post('user');
+			$ro = $detail->result();
+			//print_r($ro);die();
+			$cr_date = date("Y-m-d");
+			$user = $this->input->post('user');
 
-				$ro_data = array(
-					'est_id' => $ro[0]->est_id,
-					'adv_id' => $ro[0]->adv_id,
-					'asp' => $ro[0]->asp,
-					'est_name' => $ro[0]->name,
-					'duration' => $this->input->post('duration'),
-					'content_id' => $ro[0]->content_id,
-					'package' => $ro[0]->package,
-					'cr_date' => $cr_date,
-					'status' => 1,
-					'logo_id' => $user
-				);
-				//return $ro_data;
-				//$ro_id = $this->romodel->insert_get_ro($ro_data);
-				$this->romodel->updateoldRo($ro_data, $ro_id);
-				
-				$url = base_url() . "ro/ro_generate/" . $ro_id;
-				redirect($url);
-		
+			$ro_data = array(
+				'est_id' => $ro[0]->est_id,
+				'adv_id' => $ro[0]->adv_id,
+				'asp' => $ro[0]->asp,
+				'est_name' => $ro[0]->name,
+				'duration' => $this->input->post('duration'),
+				'content_id' => $ro[0]->content_id,
+				'package' => $ro[0]->package,
+				'cr_date' => $cr_date,
+				'status' => 1,
+				'logo_id' => $user
+			);
+			//return $ro_data;
+			//$ro_id = $this->romodel->insert_get_ro($ro_data);
+			$this->romodel->updateoldRo($ro_data, $ro_id);
+
+			$url = base_url() . "ro/ro_generate/" . $ro_id;
+			redirect($url);
 		} else {
 			$this->sess_out();
 		}

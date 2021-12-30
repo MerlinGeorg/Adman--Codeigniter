@@ -1,6 +1,12 @@
 <script src="<?php echo base_url() ?>Assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
-<?php //$this->load->view('asp/header_menu.php'); ?>
+<script type="text/javascript">
+    var uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+        var clean_uri = uri.substring(0, uri.indexOf("?"));
+        window.history.replaceState({}, document.title, clean_uri);
+    }
+</script>
 <style>
     .card-header{
         background-color: rgb(71, 163, 243);
@@ -101,13 +107,10 @@
                             <div class="col-lg-4">
                                      <div class="form-group">
                                             <label>ASP Name</label>
-                                            <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
+                                          
                                             <select class="form-control" id="aspId" name="aspId"  >
                                                 <option value="<?php echo $row->asp_id;     ?>"><?php echo $row->asp_name;   ?></option>
-                                                <!-- <?php //foreach ($asp->result() as $rorow): 
-                                                  ?>
-                                              <option value="<?php //echo $rorow->asp_id;     ?>"><?php //echo $rorow->asp_name;   ?></option>
-                                                <?php //endforeach; ?> -->
+                                               
                                                 
                                                 </select>
                                         </div> 
