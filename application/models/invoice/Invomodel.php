@@ -91,8 +91,27 @@ class Invomodel extends CI_Model
 		$this->db->where('status', 1);
 		$this->db->join('adv_reg', 'invoice_reg.adv_id = adv_reg.adv_id', 'inner');
 		$this->db->join('content_reg', 'invoice_reg.content_id = content_reg.con_id', 'inner');
-
+	//	$res=$this->db->get();
 		return $this->db->get();
+//	echo $this->db->last_query();
+	//print_r($res->result());
+//	die();
+	}
+
+	function get_invoreglinelist($id)
+	{
+		$this->db->select('*');
+		$this->db->from('invo_reg_line');
+		$this->db->where('invo_reg_line.invo_reg_lineid', $id);
+		$this->db->where('invo_reg_line.status', 1);
+		$this->db->join('invoice_reg', 'invo_reg_line.invo_id = invoice_reg.invo_id', 'inner');
+		$this->db->join('adv_reg', 'invoice_reg.adv_id = adv_reg.adv_id', 'inner');
+		$this->db->join('content_reg', 'invoice_reg.content_id = content_reg.con_id', 'inner');
+		//$res=$this->db->get();
+		return $this->db->get();
+//	echo $this->db->last_query();
+	//print_r($res);
+//	die();
 	}
 	/////////////////////////////		
 	function getasp()

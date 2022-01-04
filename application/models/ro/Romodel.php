@@ -180,11 +180,22 @@ class Romodel extends CI_Model
 
 	public function get_newpending($table_name, $course_id)
 	{
+		//echo "1";
+	//	exit();
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where('asp', $course_id);
 		$this->db->where('sc_status',0);
 		return $this->db->get();
+		// 	$ro = $this->db->get();
+		// $res = $ro->result();
+		// return $res;
+		// $ro = $this->db->get();
+		// $res = $ro->result();
+	// echo $this->db->last_query();
+		// print_r($res);
+		// die();
+		// return $res;
 	}
 
 	//////////////////////////////////////////////////
@@ -525,7 +536,7 @@ class Romodel extends CI_Model
 		return $query->result();
 	}
 	function updateScreenStatus($id){
-		$this->db->set('sc_status', 1);
+		$this->db->set('sc_status', 2);
 		$this->db->where('sc_id', $id);
 		$this->db->update('screen');
 	}

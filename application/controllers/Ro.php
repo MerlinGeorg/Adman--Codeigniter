@@ -358,8 +358,12 @@ class Ro extends Layout_Controller
 	function get_newpending()
 	{
 		$asp_id = $this->input->post('course_id');
-		$data['newpending'] = $this->romodel->get_newpending('screen', $asp_id);
-		$this->load->view('ro/new_pending', $data);
+		//$data['newpending'] = $this->romodel->get_newpending('screen', $asp_id);
+		//$this->load->view('ro/new_pending', $data);
+		$var=$this->romodel->get_newpending('screen', $asp_id);
+	//	echo "hi";
+		//print_r($var);
+		//echo $var;
 	}
 
 	public function oldro_edit()
@@ -379,7 +383,11 @@ class Ro extends Layout_Controller
 			//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
 			$ro_list['user'] = $this->Settingmodel->list_logo();
 			$ro_list['title'] = "Edit Release Order";
-
+			//print_r(($ro_list['data'][0])->asp_id);
+			//die();
+			$asp_id=($ro_list['data'][0])->asp_id;
+			$ro_list['var']=$this->romodel->get_newpending('screen', $asp_id);
+			
 			$this->data = $ro_list;
 			$this->page = "ro/oldro_edit";
 			$this->layout();

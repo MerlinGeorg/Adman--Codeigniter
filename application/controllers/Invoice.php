@@ -186,7 +186,10 @@ class Invoice extends Layout_Controller
 			$invo_id = $this->uri->segment(3);
 		//	$ro_list['ro_reg'] = $this->invomodel->get_roreglist($ro_id);
 
-		$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invo_id);
+		//$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invo_id);
+		$invo_list['invo_reg'] = $this->invomodel->get_invoreglinelist($invo_id);
+		//print_r($invo_list['invo_reg']);
+
 			// $invo_list['invo_reg'] = $this->invomodel->list_inward_invoices();
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
