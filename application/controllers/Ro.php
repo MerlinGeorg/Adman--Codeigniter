@@ -92,11 +92,11 @@ class Ro extends Layout_Controller
 				$cr_date = date("Y-m-d");
 				//$user = $this->input->post('user');
 				if($scid){
-					$status=1;
+					$status=2;
 					$sc_id = $this->romodel->update_screen($scid);
 				}
 				else{
-					$status=2;
+					$status=1;
 				}
 			//	die();
 				if(!empty($ro)){
@@ -325,6 +325,7 @@ class Ro extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
 			$ro_list['email'] = $this->session->userdata('logged_in')['email'];
+			$ro_list['involist'] =[];
 			$roId = $this->romodel->getRoId();
 			foreach ($roId as $row) {
 
@@ -332,8 +333,11 @@ class Ro extends Layout_Controller
 
 				$ro_list['involist'] = $this->romodel->get_rolist_old($estId->est_id);
 			}
+		//	print_r($ro_list['involist']);
+		//	die();
 			$ro_list['title'] = "Old Release Orders";
-
+//print_r($ro_list);
+//die();
 			$this->data = $ro_list;
 			$this->page = "ro/old_list";
 			$this->layout();
@@ -358,8 +362,12 @@ class Ro extends Layout_Controller
 	function get_newpending()
 	{
 		$asp_id = $this->input->post('course_id');
-		$data['newpending'] = $this->romodel->get_newpending('screen', $asp_id);
-		$this->load->view('ro/new_pending', $data);
+		//$data['newpending'] = $this->romodel->get_newpending('screen', $asp_id);
+		//$this->load->view('ro/new_pending', $data);
+		$var=$this->romodel->get_newpending('screen', $asp_id);
+	//	echo "hi";
+		//print_r($var);
+		//echo $var;
 	}
 
 	public function oldro_edit()
@@ -379,7 +387,11 @@ class Ro extends Layout_Controller
 			//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
 			$ro_list['user'] = $this->Settingmodel->list_logo();
 			$ro_list['title'] = "Edit Release Order";
-
+			//print_r(($ro_list['data'][0])->asp_id);
+			//die();
+			$asp_id=($ro_list['data'][0])->asp_id;
+			$ro_list['var']=$this->romodel->get_newpending('screen', $asp_id);
+			
 			$this->data = $ro_list;
 			$this->page = "ro/oldro_edit";
 			$this->layout();

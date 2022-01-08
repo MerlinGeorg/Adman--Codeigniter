@@ -76,6 +76,8 @@
                                         <div style="color: red;"><?php echo form_error('camp_name'); ?></div> -->
                                     </div>
                                 </div>
+                                
+
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Duration</label>
@@ -98,7 +100,19 @@
                                         <div style="color: red;"><?php echo form_error('content_name'); ?></div>
                                     </div>
                                 </div>
-
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>ASP</label>
+                                        <select class="form-control" id="aspId" name="aspId" required>
+                                            <option value="">Select</option>
+                                            <?php foreach ($asp->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->asp_id;     ?>"><?php echo $rorow->asp_name;   ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php echo set_value('camp_name') ?>">
+                                        <div style="color: red;"><?php echo form_error('camp_name'); ?></div> -->
+                                    </div>
+                                </div>
 
 
                                 <div class="col-lg-12 text-center">

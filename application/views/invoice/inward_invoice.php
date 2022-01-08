@@ -74,7 +74,7 @@
                                                 <!-- <td><?php //echo $estrow->content_id; 
                                                             ?></td> -->
                                                 <td><?php echo $estrow->content_name; ?></td>
-                                                <td><a href="<?php echo site_url('invoice/invoice_inward_edit') . '/' . $estrow->ro_id;; ?>" target="_blank"><i class="fas fa-edit"></i></a>
+                                                <td><a href="<?php echo site_url('invoice/invoice_inward_edit') . '/' . $estrow->inward_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
                                                 </td>
                                             </tr>
                                         <?php } ?>

@@ -387,6 +387,7 @@ foreach ($logo->result() as $row) {  ?>
                                 <tbody>
                                     <?php $i = 0;
                                     foreach ($involineedit->result() as $estlrow) {
+                                      
                                         $i++; ?>
                                         <tr>
                                             <!-- <form method="post" action="<?php echo site_url('invoice/row_del'); ?>" >

@@ -188,7 +188,7 @@
 
                                             <div class="form-group" id="output_batch">
                                                 <!-- <label>Select Pending Screen</label> -->
-                                                <select class="form-control" id="newpending" name="newpending" onChange="outputscreen(this.value)">
+                                                <select class="form-control" id="newpending" name="newpending" onChange="outputscreen(this)">
 
                                                     <option value="">Select Pending Screen</option>
                                                     <?php
@@ -205,7 +205,7 @@
                                             <input type="text" name="scname" id="scname" style=" display:  none;" />
                                         </div>
 
-                                        <button class="js-arrow addrow" name="remove"  id="pendingscreen_id" onclick="removeScreen(this.value)"><img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></button>
+                                        <button class="js-arrow addrow" name="remove"  id="pendingscreen_id" onclick="removeScreen(this)"><img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></button>
                                         <!-- <a class="js-arrow addrow">
                                                     <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a> -->
                                         
@@ -244,44 +244,110 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-  
-  function getData() {
+    // body.onload = function() {
+    // $(window).on('load', function() {
 
-//   $(window).on('load', function() {
-$('#camp_date').datepicker({
-    autoclose: true,
-    showOnFocus: true,
-    todayHighlight: true,
-    format: "yyyy-mm-dd",
-    startDate: new Date("<?= date('Y-m-d') ?>")
-}).on('changeDate', function(e) {
-    var endDate = new Date(Date.parse(e.date));
-    endDate.setDate(endDate.getDate() + parseInt($('#duration').val()));
-    $('#end_date').val(formatDate(endDate));
-});
+    function getData() {
+
+        //   $(window).on('load', function() {
+        $('#camp_date').datepicker({
+            autoclose: true,
+            showOnFocus: true,
+            todayHighlight: true,
+            format: "yyyy-mm-dd",
+            startDate: new Date("<?= date('Y-m-d') ?>")
+        }).on('changeDate', function(e) {
+            var endDate = new Date(Date.parse(e.date));
+            endDate.setDate(endDate.getDate() + parseInt($('#duration').val()));
+            $('#end_date').val(formatDate(endDate));
+        });
 
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
 
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
 
-    return [year, month, day].join('-');
+            return [year, month, day].join('-');
+        }
+        //}
+    }
+
+
+    var campId = $('#campId').val();
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        data: {
+            camp_id: campId
+        },
+        url: "<?php echo site_url('ro/get_camdata') ?>",
+        success: function(response) {
+            // console.log(response);
+            $('#camp_date').val(response[0]['est_cr_date']);
+            //   $('#ro_adv').val(response[0]['adv_name']);    
+            // $('#ro_asp').val(response[0]['asp_name']);    
+            $('#duration').val(response[0]['duration']);
+            $('#aspId').empty();
+            var option = "";
+            $.each(response['asp'], function(index) {
+                var Id = response['asp'][index].asp_id;
+                var aspname = response['asp'][index].asp_name;
+                option += '<option value="' + Id + '">' + aspname + '</option>';
+            });
+            $('#aspId').append('<option value="">Select</option>' + option);
+
+        }
+
+    });
+
+
+
+    function outputValue(item) {
+
+        document.getElementById('aspname').value = e = item.options[item.selectedIndex].text;
+
+        // document.getElementById('adv_id').value = item.value;
+
+    }
+
+    
+    function pendingscreen_id(data) {
+        // var p=
+    //    alert(data);
+        $('#pendingscreen_id').html(data);
+// document.getElementById('scname').value = e = screen.options[screen.selectedIndex].text;
+// alert(data);
+
 }
-//}
-} 
+
+    function get_newpending() {
+
+         $.ajax({
+            type: "post",
+            data: {
+                course_id: $('#aspId').val(),
+            },
+            url: "<?php echo site_url('ro/get_newpending') ?>",
+            success: function(var) {
+//alert(var);
+//die();
+                $('#output_batch').html(data);
+            }
+        }); 
+        // $('#screendiv').show();
+    }
+
 
     function removeScreen(sc_id) {
-         //  var sc= $('#pendingscreen_id').val();
-
-         //    alert(sc);
-        // alert(sc_id);
+           var sc= $('#pendingscreen_id').val();
+            // alert(sc);
         // alert('hi');
         $.ajax({
             method: "POST",
@@ -305,23 +371,29 @@ function formatDate(date) {
             }
         });
     }
-    function outputscreen(screen) {
-//alert("hi");
+    // $('#ad_date').datepicker();
+
+
+
+    //$('#campId').change(function(){
+
+    //  });
+    $(document).ready(function() {
+
+
+        function outputscreen(screen) {
+alert("hi");
         //document.getElementById('scname').value = e = screen.options[screen.selectedIndex].text;
       //  alert(document.getElementById('scname'));
-    //  $sc=document.getElementById('newpending');//[object HTMLSelectElement]
-     // $sc=document.getElementById('scname');//[object HTMLInputElement]
-
-     // alert($sc);
-   //  alert(screen);
-      $('#pendingscreen_id').val(screen);
+      $sc=document.getElementById('scname').value();
+      alert($sc);
+      $('#pendingscreen_id').val($sc);
     }
-    
-    $(document).ready(function() {
-        //alert("hello");
 
-        
-
+        /* $('#campId').on('change',function(){
+       
+    });
+ */
         $('#ad_date').datepicker({
             autoclose: true,
             showOnFocus: true,
