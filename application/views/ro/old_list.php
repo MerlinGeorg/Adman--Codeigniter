@@ -59,6 +59,9 @@
                                     </thead>
                                     <tbody>
       <?php 
+     /*  print_r($involist);
+      die(); */
+      if(!empty($involist)){
        if(!empty($involist->result())){
 
     //   echo"<pre>";print_r($involist->result());exit;
@@ -77,7 +80,8 @@
                                        <td><a href="<?php echo site_url('ro/oldro_edit').'/'.$estrow->ro_id ; ?>"><i class="fas fa-edit"></i></a>
                                     </tr>
 	  <?php }
-    } ?>
+    }
+ } ?>
                                         
                                      
                                                                           </tbody>

@@ -6,9 +6,9 @@ class Invomodel extends CI_Model
 	function insert_inward_invoice($table, $data)
 	{
 		$this->db->insert($table, $data);
-		return $this->db->get();
-		
-
+		//return $this->db->get();
+		$insertId =$this->db->insert_id();
+		return $insertId;
 	}
 
 	function get_ro_re_list($camp_id)
@@ -23,6 +23,7 @@ class Invomodel extends CI_Model
 		return $var;
 		
 	}
+
 
 
 	function get_adv_list($adv_name)
@@ -102,16 +103,23 @@ class Invomodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('invo_reg_line');
-		$this->db->where('invo_reg_line.invo_reg_lineid', $id);
+	//	$this->db->where('invo_reg_line.invo_reg_lineid', $id);
+	$this->db->where('invo_reg_line.inward_id', $id);
 		$this->db->where('invo_reg_line.status', 1);
-		$this->db->join('invoice_reg', 'invo_reg_line.invo_id = invoice_reg.invo_id', 'inner');
+		/* $this->db->join('invoice_reg', 'invo_reg_line.invo_id = invoice_reg.invo_id', 'inner');
+		
 		$this->db->join('adv_reg', 'invoice_reg.adv_id = adv_reg.adv_id', 'inner');
-		$this->db->join('content_reg', 'invoice_reg.content_id = content_reg.con_id', 'inner');
-		//$res=$this->db->get();
+	$this->db->join('content_reg', 'invoice_reg.content_id = content_reg.con_id', 'inner'); */
+	 $this->db->join('inward_invoice', 'invo_reg_line.inward_id = inward_invoice.inward_id', 'inner');
+	$this->db->join('adv_reg', 'inward_invoice.adv_id = adv_reg.adv_id', 'inner');
+	//$this->db->join('content_reg', 'inward_invoice.content_id = content_reg.con_id', 'inner'); 
+		//$this->db->get();
 		return $this->db->get();
-//	echo $this->db->last_query();
-	//print_r($res);
-//	die();
+	 // $res=$this->db->get();
+	 // echo $this->db->last_query();
+	// echo '<pre>';
+	// print_r($res);
+	// die();  
 	}
 	/////////////////////////////		
 	function getasp()
@@ -141,6 +149,8 @@ class Invomodel extends CI_Model
 
 	{
 		$this->db->insert($table, $data);
+	//	echo $this->db->last_query();
+	//	exit();
 		$insertId = $this->db->insert_id();
 		return  $insertId;
 	}
@@ -149,12 +159,18 @@ class Invomodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('invo_reg_line');
+		//$this->db->where('invo_reg_lineid', $id);
 		$this->db->where('invo_id', $id);
 		$this->db->join('asp', 'invo_reg_line.asp = asp.asp_id', 'inner');
 		$this->db->join('screen', 'invo_reg_line.screen = screen.sc_id', 'inner');
 		$this->db->join('time_policy', 'invo_reg_line.package = time_policy.tpc', 'inner');
 		$this->db->order_by("sc_name");
 		return $this->db->get();
+//	$res=$this->db->get();
+//	 echo $this->db->last_query();
+	//echo '<pre>';
+	//print_r($res);
+	//die();
 	}
 	function did_delete_row($rid)
 
@@ -201,7 +217,7 @@ class Invomodel extends CI_Model
 		$this->db->update('invoice_reg');
 	}
 	////////////////////////
-	function	get_packdate($packid)
+	function get_packdate($packid)
 	{
 
 		$this->db->select('days');
@@ -280,5 +296,82 @@ class Invomodel extends CI_Model
 		$this->db->set('status', 2);
 		$this->db->where('ro_id', $id);
 		$this->db->update('ro_line');
+	}
+
+	function inward_involine_edit($id)
+	{
+		$this->db->select('*');
+		$this->db->from('invo_reg_line');
+		$this->db->where('inward_id', $id);
+		$this->db->join('asp', 'invo_reg_line.asp = asp.asp_id', 'inner');
+		$this->db->join('screen', 'invo_reg_line.screen = screen.sc_id', 'inner');
+		$this->db->join('time_policy', 'invo_reg_line.package = time_policy.tpc', 'inner');
+		$this->db->order_by("sc_name");
+	//	$this->db->get();
+				return $this->db->get();
+//	$res=$this->db->get();
+	// echo $this->db->last_query();
+	//echo '<pre>';
+	//print_r($res);
+	//die();
+	}
+
+    function getAspInRoreg(){
+		$this->db->select('*');
+		$this->db->from('asp');
+		$this->db->join('ro_reg','asp.asp_id=ro_reg.asp','inner');
+		return $this->db->get();
+	}
+
+	function getCampaignInRoreg(){
+		$this->db->select('*');
+		$this->db->from('est_reg');
+		$this->db->where('est_reg.status', 2);
+		$this->db->join('ro_reg','est_reg.est_id=ro_reg.est_id','inner');
+		$this->db->order_by("est_reg.est_id", "desc");
+		return $this->db->get();
+	//	$r=$this->db->get();
+		//echo $this->db->last_query();
+		//print_r($r->result());
+		//exit();
+	}
+
+	function getDataByInwardId($id){
+		$this->db->select('ro_id');
+		$this->db->from('inward_invoice');
+		$this->db->where('inward_id',$id);
+		// return $this->db->row();
+		return $this->db->get();
+		// $r=$this->db->get();
+	//	$this->db->get();
+	//	 echo $this->db->last_query();
+	//return $r->result();
+		// print_r($r->result()[0]);
+		// exit();
+
+
+	}
+
+	function inward_getData($id){
+		$this->db->select('invo_reg_lineid');
+		$this->db->from('invo_reg_line');
+		$this->db->where('inward_id',$id);
+		// return $this->db->row();
+		return $this->db->get();
+	//$this->db->get();
+	//echo $this->db->last_query();
+	//	die();
+	}
+
+	function getRoPackage($id){
+	//	print_r($id);
+	//	die();
+		$this->db->select('package');
+		$this->db->from('ro_reg');
+		$this->db->where('ro_id',$id);
+		return $this->db->get();
+		// $this->db->get();
+		// echo $this->db->last_query();
+	//	 die();
 	}
 }

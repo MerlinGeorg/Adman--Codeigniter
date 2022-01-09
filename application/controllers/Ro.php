@@ -92,11 +92,11 @@ class Ro extends Layout_Controller
 				$cr_date = date("Y-m-d");
 				//$user = $this->input->post('user');
 				if($scid){
-					$status=1;
+					$status=2;
 					$sc_id = $this->romodel->update_screen($scid);
 				}
 				else{
-					$status=2;
+					$status=1;
 				}
 			//	die();
 				if(!empty($ro)){
@@ -325,6 +325,7 @@ class Ro extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$ro_list['username'] = $this->session->userdata('logged_in')['username'];
 			$ro_list['email'] = $this->session->userdata('logged_in')['email'];
+			$ro_list['involist'] =[];
 			$roId = $this->romodel->getRoId();
 			foreach ($roId as $row) {
 
@@ -332,8 +333,11 @@ class Ro extends Layout_Controller
 
 				$ro_list['involist'] = $this->romodel->get_rolist_old($estId->est_id);
 			}
+		//	print_r($ro_list['involist']);
+		//	die();
 			$ro_list['title'] = "Old Release Orders";
-
+//print_r($ro_list);
+//die();
 			$this->data = $ro_list;
 			$this->page = "ro/old_list";
 			$this->layout();

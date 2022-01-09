@@ -27,7 +27,7 @@
     <?php
     if (!empty($invo_reg->result())) {
         foreach ($invo_reg->result() as $estrow) {
-        }
+        }//var_dump($estrow->invo_reg_lineid);
     ?>
         <div id="printthis">
             <div class="container-fluid">
@@ -295,7 +295,7 @@
                                                     <div><strong>Content Name:</strong>
                                                         <?php echo $contentname = $estrow->content_name ?><br></div>
                                                     <div><strong>Campaign Name:</strong>
-                                                        <?php echo $campname = $estrow->est_name; ?><br></div>
+                                                        <?php echo $campname = $estrow->camp_name; ?><br></div>
 
                                                     <div><strong>Content Duration:</strong>
                                                         <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
@@ -320,8 +320,8 @@
 
 
 
-                                        <form method="post" action="<?php echo site_url('invoice/nr_involine'); ?>">
-                                            <input style="display:none;" type="number" name="nr_invoid" value="<?php echo $estrow->invo_id; ?>">
+                                        <form method="post" action="<?php echo site_url('invoice/inward_involine'); ?>">
+                                            <input style="display:none;" type="number" name="nr_invoid" value="<?php echo $estrow->inward_id; ?>">
                                             <input style="display:none;" type="number" name="nr_estid" value="<?php echo $estrow->est_id; ?>">
                                             <input style="display:none;" name="nr_duration" value="<?php echo $estrow->duration;  ?>">
                                             <input style="display:none;" name="nr_screen" value="1" id="scrval">
@@ -332,7 +332,7 @@
                                                         <div class="form-group">
                                                             <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
 
-                                                                <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                                               <?php foreach ($n_asp->result() as $nasprow) {//print_r($nasprow);  ?>
                                                                     <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
                                                                 <?php } ?>
@@ -442,7 +442,7 @@
 
                                                             <td class="d-print-none addrow">
                                                                 </form>
-                                                                <a class="js-arrow d-print-none" href="<?php echo site_url('invoice/row_del') ?>?var1=<?php echo $estlrow->invo_reg_lineid; ?>&var2=<?php echo  $estlrow->invo_id; ?>">
+                                                                <a class="js-arrow d-print-none" href="<?php echo site_url('invoice/inward_row_del') ?>?var1=<?php echo $estlrow->invo_reg_lineid; ?>&var2=<?php echo  $estlrow->inward_id; ?>">
                                                                     <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a>
                                                             </td>
                                                             </td>
@@ -467,6 +467,7 @@
                                     $i = 0;
 
                                     foreach ($involineedit->result() as $estlrow) {
+                                     //   print_r($estlrow);
                                         $i++;
 
                                         $pram = $estlrow->price;

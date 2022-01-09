@@ -185,7 +185,7 @@ class Romodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where('asp', $course_id);
-		$this->db->where('sc_status',0);
+		$this->db->where('sc_status',2);
 		return $this->db->get();
 		// 	$ro = $this->db->get();
 		// $res = $ro->result();
@@ -383,6 +383,9 @@ class Romodel extends CI_Model
 		$this->db->group_by("A.adv_name");
 		$this->db->order_by("A.adv_name");
 		return $this->db->get();
+	//$this->db->get();
+	//echo $this->db->last_query();
+	//die();
 	}
 	//////////////////////////////////////
 	function get_roasplist($id)
@@ -511,7 +514,7 @@ class Romodel extends CI_Model
 
 	public function update_screen($sc_id)
 	{
-		$this->db->set('sc_status', 0);
+		$this->db->set('sc_status', 2);
 		$this->db->where('sc_id', $sc_id);
 		$this->db->update('screen');
 	}
@@ -536,7 +539,7 @@ class Romodel extends CI_Model
 		return $query->result();
 	}
 	function updateScreenStatus($id){
-		$this->db->set('sc_status', 2);
+		$this->db->set('sc_status', 1);
 		$this->db->where('sc_id', $id);
 		$this->db->update('screen');
 	}
