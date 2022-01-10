@@ -290,9 +290,9 @@ class Settings extends Layout_Controller
 				
 			
 			}
-			return redirect('settings');
-			//	$url = 'settings';
-			//	echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
+			//return redirect('settings');
+				$url = 'settings';
+				echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		}
 		else {
 			$this->sess_out();
