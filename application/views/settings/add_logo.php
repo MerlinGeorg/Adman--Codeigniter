@@ -81,8 +81,8 @@
                                 </div>
                                 <div class="col-lg-6 ">
                                     <div class="form-group">
-                                        <label>CSTIN</label>
-                                        <input class="form-control" name="cstin" id="cstin" type="text" placeholder="Enter CSTIN">
+                                        <label>GSTIN</label>
+                                        <input class="form-control" name="gstin" id="gstin" type="text" placeholder="Enter GSTIN">
                                     </div>
                                 </div>
 

@@ -10,6 +10,7 @@ class Invoice extends Layout_Controller
 		$this->load->model('invoice/invomodel');
 		$this->load->model('camp/campmodel');
 		$this->load->model('ro/romodel');
+		$this->load->model('settingmodel/Settingmodel');
 		$this->load->library('numbertowords');
 	}
 
@@ -33,6 +34,7 @@ class Invoice extends Layout_Controller
 			$invodata['camp'] = $this->invomodel->getCampaignInRoreg();
 			$invodata['asp'] = $this->invomodel->getAspInRoreg();
 			$invodata['adv'] = $this->campmodel->getadv();
+			$invodata['user'] = $this->Settingmodel->list_logo();
 			$invodata['title'] = "Create Inward Invoices";
 			$invodata['msg'] = 0;
 			$this->data = $invodata;
@@ -56,11 +58,12 @@ class Invoice extends Layout_Controller
 				$adv_name = $this->input->post('ro_adv');
 				$adv_id = $this->invomodel->get_adv_list($adv_name);
 				$asp_id = $this->input->post('aspId');
-
-				// print_r($aspName);
+				$user = $this->input->post('user');
+				// print_r($user);
 				// die();
 				$invo_data = array(
 					'ro_id' => $camp_name->ro_id,
+					'logo_id' => $user,
 					'adv_id' => $adv_id->adv_id,
 					'camp_id' => $camp_id,
 					'asp' => $asp_id,
@@ -144,6 +147,7 @@ class Invoice extends Layout_Controller
 			$invodata['asp'] = $this->invomodel->getAspInRoreg();
 			// $invodata['camp'] = $this->romodel->get_ro_reg_list();
 			$invodata['adv'] = $this->campmodel->getadv();
+			$invodata['user'] = $this->Settingmodel->list_logo();
 			$invodata['title'] = "Create Inward Invoices";
 
 			$this->data = $invodata;

@@ -216,7 +216,7 @@
                         <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
                         <script type='text/javascript'></script>
                         <div class="card-header">
-                            <h5>INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></strong>
+                        <center><h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></center></strong>
 
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
@@ -285,13 +285,12 @@ foreach ($logo->result() as $row) {  ?>
                                     <div>
 
 
-                                        <div><strong>Est Date:</strong>
+                                        <div><strong>Invoice Date:</strong>
                                             <?php echo $est_date = $estrow->cr_date; ?><br></div>
+                                            <div><strong>Campaign Name:</strong>
+                                            <?php echo $campname = $estrow->est_name; ?><br></div>
                                         <div><strong>Content Name:</strong>
                                             <?php echo $contentname = $estrow->content_name ?><br></div>
-                                        <div><strong>Campaign Name:</strong>
-                                            <?php echo $campname = $estrow->est_name; ?><br></div>
-
                                         <div><strong>Content Duration:</strong>
                                             <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
                                         <div><strong>Position</strong>

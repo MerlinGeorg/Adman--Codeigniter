@@ -217,7 +217,7 @@
                         <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
                         <script type='text/javascript'></script>
                         <div class="card-header">
-                            <h5>INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->est_id; ?></strong>
+                            <center><h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->est_id; ?></center></strong>
 
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
@@ -301,7 +301,7 @@
 
 
 
-                                    <div><strong>Est Date:</strong>
+                                    <div><strong>Invoice Date:</strong>
                                         <?php echo $est_date = $estrow->est_cr_date; ?><br></div>
                                     <!-- <div><strong>Content Name:</strong>
                         <?php echo $contentname = $estrow->content_name ?><br></div>
@@ -369,8 +369,9 @@
 
 
                                             </div>
-                                            <input style="width: 40%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -34px;">Add Row</button>
+                                            <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
+                                            <br><br>
+                                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
                                         </div>
                                     </div>
 
@@ -407,7 +408,10 @@
                                             $i++; ?>
                                             <td class="center"><?php echo $estlrow->asp_name; ?></td>
                                             <td class="left"><?php echo $estlrow->sc_name; ?></td>
-                                            <td class="left"><?php echo $estlrow->tp_name; ?></td>
+                                            <td class="left"><?php echo $estlrow->tp_name; ?>
+                                             <!-- <?php echo $invo_sdate = $estlrow->start_date; ?></br>
+                                             <?php echo $invo_edate = $estlrow->end_date; ?></br> -->
+                                        </td>
                                             <td class="center"><?php echo $estlrow->price; ?></td>
                                             <td class="center">
                                                 <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
