@@ -100,7 +100,18 @@
                                         <div style="color: red;"><?php echo form_error('content_name'); ?></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select class="form-control" id="user" name="user" required>
+                                            <option value="">Select</option>
+                                            <?php foreach ($user->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->logo_id;     ?>"><?php echo $rorow->company_name;   ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ASP</label>
                                         <select class="form-control" id="aspId" name="aspId" required>
@@ -113,8 +124,7 @@
                                         <div style="color: red;"><?php echo form_error('camp_name'); ?></div> -->
                                     </div>
                                 </div>
-
-
+                                
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn mt-4 btn-submit" style="width: 230px">Save</button>
                                 </div>

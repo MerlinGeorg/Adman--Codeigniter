@@ -221,7 +221,7 @@
                             <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
                             <script type='text/javascript'></script>
                             <div class="card-header">
-                                <h5>INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></strong>
+                            <center><h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></center></strong>
 
                                 <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                     <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
@@ -290,14 +290,15 @@
                                                 <div>
 
 
-                                                    <div><strong>Est Date:</strong>
+                                                    <div><strong>Invoice Date  :</strong>&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <?php echo $est_date = $estrow->cr_date; ?><br></div>
-                                                    <div><strong>Content Name:</strong>
-                                                        <?php echo $contentname = $estrow->content_name ?><br></div>
-                                                    <div><strong>Campaign Name:</strong>
+                                                        <div><strong>Campaign Name :</strong>&nbsp;
                                                         <?php echo $campname = $estrow->camp_name; ?><br></div>
-
-                                                    <div><strong>Content Duration:</strong>
+                                                    <div><strong>Content Name      :</strong>&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;
+                                                        <?php echo $contentname = $estrow->content_name ?><br></div>
+                                                    <div><strong>Content Duration:</strong>&nbsp;
                                                         <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
                                                     <div><strong>Position</strong>
                                                         <?php echo $WF = $estrow->play; ?>
@@ -375,9 +376,9 @@
 
                                                         <th><strong>ASP</strong></td>
                                                         <th class="text-center"><strong>SCREEN</strong></td>
-                                                        <th class="text-center"><strong>Package</strong></td>
+                                                        <th class="text-left"><strong>Package</strong></td>
                                                         <th class="text-center"><strong>Rate</strong></td>
-                                                        <th class="text-right"><strong>Amount</strong></td>
+                                                        <th class="text-center"><strong>Amount</strong></td>
                                                         <th class="text-left"><strong>Discount</strong></td>
                                                         <th class="text-center"><strong>IGST</strong></td>
                                                         <th class="text-center"><strong>CGST</strong></td>
@@ -400,31 +401,31 @@
                   <td class="text-left"><button type="submit" class="btn btn-warning">Remove</button></td></form> -->
                                                             <td class="text-left"><?php echo $estlrow->asp_name; ?></td>
                                                             <td class="text-center"><?php echo $estlrow->sc_name; ?></td>
-                                                            <td class="text-right"><?php echo $duration = $estlrow->tp_name; ?></br>
+                                                            <td class="text-left"><?php echo $duration = $estlrow->tp_name; ?></br>
                                                                 <?php echo $invo_sdate = $estlrow->start_date; ?></br>
                                                                 <?php echo $invo_edate = $estlrow->end_date; ?></br>
                                                             </td>
-                                                            <td class="text-right"><?php echo $estlrow->price; ?></td>
-                                                            <td class="text-right">
+                                                            <td class="text-center"><?php echo $estlrow->price; ?></td>
+                                                            <td class="text-center">
                                                                 <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
                                                             <td class="text-left">
 
                                                                 <?php echo $dis = $estlrow->discount; ?>%</br>
                                                                 <?php echo $x = ($amount * $dis) / 100; ?></br><?php echo $y = $amount - $x; ?>
                                                             </td>
-                                                            <td class="text-right"><?php echo $igst = $estlrow->igst; ?>%</br>
+                                                            <td class="text-center"><?php echo $igst = $estlrow->igst; ?>%</br>
                                                                 <?php echo $igst_val = ($y * $igst) / 100; ?></br>
 
                                                             </td>
-                                                            <td class="text-right"><?php echo $cgst = $estlrow->cgst; ?>%</br>
+                                                            <td class="text-center"><?php echo $cgst = $estlrow->cgst; ?>%</br>
                                                                 <?php echo $cgst_val = ($y * $cgst) / 100; ?>
                                                             </td>
-                                                            <td class="text-right"><?php echo $sgst = $estlrow->sgst; ?>%</br>
+                                                            <td class="text-center"><?php echo $sgst = $estlrow->sgst; ?>%</br>
                                                                 <?php echo $sgst_val = ($y * $sgst) / 100; ?></td>
-                                                            <td class="text-right"><?php echo $ltax = $estlrow->local_tax; ?>%</br>
+                                                            <td class="text-center"><?php echo $ltax = $estlrow->local_tax; ?>%</br>
                                                                 <?php echo $ltax_val = ($y * $ltax) / 100; ?></td>
 
-                                                            <td class="text-right" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
+                                                            <td class="text-center" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
                                                             <!-- <td class="text-left" style="width: 1px;">
                                                 <form method="post">
                                                     <input name="pk" value="<?php echo $estlrow->package; ?>" style="display :none ;">
