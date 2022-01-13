@@ -218,6 +218,7 @@ class Invoice extends Layout_Controller
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);
+			$invo_list['logo']  = $this->campmodel->getLogo($invo_id);
 			$this->load->view('invoice/invoice_edit', $invo_list);
 		} else {
 			$this->sess_out();
