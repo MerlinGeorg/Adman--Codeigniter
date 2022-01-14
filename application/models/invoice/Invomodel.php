@@ -374,4 +374,21 @@ class Invomodel extends CI_Model
 		// echo $this->db->last_query();
 	//	 die();
 	}
+
+	function getinward_logo($id)
+	{
+		$this->db->select('I.logo_id,l.*,a.*');
+		$this->db->from('inward_invoice I');
+		$this->db->join('adman_logo l', 'I.logo_id = l.logo_id');
+		$this->db->join('adman_company_address a', 'l.logo_id = a.logo_id');
+		$this->db->where('I.inward_id',$id);
+		return $this->db->get();
+		// $ro = $this->db->get();
+		//$res = $ro->result();
+		//return $res; 
+		/* $this->db->get();
+		echo $this->db->last_query();
+		 die(); */
+
+	}
 }

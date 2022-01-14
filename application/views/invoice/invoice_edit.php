@@ -234,8 +234,8 @@
                         ?>
 
 <?php 
-if(!empty($logo)){
-foreach ($logo->result() as $row) {  ?>
+// if(!empty($logo)){
+foreach ($logo as $row) {  ?>
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-sm-8 address2">
@@ -262,7 +262,7 @@ foreach ($logo->result() as $row) {  ?>
                                         <!-- <div>New York City, New york, 10394</div> -->
                                          <div>Email:<?php echo  $row->email; ?></div>
                                         <div>Phone: <?php echo $row->phone; 
-                                        }
+                                        
                                         ?></div> 
                                     </div>
                                 </div>
