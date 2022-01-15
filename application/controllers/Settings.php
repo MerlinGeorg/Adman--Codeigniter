@@ -241,12 +241,12 @@ class Settings extends Layout_Controller
 				$address['sac_code	'] = $this->input->post('sac');
 				$address['des_service	'] = $this->input->post('des');
 
-
-				if (empty($_FILES['image_file']['name'])) {
-					$img = $this->Settingmodel->get_data($logoId);
+				$img = $this->Settingmodel->get_data($logoId);
 
 					$im = $img->result()[0];
 					$fillimg = $im->logo_name;
+				if (empty($_FILES['image_file']['name'])) {
+					
 					$fileName = $new_name = $fillimg;
 				} else {
 
