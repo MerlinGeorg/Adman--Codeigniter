@@ -83,9 +83,10 @@ class Ro extends Layout_Controller
 			//	$start_date  = $this->input->post('camp_date');
 
 
-				$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+			//	$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+			$ro = $this->romodel->get_campData($camp_id);
 
-				$ro = $detail->result();
+			//	$ro = $detail->result();
 			//	$scid = $this->input->post('batch');
 			//	echo $scid;
 			
@@ -99,22 +100,25 @@ class Ro extends Layout_Controller
 					$status=1;
 				}
 			//	die();
+		//	print_r($ro['est_id']);
+		//	die();
 				if(!empty($ro)){
 
 				$ro_data = array(
-					'est_id' => $ro[0]->est_id,
-					'adv_id' => $ro[0]->adv_id,
-					'asp' => $ro[0]->asp,
-					'est_name' => $ro[0]->name,
+					'est_id' => $ro->est_id,
+					'adv_id' => $ro->adv_id,
+					'asp' => $ro->asp,
+					'est_name' => $ro->name,
 					//'duration' => $ro[0]->duration,
 					'duration' => $duration,
-					'content_id' => $ro[0]->content_id,
-					'package' => $ro[0]->package,
+					'content_id' => $ro->content_id,
+					'package' => $ro->package,
 					'cr_date' => $cr_date,
 					'status' => $status,
 					'logo_id' => $logoId
 				);
-				//return $ro_data;
+			//	print_r($ro_data);
+			//	exit();
 				$ro_id = $this->romodel->insert_get_ro($ro_data);
 				
 			
@@ -160,7 +164,7 @@ class Ro extends Layout_Controller
 				redirect($url);
 	}
 	$url = base_url() . "ro/create_ro/";
-				redirect($url);
+				redirect($url); 
 			}
 
 			//	$url = 'ro/ro_generate/'.$ro_id;
@@ -172,11 +176,20 @@ class Ro extends Layout_Controller
 
 	public function ro_generate($invoiceId)
 	{
+		/* echo "hi";
+		die(); */
 		$adsdata =  $this->romodel->adscontact($invoiceId);
 		$data['advaddr'] = $adsdata;
 		$campid =  $adsdata->est_id;
-		$data['campdata'] = $this->romodel->campdata($campid);
-		$data['screens']  = $this->romodel->get_screens($campid);
+		$campdata=$this->romodel->get_campData($campid);
+		$data['campdata'] = $campdata;
+		$contentId=$campdata->content_id;
+		$data['content'] = $this->romodel->getContentById($contentId);
+	//	$data['screens']  = $this->romodel->get_screens($campid);
+	$asp=$adsdata->asp;
+	$data['screens']  = $this->romodel->get_screensByAsp($asp);
+	//$data['estedit'] = $this->campmodel->get_estedit($campid);
+	$data['estlineedit'] = $this->campmodel->get_estline_edit($campid);
 		$data['logo']  = $this->romodel->getLogo($invoiceId);
 		$this->load->view('ro/ro_invoice', $data);
 	}
@@ -252,7 +265,7 @@ class Ro extends Layout_Controller
 		$duration = $this->input->post('duration');
 		// print_r($duration);
 		// die();
-		$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+		$detail = $this->romodel->get_campData($camp_id, $asp_id);
 
 				$ro = $detail->result();
 		$cr_date = date("Y-m-d");

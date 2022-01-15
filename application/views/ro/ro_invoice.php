@@ -212,7 +212,7 @@
                     <?php
                     $originalDate = $advaddr->est_cr_date;
                     $newDate = date("d/m/Y", strtotime($originalDate));
-
+                    
                     ?>
 
 
@@ -233,7 +233,7 @@
                             <tbody>
                                 <tr>
                                     <td>PRODUCT NAME</td>
-                                    <td style="padding-right: 113px;"><?php echo $adv_name = $advaddr->name; ?> </td>
+                                    <td style="padding-right: 113px;"><?php echo $content->content_name; ?> </td>
                                 </tr>
                                 <tr>
                                     <td>COMMENCING DATE</td>
@@ -245,7 +245,7 @@
                                 </tr>
                                 <tr>
                                     <td>CONTENT TYPE</td>
-                                    <td> Live Ad </td>
+                                    <td> <?php echo $content->content_type; ?></td>
                                 </tr>
                                 <tr>
                                     <td>CONTENT DURATION </td>
@@ -268,22 +268,55 @@
 
 
 
-                                <?php $ad_duration = $advaddr->Contentdur;
-                                $amount = ($ad_duration * $campdata->price) * $campdata->package;
-                                $dis = $campdata->discount;
-                                $ltax = $campdata->ltax;
-                                $x = ($amount * $dis) / 100;
-                                $y = $amount - $x;
-                                $ltax_val = ($y * $ltax) / 100;
-                                $cgst = $campdata->cgst;
-                                $sgst = $campdata->sgst;
-                                $gst = $cgst + $sgst;
-                                $cgst_val = ($y * $cgst) / 100;
-                                $sgst_val = ($y * $sgst) / 100;
-                                $gst_val = $cgst_val + $sgst_val;
-                                $igst = $campdata->igst;
-                                $igst_val = ($y * $igst) / 100;
-                                $total = $y + $igst_val + $cgst_val + $sgst_val + $ltax_val;
+                                <?php 
+                                 $sub_total = 0;
+                                 $cgst_total = 0;
+                                 $igst_total = 0;
+                                 $sgst_total = 0;
+                                 $sub_amount = 0;
+                                 $trade_discount = 0;
+                                 $ltax_total = 0;
+                                 $ad_duration = $advaddr->Contentdur;
+                                 $index = 1;
+                                 $i = 0;
+         
+                                 foreach ($estlineedit->result() as $estlrow) {
+                                     $i++;
+         
+                                     $pram = $estlrow->price;
+                                     $subamount = ($pram * $ad_duration) * $estlrow->package;
+         
+                                     $dis = $estlrow->discount;
+                                     $dcamount = ($ad_duration * $estlrow->price) * $estlrow->package;
+         
+                                     $x = ($dcamount * $dis) / 100;
+                                     $acval = $dcamount - $x;
+         
+                                     $igst = $estlrow->igst;
+                                     $igst_value = ($acval * $igst) / 100;
+         
+                                     $cgst = $estlrow->cgst;
+                                     $cgst_value = ($acval * $cgst) / 100;
+         
+                                     $sgst = $estlrow->sgst;
+                                     $sgst_value = ($acval * $sgst) / 100;
+         
+                                     $ltax = $estlrow->local_tax;
+                                     $ltax_value = ($acval * $ltax) / 100;
+         
+                                     $line_total = $acval + $igst_value + $cgst_value + $sgst_value + $ltax_value;
+         
+                                     $sub_amount += $subamount;
+                                     $trade_discount += $x;
+                                     $sub_total += $acval;
+                                     $cgst_total += $cgst_value;
+                                     $igst_total += $igst_value;
+                                     $sgst_total += $sgst_value;
+                                     $ltax_total += $ltax_value;
+                                     $deal_total = $sub_total + $cgst_total + $igst_total + $sgst_total + $ltax_total;
+                                     
+                                 }
+         
                                 ?>
                                 <tr>
                                     <td class="text-right">
@@ -296,11 +329,11 @@
 
                                     </td>
                                     <td class="text-left">
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $amount; ?> </strong> </p>
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $x; ?> </strong> </p>
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $ltax_val; ?> </strong> </p>
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $gst_val; ?> </strong> </p>
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $total; ?> </strong> </p>
+                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $sub_amount; ?> </strong> </p>
+                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $trade_discount; ?> </strong> </p>
+                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $sub_total; ?> </strong> </p>
+                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php //echo $gst_val; ?> </strong> </p>
+                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $deal_total; ?> </strong> </p>
                                         <p> <strong>Along with RO We transfer link</strong> </p>
 
                                     </td>
@@ -317,10 +350,10 @@
                                     </td>
                                     <td class="text-left">
                                         <h4><strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php
-                                                                                                            if (empty($total)) {
+                                                                                                            if (empty($deal_total)) {
                                                                                                                 echo "Error:" . "No screen selected";
                                                                                                             } else {
-                                                                                                                echo $total . "/-";
+                                                                                                                echo $deal_total . "/-";
                                                                                                             }
                                                                                                             ?> </strong></h4>
                                     </td>

@@ -178,6 +178,7 @@ class Campmodel extends CI_Model
 		$this->db->set('status', 2);
 		$this->db->where('est_id', $id);
 		$this->db->update('est_reg');
+		return $this->db->get();
 	}
 
 

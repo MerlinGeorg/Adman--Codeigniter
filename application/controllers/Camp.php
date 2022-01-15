@@ -37,6 +37,8 @@ class camp extends Layout_Controller
 			$advdata['asp'] = $this->campmodel->getasp();
 			$advdata['tpolicy'] = $this->campmodel->gettpolicy();
 			$advdata['user'] = $this->Settingmodel->list_logo();
+			$advdata['exist_content'] = $this->campmodel->get_content();
+			$advdata['c_type'] = $this->campmodel->get_ctype();
 
 			$this->data = $advdata;
 			$this->page = "camp/create_camp";
@@ -68,12 +70,22 @@ class camp extends Layout_Controller
 				$adv = $estim->adv;
 				$user = $estim->user;
 				$publish = $estim->publish_date;
-				$asp= $estim->aspId;
+				$asp = $estim->aspId;
+				$content_inid = $estim->cnt;
+				$content_name = $estim->content_name;
+				$content_type = $estim->content_type;
 			}
-		
+
 			if (($customer != '') && ($duration != '') && ($adv !== '')) {
 
 				/////////////////////////////////////////////////////
+				if (!empty($content_name && $content_type)) {
+					$new_content = array(
+						'content_name' => $content_name,
+						'content_type' => $content_type
+					);
+					$content_inid = $this->campmodel->insert_invo_data($new_content);
+				}
 				$cr_date = date("Y/m/d");
 				$est_data = array(
 					'name' => $customer,
@@ -84,7 +96,8 @@ class camp extends Layout_Controller
 					'adv_id' => $adv,
 					'logo_id' => $user,
 					'publish_date' => $publish,
-					'asp' => $asp
+					//'asp' => $asp,
+					'content_id' => $content_inid,
 				);
 				$est_id = $this->campmodel->insert_est_data('est_reg', $est_data);
 				//////////////////////////////////////////////////////////
@@ -112,7 +125,7 @@ class camp extends Layout_Controller
 						'igst' => $igst,
 						'ltax' => $ltax,
 						'cr_date' => $cr_date,
-						'discount' => 0
+						'discount' => 0,
 					);
 					$this->campmodel->insert_est_data('est_line', $est_ldata);
 				}
@@ -126,6 +139,8 @@ class camp extends Layout_Controller
 				$advdata['asp'] = $this->campmodel->getasp();
 				$advdata['tpolicy'] = $this->campmodel->gettpolicy();
 				$advdata['user'] = $this->Settingmodel->list_logo();
+				$advdata['exist_content'] = $this->campmodel->get_content();
+				$advdata['c_type'] = $this->campmodel->get_ctype();
 
 				$this->data = $advdata;
 				$this->page = "camp/create_camp";
@@ -238,8 +253,8 @@ class camp extends Layout_Controller
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->campmodel->get_invoedline_edit($invo_id);
 			$invo_list['logo']  = $this->campmodel->getLogo($invo_id);
-		//	$estId=$this->campmodel->getEstId($invo_id);
-			$invo_list['asp']=$this->campmodel->getaspByInvoId($invo_id);
+			//	$estId=$this->campmodel->getEstId($invo_id);
+			$invo_list['asp'] = $this->campmodel->getaspByInvoId($invo_id);
 			$this->load->view('camp/invoice_edit', $invo_list);
 			//   $this->load->view('camp/invoice_edittest', $invo_list);
 		} else {
@@ -267,8 +282,8 @@ class camp extends Layout_Controller
 			$nestid = $this->input->post('nr_estid');
 			$nr_duration = $this->input->post('nr_duration');
 			$nr_asp = $this->input->post('nr_asp');
-			if($nr_asp==''){
-				$nr_asp=$this->input->post('aspHid');
+			if ($nr_asp == '') {
+				$nr_asp = $this->input->post('aspHid');
 			}
 			$nrs = $this->input->post('nr_screen');
 			$cr_date = date("Y/m/d");
@@ -324,10 +339,10 @@ class camp extends Layout_Controller
 			$nestid = $this->input->post('nr_estid');
 			$nr_duration = $this->input->post('nr_duration');
 			$nr_asp = $this->input->post('nr_asp');
-			if($nr_asp==''){
-				$nr_asp=$this->input->post('aspHid');
+			if ($nr_asp == '') {
+				$nr_asp = $this->input->post('aspHid');
 			}
-			
+
 			$nrs = $this->input->post('nr_screen');
 			$cr_date = date("Y/m/d");
 			$nr_pack = $this->input->post('nr_pack');
@@ -376,7 +391,7 @@ class camp extends Layout_Controller
 			$invo_list['logo']  = $this->campmodel->getLogo($nestid);
 			redirect($_SERVER['HTTP_REFERER']); // to avoid form submit on page refresh
 			$this->load->view('camp/invoice_edit', $invo_list);
-		//	redirect('camp/invoice_edit',$invo_list);
+			//	redirect('camp/invoice_edit',$invo_list);
 			//$this->load->view('camp/invoice_edittest', $invo_list);
 			//$this->load->view('camp/print', $invo_list);
 
@@ -444,7 +459,7 @@ class camp extends Layout_Controller
 	function camp_invo()
 	{
 		if (isset($this->session->userdata['logged_in'])) {
-			$invoest['username'] = $this->session->userdata('logged_in')['username'];
+			/* $invoest['username'] = $this->session->userdata('logged_in')['username'];
 			$invoest['email'] = $this->session->userdata('logged_in')['email'];
 			$invoest['infomsg'] = "no";
 			$invoest['title'] = "ADMAN";
@@ -457,7 +472,29 @@ class camp extends Layout_Controller
 			$this->data = $invoest;
 			$this->page = "camp/make_invoice";
 			$this->layout();
-
+ */
+$estimate_id=$this->uri->segment(3);
+$est_data = $this->campmodel->get_estdata($estimate_id);
+		$cr_date = date("Y/m/d");
+		// $estId=$this->campmodel->getEstId($estimate_id);
+		// $asp=$this->campmodel->getaspByInvoId($estId->est_id);
+		foreach ($est_data->result() as $estdata) {
+		}
+$invo_reg = array(
+	'est_id' => $estdata->est_id,
+	'est_name' =>  $estdata->name,
+	'adv_id' =>  $estdata->adv_id,
+	'duration' =>  $estdata->duration,
+	'content_id' => $estdata->content_id,
+	'cr_date' => $cr_date,
+	'status' => 1,
+	'play' => "preshow",
+	//'asp'=>$asp
+);
+$invoice_id = $this->campmodel->create_invo_data($invo_reg);
+$this->campmodel->invoiced_est($estimate_id);
+echo "<script type='text/javascript'>alert('Campaign Invoiced Successfully.Please Check Invoiced List');</script>";
+		echo  "<script type='text/javascript'>window.close();</script>";
 			// $this->load->view('asp/create_asp', $ttdata);
 		} else {
 			$this->sess_out();
@@ -515,8 +552,8 @@ class camp extends Layout_Controller
 		$invoice_id = $this->campmodel->create_invo_data($invo_reg);
 		$est_line_data = $this->campmodel->get_estlinedata($estimate_id);
 		$est_reg_data = $this->campmodel->get_estdata($estimate_id);
-		$estreg_result=$est_reg_data->result()[0];
-		$publish_date=$estreg_result->publish_date;
+		$estreg_result = $est_reg_data->result()[0];
+		$publish_date = $estreg_result->publish_date;
 		foreach ($est_line_data->result() as $estlinedata) {
 
 			$pack_id =  $estlinedata->package;
@@ -530,7 +567,7 @@ class camp extends Layout_Controller
 			$en_d = '+' . $next_date . ' day';
 			$newdate = strtotime($en_d, strtotime($publish_date));
 			$newdate = date('Y-m-d', $newdate);
-		
+
 			$est_id = $estlinedata->est_id;
 			$invo_reg_line = array(
 				'invo_id' => $invoice_id,
