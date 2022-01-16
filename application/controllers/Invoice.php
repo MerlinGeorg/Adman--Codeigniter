@@ -218,7 +218,7 @@ class Invoice extends Layout_Controller
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);
-			$invo_list['logo']  = $this->campmodel->getLogo($invo_id);
+			$invo_list['logo']  = $this->campmodel->getInvoLogo($invo_id);
 			$this->load->view('invoice/invoice_edit', $invo_list);
 		} else {
 			$this->sess_out();
@@ -370,6 +370,7 @@ class Invoice extends Layout_Controller
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($rowestid);
+			$invo_list['logo']  = $this->campmodel->getInvoLogo($rowestid);
 			$this->load->view('invoice/invoice_edit', $invo_list);
 			
 
@@ -390,6 +391,7 @@ class Invoice extends Layout_Controller
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->inward_involine_edit($rowestid);
+			$invo_list['logo']  =$this->invomodel->getinward_logo($rowestid);
 			$this->load->view('invoice/inward_invoice_edit', $invo_list); 
 		} else {
 			$this->sess_out();

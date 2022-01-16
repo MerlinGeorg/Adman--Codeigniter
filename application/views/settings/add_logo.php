@@ -82,7 +82,7 @@
                                 <div class="col-lg-6 ">
                                     <div class="form-group">
                                         <label>GSTIN</label>
-                                        <input class="form-control" name="gstin" id="gstin" type="text" placeholder="Enter GSTIN">
+                                        <input class="form-control" name="cstin" id="cstin" type="text" placeholder="Enter GSTIN">
                                     </div>
                                 </div>
 

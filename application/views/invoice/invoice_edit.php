@@ -235,7 +235,7 @@
 
 <?php 
 // if(!empty($logo)){
-foreach ($logo as $row) {  ?>
+foreach ($logo->result() as $row) { ?>
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-sm-8 address2">
