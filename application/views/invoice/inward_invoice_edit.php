@@ -117,7 +117,7 @@
 
                                 .container-fluid {
                                     -webkit-print-color-adjust: exact;
-                                    /* padding-right: 40px; */
+                                    padding-right: 40px;
 
                                 }
 
