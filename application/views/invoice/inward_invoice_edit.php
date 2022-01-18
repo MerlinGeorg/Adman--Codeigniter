@@ -303,7 +303,7 @@
                                                     <div><strong>Position</strong>
                                                         <?php echo $WF = $estrow->play; ?>
                                                         <form method="post" action="<?php echo site_url('invoice/pl_involine'); ?>">
-                                                            <input style="display:none;" type="number" name="pl_invoid" value="<?php echo $estrow->invo_id; ?>">
+                                                            <input style="display:none;" type="number" name="pl_invoid" value="<?php echo $estrow->inward_id; ?>">
                                                             <input type="radio" class="d-print-none addrow" name="play" value="Preshow" <?php if ($WF == 'Preshow') {
                                                                                                                                             echo ' checked ';
                                                                                                                                         } ?> /><label class="d-print-none addrow">Preshow</label>
