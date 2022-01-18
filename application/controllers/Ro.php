@@ -107,7 +107,7 @@ class Ro extends Layout_Controller
 				$ro_data = array(
 					'est_id' => $ro->est_id,
 					'adv_id' => $ro->adv_id,
-					'asp' => $ro->asp,
+					'asp' => $asp_id,
 					'est_name' => $ro->name,
 					//'duration' => $ro[0]->duration,
 					'duration' => $duration,
@@ -186,10 +186,11 @@ class Ro extends Layout_Controller
 		$contentId=$campdata->content_id;
 		$data['content'] = $this->romodel->getContentById($contentId);
 	//	$data['screens']  = $this->romodel->get_screens($campid);
-	$asp=$adsdata->asp;
-	$data['screens']  = $this->romodel->get_screensByAsp($asp);
+		$asp=$adsdata->asp;
+		$data['screens']  = $this->romodel->get_screensByAsp($asp);
 	//$data['estedit'] = $this->campmodel->get_estedit($campid);
-	$data['estlineedit'] = $this->campmodel->get_estline_edit($campid);
+	//$data['estlineedit'] = $this->campmodel->get_estline_edit($campid);
+	    $data['estlineedit'] = $this->romodel->get_ExcludingPendingScreen($campid,$asp);
 		$data['logo']  = $this->romodel->getLogo($invoiceId);
 		$this->load->view('ro/ro_invoice', $data);
 	}
