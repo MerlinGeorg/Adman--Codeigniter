@@ -88,7 +88,7 @@
             <!-- <div class="row">  -->
             <div class="card-body">
                 <div style="color:mediumseagreen;padding: 10px;">*All Fields Must Be Filled*</div>
-                <form>
+                <form id="form-element">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
@@ -205,14 +205,15 @@
                                         <div class="form-group">
                                             <label>Content Type</label>
                                             <select class="form-control" name="content_type" required="required">
-                                                <option value="">Choose Content Type<option>
-                                                <?php foreach ($c_type->result() as $crow) {  
-                                                ?>
+                                                <option value="">Choose Content Type
+                                                <option>
+                                                    <?php foreach ($c_type->result() as $crow) {
+                                                    ?>
 
-                                                <option><?php echo $crow->content_type; 
+                                                <option><?php echo $crow->content_type;
                                                         ?></option>
-                                                <?php } 
-                                                ?>
+                                            <?php }
+                                            ?>
 
                                             </select>
                                         </div>
@@ -237,28 +238,28 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
 
-                                        <select class="form-control" name="cnt" id="cnt" >
-                                        <option value="">Choose Content</option>
+                                        <select class="form-control" name="cnt" id="cnt">
+                                            <option value="">Choose Content</option>
                                             <?php
 
-                                            foreach ($exist_content->result() as $excrow) { 
+                                            foreach ($exist_content->result() as $excrow) {
                                             ?>
-                                           
-                                            <option value="<?php echo $excrow->con_id;?>"><?php echo $excrow->con_id; 
-                                                                    ?> &nbsp; &nbsp; <?php echo $excrow->content_name;  
-                                                                                                                        ?>
+
+                                                <option value="<?php echo $excrow->con_id; ?>"><?php echo $excrow->con_id;
+                                                                                                ?> &nbsp; &nbsp; <?php echo $excrow->content_name;
+                                                                                                                    ?>
 
 
-                                                <!-- <button class="btn btn-outline btn-primary btn-lg btn-block" type="button" name="btnSeven" id="btnSeven" value="<?php //echo $excrow->con_id; 
-                                                                                                                                                                        ?>" onclick="setText7(this)"><?php //echo $excrow->con_id; 
+                                                    <!-- <button class="btn btn-outline btn-primary btn-lg btn-block" type="button" name="btnSeven" id="btnSeven" value="<?php //echo $excrow->con_id; 
+                                                                                                                                                                            ?>" onclick="setText7(this)"><?php //echo $excrow->con_id; 
                                                                                                                                                                                                             ?>***<?php //echo $excrow->content_name;  
-                                                                                                                                                                                                                                            ?></button> -->
+                                                                                                                                                                                                                ?></button> -->
 
 
-                                            </option>
+                                                </option>
 
 
-                                            <?php } 
+                                            <?php }
                                             ?>
 
                                         </select>
@@ -464,7 +465,7 @@
 
 
 
-    function gatherData(a, du, camp_name, b, user, publish_date,content_name,content_type,cnt) {
+    function gatherData(a, du, camp_name, b, user, publish_date, content_name, content_type, cnt) {
 
         var data = [];
         var table = document.getElementById('dataTable');
@@ -487,7 +488,7 @@
                 publish_date: (publish_date.value),
                 content_name: (content_name.value),
                 content_type: (content_type.value),
-                cnt:(cnt.value)
+                cnt: (cnt.value)
             });
 
 
