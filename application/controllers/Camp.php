@@ -493,46 +493,6 @@ $invo_reg = array(
 );
 $invoice_id = $this->campmodel->create_invo_data($invo_reg);
 $this->campmodel->invoiced_est($estimate_id);
-
-$est_line_data = $this->campmodel->get_estlinedata($estimate_id);
-		$est_reg_data = $this->campmodel->get_estdata($estimate_id);
-		$estreg_result = $est_reg_data->result()[0];
-		$publish_date = $estreg_result->publish_date;
-		foreach ($est_line_data->result() as $estlinedata) {
-
-			$pack_id =  $estlinedata->package;
-			$pack_dates = $this->campmodel->get_packdate($pack_id);
-			foreach ($pack_dates->result() as $pdate) {
-				$next_date = $pdate->days;
-			}
-
-
-			//$next_date = $estlinedata->package ;
-			$en_d = '+' . $next_date . ' day';
-			$newdate = strtotime($en_d, strtotime($publish_date));
-			$newdate = date('Y-m-d', $newdate);
-
-			$est_id = $estlinedata->est_id;
-			$invo_reg_line = array(
-				'invo_id' => $invoice_id,
-				'est_id' => $est_id,
-				'asp' =>  $estlinedata->asp,
-				'screen' =>  $estlinedata->screen,
-				'duration' =>  $estlinedata->duration,
-				'package' => $estlinedata->package,
-				'discount' => $estlinedata->discount,
-				'price' => $estlinedata->price,
-				'cgst' => $estlinedata->cgst,
-				'sgst' => $estlinedata->sgst,
-				'igst' => $estlinedata->igst,
-				'ltax' => $estlinedata->ltax,
-				'start_date' => $cr_date,
-				'end_date' => $newdate,
-				'pack_date' => $next_date,
-				'status' => 1
-			);
-			$this->campmodel->create_invo_ldata($invo_reg_line);
-		}
 echo "<script type='text/javascript'>alert('Campaign Invoiced Successfully.Please Check Invoiced List');</script>";
 		echo  "<script type='text/javascript'>window.close();</script>";
 			// $this->load->view('asp/create_asp', $ttdata);
