@@ -216,7 +216,7 @@
                         <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
                         <script type='text/javascript'></script>
                         <div class="card-header">
-                        <center><h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></center></strong>
+                        <h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></strong>
 
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>

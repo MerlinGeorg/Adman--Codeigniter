@@ -235,9 +235,12 @@ class Campmodel extends CI_Model
 		//return $this->db->get();
 	}
 public function getEstId($id){
-	$this->db->select('est_id');
+	/* $this->db->select('est_id');
 		$this->db->from('invoice_reg E');
-		$this->db->where('E.invo_id', $id);
+		$this->db->where('E.invo_id', $id); */
+		$this->db->select('camp_id');
+		$this->db->from('inward_invoice E');
+		$this->db->where('E.inward_id', $id);
 		$ro = $this->db->get();
 		$res = $ro->result()[0];
 	//echo $this->db->last_query();
