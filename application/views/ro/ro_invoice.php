@@ -79,7 +79,7 @@
 
             .container-fluid {
                 -webkit-print-color-adjust: exact;
-                /* padding-right: 40px; */
+                padding-right: 40px;
             }
 
             .fa-fw {
@@ -279,7 +279,7 @@
                                  $ad_duration = $advaddr->Contentdur;
                                  $index = 1;
                                  $i = 0;
-                                 $deal_total=0;
+         
                                  foreach ($estlineedit->result() as $estlrow) {
                                      $i++;
          

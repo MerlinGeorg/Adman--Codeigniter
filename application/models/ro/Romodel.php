@@ -624,21 +624,5 @@ class Romodel extends CI_Model
 		$res=$this->db->get();
 		return $res->result()[0];
 	}
-	////////////////////////
-	public function get_ExcludingPendingScreen($id,$asp){
-		$this->db->select('*');
-		$this->db->from('est_line');
-		$this->db->where('est_line.est_id', $id);
-		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
-		$this->db->join('ro_reg','est_line.asp=ro_reg.asp','inner');
-		$this->db->join('screen', 'est_line.screen = screen.sc_id', 'inner');
-		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
-		$this->db->where('screen.sc_status',1);
-		$this->db->where('ro_reg.asp',$asp);
-		$this->db->order_by("asp_name", "asc");
-		return $this->db->get();
-		//$this->db->get();
-	//	echo $this->db->last_query();
-	//	die();
-	}								
+	////////////////////////								
 }
