@@ -43,7 +43,9 @@ class Ro extends Layout_Controller
 	function get_batch()
 	{
 		$asp_id = $this->input->post('course_id');
-		$data['batch'] = $this->romodel->get_batch('screen', $asp_id);
+		$campId = $this->input->post('campId');
+		// $data['batch'] = $this->romodel->get_batch('screen', $asp_id);
+		$data['batch'] = $this->romodel->screenByCampaign($asp_id,$campId);
 
 		$this->load->view('ro/batch_list', $data);
 	}

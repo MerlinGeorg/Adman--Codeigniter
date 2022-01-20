@@ -89,14 +89,14 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-4">
+                               <!--  <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Advertiser Name</label>
                                         <input class="form-control" name="ro_adv" id="ro_adv" readonly>
 
                                     </div>
 
-                                </div>
+                                </div> -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>ASP Name</label>
@@ -275,6 +275,7 @@
             type: "post",
             data: {
                 course_id: $('#aspId').val(),
+                campId: $('#campId').val()
             },
             url: "<?php echo site_url('ro/get_batch') ?>",
             success: function(data) {

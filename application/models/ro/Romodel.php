@@ -211,6 +211,18 @@ class Romodel extends CI_Model
 		return $this->db->get();
 	}
 
+	public function screenByCampaign($asp,$camp){
+		$this->db->select('sc_id,sc_name');
+		$this->db->from('est_line');
+		$this->db->where('est_id',$camp);
+		$this->db->where('est_line.asp',$asp);
+		$this->db->join('screen','est_line.screen=screen.sc_id','inner');
+		return $this->db->get();
+		//$this->db->get();
+		//echo $this->db->last_query();
+		//die();
+	}
+
 
 	public function get_newpending($table_name, $course_id)
 	{
