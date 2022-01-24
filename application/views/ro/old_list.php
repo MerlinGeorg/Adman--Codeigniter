@@ -68,11 +68,11 @@
        foreach ($involist->result() as $estrow) { ?>
                                         <tr>
                                            
-                                            <td><?php echo $estrow->invo_id;	 ?></td>
-                                            <!-- <td><?php //echo $estrow->est_id; ?></td> -->
-											<td><?php echo $estrow->est_name; ?></td>
+                                            <!-- <td><?php //echo $estrow->invo_id;	 ?></td> -->
+                                            <td><?php echo $estrow->est_id; ?></td>
+											<td><?php echo $estrow->name; ?></td>
 									        <td><?php echo $estrow->adv_name; ?></td>
-											<td><?php echo $estrow->duration; ?></td>
+											<td><?php echo $estrow->campaignDuration; ?></td>
 									 <!-- <td><?php //echo $estrow->screen; ?></td> -->
 <!-- <td><?php //echo $estrow->content_id; ?></td> -->
 									        <td><?php echo $estrow->content_name; ?></td>
@@ -103,4 +103,5 @@
 
         <!-- </body> -->
     </div>
+</div>
 </div>

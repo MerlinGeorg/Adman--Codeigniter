@@ -293,19 +293,19 @@ foreach ($logo->result() as $row) { ?>
                                             <?php echo $contentname = $estrow->content_name ?><br></div>
                                         <div><strong>Content Duration:</strong>
                                             <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
-                                        <div><strong>Position</strong>
-                                            <?php echo $WF = $estrow->play; ?>
-                                            <form method="post" action="<?php echo site_url('invoice/pl_involine'); ?>" >
-                                                <input style="display:none;" type="number" name="pl_invoid" value="<?php echo $estrow->invo_id; ?>">
-                                                <input type="radio" class="d-print-none addrow" name="play" value="Preshow" <?php if ($WF == 'Preshow') {
-                                                                                                                                echo ' checked ';
-                                                                                                                            } ?> /><label class="d-print-none addrow">Preshow</label>
-                                                <input type="radio" class="d-print-none addrow" name="play" value="During intravel" <?php if ($WF == 'During intravel') {
-                                                                                                                                        echo ' checked ';
-                                                                                                                                    } ?> /><label class="d-print-none addrow">During intravel</label>
+                                       <!--  <div><strong>Position</strong>
+                                            <?php //echo $WF = $estrow->play; ?>
+                                            <form method="post" action="<?php //echo site_url('invoice/pl_involine'); ?>" >
+                                                <input style="display:none;" type="number" name="pl_invoid" value="<?php //echo $estrow->invo_id; ?>">
+                                                <input type="radio" class="d-print-none addrow" name="play" value="Preshow" <?php //if ($WF == 'Preshow') {
+                                                                                                                                //echo ' checked ';
+                                                                                                                        //    } ?> /><label class="d-print-none addrow">Preshow</label>
+                                                <input type="radio" class="d-print-none addrow" name="play" value="During intravel" <?php //if ($WF == 'During intravel') {
+                                                                                                                                        //echo ' checked ';
+                                                                                                                                    //} ?> /><label class="d-print-none addrow">During intravel</label>
                                                 <button type="submit" class="d-print-none addrow">Save</button>
                                             </form>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>
@@ -332,6 +332,16 @@ foreach ($logo->result() as $row) { ?>
                                                 <?php } ?>
                                             </select>
                                              </div>
+                                             <div class="form-group">
+                                                    <select class="form-control d-print-none addrow" name="play">
+                                                    <option value="">Position</option>
+                                                    
+                                                    <option value="preshow">Preshow</option>
+                                                    <option value="during interval">During Interval</option>
+                                                       
+                                                    </select>
+
+                                                </div>
                                         <div class="form-group" id="output_batch">
 
                                         </div>
@@ -370,7 +380,8 @@ foreach ($logo->result() as $row) { ?>
                                         <th><strong>ASP</strong></td>
                                         <th class="text-center"><strong>SCREEN</strong></td>
                                         <th class="text-center"><strong>Package</strong></td>
-                                        <th class="text-center"><strong>Rate</strong></td>
+                                        <!-- <th class="text-center"><strong>Rate</strong></td> -->
+                                        <th class="center">Postion</th>
                                         <th class="text-right"><strong>Amount</strong></td>
                                         <th class="text-left"><strong>Discount</strong></td>
                                         <th class="text-center"><strong>IGST</strong></td>
@@ -399,7 +410,8 @@ foreach ($logo->result() as $row) { ?>
                                                 <?php echo $invo_sdate = $estlrow->start_date; ?></br>
                                                 <?php echo $invo_edate = $estlrow->end_date; ?></br>
                                             </td>
-                                            <td class="text-right"><?php echo $estlrow->price; ?></td>
+                                            <!-- <td class="text-right"><?php //echo $estlrow->price; ?></td> -->
+                                            <td class="center"><?php echo $estlrow->play; ?></td>
                                             <td class="text-right">
                                                 <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
                                             <td class="text-left">
