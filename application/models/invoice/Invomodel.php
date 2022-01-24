@@ -24,7 +24,21 @@ class Invomodel extends CI_Model
 		
 	}
 
+	public function getEstIdByName($name){
+		$this->db->select('est_id');
+		$this->db->from('est_reg');
+		$this->db->where('name',$name);
+		$res=$this->db->get();
+		return $res->result()[0];
+	}
 
+	public function getASPIdByName($name){
+		$this->db->select('asp_id');
+		$this->db->from('asp');
+		$this->db->where('asp_name',$name);
+		$res=$this->db->get();
+		return $res->result()[0];
+	}
 
 	function get_adv_list($adv_name)
 	{
@@ -166,8 +180,8 @@ class Invomodel extends CI_Model
 		$this->db->join('time_policy', 'invo_reg_line.package = time_policy.tpc', 'inner');
 		$this->db->order_by("sc_name");
 		return $this->db->get();
-//	$res=$this->db->get();
-//	 echo $this->db->last_query();
+	//$res=$this->db->get();
+	// echo $this->db->last_query();
 	//echo '<pre>';
 	//print_r($res);
 	//die();
@@ -326,7 +340,7 @@ class Invomodel extends CI_Model
 	function getCampaignInRoreg(){
 		$this->db->select('*');
 		$this->db->from('est_reg');
-		$this->db->where('est_reg.status', 2);
+		$this->db->where('est_reg.status', 1);
 		$this->db->join('ro_reg','est_reg.est_id=ro_reg.est_id','inner');
 		$this->db->order_by("est_reg.est_id", "desc");
 		return $this->db->get();
@@ -390,5 +404,15 @@ class Invomodel extends CI_Model
 		echo $this->db->last_query();
 		 die(); */
 
+	}
+
+	public function getPublishDate($id){
+		$this->db->select('publish_date');
+		$this->db->from('est_reg');
+		$this->db->where('est_id',$id);
+		//return $this->db->get();
+		$res=$this->db->get();
+		$ro=$res->result()[0];
+		return $ro;
 	}
 }

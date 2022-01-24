@@ -50,6 +50,16 @@ class Ro extends Layout_Controller
 		$this->load->view('ro/batch_list', $data);
 	}
 
+	public function getCampaignDays(){
+		$asp_id = $this->input->post('asp');
+		$campId = $this->input->post('campId');
+		$data=$this->romodel->getCampaignDuration($asp_id,$campId);
+		echo json_encode($data);
+	//	print_r($data);die();
+	//$screen = $this->romodel->screenByCampaign($asp_id,$campId);
+	//$this->load->view('ro/batch_list', $screen);
+		
+	}
 
 	public function valid_date($date)
 	{
@@ -79,6 +89,7 @@ class Ro extends Layout_Controller
 				$asp_id = $row->asp_id;
 				$duration = $row->duration;
 				$logoId  =$row->logoId;
+				$publishingDate=$row->start_date; //publishingDate
 			}
 		//	print_r($postData);
 		//	die();
@@ -112,7 +123,7 @@ class Ro extends Layout_Controller
 					'asp' => $asp_id,
 					'est_name' => $ro->name,
 					//'duration' => $ro[0]->duration,
-					'duration' => $duration,
+					'campaignDuration' => $duration,
 					'content_id' => $ro->content_id,
 					'package' => $ro->package,
 					'cr_date' => $cr_date,
@@ -123,7 +134,7 @@ class Ro extends Layout_Controller
 			//	exit();
 				$ro_id = $this->romodel->insert_get_ro($ro_data);
 				
-			
+			$this->romodel->updatePublishingDate($ro->est_id,$publishingDate);
 				// return true;
 				// $end_date = '+'.$ro[0]->pack_date.' day';
 				// $newdate = strtotime ($end_date , strtotime ( $cr_date ) ) ;
@@ -189,10 +200,21 @@ class Ro extends Layout_Controller
 		$data['content'] = $this->romodel->getContentById($contentId);
 	//	$data['screens']  = $this->romodel->get_screens($campid);
 		$asp=$adsdata->asp;
-		$data['screens']  = $this->romodel->get_screensByAsp($asp);
+		$estlineedit = $this->romodel->get_ExcludingPendingScreen($campid,$asp);
+		
+		foreach($estlineedit->result() as $row){
+$sc_id[]=$row->screen;
+		}
+		//print_r($sc_id);die();
+		$data['estlineedit'] =$estlineedit;
+		foreach($sc_id as $screen){
+			$screens[]  = $this->romodel->get_screensByAsp($asp,$campid,$screen);
+		}
+	//	print_r($screens);die();
+		$data['screens']  =$screens;
 	//$data['estedit'] = $this->campmodel->get_estedit($campid);
 	//$data['estlineedit'] = $this->campmodel->get_estline_edit($campid);
-	    $data['estlineedit'] = $this->romodel->get_ExcludingPendingScreen($campid,$asp);
+	   
 		$data['logo']  = $this->romodel->getLogo($invoiceId);
 		$this->load->view('ro/ro_invoice', $data);
 	}
@@ -268,26 +290,27 @@ class Ro extends Layout_Controller
 		$duration = $this->input->post('duration');
 		// print_r($duration);
 		// die();
-		$detail = $this->romodel->get_campData($camp_id, $asp_id);
+		$ro = $this->romodel->get_campData($camp_id, $asp_id);
 
-				$ro = $detail->result();
+			//	$ro = $detail->result();
 		$cr_date = date("Y-m-d");
 
-		
+		$publishingDate=$this->input->post('ad_date');
 		$ro_data = array(
 			'est_id' => $camp_id,
 			'adv_id' => $adv_id,
 			'asp' => $asp_id,
-			'est_name' => $ro[0]->name,
+			'est_name' => $ro->name,
 			//'duration' => $ro[0]->duration,
-			'duration' => $duration,
-			'content_id' => $ro[0]->content_id,
-			'package' => $ro[0]->package,
+			'campaignDuration' => $duration,
+			'content_id' => $ro->content_id,
+			'package' => $ro->package,
 			'cr_date' => $cr_date,
 			// 'status' => $status,
 			// 'logo_id' => $logoId
 		);
 		 $this->romodel->update_id('ro_reg',$id,$ro_data);
+		 $this->romodel->updatePublishingDate($camp_id,$publishingDate);
 		// echo $ro_id;
 		// die();
 		$url = base_url() . "ro/ro_generate/" . $id;
@@ -375,6 +398,17 @@ class Ro extends Layout_Controller
 		echo $encode_data;
 	}
 
+	public function getReleaseOrderData(){
+		//echo("2");
+$roId=$this->input->post('roId');
+$encode_data =$this->romodel->getEditData($roId);
+//print_r($encode_data->result()[0]);
+$res=$encode_data->result()[0];
+$encode_data=json_encode($res);
+echo $encode_data;
+//die();
+	}
+
 	function get_newpending()
 	{
 		$asp_id = $this->input->post('course_id');
@@ -451,7 +485,8 @@ class Ro extends Layout_Controller
 			//	echo $asp_id;die();
 			$start_date  = $this->input->post('camp_date');
 
-			$detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+			// $detail = $this->romodel->get_campdetail($camp_id, $asp_id);
+			$detail = $this->romodel->get_olro_campdetail($camp_id, $asp_id);
 
 			$ro = $detail->result();
 			//print_r($ro);die();
@@ -463,7 +498,7 @@ class Ro extends Layout_Controller
 				'adv_id' => $ro[0]->adv_id,
 				'asp' => $ro[0]->asp,
 				'est_name' => $ro[0]->name,
-				'duration' => $this->input->post('duration'),
+				'campaignDuration' => $this->input->post('duration'),
 				'content_id' => $ro[0]->content_id,
 				'package' => $ro[0]->package,
 				'cr_date' => $cr_date,

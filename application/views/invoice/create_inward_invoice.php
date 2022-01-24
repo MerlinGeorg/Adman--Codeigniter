@@ -59,31 +59,45 @@
                                     <div class="form-group">
                                         <label>RO ID</label>
                                         
-                                        <input class="form-control" placeholder="Enter RO ID" name="ro_id" value="<?php echo set_value('ro_id'); ?>">
-                                        <div style="color: red;"><?php echo form_error('ro_id'); ?></div>
+                                        <input class="form-control" placeholder="Enter RO ID" name="ro_id" value="<?php //echo set_value('ro_id'); ?>">
+                                        <div style="color: red;"><?php //echo form_error('ro_id'); ?></div>
                                     </div>
                                 </div> -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Campaign</label>
-                                        <select class="form-control" id="campId" name="campId" required>
+                                        <label>RO ID</label>
+                                        <select class="form-control" name="ro" id="ro" required>
                                             <option value="">Select</option>
-                                            <?php foreach ($camp->result() as $rorow) : ?>
-                                                <option value="<?php echo $rorow->est_id;     ?>"><?php echo $rorow->name;   ?></option>
+                                            <?php foreach ($ro->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->ro_id;     ?>"><?php echo $rorow->ro_id;   ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                         <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php echo set_value('camp_name') ?>">
                                         <div style="color: red;"><?php echo form_error('camp_name'); ?></div> -->
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Campaign</label>
+                                        <input class="form-control" name="camp" id="camp" readonly>
+                                       <!--  <select class="form-control" id="campId" name="campId" required>
+                                            <option value="">Select</option>
+                                            <?php //foreach ($camp->result() as $rorow) : ?>
+                                                <option value="<?php //echo $rorow->est_id;     ?>"><?php //echo $rorow->name;   ?></option>
+                                            <?php //endforeach; ?>
+                                        </select> -->
+                                        <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php //echo set_value('camp_name') ?>">
+                                        <div style="color: red;"><?php //echo form_error('camp_name'); ?></div> -->
+                                    </div>
+                                </div>
                                 
 
-                                <div class="col-lg-6">
+                                <!-- <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Duration</label>
                                         <input class="form-control" name="duration" id="duration" readonly>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Advertiser Name</label>
@@ -95,8 +109,8 @@
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label> Content Name</label>
-                                        <input class="form-control" placeholder="Enter Content Name" name="content_name" value="<?php echo set_value('content_name'); ?>">
+                                        <label> Invoice Details</label>
+                                        <input class="form-control" placeholder="Enter Invoice Details" name="content_name" value="<?php echo set_value('content_name'); ?>">
                                         <div style="color: red;"><?php echo form_error('content_name'); ?></div>
                                     </div>
                                 </div>
@@ -114,14 +128,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ASP</label>
-                                        <select class="form-control" id="aspId" name="aspId" required>
+                                        <input class="form-control" name="aspId" id="aspId" readonly>
+                                       <!--  <select class="form-control" id="aspId" name="aspId" required>
                                             <option value="">Select</option>
-                                            <?php foreach ($asp->result() as $rorow) : ?>
-                                                <option value="<?php echo $rorow->asp_id;     ?>"><?php echo $rorow->asp_name;   ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php echo set_value('camp_name') ?>">
-                                        <div style="color: red;"><?php echo form_error('camp_name'); ?></div> -->
+                                            <?php //foreach ($asp->result() as $rorow) : ?>
+                                                <option value="<?php //echo $rorow->asp_id;     ?>"><?php //echo $rorow->asp_name;   ?></option>
+                                            <?php //endforeach; ?>
+                                        </select> -->
+                                        <!-- <input class="form-control" placeholder="Enter Campaign Name" name="camp_name" value="<?php //echo set_value('camp_name') ?>">
+                                        <div style="color: red;"><?php //echo form_error('camp_name'); ?></div> -->
                                     </div>
                                 </div>
                                 
@@ -151,6 +166,7 @@
 
     </div>
 </div>
+                                            </div>
 <script>
     function outputValue(item) {
 
@@ -250,37 +266,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#campId').change(function() {
-            var campId = $('#campId').val();
+     
+        $('#ro').change(function() {
+          
+            var roId = $('#ro').val();
+           // alert(roId);
             $.ajax({
                 type: "post",
                 dataType: "json",
                 data: {
-                    camp_id: campId
+                    roId: roId
                 },
-                url: "<?php echo site_url('ro/get_camdata') ?>",
+               
+                url: "<?php echo site_url('ro/getReleaseOrderData') ?>",
                 success: function(response) {
-                    // console.log(response);
-                    $('#camp_date').val(response[0]['est_cr_date']);
-                    $('#ro_adv').val(response[0]['adv_name']);
+                 //   alert("hi");
+                  //   console.log(response);
+               //   alert(response['adv_name']);
+                   // $('#camp_date').val(response[0]['est_cr_date']);
+                    $('#ro_adv').val(response['adv_name']);
+                    $('#camp').val(response['est_name']);
+                    $('#aspId').val(response['asp_name']);
                     // $('#ro_asp').val(response[0]['asp_name']);    
-                    $('#duration').val(response[0]['duration']);
-                    $('#ad_date').val(response[0]['publish_date']);
-                    $('#aspId').empty();
+                 //   $('#duration').val(response[0]['duration']);
+                   // $('#ad_date').val(response[0]['publish_date']);
+                  /*   $('#aspId').empty();
                     var option = "";
                     $.each(response['asp'], function(index) {
                         var Id = response['asp'][index].asp_id;
                         var aspname = response['asp'][index].asp_name;
                         option += '<option value="' + Id + '">' + aspname + '</option>';
                     });
-                    $('#aspId').append('<option value="">Select</option>' + option);
+                    $('#aspId').append('<option value="">Select</option>' + option); */
 
                 }
 
-            })
+            });
         });
         // $('#ad_date').datepicker();
-        $('#campId').on('change', function() {
+      /*   $('#campId').on('change', function() {
             if ($('#campId').val() != '') {
                 $('#aspId').prop('disabled', false);
                 $('#camp_date').prop('disabled', false);
@@ -288,7 +312,7 @@
                 $('#aspId').prop('disabled', true);
                 $('#camp_date').prop('disabled', true);
             }
-        });
+        }); */
 
         /*  $('#savero').on('click',function(){
        
@@ -321,5 +345,5 @@
 
             return [year, month, day].join('-');
         }
-    })
+    });
 </script>

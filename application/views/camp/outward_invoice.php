@@ -57,13 +57,13 @@
                                             <?php foreach ($estlist->result() as $estrow) { ?>
                                                 <tr>
 
-                                                    <td><?php echo $estrow->est_id;     ?></td>
-                                                    <td><?php echo $estrow->name; ?></td>
-                                                    <td><?php echo $estrow->est_cr_date; ?></td>
+                                                    <td><?php echo $estrow->invo_id;     ?></td>
+                                                    <td><?php echo $estrow->est_name; ?></td>
+                                                    <td><?php echo $estrow->cr_date; ?></td>
                                                     <td><?php echo $estrow->adv_name; ?></td>
                                                     <td><?php echo $estrow->duration; ?></td>
 
-                                                    <td><a href="<?php echo site_url('camp/invo_edit') . '/' . $estrow->est_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
+                                                    <td><a href="<?php echo site_url('invoice/invoice_edit') . '/' . $estrow->invo_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -88,4 +88,4 @@
         </div>
     </div>
 
-</body>
+                                            </div>

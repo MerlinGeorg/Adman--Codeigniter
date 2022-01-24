@@ -235,7 +235,8 @@
                         $phone = $this->session->userdata('phone');
                         ?>
 
-<?php foreach ($logo as $row) {  ?>
+<?php if(!empty($logo->result())){
+foreach ($logo->result() as $row) {  ?>
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-sm-8 address2">
@@ -257,11 +258,12 @@
                                     </div>
                                     <div class="col-sm-4 ">
                                         <div><?php echo $row->address;
-                                            }
+                                          // }
                                                 ?></div>
                                         <!-- <div>New York City, New york, 10394</div> -->
                                         <div>Email:<?php echo $row->email ?></div>
                                         <div>Phone:<?php echo $row->phone ?></div>
+                                        <?php } }?>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 ml-auto address">
@@ -408,9 +410,9 @@
                                             $i++; ?>
                                             <td class="center"><?php echo $estlrow->asp_name; ?></td>
                                             <td class="left"><?php echo $estlrow->sc_name; ?></td>
-                                            <td class="left"><?php echo $estlrow->tp_name; ?>
-                                             <!-- <?php echo $invo_sdate = $estlrow->start_date; ?></br>
-                                             <?php echo $invo_edate = $estlrow->end_date; ?></br> -->
+                                            <td class="left"><?php echo $estlrow->tp_name; ?></br>
+                                              <?php echo $invo_sdate = $estlrow->start_date; ?></br>
+                                             <?php echo $invo_edate = $estlrow->end_date; ?></br> 
                                         </td>
                                             <td class="center"><?php echo $estlrow->price; ?></td>
                                             <td class="center">
@@ -435,12 +437,12 @@
                                             <td class="center" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
                                             <td class="left d-print-none" style="width: 1px;">
 
-                                                <input name="est_rl_id" id="d2" value="<?php echo $estlrow->est_lineid; ?>" style="display :none ;">
-                                                <input name="estid" id="d4" value="<?php echo  $estrow->est_id; ?>" style="display :none ;">
+                                                <input name="est_rl_id" id="d2" value="<?php echo $estlrow->invo_reg_lineid; ?>" style="display :none ;">
+                                                <input name="estid" id="d4" value="<?php echo  $estrow->invo_id; ?>" style="display :none ;">
 
 
                                                 </form>
-                                                <a class="js-arrow addrow" href="<?php echo site_url('camp/invorow_del') ?>?var1=<?php echo $estlrow->est_lineid; ?>&var2=<?php echo $estrow->est_id; ?>">
+                                                <a class="js-arrow addrow" href="<?php echo site_url('camp/invorow_del') ?>?var1=<?php echo $estlrow->invo_reg_lineid; ?>&var2=<?php echo $estrow->invo_id; ?>">
                                                     <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a>
                                             </td>
 

@@ -118,7 +118,8 @@
                     $email = $this->session->userdata('email');
                     $phone = $this->session->userdata('phone');
                     ?>
-                    <?php foreach ($logo as $estrow) {
+                    <?php if(!empty($logo)){
+                    foreach ($logo as $estrow) {
                     } ?>
 
                     <div class="card-body" style="margin-bottom: -53px;">
@@ -175,7 +176,7 @@
 
 
 
-
+<?php }?>
                     </div>
 
                     <!-- 
@@ -237,12 +238,12 @@
                                 </tr>
                                 <tr>
                                     <td>COMMENCING DATE</td>
-                                    <td><?php echo $newDate; ?> </td>
+                                    <td><?php echo $campdata->publish_date; ?> </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>POSITION</td>
-                                    <td> During Interval </td>
-                                </tr>
+                                    <td><?php //echo $campdata->play; ?>  </td>
+                                </tr> -->
                                 <tr>
                                     <td>CONTENT TYPE</td>
                                     <td> <?php echo $content->content_type; ?></td>
@@ -253,11 +254,11 @@
                                 </tr>
                                 <tr>
                                     <td>CAMPAIGN DURATION</td>
-                                    <td><?php echo $campdata->duration . ' ' . 'Weeks'; ?> </td>
+                                    <td><?php echo $campdata->package . ' ' . 'Weeks'; ?> </td>
                                 </tr>
                                 <!-- <tr>
                                     <td>CAMPAIGN DURATION</td>
-                                    <td> <?php echo $campdata->duration . ' ' . 'Weeks'; ?> </td>
+                                    <td> <?php //echo $campdata->duration . ' ' . 'Weeks'; ?> </td>
                                 </tr> -->
 
 
@@ -332,7 +333,7 @@
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $sub_amount; ?> </strong> </p>
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $trade_discount; ?> </strong> </p>
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $sub_total; ?> </strong> </p>
-                                        <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php //echo $gst_val; ?> </strong> </p>
+                                        <p> <strong><i class="" area-hidden="true"></i> 18 % </strong> </p>
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $deal_total; ?> </strong> </p>
                                         <p> <strong>Along with RO We transfer link</strong> </p>
 
@@ -368,6 +369,7 @@
                                     <th scope="col" class="text-center">Screens</th>                    
                                     <th scope="col" class="text-center">city</th>
                                     <th scope="col" class="text-center" >Webcode</th>
+                                    <th scope="col" class="text-center" >Position</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -379,22 +381,23 @@
                                    <th scope="row" class="text-center"> <?php echo $i; ?> </th>
                                         <td class="text-center"><?php echo $screen->sc_name; ?></td>
 
-                                        <?php $city= $screen->city; 
-                                        if($city!=''){
+                                        <?php /* $city= $screen->city; 
+                                        if($city!=''){ */
                                             ?>
 
                                         <td class="text-center"><?php echo $screen->city; ?></td>
-                                       <?php }
+                                       <?php /* }
                                        $webcode= $screen->web_code; 
                                        if($webcode!=''){
-
+ */
                                        
                                        ?>
 
                                         <td class="text-center"><?php echo $screen->web_code; ?></td>
                                         <?php
-                                       }
+                                  //     }
                                        ?>
+                                       <td class="text-center"><?php echo $screen->play; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

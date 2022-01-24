@@ -122,7 +122,7 @@ border-top: 15px solid #1E1F23; */
 
             .container-fluid {
                 -webkit-print-color-adjust: exact;
-                padding-right: 40px;
+                /* padding-right: 40px; */
 
             }
 

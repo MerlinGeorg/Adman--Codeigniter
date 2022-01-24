@@ -123,7 +123,7 @@ border-top: 15px solid #1E1F23; */
 
             .container-fluid {
                 -webkit-print-color-adjust: exact;
-                padding-right: 40px;
+                /* padding-right: 40px; */
 
             }
 
@@ -165,14 +165,14 @@ border-top: 15px solid #1E1F23; */
                     <div class="card-body">
 
 
-                        <div class="table-responsive ">
+                       
 
                        Report Date: <?php echo Date('Y-m-d');?>
-                        </div>
+                        
                     </div>
 
 
-                    <hr>
+                    <hr> <div class="table-responsive ">
                     <div style="display: block; page-break-before: always; ">
 
 
@@ -329,7 +329,7 @@ border-top: 15px solid #1E1F23; */
 
 
 
-                    </div>
+                    </div></div>
                 </div>
             </div>
         </div>

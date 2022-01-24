@@ -43,14 +43,16 @@
         }
     </script>
 
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
     <script type='text/javascript'></script>
 </head>
 
 <body>
-   
-    <div class="container-fluid" id="printthis">
+<div id="printthis">
+<div class="container-fluid">
+    <!-- <div class="container-fluid" id="printthis"> -->
+    <div id="ui-view" data-select2-id="ui-view">
+            <div>
+                <div class="card">
         <style>
             .card {
                 margin-bottom: 1.5rem
@@ -59,7 +61,7 @@
             .card {
                 position: relative;
                 display: -ms-flexbox;
-                display: flex;
+                /* display: flex; */
                 -ms-flex-direction: column;
                 flex-direction: column;
                 min-width: 0;
@@ -123,16 +125,14 @@ border-top: 15px solid #1E1F23; */
 
             .container-fluid {
                 -webkit-print-color-adjust: exact;
-                padding-right: 40px;
+                /* padding-right: 40px; */
 
             }
 
-            }
+            
         </style>
 
-        <div id="ui-view" data-select2-id="ui-view">
-            <div>
-                <div class="card">
+        
 
                     <div class="card-header">
                         <h5>REPORT</h5><?php if(!empty($advertiser)){
@@ -155,7 +155,7 @@ border-top: 15px solid #1E1F23; */
  -->
 
                     </div>
-
+                </div>
                     <?php
 
                     // $email = $this->session->userdata('email');
@@ -165,14 +165,15 @@ border-top: 15px solid #1E1F23; */
                     <div class="card-body">
 
 
-                        <div class="table-responsive ">
+                       
                         Report Date: <?php echo Date('Y-m-d');?>
 
-                        </div>
+                        
                     </div>
 
 
                     <hr>
+                    <div class="table-responsive ">
                     <div style="display: block; page-break-before: always; ">
 
 
@@ -326,7 +327,7 @@ border-top: 15px solid #1E1F23; */
 
 
 
-                    </div>
+                    </div></div>
                 </div>
             </div>
         </div>
@@ -346,6 +347,3 @@ border-top: 15px solid #1E1F23; */
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 
 
-</body>
-
-</html>

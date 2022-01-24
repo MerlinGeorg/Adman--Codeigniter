@@ -38,6 +38,12 @@
     .form-control[readonly] {
         background-color: #fbfbfb;
     }
+
+    @media screen and (max-width:479px){
+        #exutton{
+            margin-top: 10px !important;
+        }
+    }
 </style>
 <?php //$this->load->view('camp/header_menu.php'); 
 ?>
@@ -293,7 +299,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <select class="form-control" id="a" name="a" onChange="outputValue(this), get_batch()" required>
                                                     <option value="">Select ASP</option>
@@ -306,7 +312,7 @@
                                                 <input type="text" name="aspname" id="aspname" style="display : none ;" />
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
 
                                             <div class="form-group" id="output_batch">
                                                 <select class="form-control" name="batch" onChange="outputscreen(this)" required>
@@ -316,7 +322,7 @@
                                             </div>
                                             <input type="text" name="scname" id="scname" style=" display:  none;" />
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <select class="form-control" name="pol" required>
                                                     <option value="">Campaign Duration</option>
@@ -329,8 +335,20 @@
                                             </div>
 
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <select class="form-control" name="play" required>
+                                                    <option value="">Position</option>
+                                                    
+                                                        <option value="preshow">Preshow</option>
+                                                        <option value="during interval">During Interval</option>
+                                                   
+                                                </select>
+                                            </div>
+
+                                        </div>
                                         <div class="col-lg-12 mt-4 text-center">
-                                            <button type="button" class="btn" style="border-radius: 50%;" onclick="addRow('dataTable', a, du, aspname, scname, batch, pol)"><i style="font-size: 38px; color: #47a3f3;" class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn" style="border-radius: 50%;" onclick="addRow('dataTable', a, du, aspname, scname, batch, pol,play)"><i style="font-size: 38px; color: #47a3f3;" class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
                                         <!-- /.col-lg-6 (nested) -->
                                         <!-- /.row (nested) -->
@@ -356,7 +374,7 @@
                                     <th>SID</th>
                                     <th>Screen Name</th>
                                     <th>Time</th>
-
+                                    <th>Position</th>
                             </thead>
                             </tr>
                         </TABLE>
@@ -376,6 +394,7 @@
         </div>
     </div>
 </div>
+                                                    </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $('#b').select2({
@@ -424,7 +443,7 @@
     }
 
 
-    function addRow(tableID, a, du, aspname, scname, batch, pol) {
+    function addRow(tableID, a, du, aspname, scname, batch, pol,play) {
 
         var table = document.getElementById(tableID);
         var rowCount = table.rows.length;
@@ -446,7 +465,8 @@
         cell4.innerHTML = (scname.value);
         var cell5 = row.insertCell(5);
         cell5.innerHTML = (pol.value);
-
+        var cell6=row.insertCell(6);
+        cell6.innerHTML=play.value;
     }
 
 
@@ -470,7 +490,7 @@
         var data = [];
         var table = document.getElementById('dataTable');
 
-
+//alert("hi");
         for (r = 0; r < table.rows.length - 1; r++) {
 
             var row = table.rows[r + 1];
@@ -488,7 +508,8 @@
                 publish_date: (publish_date.value),
                 content_name: (content_name.value),
                 content_type: (content_type.value),
-                cnt: (cnt.value)
+                cnt: (cnt.value),
+                play: cells[6].innerHTML
             });
 
 
