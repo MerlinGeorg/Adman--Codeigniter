@@ -107,7 +107,7 @@ class Asp extends Layout_Controller
 ////////////////////////////////////////asp-list////////////////////////////////////////////
 	public function sess_out()
 	{
-		echo "sess out";
+		$this->load->view('welcome/login_form');
 	}
 
 	public function list_asp()

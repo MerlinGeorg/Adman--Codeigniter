@@ -47,7 +47,7 @@
                                 <table class="table table-borderless table-data3">
                                     <thead>
                                         <tr>
-                                          
+                                            <th>ASP ID</th> 
                                             <th>ASP NAME</th>                                               
                                             <th>ASP PERSON</th>
                                             <th>ASP PHONE</th>
@@ -62,7 +62,7 @@
                                      <?php     foreach ($aspdata->result() as $asprow)
                        			{ ?>  
                                         <tr>
-                                           
+                                        <td><?php echo $asprow->asp_id;  ?></td>
                                             <td><?php echo $asprow->asp_name;  ?></td>
                                             <td><?php echo $asprow->asp_person;  ?></td>
                                             <td><?php echo $asprow->phone_1;  ?></td>

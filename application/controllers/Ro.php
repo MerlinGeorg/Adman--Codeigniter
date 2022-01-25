@@ -40,6 +40,7 @@ class Ro extends Layout_Controller
 			$this->sess_out();
 		}
 	}
+	
 	function get_batch()
 	{
 		$asp_id = $this->input->post('course_id');
@@ -480,6 +481,10 @@ echo $encode_data;
 		} else {
 			$this->sess_out();
 		}
+	}
+	public function sess_out()
+	{
+		$this->load->view('welcome/login_form');
 	}
 
 	public function updateOldReleaseOrder()

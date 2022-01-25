@@ -43,6 +43,7 @@
                                 <table class="table table-borderless table-data3">
                                     <thead>
                                         <tr>
+                                            <th>Invo ID</th>
                                             <th>RO ID</th>
                                             <!-- <th>Est ID</th>  -->
                                             <th>Campaign</th>
@@ -62,7 +63,7 @@
                                         //   echo"<pre>";print_r($involist->result());exit;
                                         foreach ($involist->result() as $estrow) { ?>
                                             <tr>
-
+                                              <td><?php echo $estrow->inward_id;     ?></td>
                                                 <td><?php echo $estrow->ro_id;     ?></td>
                                                 <!-- <td><?php //echo $estrow->est_id; 
                                                             ?></td> -->

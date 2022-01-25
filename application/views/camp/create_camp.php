@@ -560,7 +560,8 @@
             autoclose: true,
             showOnFocus: true,
             todayHighlight: true,
-            format: "yyyy-mm-dd"
+            format: "yyyy-mm-dd",
+            startDate: new Date("<?= date('Y-m-d') ?>")
         });
 
     });

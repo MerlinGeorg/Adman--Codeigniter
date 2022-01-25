@@ -717,6 +717,10 @@ else{
 			$this->sess_out();
 		}
 	}
+	function sess_out()
+	{
+		$this->load->view('welcome/login_form');
+	}
 	////////////////////////////////////////////////////////////////
 	function pl_involine()
 	{

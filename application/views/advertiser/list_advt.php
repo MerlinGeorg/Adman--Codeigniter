@@ -56,7 +56,7 @@
                                     <table class="table table-borderless table-data3">
                                         <thead>
                                             <tr>
-
+                                                <th>ADV ID</th>
                                                 <th>ADV NAME</th>
                                                 <th>PERSON</th>
                                                 <th>PHONE</th>
@@ -70,7 +70,7 @@
                                         <tbody>
                                             <?php foreach ($list_advdata->result() as $advrow) { ?>
                                                 <tr>
-
+                                                    <td><?php echo $advrow->adv_id;  ?></td>
                                                     <td><?php echo $advrow->adv_name;  ?></td>
                                                     <td><?php echo $advrow->c_person;  ?></td>
                                                     <td><?php echo $advrow->phone_1;  ?></td>
