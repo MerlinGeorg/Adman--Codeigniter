@@ -194,12 +194,13 @@ class Ro extends Layout_Controller
 		$adsdata =  $this->romodel->adscontact($invoiceId);
 		$data['advaddr'] = $adsdata;
 		$campid =  $adsdata->est_id;
-		$campdata=$this->romodel->get_campData($campid);
+		$asp=$adsdata->asp;
+		$campdata=$this->romodel->get_campDataByAsp($campid,$asp);
 		$data['campdata'] = $campdata;
 		$contentId=$campdata->content_id;
 		$data['content'] = $this->romodel->getContentById($contentId);
 	//	$data['screens']  = $this->romodel->get_screens($campid);
-		$asp=$adsdata->asp;
+		
 		$estlineedit = $this->romodel->get_ExcludingPendingScreen($campid,$asp);
 		
 		foreach($estlineedit->result() as $row){
@@ -207,9 +208,12 @@ $sc_id[]=$row->screen;
 		}
 		//print_r($sc_id);die();
 		$data['estlineedit'] =$estlineedit;
+		$screens=[];
+		if(!empty($sc_id)){
 		foreach($sc_id as $screen){
 			$screens[]  = $this->romodel->get_screensByAsp($asp,$campid,$screen);
 		}
+	}
 	//	print_r($screens);die();
 		$data['screens']  =$screens;
 	//$data['estedit'] = $this->campmodel->get_estedit($campid);
@@ -285,7 +289,7 @@ $sc_id[]=$row->screen;
 		// echo $id;
 		// die();
 		$camp_id = $this->input->post('campId');
-		$adv_id = $this->input->post('ro_adv');
+		//$adv_id = $this->input->post('ro_adv');
 		$asp_id = $this->input->post('aspId');
 		$duration = $this->input->post('duration');
 		// print_r($duration);
@@ -298,7 +302,7 @@ $sc_id[]=$row->screen;
 		$publishingDate=$this->input->post('ad_date');
 		$ro_data = array(
 			'est_id' => $camp_id,
-			'adv_id' => $adv_id,
+			'adv_id' => $ro->adv_id,
 			'asp' => $asp_id,
 			'est_name' => $ro->name,
 			//'duration' => $ro[0]->duration,
@@ -440,7 +444,8 @@ echo $encode_data;
 			//print_r(($ro_list['data'][0])->asp_id);
 			//die();
 			$asp_id=($ro_list['data'][0])->asp_id;
-			$ro_list['var']=$this->romodel->get_newpending('screen', $asp_id);
+			$camp=($ro_list['data'][0])->est_id;
+			$ro_list['var']=$this->romodel->screenByCampaign($asp_id,$camp);
 			
 			$this->data = $ro_list;
 			$this->page = "ro/oldro_edit";
@@ -464,8 +469,12 @@ echo $encode_data;
 	public function deletePendingScreen()
 	{
 		if (isset($this->session->userdata['logged_in'])) {
+			//echo "hi";
+			//die();
+			$camp=$this->input->post('est_id');
+			$asp=$this->input->post('asp');
 			$sc_id = $this->input->post('sc_id');
-			$ro_list =  $this->romodel->updateScreenStatus($sc_id);
+			$ro_list =  $this->romodel->updateScreenStatus($sc_id,$camp,$asp);
 			$encode_data = json_encode($ro_list);
 			echo $encode_data;
 		} else {

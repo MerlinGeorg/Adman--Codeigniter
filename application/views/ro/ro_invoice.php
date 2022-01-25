@@ -250,7 +250,7 @@
                                 </tr>
                                 <tr>
                                     <td>CONTENT DURATION </td>
-                                    <td><?php echo $advaddr->Contentdur . ' ' . 'Seconds'; ?> </td>
+                                    <td><?php echo $campdata->duration . ' ' . 'Seconds'; ?> </td>
                                 </tr>
                                 <tr>
                                     <td>CAMPAIGN DURATION</td>

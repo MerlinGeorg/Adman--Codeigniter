@@ -167,8 +167,7 @@ border-top: 15px solid #1E1F23; */
                                 <?php if(!empty($advertiser)){
                     ?>         
                         Advertiser :
-                        <strong><?php 
-                        echo $advertiser; 
+                        <strong><?php echo $advertiser; 
                                 ?></strong>
                                 <?php } ?>
                                 <?php $view_path= $_ci_view;
