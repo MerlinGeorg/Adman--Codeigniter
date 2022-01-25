@@ -293,7 +293,7 @@ border-top: 15px solid #1E1F23; */
                                         <!-- <div> <strong class="mb-3">To:</strong></div> -->
                                         <div><h6></h6></div>
                                         <div>
-                                            <h6><strong><?php echo $adv_cp = $estrow->c_person; ?></strong></h6>
+                                            <strong><?php echo $adv_cp = $estrow->c_person; ?></strong>
                                         </div>
                                         <div><?php echo $adv_name = $estrow->adv_name; ?></div>
                                         <div><?php echo $adv_add1 = $estrow->add1; ?></div>
@@ -480,6 +480,19 @@ border-top: 15px solid #1E1F23; */
                                                                                                                                 ?> </strong></h4>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                        <td style=" font-weight: 100;font-size: 10px;">
+
+                                            ​
+                                            <div id="autoUpdate" class="autoUpdate"><img src="<?php echo base_url(); ?>Assets/img/icon/sign.png" style="height : 76px;"> </div> <br>
+                                            Authorised Signatory <br>
+                                            Meharali Poilungal Ismail<br>
+                                            Advertising Service Provider <br>
+                                            Current Account Details: Name: MEHARALI P I, Account No: 0250073000050159, IFSC: SIBL0000250, Bank: South Indian Bank
+                                        </td>
+
+
+                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -501,7 +514,7 @@ border-top: 15px solid #1E1F23; */
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <label class="d-print-none addrow">ASP Name</label>
+                                                <!-- <label class="d-print-none addrow">ASP Name</label> -->
                                                 <div class="form-group">
                                                     <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
                                                         <!-- <option value="">SELECT</option> -->

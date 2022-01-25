@@ -196,7 +196,7 @@
                                 }
 
                                 .div-cal {
-                                    padding: 12px;
+                                    /* padding: 12px; */
                                     text-align: right !important;
                                 }
 
@@ -218,7 +218,7 @@
                         <script type='text/javascript'></script>
                         <div class="card-header">
                             <h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->est_id; ?></strong>
-
+                            <br>
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
                             <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
@@ -227,6 +227,9 @@
                             <!-- <a href="<?php //echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span> -->
                             <a href="<?php echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a>
 
+                            <span id="printOnly" >   
+                            <class="float-left">Invoice Date:
+                                        <?php echo $est_date = $estrow->est_cr_date; ?> </span>   <br>          
 
                         </div> 
 
@@ -267,9 +270,9 @@
                                 <div class="col-sm-4 ml-auto address">
 
 
-                                    <strong class="mb-3">Billed To:</strong>
+                                    <!-- <strong class="mb-3">Billed To:</strong> -->
                                     <div>
-                                        <h6><?php echo $adv_cp = $estrow->c_person; ?></h6>
+                                        <strong><?php echo $adv_cp = $estrow->c_person; ?></strong>
                                     </div>
                                     <div><?php echo $adv_name = $estrow->adv_name; ?></div>
                                     <div><?php echo $adv_add1 = $estrow->add1; ?></div>
@@ -301,8 +304,7 @@
 
 
 
-                                    <div><strong>Invoice Date:</strong>
-                                        <?php echo $est_date = $estrow->est_cr_date; ?><br></div>
+                                    <div></div>
                                     <!-- <div><strong>Content Name:</strong>
                         <?php echo $contentname = $estrow->content_name ?><br></div>
                        <div><strong>Campaign Name:</strong>
@@ -328,131 +330,8 @@
 
                                 </div>
                             </div>
-
-
-                            <form method="post" action="<?php echo site_url('camp/nr_inline'); ?>">
-                                <input style="display:none;" type="number" name="nr_estid" value="<?php echo $estrow->est_id; ?>">
-                                <input style="display:none;" name="nr_duration" value="<?php echo $estrow->duration;  ?>">
-                                <input style="display:none;" name="nr_screen" value="1" id="scrval">
-
-
-
-                                <div class="panel-body">
-                                    <div class="row">
-                                    <div class="col-lg-6" >
-                                           
-                                            
-                                        
-                                        
-                                            <div class="form-group" >
-                                                <select class="form-control d-print-none addrow " onchange="get_batch()" name="nr_asp" id="a" >
-                                                <!-- <option value="">SELECT</option> -->
-                                                    <?php foreach ($n_asp->result() as $nasprow) {  ?>
-                                                      
-                                                        <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
-
-                                                    <?php } ?>
-                                                </select>
-<!-- <input type="hidden" value="<?php //echo $asp->asp;?>" name="aspHid"> -->
-                                            </div>
-                                            <div class="form-group d-print-none " id="output_batch">
-                                            </div>
-                                            </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <select class="form-control d-print-none addrow" name="nr_pack">
-                                                    <?php foreach ($n_package->result() as $npack) {  ?>
-                                                        <option value="<?php echo $npack->tpc; ?>"><?php echo $npack->tp_name; ?></option>
-
-                                                    <?php } ?>
-                                                </select>
-
-
-                                            </div>
-                                            <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                                            <br><br>
-                                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
-                                        </div>
-                                    </div>
-
-                             </form> 
-
-
-
-                            <!-- print div--------------------------------------------------------------------- -->
-
-
-
-                            <div class="table-responsive " style=" padding-right: 3px;  padding-left: 3px;">
-                                <table class="table table-striped list_div ">
-                                    <thead class="table-header">
-                                        <tr>
-                                            <th class="center">ASP</th>
-                                            <th class="left">SCREEN</th>
-                                            <th class="left">Package</th>
-                                            <th class="center">Rate</th>
-                                            <th class="right">Amount</th>
-                                            <th class="right">Discount</th>
-                                            <th class="right">IGST</th>
-                                            <th class="right">CGST</th>
-                                            <th class="right">SGST</th>
-                                            <th class="right">L-Tax</th>
-                                            <th class="left">Total</th>
-
-                                            <th class="left d-print-none addrow">CLR</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i = 0;
-                                        foreach ($involineedit->result() as $estlrow) {
-                                            $i++; ?>
-                                            <td class="center"><?php echo $estlrow->asp_name; ?></td>
-                                            <td class="left"><?php echo $estlrow->sc_name; ?></td>
-                                            <td class="left"><?php echo $estlrow->tp_name; ?>
-                                             <!-- <?php echo $invo_sdate = $estlrow->start_date; ?></br>
-                                             <?php echo $invo_edate = $estlrow->end_date; ?></br> -->
-                                        </td>
-                                            <td class="center"><?php echo $estlrow->price; ?></td>
-                                            <td class="center">
-                                                <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
-                                            <td class="text-left">
-
-                                                <?php echo $dis = $estlrow->discount; ?>%</br>
-                                                <?php echo $x = ($amount * $dis) / 100; ?></br><?php echo $y = $amount - $x; ?>
-                                            </td>
-                                            <td class="centert"><?php echo $igst = $estlrow->igst; ?>%</br>
-                                                <?php echo $igst_val = ($y * $igst) / 100; ?></br>
-
-                                            </td>
-                                            <td class="center"><?php echo $cgst = $estlrow->cgst; ?>%</br>
-                                                <?php echo $cgst_val = ($y * $cgst) / 100; ?>
-                                            </td>
-                                            <td class="center"><?php echo $sgst = $estlrow->sgst; ?>%</br>
-                                                <?php echo $sgst_val = ($y * $sgst) / 100; ?></td>
-                                            <td class="center"><?php echo $ltax = $estlrow->local_tax; ?>%</br>
-                                                <?php echo $ltax_val = ($y * $ltax) / 100; ?></td>
-
-                                            <td class="center" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
-                                            <td class="left d-print-none" style="width: 1px;">
-
-                                                <input name="est_rl_id" id="d2" value="<?php echo $estlrow->est_lineid; ?>" style="display :none ;">
-                                                <input name="estid" id="d4" value="<?php echo  $estrow->est_id; ?>" style="display :none ;">
-
-
-                                                </form>
-                                                <a class="js-arrow addrow" href="<?php echo site_url('camp/invorow_del') ?>?var1=<?php echo $estlrow->est_lineid; ?>&var2=<?php echo $estrow->est_id; ?>">
-                                                    <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a>
-                                            </td>
-
-
-                                            </tr>
-                                        <?PHP } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <?php
+                            
+                            <?php
                         $sub_total = 0;
                         $cgst_total = 0;
                         $igst_total = 0;
@@ -502,12 +381,7 @@
 
                         ?>
                         <hr>
-
-
-
-
-
-                        <div id="printthis_bill" style=" page-break-before: always; ">
+                        <div id="printthis_bill">
 
 
                             <div class=" bill-table">
@@ -612,8 +486,143 @@
 
 
 
-
                         </div>
+                        </div>
+                        </div>
+                    
+
+
+                            <form method="post" action="<?php echo site_url('camp/nr_inline'); ?>">
+                                <input style="display:none;" type="number" name="nr_estid" value="<?php echo $estrow->est_id; ?>">
+                                <input style="display:none;" name="nr_duration" value="<?php echo $estrow->duration;  ?>">
+                                <input style="display:none;" name="nr_screen" value="1" id="scrval">
+
+
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                    <div class="col-lg-6" >
+                                           
+                                            
+                                        
+                                        
+                                            <div class="form-group" >
+                                                <br>
+                                                <select class="form-control d-print-none addrow " onchange="get_batch()" name="nr_asp" id="a" >
+                                                <!-- <option value="">SELECT</option> -->
+                                                    <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                                      
+                                                        <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
+
+                                                    <?php } ?>
+                                                </select>
+<!-- <input type="hidden" value="<?php //echo $asp->asp;?>" name="aspHid"> -->
+                                            </div>
+                                            <div class="form-group d-print-none " id="output_batch">
+                                            </div>
+                                            </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <br>
+                                                <select class="form-control d-print-none addrow" name="nr_pack">
+                                                    <?php foreach ($n_package->result() as $npack) {  ?>
+                                                        <option value="<?php echo $npack->tpc; ?>"><?php echo $npack->tp_name; ?></option>
+
+                                                    <?php } ?>
+                                                </select>
+
+
+                                            </div>
+                                            <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
+                                            <br><br>
+                                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
+                                        </div>
+                                    </div>
+
+                             </form> 
+
+
+
+                            <!-- print div--------------------------------------------------------------------- -->
+
+
+
+                            <div class="table-responsive " style=" padding-right: 3px;  padding-left: 3px;">
+                                <table class="table table-striped list_div ">
+                                    <thead class="table-header">
+                                        <tr>
+                                            <th class="center">ASP</th>
+                                            <th class="left">SCREEN</th>
+                                            <th class="left">Package</th>
+                                            <th class="center">Rate</th>
+                                            <th class="right">Amount</th>
+                                            <th class="right">Discount</th>
+                                            <th class="right">IGST</th>
+                                            <th class="right">CGST</th>
+                                            <th class="right">SGST</th>
+                                            <th class="right">L-Tax</th>
+                                            <th class="left">Total</th>
+
+                                            <th class="left d-print-none addrow">CLR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 0;
+                                        foreach ($involineedit->result() as $estlrow) {
+                                            $i++; ?>
+                                            <td class="center"><?php echo $estlrow->asp_name; ?></td>
+                                            <td class="left"><?php echo $estlrow->sc_name; ?></td>
+                                            <td class="left"><?php echo $estlrow->tp_name; ?>
+                                             <!-- <?php echo $invo_sdate = $estlrow->start_date; ?></br>
+                                             <?php echo $invo_edate = $estlrow->end_date; ?></br> -->
+                                        </td>
+                                            <td class="center"><?php echo $estlrow->price; ?></td>
+                                            <td class="center">
+                                                <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
+                                            <td class="text-left">
+
+                                                <?php echo $dis = $estlrow->discount; ?>%</br>
+                                                <?php echo $x = ($amount * $dis) / 100; ?></br><?php echo $y = $amount - $x; ?>
+                                            </td>
+                                            <td class="centert"><?php echo $igst = $estlrow->igst; ?>%</br>
+                                                <?php echo $igst_val = ($y * $igst) / 100; ?></br>
+
+                                            </td>
+                                            <td class="center"><?php echo $cgst = $estlrow->cgst; ?>%</br>
+                                                <?php echo $cgst_val = ($y * $cgst) / 100; ?>
+                                            </td>
+                                            <td class="center"><?php echo $sgst = $estlrow->sgst; ?>%</br>
+                                                <?php echo $sgst_val = ($y * $sgst) / 100; ?></td>
+                                            <td class="center"><?php echo $ltax = $estlrow->local_tax; ?>%</br>
+                                                <?php echo $ltax_val = ($y * $ltax) / 100; ?></td>
+
+                                            <td class="center" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
+                                            <td class="left d-print-none" style="width: 1px;">
+
+                                                <input name="est_rl_id" id="d2" value="<?php echo $estlrow->est_lineid; ?>" style="display :none ;">
+                                                <input name="estid" id="d4" value="<?php echo  $estrow->est_id; ?>" style="display :none ;">
+
+
+                                                </form>
+                                                <a class="js-arrow addrow" href="<?php echo site_url('camp/invorow_del') ?>?var1=<?php echo $estlrow->est_lineid; ?>&var2=<?php echo $estrow->est_id; ?>">
+                                                    <img src="<?php echo base_url('Assets/img/icon/delete.png'); ?>" style="<height:2></height:2>0px; width:20px" title="Remove"></a>
+                                            </td>
+
+
+                                            </tr>
+                                        <?PHP } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        
+
+
+
+
+
+                        
                     </div>
                 </div>
             </div>

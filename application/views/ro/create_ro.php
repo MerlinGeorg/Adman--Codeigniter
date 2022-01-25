@@ -130,7 +130,7 @@
                                 </div>
 
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>End Date</label>
 
@@ -146,7 +146,7 @@
                                 </div>
 
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>User</label>
                                         <select class="form-control" id="user" name="user" required>
