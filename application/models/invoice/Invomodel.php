@@ -25,7 +25,7 @@ class Invomodel extends CI_Model
 	}
 
 	public function getEstIdByName($name){
-		$this->db->select('est_id');
+		$this->db->select('est_id,duration');
 		$this->db->from('est_reg');
 		$this->db->where('name',$name);
 		$res=$this->db->get();
@@ -126,7 +126,7 @@ class Invomodel extends CI_Model
 	$this->db->join('content_reg', 'invoice_reg.content_id = content_reg.con_id', 'inner'); */
 	 $this->db->join('inward_invoice', 'invo_reg_line.inward_id = inward_invoice.inward_id', 'inner');
 	$this->db->join('adv_reg', 'inward_invoice.adv_id = adv_reg.adv_id', 'inner');
-	//$this->db->join('content_reg', 'inward_invoice.content_id = content_reg.con_id', 'inner'); 
+	$this->db->join('est_reg', 'inward_invoice.camp_id = est_reg.est_id', 'inner'); 
 		//$this->db->get();
 		return $this->db->get();
 	 // $res=$this->db->get();

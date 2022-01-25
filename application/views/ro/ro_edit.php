@@ -74,9 +74,9 @@
                                             <label>Campaign Name</label>
                                              <select class="form-control" id="campId" name="campId" >
                                               <option value="<?php echo $row->est_id;   ?>"><?php echo $row->name;   ?></option>
-                                                <?php foreach ($rolist->result() as $rorow): ?>
+                                               <!--  <?php foreach ($rolist->result() as $rorow): ?>
                                               <option value="<?php echo $rorow->est_id;     ?>"><?php echo $rorow->name;   ?></option>
-                                                <?php endforeach; ?>
+                                                <?php endforeach; ?> -->
                                              </select>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                      <div class="form-group">
                                             <label>ASP Name</label>
                                           
-                                            <select class="form-control" id="aspId" name="aspId"  >
+                                            <select class="form-control" id="aspId" name="aspId"  required>
                                                 <option value="<?php echo $row->asp_id;     ?>"><?php echo $row->asp_name;   ?></option>
                                                
                                                 
@@ -145,7 +145,8 @@
                                             $endDate = date('Y-m-d', $date);
 
                                              ?>
-                                            <input class="form-control" name="end_date" id="end_date" value="<?php echo $endDate;   ?>" readonly >
+                                            <!-- <input class="form-control" name="end_date" id="end_date" value="<?php echo $endDate;   ?>" readonly > -->
+                                            <input class="form-control" name="end_date" id="end_date" value="<?php echo $row->lst_date;   ?>" readonly >
                                             <div style="color: red;"><?php echo form_error('end_date'); ?></div>
                                             <!-- <select class="form-control" id="end_date" name="end_date" required>
                                                 <option value="">Select</option>

@@ -212,7 +212,7 @@
                                             <label>Content Type</label>
                                             <select class="form-control" name="content_type" required="required">
                                                 <option value="">Choose Content Type
-                                                <option>
+                                            </option>
                                                     <?php foreach ($c_type->result() as $crow) {
                                                     ?>
 

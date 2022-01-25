@@ -39,9 +39,9 @@ class Reports extends Layout_Controller
                 $advId = $this->input->post('ad_name');
                 $result = $this->Report->advertiserReport('invo_reg_line', $advId);
                 $adv=$this->Report->advertiserName($advId);
-               
+
                 if (empty($result)) {
-                    $this->emptyAdvertiserReport($adv);
+                    $this->emptyAdvertiserReport($adv->adv_name);
                 } else {
                     foreach ($result as $row) {
 

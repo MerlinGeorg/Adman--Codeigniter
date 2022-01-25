@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='viewport' content='text/html;charset="UTF-8"' http-equiv="Content-Type">
     <title>Report</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/frm_style.css') ?>">
     <!-- <link rel="stylesheet" type="text/css" href="print.css" media="screen, print" /> -->
@@ -24,9 +24,9 @@
                 useCORS: true,
                 onrendered: function(canvas) {
                     imgData = canvas.toDataURL('image/png');
-                    var doc = new jsPDF('l', 'pt', 'a4');
+                    var doc = new jsPDF('l', 'pt', 'a4',true);
 
-                    doc.addImage(imgData, 'PNG', 4, 35);
+                    doc.addImage(imgData, 'PNG', 4, 35,800,900,'','FAST');
 
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');

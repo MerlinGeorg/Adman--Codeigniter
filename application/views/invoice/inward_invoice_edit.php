@@ -311,9 +311,11 @@
                                                         <?php echo $campname = $estrow->camp_name; ?><br></div>
                                                     <div><strong>Content Name      :</strong>&nbsp;&nbsp;
                                                     &nbsp;&nbsp;
-                                                        <?php echo $contentname = $estrow->content_name ?><br></div>
+                                                        <?php echo $content->content_name ?><br></div>
                                                     <div><strong>Content Duration:</strong>&nbsp;
                                                         <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
+                                                        <div><strong>Invoice Details:</strong>&nbsp;
+                                                        <?php echo $estrow->content_name; ?><br></div>    
                                                    <!--  <div><strong>Position</strong>
                                                         <?php //echo $WF = $estrow->play; ?>
                                                         <form method="post" action="<?php //echo site_url('invoice/pl_involine'); ?>">

@@ -283,11 +283,17 @@ function formatDate(date) {
          //    alert(sc);
         // alert(sc_id);
         // alert('hi');
+        var campId=$('#campId').val();
+        var aspId=$('#aspId').val();
+        //alert(campId);
+
         $.ajax({
             method: "POST",
             url: "<?php echo site_url('ro/deletePendingScreen') ?>",
             data: {
-                sc_id: sc_id
+                sc_id: sc_id,
+                est_id:campId,
+                asp:aspId
             }, // serializes the form's elements.
             success: function(data) {
                 // alert(data);  
