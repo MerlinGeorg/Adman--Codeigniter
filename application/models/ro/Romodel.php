@@ -7,7 +7,7 @@ class Romodel extends CI_Model
 	{
 
 
-		$this->db->select('DISTINCT(R.ro_id),R.campaignDuration,E.name AS camp_ame,R.est_id');
+		$this->db->select('DISTINCT(R.ro_id),R.campaignDuration,R.cr_date,E.name AS camp_ame,R.est_id');
 		$this->db->from('ro_reg R');
 		$this->db->where('R.status', 1);
 		$this->db->where('R.campaignDuration !=', '0');

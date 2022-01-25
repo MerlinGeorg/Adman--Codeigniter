@@ -301,8 +301,6 @@ class Settings extends Layout_Controller
 
 	public function sess_out()
 	{
-
-
-		echo "sess out";
+		$this->load->view('welcome/login_form');
 	}
 }

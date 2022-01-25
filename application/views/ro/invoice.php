@@ -45,12 +45,11 @@
                                     <thead>
                                         <tr>
                                             <!-- <th>Invo ID</th>      -->
-
+                                            <th>RO ID</th>
                                             <th>Campaign</th>
-                                            <th>Duration</th>
-
+                                            <th>Created</th>
+                                            <th>Duration</th>                                           
                                             <th>Edit</th>
-
 
 
                                         </tr>
@@ -59,14 +58,10 @@
                                         <?php foreach ($involist->result() as $estrow) { ?>
                                             <tr>
 
-                                                <!-- <td><?php echo $estrow->invo_id;     ?></td> -->
-
+                                                <td><?php echo $estrow->ro_id;     ?></td>
                                                 <td><?php echo $estrow->camp_ame; ?></td>
-
-
-
-
-                                                <td><?php echo $estrow->campaignDuration; ?></td>
+                                                <td><?php echo $estrow->cr_date; ?></td>
+                                                <td><?php echo $estrow->campaignDuration; ?></td>                                              
                                                 <td><a href="<?php echo site_url('ro/ro_edit') . '/' . $estrow->ro_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
                                                 </td>
                                             </tr>

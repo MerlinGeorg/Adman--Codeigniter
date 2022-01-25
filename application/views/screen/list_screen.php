@@ -22,7 +22,7 @@
                                         <table class="table table-borderless table-data3">
                                             <thead>
                                                 <tr>
-
+                                                    <th>SCREEN ID</th>
                                                     <th>SCREEN NAME</th>
                                                     <th>CITY</th>
                                                     <th>ASP</th>
@@ -35,7 +35,7 @@
                                             <tbody>
                                                 <?php foreach ($scdata->result() as $scrow) { ?>
                                                     <tr>
-
+                                                        <td><?php echo $scrow->sc_id;  ?></td>
                                                         <td><?php echo $scrow->sc_name;  ?></td>
                                                         <td><?php echo $scrow->city;  ?></td>
                                                         <td><?php echo $scrow->asp_name;  ?></td>

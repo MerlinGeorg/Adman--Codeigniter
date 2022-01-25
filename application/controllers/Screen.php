@@ -119,7 +119,7 @@ class Screen extends Layout_Controller
 	////////////////////////////////////////screen-list////////////////////////////////////////////
 	public function sess_out()
 	{
-		echo "sess out";
+		$this->load->view('welcome/login_form');
 	}
 	public function list_screen()
 	{

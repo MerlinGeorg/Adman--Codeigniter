@@ -134,7 +134,7 @@ class Advertiser extends Layout_Controller
 	{
 
 
-		echo "sess out";
+		$this->load->view('welcome/login_form');
 	}
 
 	public function adv_edit()

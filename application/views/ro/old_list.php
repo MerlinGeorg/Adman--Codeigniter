@@ -43,7 +43,7 @@
                                 <table class="table table-borderless table-data3">
                                     <thead>
                                     <tr>
-                                          <th>Invo ID</th>       
+                                          <th>RO ID</th>       
                                             <th>CAMPAIGN NAME</th> 
 											 <th>ADVERTISER</th> 			
 											 <th>DURATION</th> 	
@@ -69,7 +69,7 @@
                                         <tr>
                                            
                                             <!-- <td><?php //echo $estrow->invo_id;	 ?></td> -->
-                                            <td><?php echo $estrow->est_id; ?></td>
+                                            <td><?php echo $estrow->ro_id; ?></td>
 											<td><?php echo $estrow->name; ?></td>
 									        <td><?php echo $estrow->adv_name; ?></td>
 											<td><?php echo $estrow->campaignDuration; ?></td>

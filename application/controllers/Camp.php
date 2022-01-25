@@ -675,7 +675,7 @@ echo "<script type='text/javascript'>alert('Campaign Invoiced Successfully.Pleas
 	///////////////////////////////
 	function sess_out()
 	{
-		echo "exit sess";
+		$this->load->view('welcome/login_form');
 	}
 	function list_outward_invoiced()
 	{
