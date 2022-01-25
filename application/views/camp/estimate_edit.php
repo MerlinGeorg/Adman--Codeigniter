@@ -163,7 +163,7 @@ border-top: 15px solid #1E1F23; */
                                 }
 
                                 .date-div {
-                                    padding-top: 110px;
+                                    padding-top: 105px;
                                     /* float:left; */
 
                                 }
