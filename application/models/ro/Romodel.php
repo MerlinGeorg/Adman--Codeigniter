@@ -7,10 +7,10 @@ class Romodel extends CI_Model
 	{
 
 
-		$this->db->select('DISTINCT(R.ro_id),R.duration,E.name AS camp_ame,R.est_id');
+		$this->db->select('DISTINCT(R.ro_id),R.campaignDuration,E.name AS camp_ame,R.est_id');
 		$this->db->from('ro_reg R');
 		$this->db->where('R.status', 1);
-		$this->db->where('R.duration !=', '0');
+		$this->db->where('R.campaignDuration !=', '0');
 		$this->db->where('R.asp !=', '0');
 		$this->db->where('R.package !=', '0');
 		$this->db->join('est_reg E ', 'R.est_id = E.est_id');
@@ -77,9 +77,26 @@ class Romodel extends CI_Model
 		$this->db->where('El.asp', $aspId);
 		return $this->db->get();
 	//$res=$this->db->get();
+//	echo $this->db->last_query();
+	//print_r($res);
+	//exit();
+	}
+
+	public function get_olro_campdetail($campId, $aspId)
+	{
+		$this->db->select('*');
+		$this->db->from('est_reg E');
+		$this->db->join('est_line El', 'E.est_id = El.est_id', 'inner');
+	//	$this->db->join('invoice_reg Ir', 'E.est_id = Ir.est_id', 'inner');
+	//	$this->db->join('invo_reg_line Il', 'E.est_id = Il.est_id', 'inner');
+		$this->db->join('adv_reg A', 'E.adv_id = A.adv_id', 'inner');
+		$this->db->where('E.est_id', $campId);
+		$this->db->where('El.asp', $aspId);
+		return $this->db->get();
+	//$res=$this->db->get();
 	//echo $this->db->last_query();
 	//print_r($res);
-//	exit();
+	//exit();
 	}
 
 	public function get_campData($campId)
@@ -231,7 +248,7 @@ class Romodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where('asp', $course_id);
-		$this->db->where('sc_status',2);
+		$this->db->where('sc_status',1);
 		return $this->db->get();
 		// 	$ro = $this->db->get();
 		// $res = $ro->result();
@@ -282,9 +299,11 @@ class Romodel extends CI_Model
 		$this->db->join('est_reg', 'R.est_id = est_reg.est_id');
 		$this->db->join('asp', 'R.asp = asp.asp_id');
 		//$this->db->join('screen', 'Rl.screen = screen.sc_id');
-		$this->db->join('adv_reg', 'R.adv_id = adv_reg.adv_id');
+		//$this->db->join('adv_reg', 'R.adv_id = adv_reg.adv_id');
 		$query = $this->db->get();
 		return $query;
+	//	echo $this->db->last_query();
+	//	die();
 	}
 
 	function update_id($table, $id, $data)
@@ -410,7 +429,7 @@ class Romodel extends CI_Model
 	{
 		$this->db->select('R.ro_id');
 		$this->db->from('ro_reg R');
-		$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
+	//	$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
 		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
 		$this->db->join('content_reg C', 'R.content_id = C.con_id', 'inner');
 
@@ -418,16 +437,21 @@ class Romodel extends CI_Model
 
 		$res = $this->db->get();
 		return $res->result();
+	//echo $this->db->last_query();
+	//die();
 	}
 	function get_rolist_old($id)
 	{
-		$this->db->select('R.ro_id,R.duration,R.content_id,C.content_name,A.adv_name,I.invo_id,I.est_name');
+	//	$this->db->select('R.ro_id,R.duration,R.content_id,C.content_name,A.adv_name,I.invo_id,I.est_name');
+	$this->db->select('R.ro_id,R.campaignDuration,R.content_id,R.est_id,E.name,C.content_name,A.adv_name');
 		$this->db->from('ro_reg R');
-		$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
+	//	$this->db->join('invoice_reg I', 'R.est_id = I.est_id', 'inner');
+	$this->db->join('est_reg E', 'R.est_id = E.est_id', 'inner');
 		$this->db->join('adv_reg A', 'R.adv_id = A.adv_id', 'inner');
 		$this->db->join('content_reg C', 'R.content_id = C.con_id', 'inner');
 		$this->db->where('R.status', 2);
-		$this->db->where('I.est_id', $id);
+	//	$this->db->where('I.est_id', $id);
+		$this->db->where('R.est_id', $id);
 		$this->db->group_by("A.adv_name");
 		$this->db->order_by("A.adv_name");
 		return $this->db->get();
@@ -512,16 +536,28 @@ class Romodel extends CI_Model
 		return $ro->result_array();
 	}
 
+	public function getCampaignDuration($asp,$camp){
+		$this->db->select('days,tp_name');
+		$this->db->from('est_line');
+		$this->db->where('est_id',$camp);
+		$this->db->where('est_line.asp',$asp);
+		$this->db->join('time_policy','est_line.duration=time_policy.tpc','inner');
+		$res=$this->db->get();
+		return $res->result()[0];
+	}
+
 	public function adscontact($invoiceId)
 	{
 		//$this->db->select('A.c_person,A.adv_name,A.add1,A.phone_1,A.email,A.gst,A.pan,E.cr_date,E.name,R.duration AS Contentdur,R.camp_id');
-		$this->db->select('R.asp,A.asp_name,A.asp_add,A.asp_person,E.est_cr_date,E.name,R.duration AS Contentdur,R.est_id');
+		$this->db->select('R.asp,A.asp_name,A.asp_add,A.asp_person,E.est_cr_date,E.name,R.campaignDuration AS Contentdur,R.est_id');
 		$this->db->from('ro_reg R');
 		$this->db->join('est_reg E', 'R.est_id = E.est_id');
 		$this->db->join('asp A', 'R.asp = A.asp_id');
 		// $this->db->join('adv_reg A', 'E.adv_id = A.adv_id');
 		$this->db->where('R.ro_id', $invoiceId);
 		$ro = $this->db->get();
+//echo $this->db->last_query();
+//die();
 		$res = $ro->result();
 		return $res[0];
 	}
@@ -559,17 +595,20 @@ class Romodel extends CI_Model
 		return $res;
 	}
 
-	public function get_screensByAsp($asp)
+	public function get_screensByAsp($asp,$campid,$screen)
 	{
-		$this->db->select('S.sc_name,S.city,S.web_code,S.sc_status');
+		$this->db->select('S.sc_name,S.city,S.web_code,S.sc_status,E.play');
 		$this->db->from('est_line E');
 		$this->db->join('screen S', 'E.screen = S.sc_id');
+		$this->db->where('E.screen',$screen);
 		$this->db->where('E.asp', $asp);
-		$this->db->where('sc_status', 1);
+		$this->db->where('E.est_id',$campid);
+		$this->db->where('E.sc_status', 1);
 		$ro = $this->db->get();
 	//	echo $this->db->last_query();
 	//	die();
-		$res = $ro->result();
+	//	$res = $ro->result();
+	$res = $ro->row();
 		return $res;
 	}
 
@@ -589,9 +628,12 @@ class Romodel extends CI_Model
  */
 	public function update_screen($sc_id)
 	{
-		$this->db->set('sc_status', 2);
+		/* $this->db->set('sc_status', 2);
 		$this->db->where('sc_id', $sc_id);
-		$this->db->update('screen');
+		$this->db->update('screen'); */
+		$this->db->set('sc_status',2);
+		$this->db->where('screen',$sc_id);
+		$this->db->update('est_line');
 	}
 
 
@@ -626,7 +668,8 @@ class Romodel extends CI_Model
 		$this->db->update('ro_reg', $data);
 		//$res=$this->db->get();
 //echo $this->db->last_query();
-	//	print_r($res);exit();
+	//	print_r($res);
+	//exit();
 	}
 
 	function getContentById($id){
@@ -640,17 +683,32 @@ class Romodel extends CI_Model
 	public function get_ExcludingPendingScreen($id,$asp){
 		$this->db->select('*');
 		$this->db->from('est_line');
-		$this->db->where('est_line.est_id', $id);
-		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
+	 	$this->db->where('est_line.est_id', $id);
+		$this->db->where('est_line.sc_status',1);
+		$this->db->where('est_line.asp',$asp);
 		$this->db->join('ro_reg','est_line.asp=ro_reg.asp','inner');
+		$this->db->where('ro_reg.est_id',$id);
+		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
 		$this->db->join('screen', 'est_line.screen = screen.sc_id', 'inner');
 		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
-		$this->db->where('screen.sc_status',1);
 		$this->db->where('ro_reg.asp',$asp);
 		$this->db->order_by("asp_name", "asc");
 		return $this->db->get();
-		//$this->db->get();
+	//	$this->db->get();
 	//	echo $this->db->last_query();
 	//	die();
-	}								
+	}
+	
+	public function updatePublishingDate($id,$date){
+		$this->db->set('publish_date',$date);
+		$this->db->where('est_id',$id);
+		$this->db->update('est_reg');
+	}
+
+	public function getRoIds(){
+		$this->db->select('ro_id');
+		$this->db->from('ro_reg');
+		$this->db->join('est_reg','ro_reg.est_id=est_reg.est_id','inner');
+		return $this->db->get();
+	}
 }

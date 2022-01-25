@@ -69,7 +69,7 @@
                             <form role="form" method="post" action="<?php echo site_url('ro/ro_update');  ?>" target="_blank"  >
                             <input  name="ro_id"  value="<?php echo $row->ro_id;   ?>" style="display : none ;" >
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                             <label>Campaign Name</label>
                                              <select class="form-control" id="campId" name="campId" >
@@ -80,30 +80,30 @@
                                              </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                               <!--  <div class="col-lg-4">
 				                    <div class="form-group">
                                             <label>Campaign Date</label>
                                             
-                                            <input class="form-control" name="camp_date" id="camp_date" value="<?php echo $row->est_cr_date;   ?>">
+                                            <input class="form-control" name="camp_date" id="camp_date" value="<?php //echo $row->est_cr_date;   ?>" readonly>
                                             
                                         </div>
 
-                                </div>
-                                <div class="col-lg-4">
+                                </div> -->
+                               <!--  <div class="col-lg-4">
                                      <div class="form-group">
                                             <label>Advertiser Name</label>
                                             
                                             <select class="form-control" id="ro_adv" name="ro_adv" >
-                                                <option value="<?php echo $row->adv_id;     ?>"><?php echo $row->adv_name;   ?></option>
-                                                <?php foreach ($adv->result() as $rorow): 
+                                                <option value="<?php //echo $row->adv_id;     ?>"><?php //echo $row->adv_name;   ?></option>
+                                                <?php //foreach ($adv->result() as $rorow): 
                                                   ?>
-                                              <option value="<?php echo $rorow->adv_id;     ?>"><?php echo $rorow->adv_name;   ?></option>
-                                                <?php endforeach; ?>
+                                              <option value="<?php //echo $rorow->adv_id;     ?>"><?php //echo $rorow->adv_name;   ?></option>
+                                                <?php //endforeach; ?>
                                                 
                                                 </select>
                                         </div> 
                                 
-                            </div>
+                            </div> -->
                             <div class="col-lg-4">
                                      <div class="form-group">
                                             <label>ASP Name</label>
@@ -126,8 +126,8 @@
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-4">
                                      <div class="form-group">
-                                            <label>Duration</label>
-                                            <input class="form-control" name="duration" id="duration" value="<?php echo $row->duration;   ?>" >
+                                            <label>Campaign Duration</label>
+                                            <input class="form-control" name="duration" id="duration" value="<?php echo $row->campaignDuration;   ?>" readonly>
                                             
                                         </div> 
                                 
@@ -155,6 +155,8 @@
                                         </div> 
                                 
                             </div>
+                            
+
                             <div class="col-lg-12 text-center">
                                 <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>  
                             </div>         
@@ -233,7 +235,7 @@ function getData(){
                     $('#camp_date').val(response[0]['est_cr_date']);    
                  //   $('#ro_adv').val(response[0]['adv_name']);    
                     // $('#ro_asp').val(response[0]['asp_name']);    
-                    $('#duration').val(response[0]['duration']);
+                  //  $('#duration').val(response[0]['duration']);
                 $('#aspId').empty();
                 var option = "";
                 $.each(response['asp'],function(index){
@@ -242,7 +244,7 @@ function getData(){
                     option += '<option value="'+ Id +'">'+ aspname +'</option>';
                 });
                 $('#aspId').append('<option value="">Select</option>'+option);
-
+               // $('#aspId').option;
             }
 
         });

@@ -526,6 +526,16 @@ border-top: 15px solid #1E1F23; */
                                                     </select>
 
                                                 </div>
+                                                <div class="form-group">
+                                                    <select class="form-control d-print-none addrow" name="play">
+                                                    <option value="">Position</option>
+                                                    
+                                                    <option value="preshow">Preshow</option>
+                                                    <option value="during interval">During Interval</option>
+                                                       
+                                                    </select>
+
+                                                </div>
                                                 <!-- <input type="hidden" value="<?php //echo $asp->asp;
                                                                                     ?>" name="aspHid"> -->
                                                 <div class="form-group d-print-none " id="output_batch">
@@ -533,6 +543,7 @@ border-top: 15px solid #1E1F23; */
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
+                                                <label class="d-print-none addrow">Campaign Duration</label>
                                                     <select class="form-control d-print-none addrow" name="nr_pack">
                                                         <?php foreach ($n_package->result() as $npack) {  ?>
                                                             <option value="<?php echo $npack->tpc; ?>"><?php echo $npack->tp_name; ?></option>
@@ -558,7 +569,8 @@ border-top: 15px solid #1E1F23; */
                                                 <th class="center">ASP</th>
                                                 <th class="left">SCREEN</th>
                                                 <th class="left">Package</th>
-                                                <th class="center">Rate</th>
+                                                <!-- <th class="center">Rate</th> -->
+                                                <th class="center">Postion</th>
                                                 <th class="right">Amount</th>
                                                 <th class="right">Discount</th>
                                                 <th class="right">IGST</th>
@@ -577,11 +589,12 @@ border-top: 15px solid #1E1F23; */
                                                 $i++; ?>
                                                 <td class="center"><?php echo $estlrow->asp_name; ?></td>
                                                 <td class="left"><?php echo $estlrow->sc_name; ?></td>
-                                                <td class="left"><?php echo $estlrow->tp_name; ?>
-                                                    <!-- <?php echo $invo_sdate = $estlrow->start_date; ?></br>
-            <?php echo $invo_edate = $estlrow->end_date; ?></br> -->
+                                                <td class="left"><?php echo $estlrow->tp_name; ?></br>
+                                                     <?php echo $invo_sdate = $estlrow->publish_date; ?></br>
+            <?php echo $invo_edate = $estlrow->lst_date; ?></br> 
                                                 </td>
-                                                <td class="center"><?php echo $estlrow->price; ?></td>
+                                                <!-- <td class="center"><?php //echo $estlrow->price; ?></td> -->
+                                                <td class="center"><?php echo $estlrow->play; ?></td>
                                                 <td class="center">
                                                     <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
                                                 <td class="left">

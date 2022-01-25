@@ -66,7 +66,7 @@
 
 
 
-                                                <td><?php echo $estrow->duration; ?></td>
+                                                <td><?php echo $estrow->campaignDuration; ?></td>
                                                 <td><a href="<?php echo site_url('ro/ro_edit') . '/' . $estrow->ro_id; ?>" target="_blank"><i class="fas fa-edit"></i></a>
                                                 </td>
                                             </tr>
@@ -91,5 +91,5 @@
         </div>
     </div>
 </div>
-
+</div>
         <!-- </body> -->

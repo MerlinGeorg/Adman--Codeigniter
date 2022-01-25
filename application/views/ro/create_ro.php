@@ -101,7 +101,7 @@
                                     <div class="form-group">
                                         <label>ASP Name</label>
                                         <!-- <input class="form-control" name="ro_asp" id="ro_asp" readonly > -->
-                                        <select class="form-control" id="aspId" name="aspId" onChange="outputValue(this),get_batch()" required>
+                                        <select class="form-control" id="aspId" name="aspId" onChange="outputValue(this),get_batch(),campaignDuration()" required>
                                             <option value="">Select</option>
 
 
@@ -122,8 +122,9 @@
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Duration</label>
-                                        <input class="form-control" name="duration" id="duration" readonly>
+                                        <label>Campaign Duration</label>
+                                        <input class="form-control" name="duration" id="duration" readonly> <!--Weeks-->
+                                        <input class="form-control" name="durationHidden" id="durationHidden" style="display: none;"><!--Days-->
 
                                     </div>
 
@@ -211,7 +212,7 @@
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user); return false;">Save</button>
+                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user,ad_date); return false;">Save</button>
                     </div>
 
                 </div>
@@ -272,6 +273,7 @@
 
     function get_batch() {
         $.ajax({
+            async: true,
             type: "post",
             data: {
                 course_id: $('#aspId').val(),
@@ -279,12 +281,62 @@
             },
             url: "<?php echo site_url('ro/get_batch') ?>",
             success: function(data) {
+              
                 $('#output_batch').html(data);
+              //  $('#duration').val(data[0]['tp_name']);
+                /*  var options=data[0]['days'];
+                options+= '<span> Weeks</span>';
+                $('#duration').append(options);  */
+            //    $('#durationHidden').val(data[0]['days']);
             }
         });
     }
 
-    function gatherData(campId,aspId,duration,user) {
+    function campaignDuration(){
+    
+        $.ajax({
+            async: true,
+            type: "post",
+            dataType: "json",
+            data: {
+                asp: $('#aspId').val(),
+                campId:$('#campId').val()
+            },
+            url: "<?php echo site_url('ro/getCampaignDays')?>",
+            success: function(data){
+                $('#duration').val(data['tp_name']);
+               $('#durationHidden').val(data['days']);
+
+               days_to_add=$('#durationHidden').val();
+               publish_date=$('#ad_date').val();
+                   // calc_date = new Date(Date.now() +(days_to_add * 86400000));
+
+                    var endDate = new Date(Date.parse(publish_date));
+                   
+            endDate.setDate(endDate.getDate() + parseInt(days_to_add));
+                   
+                    $('#end_date').val(formatDate(endDate));
+                
+            }
+        });
+    }
+
+    function formatDate(date) {
+           
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        } 
+
+    function gatherData(campId,aspId,duration,user,ad_date) {
 
         var data = [];
         var table = document.getElementById('dataTable');
@@ -310,8 +362,8 @@ if(table.rows.length >1){
               camp_id: (campId.value),
               asp_id: cells[1].innerHTML,
               duration: (duration.value),
-              logoId:(user.value)
-           //   start_date: (ad_date.value)
+              logoId:(user.value),
+              start_date: (ad_date.value)
 
             });
 
@@ -331,7 +383,8 @@ scid: null,
 camp_id: (campId.value),
 asp_id: (aspId.value),
 duration: (duration.value),
-logoId:(user.value)
+logoId:(user.value),
+start_date: (ad_date.value)
 });
     }
     // alert(data);
@@ -377,7 +430,7 @@ logoId:(user.value)
                     $('#camp_date').val(response[0]['est_cr_date']);
                     $('#ro_adv').val(response[0]['adv_name']);
                     // $('#ro_asp').val(response[0]['asp_name']);    
-                    $('#duration').val(response[0]['duration']);
+                   // $('#duration').val(response[0]['duration']);
                     $('#ad_date').val(response[0]['publish_date']);
                     $('#aspId').empty();
                     var option = "";
@@ -387,7 +440,7 @@ logoId:(user.value)
                         option += '<option value="' + Id + '">' + aspname + '</option>';
                     });
                     $('#aspId').append('<option value="">Select</option>' + option);
-
+                   
                 }
 
             })
@@ -409,15 +462,18 @@ logoId:(user.value)
     }) 
  */
 
-        $('#ad_date').datepicker({
+         $('#ad_date').datepicker({
             autoclose: true,
             showOnFocus: true,
             todayHighlight: true,
             format: "yyyy-mm-dd",
             startDate: new Date("<?= date('Y-m-d') ?>")
         }).on('changeDate', function(e) {
+           // alert(e);           //[object Object]
+           // alert(e.date);     //Wed Jan 26 2022 05:30:00 GMT+0530 (India Standard Time)
             var endDate = new Date(Date.parse(e.date));
-            endDate.setDate(endDate.getDate() + parseInt($('#duration').val()));
+          //  alert(endDate);   //Mon Jan 24 2022 00:00:00 GMT+0530 (India Standard Time)
+            endDate.setDate(endDate.getDate() + parseInt($('#durationHidden').val()));
             $('#end_date').val(formatDate(endDate));
         });
 
@@ -433,6 +489,6 @@ logoId:(user.value)
                 day = '0' + day;
 
             return [year, month, day].join('-');
-        }
+        } 
     });
 </script>
