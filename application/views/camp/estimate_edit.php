@@ -526,7 +526,7 @@ border-top: 15px solid #1E1F23; */
                                     <div class="panel-body">
                                         <div class="row" style="page-break-inside: avoid; ">
                                             <div class="col-lg-6">
-                                                <!-- <label class="d-print-none addrow">ASP Name</label> -->
+                                             <label class="d-print-none addrow">ASP Name</label>
                                                 <div class="form-group">
                                                     <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
                                                         <!-- <option value="">SELECT</option> -->
