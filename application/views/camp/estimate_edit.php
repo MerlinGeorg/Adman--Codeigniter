@@ -114,6 +114,10 @@ border-top: 15px solid #1E1F23; */
 
 
                             @media print {
+                                  body {transform: scale(1);}  
+                                /* @page{
+                                    size: A4;
+                                }  */
 
                                 #dis,
                                 #discountDiv {
@@ -159,7 +163,7 @@ border-top: 15px solid #1E1F23; */
                                 }
 
                                 .date-div {
-                                    padding-top: 180px;
+                                    padding-top: 105px;
                                     /* float:left; */
 
                                 }
@@ -186,17 +190,23 @@ border-top: 15px solid #1E1F23; */
                                 .table-head {
                                     padding: 12px;
                                     /* display: table-header-group; */
+                                    /* display: none; */
                                 }
+                              
 
-                              /*   tr,td{
+                                /*  tr,td{
                                     page-break-inside: avoid;
                                     page-break-after: auto;
-                                } */
-                              /*   table { page-break-inside:auto }
+                                } 
+                                 table { page-break-inside:auto }
     tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
- */
+  */
+
+  .h{
+    display: none!important;
+  }
                                 .table-result {
                                     padding: 1px;
                                 }
@@ -261,13 +271,13 @@ border-top: 15px solid #1E1F23; */
                         <?php foreach ($logo as $row) {  ?>
                             <div class="card-body">
                                 <div class="row mb-4">
-                                    <div class="col-sm-8 address2">
+                                    <div class="col-sm-8 address2" style="margin-bottom: 0rem!important;">
 
                                         <div>
                                             <?php
                                             if (!empty($row->logo_image)) {
                                             ?>
-                                                <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name ?></strong></h6>
+                                                <img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name ?></strong>
                                             <?php
                                             } else {
 
@@ -276,16 +286,18 @@ border-top: 15px solid #1E1F23; */
                                             <?php
                                             }
                                             ?>
-
-                                        </div>
-                                        <div class="col-sm-4 ">
-                                            <div><?php echo $row->address;
-                                                }
+                                            
+                                            <div> <?php echo $row->address;
+                                                
                                                     ?></div>
                                             <!-- <div>New York City, New york, 10394</div> -->
                                             <div>Email: <?php echo $row->email ?></div>
                                             <div>Phone: <?php echo $row->phone ?></div>
                                         </div>
+                                        <?php } ?>
+                                        <!-- <div class="col-sm-4 "> -->
+                                            
+                                        <!-- </div> -->
                                     </div>
                                     <div class="col-sm-4 ml-auto address">
 
@@ -394,14 +406,14 @@ border-top: 15px solid #1E1F23; */
                                 ?>
 
 
-                                <hr>
-                                <div id="printthis_bill" >
+                                <hr class="d-print-none addrow">
+                                <div id="printthis_bill" style="margin-top: 0px!important;margin-bottom:0px!important">
                                     <!-- <div id="printDiv"> -->
 
 
                                         <div class="bill-table"  >
                                             <table class="table text-centered table-bordered bill-tab">
-                                                <thead class="table-header" id="theader">
+                                                <thead class="table-header h" id="theader">
                                                     <tr>
                                                         <th class="lefttable-des">
                                                             <h5>Description</h5>
@@ -512,7 +524,7 @@ border-top: 15px solid #1E1F23; */
 
 
                                     <div class="panel-body">
-                                        <div class="row">
+                                        <div class="row" style="page-break-inside: avoid; ">
                                             <div class="col-lg-6">
                                                 <!-- <label class="d-print-none addrow">ASP Name</label> -->
                                                 <div class="form-group">
@@ -538,7 +550,7 @@ border-top: 15px solid #1E1F23; */
                                                 </div>
                                                 <!-- <input type="hidden" value="<?php //echo $asp->asp;
                                                                                     ?>" name="aspHid"> -->
-                                                <div class="form-group d-print-none " id="output_batch">
+                                                <div class="form-group d-print-none addrow" id="output_batch">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -561,7 +573,7 @@ border-top: 15px solid #1E1F23; */
 
                                 </form>
 
-                                <div class="table-responsive ">
+                                <div class="table-responsive " style="page-break-before: always;margin-top:0px">
 
                                     <table class="table table-striped list-table list_div" >
                                         <thead class="table-header">
