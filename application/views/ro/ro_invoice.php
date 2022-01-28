@@ -143,7 +143,7 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div><?php echo $estrow->address ?></div>
+                                        <div  style="width: 405px;"><?php echo $estrow->address ?></div>
                                         <!-- <div>New York City, New york, 10394</div> -->
                                         <div>Email: <?php echo $estrow->email ?></div>
                                         <div>Phone: <?php echo $estrow->phone ?></div>
