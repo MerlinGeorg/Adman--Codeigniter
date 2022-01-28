@@ -263,6 +263,7 @@ $sc_id[]=$row->screen;
 			$ro_list['adv'] = $this->campmodel->getadv();
 			$ro_list['asp'] = $this->campmodel->getasp();
 			$ro_list['data'] =  $this->romodel->getEditData($ro_id);
+			$ro_list['material'] = $this->romodel->listMaterial();
 			//$ro_list['campdata'] =  $this->romodel->getCampData($ro_id); 
 
 			$ro_list['title'] = "Edit Release Order";
@@ -302,7 +303,10 @@ $sc_id[]=$row->screen;
 
 			//	$ro = $detail->result();
 		$cr_date = date("Y-m-d");
-
+		$material=$this->input->post('materialnew');
+		if($material==''){
+			$material=$this->input->post('material');
+		}
 		$publishingDate=$this->input->post('ad_date');
 		$ro_data = array(
 			'est_id' => $camp_id,
@@ -316,6 +320,7 @@ $sc_id[]=$row->screen;
 			'cr_date' => $cr_date,
 			// 'status' => $status,
 			// 'logo_id' => $logoId
+			'ro_material'=>$material
 		);
 		 $this->romodel->update_id('ro_reg',$id,$ro_data);
 		 $this->romodel->updatePublishingDate($camp_id,$publishingDate);
