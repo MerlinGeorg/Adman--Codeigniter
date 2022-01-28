@@ -131,7 +131,7 @@
                                 </div>
 
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>End Date</label>
 
@@ -146,8 +146,20 @@
 
                                 </div>
 
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Material</label>
+                                        <select class="form-control" id="" name="material" required>
+                                            <option value="">Select</option>
+                                            <?php foreach ($material->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->material_name;     ?>"><?php echo $rorow->material_name;   ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
 
-                                <div class="col-lg-6">
+                                </div>
+
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>User</label>
                                         <select class="form-control" id="user" name="user" required>
@@ -212,7 +224,7 @@
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user,ad_date); return false;">Save</button>
+                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user,ad_date,material); return false;">Save</button>
                     </div>
 
                 </div>
@@ -336,7 +348,7 @@
             return [year, month, day].join('-');
         } 
 
-    function gatherData(campId,aspId,duration,user,ad_date) {
+    function gatherData(campId,aspId,duration,user,ad_date,material) {
 
         var data = [];
         var table = document.getElementById('dataTable');
@@ -363,8 +375,8 @@ if(table.rows.length >1){
               asp_id: cells[1].innerHTML,
               duration: (duration.value),
               logoId:(user.value),
-              start_date: (ad_date.value)
-
+              start_date: (ad_date.value),
+              material:(material.value)
             });
 
 
@@ -384,7 +396,8 @@ camp_id: (campId.value),
 asp_id: (aspId.value),
 duration: (duration.value),
 logoId:(user.value),
-start_date: (ad_date.value)
+start_date: (ad_date.value),
+              material:(material.value)
 });
     }
     // alert(data);
