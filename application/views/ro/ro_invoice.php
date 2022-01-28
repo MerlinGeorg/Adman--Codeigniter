@@ -335,7 +335,7 @@
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $sub_total; ?> </strong> </p>
                                         <p> <strong><i class="" area-hidden="true"></i> 18 % </strong> </p>
                                         <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php echo $deal_total; ?> </strong> </p>
-                                        <p> <strong>Along with RO We transfer link</strong> </p>
+                                        <p> <strong><?php echo $advaddr->ro_material;?></strong> </p>
 
                                     </td>
                                 </tr>

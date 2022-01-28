@@ -237,6 +237,15 @@ class Romodel extends CI_Model
 		//die();
 	}
 
+	public function nonPendingscreenByCampaign($asp,$camp){
+		$this->db->select('sc_id,sc_name');
+		$this->db->from('est_line');
+		$this->db->where('est_id',$camp);
+		$this->db->where('est_line.asp',$asp);
+		$this->db->where('est_line.sc_status',1);
+		$this->db->join('screen','est_line.screen=screen.sc_id','inner');
+		return $this->db->get();
+	}
 
 	public function get_newpending($table_name, $course_id)
 	{
@@ -547,7 +556,7 @@ class Romodel extends CI_Model
 	public function adscontact($invoiceId)
 	{
 		//$this->db->select('A.c_person,A.adv_name,A.add1,A.phone_1,A.email,A.gst,A.pan,E.cr_date,E.name,R.duration AS Contentdur,R.camp_id');
-		$this->db->select('R.asp,A.asp_name,A.asp_add,A.asp_person,E.est_cr_date,E.name,R.campaignDuration AS Contentdur,R.est_id');
+		$this->db->select('R.ro_material,R.asp,A.asp_name,A.asp_add,A.asp_person,E.est_cr_date,E.name,R.campaignDuration AS Contentdur,R.est_id');
 		$this->db->from('ro_reg R');
 		$this->db->join('est_reg E', 'R.est_id = E.est_id');
 		$this->db->join('asp A', 'R.asp = A.asp_id');
@@ -712,6 +721,13 @@ class Romodel extends CI_Model
 		$this->db->select('ro_id');
 		$this->db->from('ro_reg');
 		$this->db->join('est_reg','ro_reg.est_id=est_reg.est_id','inner');
+		return $this->db->get();
+	}
+
+	public function listMaterial(){
+		$this->db->select('*');
+		$this->db->from('material');
+		//$this->db->join('est_reg','ro_reg.est_id=est_reg.est_id','inner');
 		return $this->db->get();
 	}
 }

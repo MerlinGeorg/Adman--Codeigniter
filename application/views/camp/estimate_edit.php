@@ -6,7 +6,6 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>PROPOSAL</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/frm_style.css') ?>">
-    <!-- <link rel="stylesheet" type="text/css" href="print.css" media="screen, print" /> -->
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
     <link href='' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,9 +21,8 @@
     } ?>
     <div id="printthis">
         <div class="container-fluid">
-            <!-- <div class="container-fluid" id="printthis"> -->
             <div id="ui-view" data-select2-id="ui-view">
-                <div>
+                <!-- <div> -->
                     <div class="card">
                         <style>
                             .card {
@@ -114,7 +112,10 @@ border-top: 15px solid #1E1F23; */
 
 
                             @media print {
-                                  body {transform: scale(1);}  
+                                body {
+                                    transform: scale(1);
+                                }
+
                                 /* @page{
                                     size: A4;
                                 }  */
@@ -150,23 +151,28 @@ border-top: 15px solid #1E1F23; */
 
                                 .address {
                                     float: right;
-
+                                    /* overflow-wrap: break-word; */
+                                    /* display: inline-block; */
+                                   
                                     word-wrap: break-word;
 
                                 }
 
                                 .address2 {
 
-                                    padding-left: 50px;
+                                    /* padding-left: 50px; */
                                     float: left;
-
+                                    /* display: inline-block; */
+                                    /* overflow-wrap: break-word; */
+                                    word-wrap: break-word;
+                                    /* width: 500px; */
                                 }
 
-                                .date-div {
+                                /* .date-div {
                                     padding-top: 105px;
-                                    /* float:left; */
+                                    float:left; 
 
-                                }
+                                } */
 
                                 .bill-table {
                                     /*  padding-left: 150px;
@@ -181,6 +187,7 @@ border-top: 15px solid #1E1F23; */
                                     border-spacing: 2px;
                                     border: 1px solid #dee2e6;
                                     max-width: 100%;
+                                    width: 100%;
                                 }
 
                                 td th {
@@ -192,7 +199,7 @@ border-top: 15px solid #1E1F23; */
                                     /* display: table-header-group; */
                                     /* display: none; */
                                 }
-                              
+
 
                                 /*  tr,td{
                                     page-break-inside: avoid;
@@ -204,9 +211,10 @@ border-top: 15px solid #1E1F23; */
     tfoot { display:table-footer-group }
   */
 
-  .h{
-    display: none!important;
-  }
+                                /* .h {
+                                    display: none !important;
+                                } */
+
                                 .table-result {
                                     padding: 1px;
                                 }
@@ -222,7 +230,7 @@ border-top: 15px solid #1E1F23; */
                                     text-align: right !important;
                                 }
 
-                                .table-des: {
+                                .table-des {
                                     border-bottom-width: 2px;
                                     vertical-align: bottom;
                                     border-bottom: 2px solid #dee2e6;
@@ -231,119 +239,88 @@ border-top: 15px solid #1E1F23; */
                                     font-weight: bold;
 
                                 }
-
-                            }
-
+                                /* #tablePrint{
+                                    page-break-before: always;
+                                } */
+/* 
+                                thead{display: table-header-group;} */
                             }
                         </style>
 
 
 
-<div class="card-header">
-                        <!-- <div class="left" style="float:left;"> -->
+                        <div class="card-header">
+
                             <h5>PROPOSAL</h5><strong>Est #</strong>
                             <?php echo $estimate_num = $estrow->est_id; ?>
-                        <!-- </div> -->
+
                             <br>
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
-                            <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
-                        <i class="fa fa-save"></i> Save</a> -->
 
-                            <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> </span>
-                            <!-- <a href="<?php //echo site_url('camp/camp_cancel') . '/' . $estrow->est_id; 
-                                            ?>" class="d-print-none float-right mr-1" mt-4><i class="fas fa-file-excel fa-fw" title="Cancel Invoice"></i></a> -->
-                        
-<span id="printOnly" >
- <strong class="float-right">Est Date:</strong>
-                                                <?php echo $est_date = $estrow->est_cr_date; ?><br>
-                                                <strong>Content Duration:</strong>
-                                                <?php echo $ad_duration = $estrow->duration; ?>/sec
-                            </div> 
+                            <a href="<?php echo site_url('camp/camp_invo') . '/' . $estrow->est_id; ?>" class="d-print-none float-right mr-1"><i class="fas fa-file-invoice fa-fw" title="Make Invice"></i></a> 
+
+
+                            <strong>Est Date:</strong>
+                            <?php echo $est_date = $estrow->est_cr_date; ?><br>
+                            <strong >Content Duration:</strong>
+                            <?php echo $ad_duration = $estrow->duration; ?>/sec
                         </div>
+                    </div>
 
-                        <?php
+                    <?php
 
-                        $email = $this->session->userdata('email');
-                        $phone = $this->session->userdata('phone');
-                        ?>
+                    $email = $this->session->userdata('email');
+                    $phone = $this->session->userdata('phone');
+                    ?>
 
-                        <?php foreach ($logo as $row) {  ?>
-                            <div class="card-body">
-                                <div class="row mb-4">
-                                    <div class="col-sm-8 address2" style="margin-bottom: 0rem!important;">
+                    <?php foreach ($logo as $row) {  ?>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-sm-4 address2" style="margin-bottom: 0rem!important;">
 
-                                        <div>
-                                            <?php
-                                            if (!empty($row->logo_image)) {
-                                            ?>
-                                                <img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name ?></strong>
-                                            <?php
-                                            } else {
+                                    <!-- <div> -->
+                                        <?php
+                                        if (!empty($row->logo_image)) {
+                                        ?>
+                                            <img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name ?></strong>
+                                        <?php
+                                        } else {
 
-                                            ?>
-                                                <h6> <strong><?php echo $row->company_name ?></strong></h6>
-                                            <?php
-                                            }
-                                            ?>
-                                            
-                                            <div> <?php echo $row->address;
-                                                
-                                                    ?></div>
-                                            <!-- <div>New York City, New york, 10394</div> -->
-                                            <div>Email: <?php echo $row->email ?></div>
-                                            <div>Phone: <?php echo $row->phone ?></div>
-                                        </div>
-                                        <?php } ?>
-                                        <!-- <div class="col-sm-4 "> -->
-                                            
-                                        <!-- </div> -->
-                                    </div>
-                                    <div class="col-sm-4 ml-auto address">
+                                        ?>
+                                            <h6> <strong><?php echo $row->company_name ?></strong></h6>
+                                        <?php
+                                        }
+                                        ?>
 
+                                        <div style="width: 405px;"> <?php echo $row->address;
 
-                                        <!-- <div> <strong class="mb-3">To:</strong></div> -->
-                                        <div><h6></h6></div>
-                                        <div>
-                                            <strong><?php echo $adv_cp = $estrow->c_person; ?></strong>
-                                        </div>
-                                        <div><?php echo $adv_name = $estrow->adv_name; ?></div>
-                                        <div><?php echo $adv_add1 = $estrow->add1; ?></div>
-                                        <div>Email: <?php echo $adv_email = $estrow->email; ?></div>
-                                        <div>Phone: <?php echo $adv_phone = $estrow->phone_1; ?></div>
-                                    </div>
-                                    <!-- <div class="col-sm-4 ml-auto">
-                            
-                            
-                            <div><img width='90px' height='90px'  src='<?= base_url("Assets/img/logo/$img") ?>'></div>
-                           <div class="mx-auto" style="width: 330px;"><h4>  <?php echo $companyname ?><h4>  </div>
-                        </div> -->
+                                                ?></div>
 
-
-
-                                    <!-- <div class="col-md-6  mt-4">
-                            <strong class="mb-3">To:</strong>
-                            <div>
-                                <h6><?php echo $adv_cp = $estrow->c_person; ?></h6>
-                            </div>
-                            <div><?php echo $adv_name = $estrow->adv_name; ?></div>
-                            <div><?php echo $adv_add1 = $estrow->add1; ?></div>
-                            <div>Email: <?php echo $adv_email = $estrow->email; ?></div>
-                            <div>Phone: <?php echo $adv_phone = $estrow->phone_1; ?></div>
-                        </div> -->
-                                     <div class="row col-sm-8 date-div" style="padding-left:30px;">
-                                        <div>
-                                            <!-- <div><strong>Est Date:</strong>
-                                                <?php //echo $est_date = $estrow->est_cr_date; ?><br></div> -->
-
-                                            <!-- <div><strong>Content Duration:</strong>
-                                                <?php //echo $ad_duration = $estrow->duration; ?>/sec<br></div> -->
-
-                                        </div>
-                                    </div> 
-
+                                        <div>Email: <?php echo $row->email ?></div>
+                                        <div>Phone: <?php echo $row->phone ?></div>
+                                    <!-- </div> -->
+                                <?php } ?>
 
                                 </div>
+                                <div class="col-sm-4 ml-auto address">
+
+
+                                    <!-- <div>
+                                        <h6></h6>
+                                    </div> -->
+                                    <div>
+                                        <strong><?php echo $adv_cp = $estrow->c_person; ?></strong>
+                                    </div>
+                                    <div><?php echo $adv_name = $estrow->adv_name; ?></div>
+                                    <div><?php echo $adv_add1 = $estrow->add1; ?></div>
+                                    <div>Email: <?php echo $adv_email = $estrow->email; ?></div>
+                                    <div>Phone: <?php echo $adv_phone = $estrow->phone_1; ?></div>
+                                </div>
+
+            
+
+                            </div>
 
 
 
@@ -353,146 +330,140 @@ border-top: 15px solid #1E1F23; */
 
 
 
-                                <!-- </div> -->
+                            <?php
+                            $sub_total = 0;
+                            $cgst_total = 0;
+                            $igst_total = 0;
+                            $sgst_total = 0;
+                            $sub_amount = 0;
+                            $trade_discount = 0;
+                            $ltax_total = 0;
+                            $index = 1;
+                            $i = 0;
 
-                                <?php
-                                $sub_total = 0;
-                                $cgst_total = 0;
-                                $igst_total = 0;
-                                $sgst_total = 0;
-                                $sub_amount = 0;
-                                $trade_discount = 0;
-                                $ltax_total = 0;
-                                $index = 1;
-                                $i = 0;
+                            foreach ($estlineedit->result() as $estlrow) {
+                                $i++;
 
-                                foreach ($estlineedit->result() as $estlrow) {
-                                    $i++;
+                                $pram = $estlrow->price;
+                                $subamount = ($pram * $ad_duration) * $estlrow->package;
 
-                                    $pram = $estlrow->price;
-                                    $subamount = ($pram * $ad_duration) * $estlrow->package;
+                                $dis = $estlrow->discount;
+                                $dcamount = ($ad_duration * $estlrow->price) * $estlrow->package;
 
-                                    $dis = $estlrow->discount;
-                                    $dcamount = ($ad_duration * $estlrow->price) * $estlrow->package;
+                                $x = ($dcamount * $dis) / 100;
+                                $acval = $dcamount - $x;
 
-                                    $x = ($dcamount * $dis) / 100;
-                                    $acval = $dcamount - $x;
+                                $igst = $estlrow->igst;
+                                $igst_value = ($acval * $igst) / 100;
 
-                                    $igst = $estlrow->igst;
-                                    $igst_value = ($acval * $igst) / 100;
+                                $cgst = $estlrow->cgst;
+                                $cgst_value = ($acval * $cgst) / 100;
 
-                                    $cgst = $estlrow->cgst;
-                                    $cgst_value = ($acval * $cgst) / 100;
+                                $sgst = $estlrow->sgst;
+                                $sgst_value = ($acval * $sgst) / 100;
 
-                                    $sgst = $estlrow->sgst;
-                                    $sgst_value = ($acval * $sgst) / 100;
+                                $ltax = $estlrow->local_tax;
+                                $ltax_value = ($acval * $ltax) / 100;
 
-                                    $ltax = $estlrow->local_tax;
-                                    $ltax_value = ($acval * $ltax) / 100;
+                                $line_total = $acval + $igst_value + $cgst_value + $sgst_value + $ltax_value;
 
-                                    $line_total = $acval + $igst_value + $cgst_value + $sgst_value + $ltax_value;
+                                $sub_amount += $subamount;
+                                $trade_discount += $x;
+                                $sub_total += $acval;
+                                $cgst_total += $cgst_value;
+                                $igst_total += $igst_value;
+                                $sgst_total += $sgst_value;
+                                $ltax_total += $ltax_value;
+                                $deal_total = $sub_total + $cgst_total + $igst_total + $sgst_total + $ltax_total;
+                                $estrow->adv_name;
+                            }
 
-                                    $sub_amount += $subamount;
-                                    $trade_discount += $x;
-                                    $sub_total += $acval;
-                                    $cgst_total += $cgst_value;
-                                    $igst_total += $igst_value;
-                                    $sgst_total += $sgst_value;
-                                    $ltax_total += $ltax_value;
-                                    $deal_total = $sub_total + $cgst_total + $igst_total + $sgst_total + $ltax_total;
-                                    $estrow->adv_name;
-                                }
-
-                                ?>
+                            ?>
 
 
-                                <hr class="d-print-none addrow">
-                                <div id="printthis_bill" style="margin-top: 0px!important;margin-bottom:0px!important">
-                                    <!-- <div id="printDiv"> -->
+                            <hr class="d-print-none addrow">
+                            <!-- <div id="printthis_bill" style="margin-top: 0px!important;margin-bottom:0px!important"> -->
+                            <!-- <div id="printDiv"> -->
 
 
-                                        <div class="bill-table"  >
-                                            <table class="table text-centered table-bordered bill-tab">
-                                                <thead class="table-header h" id="theader">
-                                                    <tr>
-                                                        <th class="lefttable-des">
-                                                            <h5>Description</h5>
-                                                        </th>
-                                                        <th class="table-des">
-                                                            <h5>Amount</h5>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="table-head"> Campaign / Ad Name </td>
-                                                        <td style="padding-right: 101px;"> <?php echo $estrow->adv_name; ?> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="table-head"> Screens</td>
-                                                        <td><?php echo $i; ?> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="table-head"> Sub Amount</td>
-                                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sub_amount; ?>/- </td>
-                                                    </tr>
-                                                    <!-- <tr>
-                                    <td class="col-md-9">Trade Discount</td>
-                                    <td class="col-md-3"><i class="fas fa-rupee-sign" area-hidden="true"></i> 5,200 </td>
-                                </tr> -->
-                                                    <tr>
-                                                        <td class="col-md-3 table-head">Total Taxable Amount</td>
-                                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sub_total; ?>/- </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-3 table-head">IGST</td>
-                                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $igst_total; ?>/-</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-3 table-head">CGST</td>
-                                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $cgst_total; ?>/-</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-3 table-head">SGST</td>
-                                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sgst_total; ?>/- </td>
-                                                    </tr>
+                            <!-- <div class="bill-table"  > -->
+                            <table class="table text-centered table-bordered bill-tab" >
+                                <thead class="table-header h" id="theader">
+                                    <tr>
+                                        <th class="lefttable-des">
+                                            <h5>Description</h5>
+                                        </th>
+                                        <th class="table-des">
+                                            <h5>Amount</h5>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="table-head"> Campaign / Ad Name </td>
+                                        <td style="padding-right: 101px;"> <?php echo $estrow->adv_name; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-head"> Screens</td>
+                                        <td><?php echo $i; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-head"> Sub Amount</td>
+                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sub_amount; ?>/- </td>
+                                    </tr>
 
-                                                    <tr>
-                                                        <td class="text-right div-cal">
-                                                            <p> <strong>Local Tax:</strong> </p>
-                                                            <p> <strong>Trade Discount: </strong> </p>
-                                                            <!-- <p> <strong>Discount: </strong> </p> -->
-                                                            <p> <strong> Total </strong> </p>
-                                                        </td>
-                                                        <td>
-                                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i> <?php echo $ltax_total; ?>/- </strong> </p>
-                                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i> <?php echo $trade_discount; ?>/-</strong> </p>
-                                                            <!-- <p> <strong><i class="fas fa-rupee-sign" area-hidden="true"></i> 3,000 </strong> </p> -->
-                                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i>
-                                                                    <?php
-                                                                    if (empty($deal_total)) {
-                                                                        echo "Error:" . "No screen selected";
-                                                                    } else {
-                                                                        echo $deal_total . "/-";
-                                                                    }
-                                                                    ?></strong> </p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="color: #346a7d;">
-                                                        <td class="text-right table-total">
-                                                            <h4><strong>Total Campaign Cost </strong></h4>
-                                                        </td>
-                                                        <td class="text-left table-total">
-                                                            <h4><strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php
-                                                                                                                                if (empty($deal_total)) {
-                                                                                                                                    echo "Error:" . "No screen selected";
-                                                                                                                                } else {
-                                                                                                                                    echo $deal_total . "/-";
-                                                                                                                                }
-                                                                                                                                ?> </strong></h4>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                    <tr>
+                                        <td class="col-md-3 table-head">Total Taxable Amount</td>
+                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sub_total; ?>/- </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3 table-head">IGST</td>
+                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $igst_total; ?>/-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3 table-head">CGST</td>
+                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $cgst_total; ?>/-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3 table-head">SGST</td>
+                                        <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $sgst_total; ?>/- </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-right div-cal">
+                                            <p> <strong>Local Tax:</strong> </p>
+                                            <p> <strong>Trade Discount: </strong> </p>
+
+                                            <p> <strong> Total </strong> </p>
+                                        </td>
+                                        <td>
+                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i> <?php echo $ltax_total; ?>/- </strong> </p>
+                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i> <?php echo $trade_discount; ?>/-</strong> </p>
+                                            <p> <strong><i class="fas fa-rupee-sign table-result" area-hidden="true"></i>
+                                                    <?php
+                                                    if (empty($deal_total)) {
+                                                        echo "Error:" . "No screen selected";
+                                                    } else {
+                                                        echo $deal_total . "/-";
+                                                    }
+                                                    ?></strong> </p>
+                                        </td>
+                                    </tr>
+                                    <tr style="color: #346a7d;">
+                                        <td class="text-right table-total">
+                                            <h4><strong>Total Campaign Cost </strong></h4>
+                                        </td>
+                                        <td class="text-left table-total">
+                                            <h4><strong><i class="fas fa-rupee-sign" area-hidden="true"></i> <?php
+                                                                                                                if (empty($deal_total)) {
+                                                                                                                    echo "Error:" . "No screen selected";
+                                                                                                                } else {
+                                                                                                                    echo $deal_total . "/-";
+                                                                                                                }
+                                                                                                                ?> </strong></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td style=" font-weight: 100;font-size: 10px;">
 
                                             ​
@@ -505,107 +476,98 @@ border-top: 15px solid #1E1F23; */
 
 
                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                </tbody>
+                            </table>
+                            <!-- </div> -->
 
-                                    <!-- </div> -->
-
-                                </div>
-
-                                <!-- <hr> -->
+                            <!-- </div> -->
 
 
-                                <form method="post" action="<?php echo site_url('camp/nr_estline'); ?>">
-                                    <input style="display:none;" type="number" name="nr_estid" value="<?php echo $estrow->est_id; ?>">
-                                    <input style="display:none;" name="nr_duration" value="<?php echo $estrow->duration;  ?>">
-                                    <input style="display:none;" name="nr_screen" value="1" id="scrval">
+                            <form method="post" action="<?php echo site_url('camp/nr_estline'); ?>">
+                                <input style="display:none;" type="number" name="nr_estid" value="<?php echo $estrow->est_id; ?>">
+                                <input style="display:none;" name="nr_duration" value="<?php echo $estrow->duration;  ?>">
+                                <input style="display:none;" name="nr_screen" value="1" id="scrval">
 
 
 
-                                    <div class="panel-body">
-                                        <div class="row" style="page-break-inside: avoid; ">
-                                            <div class="col-lg-6">
-                                              <label class="d-print-none addrow">ASP Name</label> 
-                                                <div class="form-group">
-                                                    <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
-                                                        <!-- <option value="">SELECT</option> -->
-                                                        <?php foreach ($n_asp->result() as $nasprow) {  ?>
+                                <div class="panel-body">
+                                    <div class="row" style="page-break-inside: avoid; ">
+                                        <div class="col-lg-6">
+                                            <label class="d-print-none addrow">ASP Name</label>
+                                            <div class="form-group">
+                                                <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
+                                                    <?php foreach ($n_asp->result() as $nasprow) {  ?>
 
-                                                            <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
+                                                        <option value="<?php echo $nasprow->asp_id; ?>"><?php echo $nasprow->asp_name; ?></option>
 
-                                                        <?php } ?>
-                                                    </select>
+                                                    <?php } ?>
+                                                </select>
 
-                                                </div>
-                                                <div class="form-group">
-                                                    <select class="form-control d-print-none addrow" name="play">
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control d-print-none addrow" name="play">
                                                     <option value="">Position</option>
-                                                    
+
                                                     <option value="preshow">Preshow</option>
                                                     <option value="during interval">During Interval</option>
-                                                       
-                                                    </select>
 
-                                                </div>
-                                                <!-- <input type="hidden" value="<?php //echo $asp->asp;
-                                                                                    ?>" name="aspHid"> -->
-                                                <div class="form-group d-print-none addrow" id="output_batch">
-                                                </div>
+                                                </select>
+
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                <label class="d-print-none addrow">Campaign Duration</label>
-                                                    <select class="form-control d-print-none addrow" name="nr_pack">
-                                                        <?php foreach ($n_package->result() as $npack) {  ?>
-                                                            <option value="<?php echo $npack->tpc; ?>"><?php echo $npack->tp_name; ?></option>
-
-                                                        <?php } ?>
-                                                    </select>
-
-
-                                                </div>
-                                                <input style="width: 100%;" class="form-control d-print-none addrow " placeholder="Enter Discount %" type="number" name="nr_discount">
-                                                <br><br>
-                                                <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -45px;">Add Row</button>
+                                            <div class="form-group d-print-none addrow" id="output_batch">
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="d-print-none addrow">Campaign Duration</label>
+                                                <select class="form-control d-print-none addrow" name="nr_pack">
+                                                    <?php foreach ($n_package->result() as $npack) {  ?>
+                                                        <option value="<?php echo $npack->tpc; ?>"><?php echo $npack->tp_name; ?></option>
 
-                                </form>
+                                                    <?php } ?>
+                                                </select>
 
-                                <div class="table-responsive " style="page-break-before: always;margin-top:0px">
 
-                                    <table class="table table-striped list-table list_div" >
-                                        <thead class="table-header">
-                                            <tr>
-                                                <th class="center">ASP</th>
-                                                <th class="left">SCREEN</th>
-                                                <th class="left">Package</th>
-                                                <!-- <th class="center">Rate</th> -->
-                                                <th class="center">Postion</th>
-                                                <th class="right">Amount</th>
-                                                <th class="right">Discount</th>
-                                                <th class="right">IGST</th>
-                                                <th class="right">CGST</th>
-                                                <th class="right">SGST</th>
-                                                <th class="right">L-Tax</th>
-                                                <th class="left">Total</th>
+                                            </div>
+                                            <input style="width: 100%;" class="form-control d-print-none addrow " placeholder="Enter Discount %" type="number" name="nr_discount">
+                                            <!-- <br><br> -->
+                                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: 20px;">Add Row</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
-                                                <th class="left d-print-none addrow">CLR</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
+                            <div class="table-responsive " style="page-break-before: always;margin-top:0px" id="tablePrint">
+
+                                <table class="table table-striped list-table list_div">
+                                    <thead class="table-header">
+                                        <tr>
+                                            <th class="center">ASP</th>
+                                            <th class="left">SCREEN</th>
+                                            <th class="left">Package</th>
+                                            <th class="center">Postion</th>
+                                            <th class="right">Amount</th>
+                                            <th class="right">Discount</th>
+                                            <th class="right">IGST</th>
+                                            <th class="right">CGST</th>
+                                            <th class="right">SGST</th>
+                                            <th class="right">L-Tax</th>
+                                            <th class="left">Total</th>
+
+                                            <th class="left d-print-none addrow">CLR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
                                             <?php $i = 0;
                                             foreach ($estlineedit->result() as $estlrow) {
                                                 $i++; ?>
                                                 <td class="center"><?php echo $estlrow->asp_name; ?></td>
                                                 <td class="left"><?php echo $estlrow->sc_name; ?></td>
                                                 <td class="left"><?php echo $estlrow->tp_name; ?></br>
-                                                     <?php echo $invo_sdate = $estlrow->publish_date; ?></br>
-            <?php echo $invo_edate = $estlrow->lst_date; ?></br> 
+                                                    <?php echo $invo_sdate = $estlrow->publish_date; ?></br>
+                                                    <?php echo $invo_edate = $estlrow->lst_date; ?></br>
                                                 </td>
-                                                <!-- <td class="center"><?php //echo $estlrow->price; ?></td> -->
                                                 <td class="center"><?php echo $estlrow->play; ?></td>
                                                 <td class="center">
                                                     <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
@@ -640,21 +602,21 @@ border-top: 15px solid #1E1F23; */
                                                 </td>
 
 
-                                                </tr>
-                                            <?PHP } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                                        </tr>
+                                    <?PHP } ?>
+                                    </tbody>
+                                </table>
                             </div>
 
+                        </div>
 
-                    </div>
-                </div>
+
+                <!-- </div> -->
             </div>
         </div>
     </div>
     </div>
+
 
 
 
