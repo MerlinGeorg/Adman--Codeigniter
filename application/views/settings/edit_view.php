@@ -77,13 +77,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>PAN Number</label>
-                                        <input class="form-control" name="pan" id="pan" value="<?php echo $estrow->pan; ?>" type="number" placeholder="Enter Pan Number">
+                                        <input class="form-control" name="pan" id="pan" value="<?php echo $estrow->pan; ?>" type="text" placeholder="Enter Pan Number">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 ">
                                     <div class="form-group">
-                                        <label>CSTIN</label>
-                                        <input class="form-control" name="cstin" id="cstin" value="<?php echo $estrow->cstin; ?>" type="text" placeholder="Enter CSTIN">
+                                        <label>GSTIN</label>
+                                        <input class="form-control" name="cstin" id="cstin" value="<?php echo $estrow->cstin; ?>" type="text" placeholder="Enter GSTIN">
                                     </div>
                                 </div>
 
@@ -120,8 +120,8 @@
 
                                 <div class="col-lg-12 text-center">
                                     <div class="form-group">
-                                        <input type="submit" name="save" value="Save" id="addlogo" class="btncls">
-
+                                        <!-- <input type="submit" name="save" value="Save" id="addlogo" class="btncls"> -->
+                                        <button type="submit" id="addlogo" class="btn mt-4 btn-submit" style="width: 230px">Save</button>
                                     </div>
                                 </div>
 

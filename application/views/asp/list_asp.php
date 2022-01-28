@@ -1,12 +1,10 @@
+<?php //$this->load->view('asp/header_menu.php'); 
+?>
+<div id="wrapper">
 
+    <!-- Navigation -->
 
-
-<?php //$this->load->view('asp/header_menu.php'); ?>
- <div id="wrapper">
-
-        <!-- Navigation -->
-   
-            <!-- <div class="navbar-default sidebar" role="navigation">
+    <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       <li>                
@@ -21,67 +19,70 @@
                        
                                           
                      </ul> -->
-                            <!-- /.nav-second-level -->
-                       
-                <!-- </div> -->
-                <!-- /.sidebar-collapse -->
-            <!-- </div> -->
-            <!-- /.navbar-static-side -->
-                <div id="page-wrapper">
+    <!-- /.nav-second-level -->
+
+    <!-- </div> -->
+    <!-- /.sidebar-collapse -->
+    <!-- </div> -->
+    <!-- /.navbar-static-side -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-5 m-b-35 text-center"> List All ASP</div>
+            </div>
+            <!-- /////////////////////////////////////////////////////////.panel-body -->
+
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-5 m-b-35 text-center"> List All ASP</div>
-                </div>
- <!-- /////////////////////////////////////////////////////////.panel-body -->     
-  
-  <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <!-- <div class="panel-heading">Listed All Advertise Service Providers</div> -->
                         <div class="panel-body">
                             <div class="row">
-                           
-                        <div class="panel-body">
-                            
-                            <div class="table-responsive m-b-40">
-                                <table class="table table-borderless table-data3">
-                                    <thead>
-                                        <tr>
-                                            <th>ASP ID</th> 
-                                            <th>ASP NAME</th>                                               
-                                            <th>ASP PERSON</th>
-                                            <th>ASP PHONE</th>
-                                            <th>ASP EMAIL</th>
-                                            <th>STATUS</th>
-                                             <th>EDIT</th>
-                                               
-                                          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                     <?php     foreach ($aspdata->result() as $asprow)
-                       			{ ?>  
-                                        <tr>
-                                        <td><?php echo $asprow->asp_id;  ?></td>
-                                            <td><?php echo $asprow->asp_name;  ?></td>
-                                            <td><?php echo $asprow->asp_person;  ?></td>
-                                            <td><?php echo $asprow->phone_1;  ?></td>
-                                            <td><?php echo $asprow->email;  ?></td>
-                                            <td><?php $status = $asprow->status; 
-if($status==1) {    echo "Active" ; } else { echo "Deactive" ; }                                       
-                                            
-                                            
-                                              ?></td>
-                  <td><a href="<?php echo site_url('asp/asp_edit').'/'.$asprow->asp_id ; ?>"><i class="fas fa-edit"></i></a>
-                                        </tr>
-                                      <?php  }
-                       			?>
-                                    </tbody>
-                                </table>
-                            </div>
-                           
-                        </div>
-                    
+
+                                <div class="panel-body">
+
+                                    <div class="table-responsive m-b-40">
+                                        <table class="table table-borderless table-data3">
+                                            <thead>
+                                                <tr>
+                                                    <th>ASP ID</th>
+                                                    <th>ASP NAME</th>
+                                                    <th>ASP PERSON</th>
+                                                    <th>ASP PHONE</th>
+                                                    <th>ASP EMAIL</th>
+                                                    <th>STATUS</th>
+                                                    <th>EDIT</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($aspdata->result() as $asprow) { ?>
+                                                    <tr>
+                                                        <td><?php echo $asprow->asp_id;  ?></td>
+                                                        <td><?php echo $asprow->asp_name;  ?></td>
+                                                        <td><?php echo $asprow->asp_person;  ?></td>
+                                                        <td><?php echo $asprow->phone_1;  ?></td>
+                                                        <td><?php echo $asprow->email;  ?></td>
+                                                        <td><?php $status = $asprow->status;
+                                                            if ($status == 1) {
+                                                                echo "Active";
+                                                            } else {
+                                                                echo "Deactive";
+                                                            }
+
+
+                                                            ?></td>
+                                                        <td><a href="<?php echo site_url('asp/asp_edit') . '/' . $asprow->asp_id; ?>"><i class="fas fa-edit"></i></a>
+                                                    </tr>
+                                                <?php  }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
                             <!-- /.row (nested) -->
@@ -96,11 +97,9 @@ if($status==1) {    echo "Active" ; } else { echo "Deactive" ; }
         </div>
 
 
-                    <div class="panel-heading">
+        <div class="panel-heading">
 
-                        </div>
-                        
-                    </div>
-                  
-             
+        </div>
 
+    </div>
+</div>
