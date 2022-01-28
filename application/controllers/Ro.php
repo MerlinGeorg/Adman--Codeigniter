@@ -29,8 +29,8 @@ class Ro extends Layout_Controller
 			$advdata['adv'] = $this->campmodel->getadv();
 			$advdata['asp'] = $this->campmodel->getasp();
 			$advdata['user'] = $this->Settingmodel->list_logo();
+			$advdata['material'] = $this->romodel->listMaterial();
 			$advdata['title'] = "Create Release Order";
-
 			$this->data = $advdata;
 			$this->page = "ro/create_ro";
 			$this->layout();
@@ -46,7 +46,8 @@ class Ro extends Layout_Controller
 		$asp_id = $this->input->post('course_id');
 		$campId = $this->input->post('campId');
 		// $data['batch'] = $this->romodel->get_batch('screen', $asp_id);
-		$data['batch'] = $this->romodel->screenByCampaign($asp_id,$campId);
+		//$data['batch'] = $this->romodel->screenByCampaign($asp_id,$campId);
+		$data['batch'] = $this->romodel->nonPendingscreenByCampaign($asp_id,$campId);
 
 		$this->load->view('ro/batch_list', $data);
 	}
@@ -91,6 +92,7 @@ class Ro extends Layout_Controller
 				$duration = $row->duration;
 				$logoId  =$row->logoId;
 				$publishingDate=$row->start_date; //publishingDate
+				$material=$row->material;
 			}
 		//	print_r($postData);
 		//	die();
@@ -129,7 +131,8 @@ class Ro extends Layout_Controller
 					'package' => $ro->package,
 					'cr_date' => $cr_date,
 					'status' => $status,
-					'logo_id' => $logoId
+					'logo_id' => $logoId,
+					'ro_material'=>$material
 				);
 			//	print_r($ro_data);
 			//	exit();

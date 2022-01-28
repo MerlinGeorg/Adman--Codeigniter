@@ -21,7 +21,7 @@ class Settings extends Layout_Controller
 			$stdata['title'] = "Settings";
 			$stdata['logodata'] = $this->Settingmodel->list_logo();
 
-			
+
 			$this->data = $stdata;
 			//	$this->page = "settings/setting_view";
 			$this->page = "settings/list_logo";
@@ -57,15 +57,15 @@ class Settings extends Layout_Controller
 
 
 		if (isset($this->session->userdata['logged_in'])) {
-			
+
 			$this->form_validation->set_rules('cmpname', 'CompanyName', 'required|xss_clean');
 			$this->form_validation->set_rules('adrs', 'Adress', 'required|xss_clean');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required|xss_clean');
-			if(empty($_FILES['file']['name'])){
+			if (empty($_FILES['file']['name'])) {
 				$this->form_validation->set_rules('file', 'Logo Image', 'required');
 			}
-			
+
 			if ($this->form_validation->run() == true) {
 				$data['company_name'] = $this->input->post('cmpname');
 				$data['address'] = $this->input->post('adrs');
@@ -104,25 +104,21 @@ class Settings extends Layout_Controller
 				if (!$this->upload->do_upload('file')) {
 					$error = array('error' => $this->upload->display_errors());
 
-				//	return redirect('newlogo');
+					//	return redirect('newlogo');
 				} else {
 					$data = array('upload_data' => $this->upload->data());
 				}
 				return redirect('settings');
-			}
-			else{
+			} else {
 				$stdata['username'] = $this->session->userdata('logged_in')['username'];
-			$stdata['email'] = $this->session->userdata('logged_in')['email'];
-			$stdata['infomsg'] = "no";
-			$stdata['title'] = "Settings";
+				$stdata['email'] = $this->session->userdata('logged_in')['email'];
+				$stdata['infomsg'] = "no";
+				$stdata['title'] = "Settings";
 
-			$this->data = $stdata;
-			$this->page = "settings/add_logo";
-			$this->layout();
+				$this->data = $stdata;
+				$this->page = "settings/add_logo";
+				$this->layout();
 			}
-				
-			
-			
 		} else {
 			$this->sess_out();
 		}
@@ -196,20 +192,18 @@ class Settings extends Layout_Controller
 
 			$id = $this->uri->segment(3);
 
-			
+
 			$lgdata['username'] = $this->session->userdata('logged_in')['username'];
 			$lgdata['email'] = $this->session->userdata('logged_in')['email'];
 			$lgdata['infomsg'] = "no";
 			$lgdata['title'] = "Settings";
 			$lgdata['data'] = $this->Settingmodel->get_data($id);
-			
+
 
 
 			$this->data = $lgdata;
 			$this->page = "settings/edit_view";
 			$this->layout();
-
-			
 		} else {
 			$this->sess_out();
 		}
@@ -225,8 +219,12 @@ class Settings extends Layout_Controller
 			$this->form_validation->set_rules('adrs', 'Adress', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
-			if (empty($_FILES['image_file']['name'])) {
-			$this->form_validation->set_rules('image_file', 'Logo Image', 'required|xss_clean');
+			$fillImage = $this->input->post('logo_img');
+			
+			if ($fillImage == '') {
+				if (empty($_FILES['image_file']['name'])) {
+					$this->form_validation->set_rules('image_file', 'Logo Image', 'required|xss_clean');
+				}
 			}
 
 			if ($this->form_validation->run() == true) {
@@ -243,10 +241,10 @@ class Settings extends Layout_Controller
 
 				$img = $this->Settingmodel->get_data($logoId);
 
-					$im = $img->result()[0];
-					$fillimg = $im->logo_name;
+				$im = $img->result()[0];
+				$fillimg = $im->logo_name;
 				if (empty($_FILES['image_file']['name'])) {
-					
+
 					$fileName = $new_name = $fillimg;
 				} else {
 
@@ -286,15 +284,11 @@ class Settings extends Layout_Controller
 				$this->Settingmodel->update_logo($logo, $logoId);
 
 				$this->Settingmodel->update_address($address, $logoId);
-
-				
-			
 			}
 			//return redirect('settings');
-				$url = 'settings';
-				echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
-		}
-		else {
+			$url = 'settings';
+			echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
+		} else {
 			$this->sess_out();
 		}
 	}

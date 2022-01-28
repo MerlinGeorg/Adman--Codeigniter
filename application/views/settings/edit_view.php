@@ -114,6 +114,7 @@
                                 <div class="col-lg-6 text-center">
                                     <div class="form-group">
                                         <img name="logo_img" id="logo_id" class="logo_id" src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'>                                       
+                                        <input type="hidden" name="logo_img" value="<?php echo $estrow->logo_name;?>">
                                     </div>
                                 </div>
 
