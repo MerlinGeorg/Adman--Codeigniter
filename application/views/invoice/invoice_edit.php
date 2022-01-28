@@ -290,39 +290,7 @@
                                         <div>PAN : <?php echo $adv_pan = $estrow->pan; ?></div>
                                     </div>
 
-                                    <div class="row col-sm-8 date-div" style="padding-left:30px;">
-                                        <div>
-
-
-                                            <!-- <div><strong>Invoice Date:</strong>
-                                            <?php echo $est_date = $estrow->cr_date; ?><br></div>
-                                            <div><strong>Campaign Name:</strong>
-                                            <?php echo $campname = $estrow->est_name; ?><br></div>
-                                        <div><strong>Content Name:</strong>
-                                            <?php echo $contentname = $estrow->content_name ?><br></div>
-                                        <div><strong>Content Duration:</strong>
-                                            <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div> -->
-                                            <!--  <div><strong>Position</strong>
-                                            <?php //echo $WF = $estrow->play; 
-                                            ?>
-                                            <form method="post" action="<?php //echo site_url('invoice/pl_involine'); 
-                                                                        ?>" >
-                                                <input style="display:none;" type="number" name="pl_invoid" value="<?php //echo $estrow->invo_id; 
-                                                                                                                    ?>">
-                                                <input type="radio" class="d-print-none addrow" name="play" value="Preshow" <?php //if ($WF == 'Preshow') {
-                                                                                                                            //echo ' checked ';
-                                                                                                                            //    } 
-                                                                                                                            ?> /><label class="d-print-none addrow">Preshow</label>
-                                                <input type="radio" class="d-print-none addrow" name="play" value="During intravel" <?php //if ($WF == 'During intravel') {
-                                                                                                                                    //echo ' checked ';
-                                                                                                                                    //} 
-                                                                                                                                    ?> /><label class="d-print-none addrow">During intravel</label>
-                                                <button type="submit" class="d-print-none addrow">Save</button>
-                                            </form>
-                                        </div> -->
-
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
                                 <?php
@@ -374,10 +342,10 @@
                                 }
 
                                 ?>
-                                <hr>
+                                
 
 
-
+                            </div>
 
 
                                 <div id="printthis_bill">
