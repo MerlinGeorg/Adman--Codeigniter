@@ -157,7 +157,7 @@
                                         </div> 
                                 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Material</label>
                                     <input type="text" name="material" value="<?php echo $row->ro_material;?>" class="form-control" readonly>
@@ -167,7 +167,7 @@
                             <div class="col-lg-6" id="hidddenMaterial" style="display: none;">
                                 <!-- <div class="form-group"> -->
                                     <select name="materialnew" class="form-control">
-                                    <option value="">Select</option>
+                                    <option value="">Select Material</option>
                                             <?php foreach ($material->result() as $rorow) : ?>
                                                 <option value="<?php echo $rorow->material_name;     ?>"><?php echo $rorow->material_name;   ?></option>
                                             <?php endforeach; ?>
