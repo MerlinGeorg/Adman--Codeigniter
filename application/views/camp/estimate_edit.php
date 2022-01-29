@@ -244,6 +244,12 @@ border-top: 15px solid #1E1F23; */
                                 } */
 /* 
                                 thead{display: table-header-group;} */
+                                .mb-4{
+                                   /*  display: inline-block;
+                                    width: 100%; */
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
                             }
                         </style>
 
