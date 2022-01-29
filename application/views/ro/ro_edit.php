@@ -1,5 +1,6 @@
 <script src="<?php echo base_url() ?>Assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script>
+<script src="<?php echo base_url('vendor/select2/select2.min.js'); ?>"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
     var uri = window.location.toString();
     if (uri.indexOf("?") > 0) {
@@ -156,8 +157,23 @@
                                         </div> 
                                 
                             </div>
-                            
-
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Material</label>
+                                    <input type="text" name="material" value="<?php echo $row->ro_material;?>" class="form-control" readonly>
+                                    <a href="#" class="toggleMaterial" ><i class="fas fa-edit"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" id="hidddenMaterial" style="display: none;">
+                                <!-- <div class="form-group"> -->
+                                    <select name="materialnew" class="form-control">
+                                    <option value="">Select</option>
+                                            <?php foreach ($material->result() as $rorow) : ?>
+                                                <option value="<?php echo $rorow->material_name;     ?>"><?php echo $rorow->material_name;   ?></option>
+                                            <?php endforeach; ?>
+                                    </select>
+                                <!-- </div> -->
+                            </div>
                             <div class="col-lg-12 text-center">
                                 <button type="submit" class="btn mt-4 btn-submit" id="savero">Save</button>  
                             </div>         
@@ -187,14 +203,14 @@
                   
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script type="text/javascript">
    // body.onload = function() {
    // $(window).on('load', function() {
   
-function getData(){
-   
-     //   $(window).on('load', function() {
+ function getData(){
+   // $('#hidddenMaterial').hide();
+    
          $('#camp_date').datepicker({
 	autoclose: true,
 	showOnFocus: true,
@@ -221,16 +237,16 @@ function getData(){
 
         return [year, month, day].join('-');
     }
-//}
-    }
+
+    } 
 
 
-    var campId =  $('#campId').val();
+     var campId =  $('#campId').val();
         $.ajax({
             type:"post",
             dataType: "json",
             data:{camp_id:campId},
-            url:"<?php echo site_url('ro/get_camdata')?>",
+            url:"<?php //echo site_url('ro/get_camdata')?>",
             success : function(response){
                 // console.log(response);
                     $('#camp_date').val(response[0]['est_cr_date']);    
@@ -248,26 +264,17 @@ function getData(){
                // $('#aspId').option;
             }
 
-        });
-    // $('#ad_date').datepicker();
-    
-    
-    /*  $('#savero').on('click',function(){
-       
-        window.location.href = "<?php echo site_url('ro/list_ro'); ?>";
-    }) 
- */
-//$('#campId').change(function(){
-        
-  //  });
+        }); 
+   
+  $(document).on("click",".toggleMaterial",function(){
+$('#hidddenMaterial').toggle();
+  });
+
   $(document).ready(function(){
 
-
-    /* $('#campId').on('change',function(){
-       
-    });
- */
-    $('#ad_date').datepicker({
+    //$('#hidddenMaterial').hide();
+    
+     $('#ad_date').datepicker({
             autoclose: true,
             showOnFocus: true,
             todayHighlight: true,
@@ -291,6 +298,6 @@ function getData(){
                 day = '0' + day;
 
             return [year, month, day].join('-');
-        }
+        }       
 });
 </script>
