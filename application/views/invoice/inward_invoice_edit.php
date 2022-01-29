@@ -33,7 +33,7 @@
             <div class="container-fluid">
 
                 <div id="ui-view" data-select2-id="ui-view">
-                    <div>
+                    <!-- <div> -->
                         <div class="card">
 
 
@@ -42,7 +42,7 @@
                                 input[type="checkbox"][checked] {
                                     visibility: visible;
                                 }
-                                }
+                                
 
 
                                 .card {
@@ -52,12 +52,12 @@
                                 .card {
                                     position: relative;
                                     display: -ms-flexbox;
-                                    display: flex;
+                                    /* display: flex; */
                                     -ms-flex-direction: column;
                                     flex-direction: column;
                                     min-width: 0;
                                     word-wrap: break-word;
-                                    background-color: #fff;
+                                    /* background-color: #fff; */
                                     background-clip: border-box;
                                     border: 1px solid #c8ced3;
                                     border-radius: .25rem
@@ -93,7 +93,6 @@
 
                                 .table-header {
                                     background-color: #346a7d !important;
-                                    ;
                                     color: #ffffff;
                                     -webkit-print-color-adjust: exact;
                                     /* display: table-header-group;
@@ -103,7 +102,7 @@
 
 
                                 .body-main {
-                                    -webkit-print-color-adjust: exact;
+                                    /* -webkit-print-color-adjust: exact; */
                                     background: #ffffff;
                                     /* border-bottom: 15px solid #1E1F23;
      border-top: 15px solid #1E1F23; */
@@ -120,6 +119,9 @@
                                     /* padding-right: 40px; */
 
                                 }
+                                #printOnly {
+                                display: none;
+                            }
 
                                 /* NOTE: This style tag can go anywhere in the email. */
 
@@ -134,6 +136,13 @@
                                 }
 
                                 @media print {
+
+                                    body{
+                                        transform: scale(1);
+                                    }
+                                    #printOnly {
+                                    display: block;
+                                }
                                     .addrow {
                                         display: none;
                                     }
@@ -155,9 +164,10 @@
 
                                     .address2 {
 
-                                        padding-left: 50px;
+                                        /* padding-left: 50px; */
                                         float: left;
-
+                                        word-wrap: break-word;
+                                        /* margin-left: 7px; */
                                     }
 
                                     .date-div {
@@ -178,6 +188,7 @@
                                         border-spacing: 2px;
                                         border: 1px solid #dee2e6;
                                         max-width: 100%;
+                                        width:100%;
                                     }
 
                                     td th {
@@ -203,7 +214,7 @@
                                         text-align: right !important;
                                     }
 
-                                    .table-des: {
+                                    .table-des {
                                         border-bottom-width: 2px;
                                         vertical-align: bottom;
                                         border-bottom: 2px solid #dee2e6;
@@ -212,9 +223,11 @@
                                         font-weight: bold;
 
                                     }
+                                    h5{
+    margin-bottom: 0px;
+}
 
-
-                                }
+                                
                                 }
                             </style>
                             <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
@@ -222,8 +235,9 @@
                             <script type='text/javascript'></script>
                             <div class="card-header">
                                 <center>
-                                    <h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?>
-                                </center></strong>
+                                    <h5>TAX INVOICE</h5>
+                                    Invoice # MPIBSA/00<?php echo $estimate_num = $estrow->inward_id; ?>
+                                </center>
 
                                 <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                     <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
@@ -231,7 +245,7 @@
                         <i class="fa fa-save"></i> Save</a> -->
 
 
-                                <span id="printOnly">
+                                <!-- <span id="printOnly"> -->
                                     <div>Invoice Date:
                                         <?php echo $est_date = $estrow->cr_date; ?><br></div>
                                     <div>Campaign Name:
@@ -243,7 +257,7 @@
                                     <div>Invoice Details:
                                         <?php echo $estrow->content_name; ?><br></div>
                             </div>
-
+                            </div>
                             <?php
 
                             $email = $this->session->userdata('email');
@@ -254,13 +268,13 @@
                             if (!empty($logo)) {
                                 foreach ($logo->result() as $row) {  ?>
                                     <div class="card-body">
-                                        <div class="row mb-4">
-                                            <div class="col-sm-8 address2">
+                                        <div class="row mb-4" style="margin-bottom: 0rem!important;">
+                                            <div class="col-sm-4 address2">
 
 
                                                 <!-- <strong class="mb-3 ">Billed To:</strong> -->
                                                 <div>
-                                                    <b><?php echo $adv_cp = $estrow->c_person; ?></b>
+                                                    <strong><?php echo $adv_cp = $estrow->c_person; ?></strong>
                                                 </div>
                                                 <div><?php echo $adv_name = $estrow->adv_name; ?></div>
                                                 <div><?php echo $adv_add1 = $estrow->add1; ?></div>
@@ -269,13 +283,13 @@
                                                 <div>GST Id:<?php echo $adv_gst = $estrow->gst; ?></div>
                                                 <div>PAN : <?php echo $adv_pan = $estrow->pan; ?></div>
                                             </div>
-                                            <div class="col-sm-4 ml-auto address">
+                                            <div class="col-sm-4  ml-auto address">
 
-                                                <div>
+                                                <!-- <div> -->
                                                     <?php
                                                     if (!empty($row->logo_image)) {
                                                     ?>
-                                                        <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name; ?></strong></h6>
+                                                       <img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name; ?></strong>
                                                     <?php
                                                     } else {
 
@@ -285,9 +299,9 @@
                                                     }
                                                     ?>
 
-                                                </div>
-                                                <div class="col-sm-4 ">
-                                                    <div><?php echo $row->address;
+                                                <!-- </div> -->
+                                                <!-- <div class="col-sm-4 "> -->
+                                                    <div style="width:350px;"><?php echo $row->address;
                                                         }
                                                             ?></div>
                                                     <!-- <div>New York City, New york, 10394</div> -->
@@ -295,13 +309,13 @@
                                                     <div>Phone: <?php echo $row->phone;
                                                             }
                                                                 ?></div>
-                                                </div>
+                                                <!-- </div> -->
                                             </div>
 
 
-
-
-                                        </div>
+                                            </div>
+                                                       
+                                      
                                         <?php
                                         $sub_total = 0;
                                         $cgst_total = 0;
@@ -352,13 +366,13 @@
                                         }
 
                                         ?>
-                                    </div>
+                                   
 
 
 
 
 
-                                    <div id="printthis_bill">
+                                    <!-- <div id="printthis_bill"> -->
 
                                         <link rel="stylesheet" type="text/css" media="print" href="<?php echo base_url('Assets/css/print/style.css') ?>" />
 
@@ -370,13 +384,13 @@
     </style>
    -->
 
-                                        <div id="dd" style="display: none;">df</div>
+                                        <!-- <div id="dd" style="display: none;">df</div> -->
 
 
 
 
 
-                                        <div class=" bill-table">
+                                        <!-- <div class=" bill-table"> -->
                                             <table class="table text-centered  table-bordered bill-tab">
                                                 <thead class="table-header" id="theader">
                                                     <tr>
@@ -390,7 +404,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="table-head"> Campaign / Ad Name </td>
+                                                        <td class="table-head">  Ad Name </td>
                                                         <td style="padding-right: 101px;"> <?php echo $estrow->adv_name; ?> </td>
                                                     </tr>
                                                     <tr>
@@ -473,8 +487,8 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </div>
+                                        <!-- </div>
+                                    </div> -->
 
 
 
@@ -485,7 +499,7 @@
                                         <input style="display:none;" name="nr_screen" value="1" id="scrval">
 
                                         <div class="panel-body">
-                                            <div class="row">
+                                            <div class="row" style="page-break-inside: avoid; ">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <select class="form-control d-print-none addrow" onchange="get_batch()" name="nr_asp" id="a">
@@ -524,8 +538,8 @@
 
                                                     </div>
                                                     <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                                                    <br><br>
-                                                    <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
+                                                    
+                                                    <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: 20px;">Add Row</button>
                                                 </div>
                                             </div>
 
@@ -537,8 +551,8 @@
 
 
 
-                                    <div class="table-responsive" style=" padding-right: 3px;  padding-left: 3px;">
-                                        <table class="table table-striped list_div ">
+                                    <div class="table-responsive" style=" page-break-before:always;margin-top:0px;">
+                                        <table class="table table-striped list-table list_div ">
                                             <thead class="table-header">
                                                 <tr>
 
@@ -564,18 +578,14 @@
                                                 foreach ($involineedit->result() as $estlrow) {
                                                     $i++; ?>
                                                     <tr>
-                                                        <!-- <form method="post" action="<?php echo site_url('invoice/row_del'); ?>" >
-                                  <input style="display:none;"  name="row_id" value="<?php echo $estlrow->invo_reg_lineid;  ?>" >
-                                  <input name="row_invoid" value="<?php echo  $estlrow->invo_id; ?>" style="display :none ;">
-                  <td class="text-left"><button type="submit" class="btn btn-warning">Remove</button></td></form> -->
+                                                       
                                                         <td class="text-left"><?php echo $estlrow->asp_name; ?></td>
                                                         <td class="text-center"><?php echo $estlrow->sc_name; ?></td>
                                                         <td class="text-left"><?php echo $duration = $estlrow->tp_name; ?></br>
                                                             <?php echo $invo_sdate = $estlrow->start_date; ?></br>
                                                             <?php echo $invo_edate = $estlrow->end_date; ?></br>
                                                         </td>
-                                                        <!-- <td class="text-center"><?php //echo $estlrow->price; 
-                                                                                        ?></td> -->
+                                                      
                                                         <td class="center"><?php echo $estlrow->play; ?></td>
                                                         <td class="text-center">
                                                             <?php echo $amount = ($ad_duration * $estlrow->price) * $estlrow->package; ?></td>
@@ -597,18 +607,7 @@
                                                             <?php echo $ltax_val = ($y * $ltax) / 100; ?></td>
 
                                                         <td class="text-center" style=" font-weight: 600;font-size: 21px;"><?php echo $y + $igst_val + $cgst_val + $sgst_val + $ltax_val; ?></td>
-                                                        <!-- <td class="text-left" style="width: 1px;">
-                                                <form method="post">
-                                                    <input name="pk" value="<?php echo $estlrow->package; ?>" style="display :none ;">
-                                                    <input name="pkdate" value="<?php echo $estlrow->pack_date; ?>" style="display :none ;">
-                                                    <input type="date" class="start_date" name="start_date" value="<?php echo $estlrow->start_date; ?>" style="display :none ;">
-                                                    <input name="invo_id" value="<?php echo $estimate_num; ?>" style="display :none ;">
-                                                    <input name="invo_lid" value="<?php echo $estlrow->invo_reg_lineid; ?>" style="display :none ;">
-                                                    <input type="submit" class="btn btn-info" value="Refresh"  >
-
-                                                </form>
-
-                                            </td> -->
+                                                     
 
 
 
@@ -624,9 +623,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                        <!-- </div> -->
                         </div>
-
-
+                        </div>
 
                     </div>
                 <?php
@@ -658,7 +657,7 @@
 
         </div>
 
-
+        </div>
         <!-- script -->
 
 
@@ -713,14 +712,14 @@
             function printthis()
 
             {
-                var divToPrint2 = document.getElementById('printthis_bill').style.display = 'block';
+              //  var divToPrint2 = document.getElementById('printthis').style.display = 'block';
                 var w = window.open('', '', 'width=500,height=800,resizeable,scrollbars');
 
                 w.document.write($("#printthis").html());
                 w.document.close(); // needed for chrome and safari
                 javascript: w.print();
                 w.close();
-                var divToPrint2 = document.getElementById('printthis_bill').style.display = 'none';
+                //var divToPrint2 = document.getElementById('printthis').style.display = 'none';
                 return false;
             }
 

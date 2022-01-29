@@ -37,7 +37,7 @@
                             input[type="checkbox"][checked] {
                                 visibility: visible;
                             }
-                            }
+                            
 
 
                             .card {
@@ -52,7 +52,7 @@
                                 flex-direction: column;
                                 min-width: 0;
                                 word-wrap: break-word;
-                                background-color: #fff;
+                                /* background-color: #fff; */
                                 background-clip: border-box;
                                 border: 1px solid #c8ced3;
                                 border-radius: .25rem
@@ -88,7 +88,6 @@
 
                             .table-header {
                                 background-color: #346a7d !important;
-                                ;
                                 color: #ffffff;
                                 -webkit-print-color-adjust: exact;
                                 /* display: table-header-group;
@@ -98,7 +97,7 @@
 
 
                             .body-main {
-                                -webkit-print-color-adjust: exact;
+                                /* -webkit-print-color-adjust: exact; */
                                 background: #ffffff;
                                 /* border-bottom: 15px solid #1E1F23;
      border-top: 15px solid #1E1F23; */
@@ -115,7 +114,9 @@
                                 /* padding-right: 40px; */
 
                             }
-
+                            #printOnly {
+                                display: none;
+                            }
                             /* NOTE: This style tag can go anywhere in the email. */
 
                             @print {
@@ -129,6 +130,12 @@
                             }
 
                             @media print {
+                                body{
+                                    transform:scale(1);
+                                }
+                                #printOnly {
+                                    display: block;
+                                }
                                 .addrow {
                                     display: none;
                                 }
@@ -150,9 +157,9 @@
 
                                 .address2 {
 
-                                    padding-left: 50px;
+                                    /* padding-left: 50px; */
                                     float: left;
-
+                                    word-wrap: break-word;
                                 }
 
                                 .date-div {
@@ -173,6 +180,7 @@
                                     border-spacing: 2px;
                                     border: 1px solid #dee2e6;
                                     max-width: 100%;
+                                    width:100%;
                                 }
 
                                 td th {
@@ -198,7 +206,7 @@
                                     text-align: right !important;
                                 }
 
-                                .table-des: {
+                                .table-des {
                                     border-bottom-width: 2px;
                                     vertical-align: bottom;
                                     border-bottom: 2px solid #dee2e6;
@@ -208,23 +216,25 @@
 
                                 }
 
-
-                            }
+                                h5{
+    margin-bottom: 0px;
+}
+                            
                             }
                         </style>
                         <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                         <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
                         <script type='text/javascript'></script>
                         <div class="card-header">
-                            <h5>TAX INVOICE</h5>Invoice # 2018-2019/MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></strong>
+                           <center> <h5>TAX INVOICE</h5>Invoice # MPIBSA/00<?php echo $estimate_num = $estrow->invo_id; ?></center>
 
                             <a class="float-right mr-1 d-print-none" href="#" onclick="printthis()" data-abc="true">
                                 <i class="fa fa-print fa-fw" title="Print Invoice"></i></a>
                             <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 
-
-                            <span id="printOnly">
+<!-- 
+                            <span id="printOnly"> -->
                                 <div>Invoice Date:
                                     <?php echo $est_date = $estrow->cr_date; ?><br></div>
                                 <div>Campaign Name:
@@ -235,7 +245,7 @@
                                     <?php echo $ad_duration = $estrow->duration; ?>/sec<br></div>
 
                         </div>
-
+                        </div>
                         <?php
 
                         $email = $this->session->userdata('email');
@@ -247,13 +257,13 @@
                         foreach ($logo->result() as $row) { ?>
                             <div class="card-body">
                                 <div class="row mb-4">
-                                    <div class="col-sm-8 address2">
+                                    <div class="col-sm-4 address2" style="margin-bottom: 0rem!important;">
 
-                                        <div>
+                                        <!-- <div> -->
                                             <?php
                                             if (!empty($row->logo_image)) {
                                             ?>
-                                                <h6><img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name; ?></strong></h6>
+                                                <img width='40px' height='40px' src='<?= base_url("Assets/img/logo/$row->logo_name") ?>'> <strong><?php echo $row->company_name; ?></strong>
                                             <?php
                                             } else {
 
@@ -263,9 +273,9 @@
                                             }
                                             ?>
 
-                                        </div>
-                                        <div class="col-sm-4 ">
-                                            <div><?php echo $row->address;
+                                        <!-- </div> -->
+                                        <!-- <div class="col-sm-4 "> -->
+                                            <div style="width: 405px;"><?php echo $row->address;
                                                 }
                                                     ?></div>
                                             <!-- <div>New York City, New york, 10394</div> -->
@@ -273,7 +283,7 @@
                                             <div>Phone: <?php echo $row->phone;
 
                                                         ?></div>
-                                        </div>
+                                        <!-- </div> -->
                                     </div>
                                     <div class="col-sm-4 ml-auto address">
 
@@ -283,7 +293,7 @@
                                             <b> <?php echo $adv_cp = $estrow->c_person; ?></b>
                                         </div>
                                         <div><?php echo $adv_name = $estrow->adv_name; ?></div>
-                                        <div><?php echo $adv_add1 = $estrow->add1; ?></div>
+                                        <div ><?php echo $adv_add1 = $estrow->add1; ?></div>
                                         <div>Email: <?php echo $adv_email = $estrow->email; ?></div>
                                         <div>Phone: <?php echo $adv_phone = $estrow->phone_1; ?></div>
                                         <div>GST :<?php echo $adv_gst = $estrow->gst; ?></div>
@@ -345,10 +355,10 @@
                                 
 
 
-                            </div>
+                            
 
 
-                                <div id="printthis_bill">
+                                <!-- <div id="printthis_bill"> -->
 
                                     <link rel="stylesheet" type="text/css" media="print" href="<?php echo base_url('Assets/css/print/style.css') ?>" />
 
@@ -360,13 +370,13 @@
     </style>
    -->
 
-                                    <div id="dd" style="display: none;">df</div>
+                                    <!-- <div id="dd" style="display: none;">df</div> -->
 
 
 
 
 
-                                    <div class=" bill-table">
+                                    <!-- <div class=" bill-table"> -->
                                         <table class="table text-centered  table-bordered bill-tab">
                                             <thead class="table-header" id="theader">
                                                 <tr>
@@ -452,7 +462,7 @@
                                                     <td style=" font-weight: 100;font-size: 10px;">
 
                                                         ​
-                                                        <div id="autoUpdate" class="autoUpdate"><img src="<?php echo base_url(); ?>Assets/img/icon/sign.png" style="height : 76px;"> </div> <br>
+                                                        <div id="autoUpdate" class="autoUpdate"><img src="<?php echo base_url(); ?>Assets/img/icon/sign.png" style="height : 60px;"> </div> <br>
                                                         Authorised Signatory <br>
                                                         Meharali Poilungal Ismail<br>
                                                         Advertising Service Provider <br>
@@ -463,14 +473,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
+                                    
 
 
 
@@ -483,7 +486,7 @@
                 <input style="display:none;" name="nr_screen" value="1" id="scrval">
 
                 <div class="panel-body">
-                    <div class="row">
+                    <div class="row" style="page-break-inside: avoid; ">
                         <div class="col-lg-6">
                             <br>
                             <div class="form-group">
@@ -523,8 +526,8 @@
 
                             </div>
                             <input style="width: 100%;" class="form-control d-print-none addrow" placeholder="Enter Discount %" type="number" name="nr_discount">
-                            <br><br>
-                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: -40px;">Add Row</button>
+                            <!-- <br><br> -->
+                            <button type="submit" class="btn btn-info d-print-none addrow" style="width: 46%;margin-left: 293px; margin-top: 20px;">Add Row</button>
                         </div>
                     </div>
 
@@ -536,8 +539,8 @@
 
 
 
-            <div class="table-responsive" style=" padding-right: 3px;  padding-left: 3px;">
-                <table class="table table-striped list_div ">
+            <div class="table-responsive" style="page-break-before:always;margin-top:0px;">
+                <table class="table table-striped list-table list_div ">
                     <thead class="table-header">
                         <tr>
 
@@ -628,7 +631,7 @@
 
 
 
-
+        
 
 
     </div>
@@ -692,14 +695,14 @@
         function printthis()
 
         {
-            var divToPrint2 = document.getElementById('printthis_bill').style.display = 'block';
+          //  var divToPrint2 = document.getElementById('printthis_bill').style.display = 'block';
             var w = window.open('', '', 'width=500,height=800,resizeable,scrollbars');
 
             w.document.write($("#printthis").html());
             w.document.close(); // needed for chrome and safari
             javascript: w.print();
             w.close();
-            var divToPrint2 = document.getElementById('printthis_bill').style.display = 'none';
+           // var divToPrint2 = document.getElementById('printthis_bill').style.display = 'none';
             return false;
         }
 
