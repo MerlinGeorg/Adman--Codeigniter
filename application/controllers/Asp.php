@@ -161,8 +161,8 @@ class Asp extends Layout_Controller
 			$this->form_validation->set_rules('asp_name', 'Asp name', 'trim|required|callback__alpha_dash_space|min_length[5]|xss_clean');
 			$this->form_validation->set_rules('asp_person', 'Asp person', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('person_desig', 'Person_desig', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
-			$this->form_validation->set_rules('asp_phone_1', 'Phone number', 'numeric|required|max_length[10]|min_length[10]|xss_clean');
-			$this->form_validation->set_rules('asp_phone_2', 'Phone', 'numeric|max_length[10]|min_length[10]|xss_clean');
+			$this->form_validation->set_rules('asp_phone_1', 'Phone number', 'numeric|required|xss_clean');
+			$this->form_validation->set_rules('asp_phone_2', 'Phone', 'numeric|xss_clean');
 			if ($this->form_validation->run() == true)
 			{
 			 
