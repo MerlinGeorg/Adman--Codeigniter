@@ -56,7 +56,7 @@
     <!-- </div> -->
     <!-- /.navbar-static-side -->
     <div id="page-wrapper">
-        <div class="row card">
+        <div class="card">
             <div class="card-header">
                 Create RO
             </div>
@@ -204,7 +204,7 @@
                         </div>
                     </div>
 
-                    <div class="panel-heading">
+                    <div class="panel-heading table-responsive">
                         <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="font-size: 10px;">
                             <thead>
                                 <tr>
