@@ -1,0 +1,76 @@
+
+.container-fluid #ui-view .card{
+    margin-bottom: 1.5rem
+    }
+
+.container-fluid #ui-view .card {
+    position: relative;
+    display: -ms-flexbox;
+    /* display: flex; */
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    /* background-color: #fff; */
+    background-clip: border-box;
+    border: 1px solid #c8ced3;
+    border-radius: .25rem
+}
+
+.container-fluid #ui-view .card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
+}
+
+.container-fluid #ui-view .card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #346a7d;
+    border-bottom: 1px solid #c8ced3;
+    color: #ffffff;
+}
+
+.container-fluid #ui-view .fa-save {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.container-fluid #ui-view .fa-file-invoice {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.container-fluid #ui-view .fa-file-excel {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+
+.container-fluid #ui-view .table-header {
+    background-color: #346a7d;
+    color: #ffffff;
+    -webkit-print-color-adjust: exact;
+    /* display: table-header-group;
+-webkit-print-color-adjust: exact;  */
+}
+    
+
+
+.container-fluid #ui-view .body-main {
+    /* -webkit-print-color-adjust: exact;  */
+
+    /* border-bottom: 15px solid #1E1F23;
+border-top: 15px solid #1E1F23; */
+    margin-top: 30px;
+    margin-left: 306px;
+    padding: 40px 30px !important;
+    position: relative;
+    /* box-shadow: 0 1px 21px #808080; */
+    font-size: 10px
+}
+
+.container-fluid #ui-view .container-fluid {
+    -webkit-print-color-adjust: exact;
+    /* padding-right: 40px; */
+
+}
+
