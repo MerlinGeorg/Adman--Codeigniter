@@ -29,7 +29,7 @@ class Reports extends Layout_Controller
             $this->page = "reports/view_reports";
             $this->layout();
         } else {
-            echo "no";
+            $this->sess_out();
         }
     }
 
@@ -145,6 +145,8 @@ class Reports extends Layout_Controller
                 $url = 'reports';
                 echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
             }
+        } else {
+            $this->sess_out();
         }
     }
 
@@ -228,6 +230,8 @@ class Reports extends Layout_Controller
             $mpdf->WriteHTML($content);
 
             $mpdf->Output();
+        } else {
+            $this->sess_out();
         }
     }
     public function advertiser($advId)
@@ -328,5 +332,9 @@ class Reports extends Layout_Controller
             $key['month'] = $month;
         }
         return $key;
+    }
+    public function sess_out()
+    {
+        $this->load->view('welcome/login_form');
     }
 }
