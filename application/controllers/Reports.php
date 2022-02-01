@@ -241,7 +241,7 @@ class Reports extends Layout_Controller
 
         if (empty($result)) {
 
-            $key['advertiser'] = $adv;
+            $key['advertiser'] = $adv->adv_name;
         } else {
             foreach ($result as $row) {
 
@@ -254,7 +254,7 @@ class Reports extends Layout_Controller
             }
 
             $key['estlineedit'] = $estlineedit;
-            $key['advertiser'] = $adv;
+            $key['advertiser'] = $adv->adv_name;
         }
         return $key;
     }
