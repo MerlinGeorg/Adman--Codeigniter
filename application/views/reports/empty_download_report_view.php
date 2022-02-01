@@ -141,6 +141,7 @@ border-top: 15px solid #1E1F23; */
                         <strong><?php 
                         echo $date; 
                                 ?></strong>
+<a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?date=<?php echo $date;?>&report=daily" data-abc="true" target="_blank">   
                                 <?php } ?>
 
                                 <?php if(!empty($fromDate)){
@@ -156,6 +157,7 @@ border-top: 15px solid #1E1F23; */
                         <strong><?php 
                         echo $toDate; 
                                 ?></strong>
+<a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?from_date=<?php echo $fromDate;?>&to_date=<?php echo $toDate;?>&report=weekly" data-abc="true" target="_blank">
                                 <?php } ?>
                                 <?php if(!empty($month)){
                     ?>         
@@ -163,18 +165,21 @@ border-top: 15px solid #1E1F23; */
                         <strong><?php 
                         echo $month; 
                                 ?></strong>
+ <a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?month=<?php echo $monthId;?>&report=monthly" data-abc="true" target="_blank">
                                 <?php } ?><br>
                                 <?php if(!empty($advertiser)){
                     ?>         
                         Advertiser :
                         <strong><?php echo $advertiser; 
                                 ?></strong>
+<a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?adv_id=<?php echo $advId;?>&report=advertiser" data-abc="true" target="_blank">
                                 <?php } ?>
                                 <?php $view_path= $_ci_view;
                                $page=explode('/',$view_path);
                               ?>
-                        <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true">
-                            <i class="fa fa-save fa-fw" title="Download Report"></i></a>
+                        <!-- <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true"> -->
+                        <!-- <a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?from_date=<?php echo $fromDate;?>&to_date=<?php echo $toDate;?>&report=weekly" data-abc="true"> -->
+                        <i class="fa fa-save fa-fw" title="Download Report"></i></a>
                         <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 

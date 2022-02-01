@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='text/html;charset="UTF-8"' http-equiv="Content-Type">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Report</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('Assets/css/frm_style.css') ?>">
     <!-- <link rel="stylesheet" type="text/css" href="print.css" media="screen, print" /> -->
@@ -12,17 +12,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <!-- <script src="custom_script.js"></script>
+ -->
+    <script type="text/javascript">
+        function savePDF() {
+            var imgData;
 
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+            html2canvas($('#ui-view'), {
+                useCORS: true,
+                onrendered: function(canvas) {
+                    imgData = canvas.toDataURL('image/png');
+                    var doc = new jsPDF('l', 'pt', 'a4');
+
+                    doc.addImage(imgData, 'PNG', 4, 35);
+
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = mm + '/' + dd + '/' + yyyy;
+
+                    doc.save('SalesReport_' + today + '.pdf');
+
+                    
+                }
+            });
+        }
+    </script>
+
     <script type='text/javascript'></script>
 </head>
 
 <body>
-   
-    <div class="container-fluid" id="printthis">
+<div id="printthis">
+<div class="container-fluid">
+    <!-- <div class="container-fluid" id="printthis"> -->
+    <div id="ui-view" data-select2-id="ui-view">
+            <div>
+                <div class="card">
         <style>
             .card {
                 margin-bottom: 1.5rem
@@ -31,7 +61,7 @@
             .card {
                 position: relative;
                 display: -ms-flexbox;
-                display: flex;
+                /* display: flex; */
                 -ms-flex-direction: column;
                 flex-direction: column;
                 min-width: 0;
@@ -99,25 +129,22 @@ border-top: 15px solid #1E1F23; */
 
             }
 
-            }
+            
         </style>
 
-        <div id="ui-view" data-select2-id="ui-view">
-            <div>
-                <div class="card">
+        
 
                     <div class="card-header">
-                        <h5>REPORT</h5><?php if(!empty($month)){
+                        <h5>REPORT</h5><?php if(!empty($advertiser)){
                     ?>         
-                        Month :
+                        Advertiser :
                         <strong><?php 
-                        echo $month; 
+                        echo $advertiser->adv_name; 
                                 ?></strong>
                                 <?php } ?>
-                               
-                        <!-- <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true"> -->
-                        <a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?month=<?php echo $monthId;?>&report=monthly" data-abc="true" target="_blank">    
-                        <i class="fa fa-save fa-fw" title="Download Report"></i></a>
+
+                        <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true">
+                            <i class="fa fa-save fa-fw" title="Download Report"></i></a>
                         <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 
@@ -128,7 +155,7 @@ border-top: 15px solid #1E1F23; */
  -->
 
                     </div>
-
+                </div>
                     <?php
 
                     // $email = $this->session->userdata('email');
@@ -139,13 +166,14 @@ border-top: 15px solid #1E1F23; */
 
 
                        
+                        Report Date: <?php echo Date('Y-m-d');?>
 
-                       Report Date: <?php echo Date('Y-m-d');?>
                         
                     </div>
 
 
-                    <hr> <div class="table-responsive ">
+                    <hr>
+                    <div class="table-responsive ">
                     <div style="display: block; page-break-before: always; ">
 
 
@@ -166,9 +194,6 @@ border-top: 15px solid #1E1F23; */
                                         </th>
                                         <th class="left table-des">
                                             <h5>Campaign Name</h5>
-                                        </th>
-                                        <th class="left table-des">
-                                            <h5>Advertiser Name</h5>
                                         </th>
                                         <th class="table-des">
                                             <h5>Sub Amount</h5>
@@ -261,7 +286,7 @@ border-top: 15px solid #1E1F23; */
 
                                         <td><i class="fas table-result"></i> <?php echo $estlrow->asp_name; ?> </td>
                                         <td><i class="fas table-result"></i> <?php echo $estlrow->name; ?></td>
-                                        <td><i class="fas table-result"></i> <?php echo $estlrow->adv_name;  ?></td>
+                                       
                                         
                                         <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $subamount; ?></td>
                                         <td><i class="fas fa-rupee-sign table-result"></i> <?php echo $cgst_value; ?></td>
@@ -313,9 +338,12 @@ border-top: 15px solid #1E1F23; */
 
 
 
-   
+    <!-- script -->
 
 
-</body>
+    <!-- <script src="<?php //echo base_url() ?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 
-</html>
+

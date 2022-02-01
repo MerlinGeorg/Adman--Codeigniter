@@ -131,10 +131,10 @@
                                         <?php
                                         if (!empty($estrow->logo_image)) {
                                         ?>
-                                            <h6><img name="logo_img" id="logo_id" class="logo_id" src='<?php echo base_url("assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'> <strong><?php echo $estrow->company_name ?></strong></h6>
+                                            <h6><img name="logo_img" id="logo_id" class="logo_id" src='<?php echo base_url("Assets/img/logo/$estrow->logo_name") ?>' height='40px' width='40px'> <strong><?php echo $estrow->company_name ?></strong></h6>
                                         <?php
                                         } else {
-
+ 
                                         ?>
                                             <h6> <strong><?php echo $estrow->company_name ?></strong></h6>
                                         <?php

@@ -140,8 +140,9 @@ border-top: 15px solid #1E1F23; */
                         echo $date; 
                                 ?></strong>
 
-                        <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true">
-                            <i class="fa fa-save fa-fw" title="Download Report"></i></a>
+                        <!-- <a class="float-right mr-1 d-print-none" href="#" onclick="savePDF();return false;" data-abc="true"> -->
+                        <a class="float-right mr-1 d-print-none" href="<?php echo site_url('reports/downloadReport'); ?>?date=<?php echo $date;?>&report=daily" data-abc="true" target="_blank">   
+                        <i class="fa fa-save fa-fw" title="Download Report"></i></a>
                         <!-- <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
                         <i class="fa fa-save"></i> Save</a> -->
 
