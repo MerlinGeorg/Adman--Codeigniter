@@ -7,7 +7,7 @@
         display: none;
     }  */
 }
-@media screen and (max-width: 576px){
+@media screen {
     #mobileDisplay{
         display: block;
     }  
