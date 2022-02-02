@@ -29,7 +29,7 @@ class Reports extends Layout_Controller
             $this->page = "reports/view_reports";
             $this->layout();
         } else {
-            echo "no";
+            $this->sess_out();
         }
     }
 
@@ -329,4 +329,8 @@ class Reports extends Layout_Controller
         }
         return $key;
     }
+    public function sess_out()
+	{
+		$this->load->view('welcome/login_form');
+	}
 }
