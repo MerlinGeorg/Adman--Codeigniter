@@ -29,8 +29,6 @@ class Invoice extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$invodata['username'] = $this->session->userdata('logged_in')['username'];
 			$invodata['email'] = $this->session->userdata('logged_in')['email'];
-			//	$invodata['camp'] = $this->romodel->get_releaselist();
-			// $invodata['camp'] = $this->romodel->get_ro_reg_list();
 			$invodata['camp'] = $this->invomodel->getCampaignInRoreg();
 			$invodata['asp'] = $this->invomodel->getAspInRoreg();
 			$invodata['adv'] = $this->campmodel->getadv();
@@ -48,7 +46,6 @@ class Invoice extends Layout_Controller
 	public function inward_invoice_save()
 	{
 		if (isset($this->session->userdata['logged_in'])) {
-			// $this->form_validation->set_rules('ro_id', 'ro_id', 'numeric|required');
 			$this->form_validation->set_rules('content_name', 'content_name', 'trim|required');
 
 			if ($this->form_validation->run() == true) {
@@ -75,25 +72,16 @@ class Invoice extends Layout_Controller
 					'adv_name' => $adv_name,
 					'content_name' => $this->input->post('content_name'),
 					'cr_date' => $cr_date,
-					//'play' => "preshow",
 				);
-				// print_r($invo_data);
-				// exit();
 				$id = $this->invomodel->insert_inward_invoice('inward_invoice', $invo_data);
 
 				$screen = $this->campmodel->get_batch('screen', $asp_id->asp_id);
 
 
 				foreach ($screen->result() as $sc) {
-
-					// $mscreen_data = $this->invomodel->get_screen('screen', $screen);
 					$mscreen_data = $this->invomodel->get_screen('screen', $sc->sc_id);
 				}
-				// print_r($mscreen_data->result());
-				// die();
 				foreach ($mscreen_data->result() as $scdata) {
-					//	print_r($scdata);
-					//	die();
 					$nrs = $scdata->sc_id;
 					$sc_price = $scdata->sc_price;
 					$cgst = $scdata->cgst;
@@ -103,10 +91,8 @@ class Invoice extends Layout_Controller
 				}
 				$ro = $this->invomodel->getDataByInwardId($id);
 				$roId = $ro->result()[0];
-				//	print_r($roId->ro_id);die();
 				$roPackage = $this->invomodel->getRoPackage($roId->ro_id);
 				$package = $roPackage->result()[0];
-				//print_r($package->result()[0]);die();
 				$pack_dates = $this->invomodel->get_packdate($package->package);
 				foreach ($pack_dates->result() as $pdate) {
 					$next_date = $pdate->days;
@@ -123,7 +109,6 @@ class Invoice extends Layout_Controller
 					$newest_ldata = array(
 						'inward_id' => $id,
 						'invo_id' => 0,
-						//'asp' => $asp_id,
 						'est_id' => $camp_id->est_id,
 						'package' => $package->package,
 						'start_date' => $publish->publish_date,
@@ -141,32 +126,8 @@ class Invoice extends Layout_Controller
 						'igst' => $estlinedata->igst,
 						'ltax' => $estlinedata->ltax,
 						'play' => $estlinedata->play
-						//	'play'=>$play
 					);
-					/* $newest_ldata = array(
-					'inward_id' => $id,
-					'invo_id' => 0,
-					'asp' => $asp_id,
-					'est_id' => $camp_id,
-					'screen' => $nrs,
-					'duration' => $this->input->post('duration'),
-					'package' => $package->package,
-					'start_date' => $publish->publish_date,
-					'end_date' => $newdate,
-					'pack_date' => $next_date,
-					'status' => 1,
-					'discount' => 0,
-
-					'price' => $sc_price,
-					'cgst' => $cgst,
-					'sgst' => $sgst,
-					'igst' => $igst,
-					'ltax' => $ltax,
-					'play'=>"pre"
-				//	'play'=>$play
-				); */
-					//	print_r($newest_ldata);
-					//	die();
+					
 					$this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
 				}
 				$invodata['msg'] = 1;
@@ -177,7 +138,6 @@ class Invoice extends Layout_Controller
 			$invodata['email'] = $this->session->userdata('logged_in')['email'];
 			$invodata['camp'] = $this->invomodel->getCampaignInRoreg();
 			$invodata['asp'] = $this->invomodel->getAspInRoreg();
-			// $invodata['camp'] = $this->romodel->get_ro_reg_list();
 			$invodata['adv'] = $this->campmodel->getadv();
 			$invodata['ro'] = $this->romodel->getRoIds();
 			$invodata['user'] = $this->Settingmodel->list_logo();
@@ -213,8 +173,6 @@ class Invoice extends Layout_Controller
 			$this->data = $invo_list;
 			$this->page = "invoice/outward_invoice";
 			$this->layout();
-
-			// $this->load->view('invoice/invoice', $invo_list);
 		} else {
 			$this->sess_out();
 		}
@@ -226,14 +184,11 @@ class Invoice extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$invo_list['username'] = $this->session->userdata('logged_in')['username'];
 			$invo_list['email'] = $this->session->userdata('logged_in')['email'];
-			// $invo_list['involist'] = $this->invomodel->get_inward_involist();
 			$invo_list['title'] = "Inward Invoices";
 			$invo_list['involist']    = $this->invomodel->list_inward_invoices();
 			$this->data = $invo_list;
 			$this->page = "invoice/inward_invoice";
 			$this->layout();
-
-			// $this->load->view('invoice/invoice', $invo_list);
 		} else {
 			$this->sess_out();
 		}
@@ -253,11 +208,6 @@ class Invoice extends Layout_Controller
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invo_id);
 			$estId = $this->campmodel->getEstIdByInvoId($invo_id);
 			$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
-
-			//$invo_list['title']="Outward Invoices";
-			//$this->data = $invo_list;
-			//$this->page = "invoice/invoice_edit";
-			//$this->layout();
 			$this->load->view('invoice/invoice_edit', $invo_list);
 		} else {
 			$this->sess_out();
@@ -349,7 +299,6 @@ class Invoice extends Layout_Controller
 
 			$en_d = '+' . $next_date . ' day';
 			$publish = $this->invomodel->getPublishDate($nestid);
-			//print_r($publish);die();
 			$newdate = strtotime($en_d, strtotime($publish->publish_date));
 			$newdate = date('Y-m-d', $newdate);
 
@@ -390,12 +339,6 @@ class Invoice extends Layout_Controller
 			$this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
 			$url = base_url() . "invoice/invoice_edit/" . $invoid;
 			redirect($url);
-
-			// $invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invoid);
-			// $invo_list['n_asp'] = $this->invomodel->getasp();
-			// $invo_list['n_package'] = $this->invomodel->gettpolicy();
-			// $invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
-			// $this->load->view('invoice/invoice_edit', $invo_list);
 		} else {
 			$this->sess_out();
 		}
@@ -409,9 +352,6 @@ class Invoice extends Layout_Controller
 
 
 			$this->invomodel->did_delete_row($rowid);
-			// $url = base_url() . "invoice/invoice_edit/" . $rowestid;
-			// redirect($url);
-
 			$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($rowestid);
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
@@ -429,8 +369,6 @@ class Invoice extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 
 			$this->invomodel->did_delete_row($rowid);
-			// $url = base_url() . "invoice/invoice_inward_edit/" . $rowestid;
-			// redirect($url);
 			$invo_reg = $this->invomodel->get_invoreglinelist($rowestid);
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
@@ -451,22 +389,13 @@ class Invoice extends Layout_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 
 			$invoid = $this->input->post('nr_invoid');
-
-			// print_r($invoid);
-			// die();
 			$nestid = $this->input->post('nr_estid');
-			// 	print_r($nestid);
-			// die();
 			$nr_asp = $this->input->post('nr_asp');
 			$nrs = $this->input->post('nr_screen');
 			$nr_duration = $this->input->post('nr_duration');
 			$nr_pack = $this->input->post('nr_pack');
 			$cr_date = date("Y/m/d");
 			$nr_discount = $this->input->post('nr_discount');
-
-			//print_r($nrs);
-			//die();
-
 			$pack_dates = $this->invomodel->get_packdate($nr_pack);
 			foreach ($pack_dates->result() as $pdate) {
 				$next_date = $pdate->days;
@@ -495,7 +424,6 @@ class Invoice extends Layout_Controller
 			}
 			$play = $this->input->post('play');
 			$newest_ldata = array(
-				//'invo_id' => $invoid,
 				'inward_id' => $invoid,
 				'est_id' => $nestid,
 				'asp' => $nr_asp,
@@ -514,120 +442,16 @@ class Invoice extends Layout_Controller
 				'discount' => $nr_discount,
 				'play' => $play
 			);
-			// print_r($newest_ldata);
-			// 	die();
 			$invo_regline_id = $this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
 
 			$url = base_url() . "invoice/invoice_inward_edit/" . $invoid;
 			redirect($url);
-
-			/* $invo_list['invo_reg'] = $this->invomodel->get_invoreglinelist($invoid);
-			$invo_list['n_asp'] = $this->invomodel->getasp();
-			// $invo_list['n_asp'] =$this->invomodel->getAspByInwardId($invoid);
-			$invo_list['n_package'] = $this->invomodel->gettpolicy();
-			$invo_list['involineedit'] = $this->invomodel->inward_involine_edit($invoid);
-			$this->load->view('invoice/inward_invoice_edit', $invo_list); */
 		} else {
 			$this->sess_out();
 		}
 	}
 
 	///////////////////////////////////
-	/* function nr_involine()
-{
-
-if(isset($this->session->userdata['logged_in'])){
-	
-$invoid = $this->input->post('nr_invoid');
-$nestid = $this->input->post('nr_estid');
-$nr_asp = $this->input->post('nr_asp');
-$nrs = $this->input->post('nr_screen');
-$nr_duration = $this->input->post('nr_duration');
-$nr_pack = $this->input->post('nr_pack');
-$cr_date = date("Y/m/d") ;
-$nr_discount = $this->input->post('nr_discount');
-
-
-$pack_dates = $this->invomodel->get_packdate($nr_pack);
-foreach ($pack_dates->result() as $pdate) 
-{
-$next_date = $pdate->days ;
-} 
-
-
-		if (isset($this->session->userdata['logged_in'])) 
-		{
-			$invo_id = $this->uri->segment(3);
-
-/////////////////////////////////////////////////////////////////
-
-$mscreen_data =$this->invomodel->get_screen('screen',$nrs);
-	 foreach ($mscreen_data->result() as $scdata) 
-	 {
-		$sc_price = $scdata->sc_price;
-		$cgst = $scdata->cgst;
-		$sgst = $scdata->sgst; 
-	 	$igst = $scdata->igst;
-		$ltax = $scdata->local_tax;
-	 }
-$newest_ldata = array(
-					'invo_id'=>$invoid,
-					'est_id'=>$nestid,
-					'asp' => $nr_asp,
-					'screen' => $nrs,
-					'duration' => $nr_duration,
-					'package' => $nr_pack,
-					'price' => $sc_price,
-					'cgst' => $cgst,
-					'sgst' => $sgst,
-					'igst' => $igst,
-					'ltax' => $ltax,
-					'start_date' => $cr_date,
-					'end_date' => $newdate,
-					'pack_date' => $next_date,
-					'status' => 1,
-					'discount' => $nr_discount
-				);
-				
-$this->invomodel->insert_invo_data('invo_reg_line', $newest_ldata);
-		$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($invoid);
-		$invo_list['n_asp'] = $this->invomodel->getasp();	
-		$invo_list['n_package'] = $this->invomodel->gettpolicy();
-		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
-		$estId=$this->campmodel->getEstId($nestid);
-		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
-		$this->load->view('invoice/invoice_edit', $invo_list);
-
-				$adv_id = $row->adv_id;
-				$content_id = $row->content_id;
-				$est_name = $row->est_name;
-			}
-
-}
-////////////////////////////
-function row_del()
-{
-	$rowid = $this->input->get('var1');
-	$rowestid = $this->input->get('var2');	
-if(isset($this->session->userdata['logged_in'])){
-
-	// $rowid = $this->input->post('row_id');
-	// $rowestid = $this->input->post('row_invoid');	
-	$this->invomodel->did_delete_row($rowid);
-	$invo_list['invo_reg'] = $this->invomodel->get_invoreglist($rowestid);
-		$invo_list['n_asp'] = $this->invomodel->getasp();	
-		$invo_list['n_package'] = $this->invomodel->gettpolicy();
-		$invo_list['involineedit'] = $this->invomodel->get_involine_edit($rowestid);
-		$estId=$this->campmodel->getEstId($rowestid);
-		$invo_list['logo']  = $this->campmodel->getInvoLogo($estId->est_id);
-		$this->load->view('invoice/invoice_edit', $invo_list);
-		// redirect('invoice/list_outward_invoice');
-	
-}
-else{
-	$this->sess_out();
-}	
-}*/
 	////////////////////////////
 	function update_sdate()
 	{
@@ -653,7 +477,6 @@ else{
 			$invo_list['n_asp'] = $this->invomodel->getasp();
 			$invo_list['n_package'] = $this->invomodel->gettpolicy();
 			$invo_list['involineedit'] = $this->invomodel->get_involine_edit($invoid);
-			//$this->load->view('invoice/invoice_edit', $invo_list);
 			echo json_encode($invo_list);
 		} else {
 			$this->sess_out();

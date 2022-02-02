@@ -74,16 +74,10 @@ class Campmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('est_reg');
-		//$this->db->where('est_id', $id);
-		//$this->db->where('status', 1);
 		$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
-		//	$this->db->join('content_reg', 'est_reg.content_id = est_reg.con_id','inner');
-		//return $this->db->get();
-		$this->db->join('invoice_reg','invoice_reg.est_id=est_reg.est_id');
+		$this->db->join('invoice_reg', 'invoice_reg.est_id=est_reg.est_id');
 		$this->db->where('invoice_reg.invo_id', $id);
 		return $this->db->get();
-		//echo $this->db->last_query();
-		//die();
 	}
 
 	public function get_estline_edit($id)
@@ -91,22 +85,19 @@ class Campmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('est_line');
 		$this->db->where('est_line.est_id', $id);
-		$this->db->join('est_reg','est_line.est_id=est_reg.est_id','inner');
+		$this->db->join('est_reg', 'est_line.est_id=est_reg.est_id', 'inner');
 		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
 		$this->db->join('screen', 'est_line.screen = screen.sc_id', 'inner');
 		$this->db->join('time_policy', 'est_line.package = time_policy.tpc', 'inner');
 		$this->db->order_by("asp_name", "asc");
 		return $this->db->get();
-		//$this->db->get();
-		//echo $this->db->last_query();
-		//die();
 	}
 
 
 
 	function get_invoedline_edit($id)
 	{
-		$this->db->select('*'); 
+		$this->db->select('*');
 		$this->db->from('est_line');
 		$this->db->where('est_id', $id);
 		$this->db->join('asp', 'est_line.asp = asp.asp_id', 'inner');
@@ -177,8 +168,6 @@ class Campmodel extends CI_Model
 	{
 		$this->db->insert('invoice_reg', $data);
 		$invoiceId = $this->db->insert_id();
-	//	echo $this->db->last_query();
-	//	die();
 		return $invoiceId;
 	}
 
@@ -209,7 +198,8 @@ class Campmodel extends CI_Model
 		return $this->db->get();
 	}
 
-	public function getEstlineInvoice($id,$asp){
+	public function getEstlineInvoice($id, $asp)
+	{
 		$this->db->select('*');
 		$this->db->from('est_line');
 		$this->db->where('est_id', $id);
@@ -225,13 +215,9 @@ class Campmodel extends CI_Model
 	public function get_involist()
 	{
 		$this->db->select('*');
-	//	$this->db->from('est_reg');
-	//	$this->db->where('status', 2);
-	$this->db->from('invoice_reg');
-		//$this->db->join('adv_reg', 'est_reg.adv_id = adv_reg.adv_id', 'inner');
-
+		$this->db->from('invoice_reg');
 		$this->db->join('adv_reg', 'invoice_reg.adv_id = adv_reg.adv_id', 'inner');
-		$this->db->order_by("est_name",'asc');
+		$this->db->order_by("est_name", 'asc');
 		return $this->db->get();
 	}
 
@@ -253,21 +239,17 @@ class Campmodel extends CI_Model
 		$ro = $this->db->get();
 		$res = $ro->result();
 		return $res;
-		//return $this->db->get();
 	}
-public function getEstId($id){
-	/* $this->db->select('est_id');
-		$this->db->from('invoice_reg E');
-		$this->db->where('E.invo_id', $id); */
+	public function getEstId($id)
+	{
+
 		$this->db->select('camp_id');
 		$this->db->from('inward_invoice E');
 		$this->db->where('E.inward_id', $id);
 		$ro = $this->db->get();
 		$res = $ro->result()[0];
-	//echo $this->db->last_query();
-	//	print_r($res);die();
 		return $res;
-}
+	}
 	public function getInvoLogo($id)
 	{
 		$this->db->select('E.logo_id,l.*,a.*');
@@ -275,48 +257,27 @@ public function getEstId($id){
 		$this->db->join('adman_logo l', 'E.logo_id = l.logo_id');
 		$this->db->join('adman_company_address a', 'l.logo_id = a.logo_id');
 		$this->db->join('invoice_reg I', 'E.est_id = I.est_id');
-		//$this->db->where('E.est_id', $id);
 		$this->db->where('invo_id', $id);
-	//	$ro = $this->db->get();
-	//	$res = $ro->result();
-//echo $this->db->last_query();
-//die();
-		//return $res;
 		return $this->db->get();
 	}
 
 	public function getaspByInvoId($id)
 	{
-		/* $this->db->select('asp.asp_name,asp.asp_id');
-		$this->db->from('invo_reg_line');
-		$this->db->join('asp', 'asp.asp_id = invo_reg_line.asp');
-		$this->db->where('invo_id', $id);
-		$ro=$this->db->get();
-	echo $this->db->last_query();
-	echo '<pre>';
-	
-	//$res=$ro->result()[0];
-	print_r($ro->result());
-	exit();
-	return $res; */
-	$this->db->select('asp');
+
+		$this->db->select('asp');
 		$this->db->from('est_reg');
-		$this->db->join('invoice_reg','invoice_reg.est_id=est_reg.est_id');
+		$this->db->join('invoice_reg', 'invoice_reg.est_id=est_reg.est_id');
 		$this->db->where('invoice_reg.invo_id', $id);
-		$ro=$this->db->get();
-	//echo $this->db->last_query();
-	//echo '<pre>';
-	
-	$res=$ro->result()[0];
-	//print_r($ro->result());
-	//exit();
-	return $res; 
+		$ro = $this->db->get();
+		$res = $ro->result()[0];
+		return $res;
 	}
-public function update_estData($data,$id){
-	$this->db->set('asp', $data);
+	public function update_estData($data, $id)
+	{
+		$this->db->set('asp', $data);
 		$this->db->where('est_id', $id);
 		$this->db->update('est_reg');
-}
+	}
 	public function getaspByEstId($id)
 	{
 		$this->db->select('est_line.asp,asp.asp_name');
@@ -324,18 +285,17 @@ public function update_estData($data,$id){
 		$this->db->join('est_line', 'est_reg.est_id = est_line.est_id');
 		$this->db->join('asp', 'asp.asp_id = est_line.asp');
 		$this->db->where('est_reg.est_id', $id);
-	$ro=$this->db->get();
-	$res=$ro->result()[0];
-	//print_r($res);exit();
-	return $res;
+		$ro = $this->db->get();
+		$res = $ro->result()[0];
+		return $res;
 	}
 
-	public function getEstIdByInvoId($id){
+	public function getEstIdByInvoId($id)
+	{
 		$this->db->select('est_id');
 		$this->db->from('invoice_reg');
-		$this->db->where('invo_id',$id);
-		$res=$this->db->get();
-//print_r($res->result()[0]);
-return $res->result()[0];
+		$this->db->where('invo_id', $id);
+		$res = $this->db->get();
+		return $res->result()[0];
 	}
 }
