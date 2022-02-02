@@ -6,7 +6,7 @@ class Settings extends Layout_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->load->library('form_validation');
+
 		$this->load->model('settingmodel/Settingmodel');
 		$this->load->helper('security');
 	}
@@ -23,11 +23,9 @@ class Settings extends Layout_Controller
 
 
 			$this->data = $stdata;
-			//	$this->page = "settings/setting_view";
+
 			$this->page = "settings/list_logo";
 			$this->layout();
-
-			// $this->load->view('asp/create_asp', $ttdata);
 		} else {
 			$this->sess_out();
 		}
@@ -44,8 +42,6 @@ class Settings extends Layout_Controller
 			$this->data = $stdata;
 			$this->page = "settings/add_logo";
 			$this->layout();
-
-			// $this->load->view('asp/create_asp', $ttdata);
 		} else {
 			$this->sess_out();
 		}
@@ -81,7 +77,7 @@ class Settings extends Layout_Controller
 				$data['des_service	'] = $this->input->post('des');
 
 				$fileName = $_FILES['file']['name'];
-				//echo $fileName;die();
+
 				$new_name = time() . $fileName;
 
 				$logo['logo_image'] = $fileName;
@@ -95,16 +91,12 @@ class Settings extends Layout_Controller
 				$config['upload_path']    = './Assets/img/logo/';
 				$config['allowed_types']  = 'gif|jpg|png';
 				$config['file_name']      = $new_name;
-				// $config['max_size']             =100 ;
-				// $config['max_width']            = 1024;
-				// $config['max_height']           = 768;
+
 
 				$this->load->library('upload', $config);
 
 				if (!$this->upload->do_upload('file')) {
 					$error = array('error' => $this->upload->display_errors());
-
-					//	return redirect('newlogo');
 				} else {
 					$data = array('upload_data' => $this->upload->data());
 				}
@@ -150,9 +142,6 @@ class Settings extends Layout_Controller
 			}
 			$logos = $this->session->userdata('company_adrs');
 			return redirect('Settings');
-			//  echo $logos;
-
-
 		} else {
 			$this->sess_out();
 		}
@@ -165,22 +154,13 @@ class Settings extends Layout_Controller
 
 			$id = $this->input->post('lgo_id');
 
-			//echo $id;
-			//die();
+
 			$stdata['username'] = $this->session->userdata('logged_in')['username'];
 			$stdata['email'] = $this->session->userdata('logged_in')['email'];
 			$stdata['infomsg'] = "no";
 			$stdata['title'] = "Settings";
 			$lgdata = $this->Settingmodel->get_data($id);
 			echo json_encode($lgdata);
-			//die();
-
-
-			// $this->data = $stdata;
-			// $this->page = "settings/setting_view";
-			// $this->layout();
-
-			// $this->load->view('asp/create_asp', $ttdata);
 		} else {
 			$this->sess_out();
 		}
@@ -220,7 +200,7 @@ class Settings extends Layout_Controller
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required');
 			$fillImage = $this->input->post('logo_img');
-			
+
 			if ($fillImage == '') {
 				if (empty($_FILES['image_file']['name'])) {
 					$this->form_validation->set_rules('image_file', 'Logo Image', 'required|xss_clean');
@@ -285,7 +265,7 @@ class Settings extends Layout_Controller
 
 				$this->Settingmodel->update_address($address, $logoId);
 			}
-			//return redirect('settings');
+
 			$url = 'settings';
 			echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 		} else {

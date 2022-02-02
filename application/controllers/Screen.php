@@ -10,21 +10,18 @@ class Screen extends Layout_Controller
 
 	public function index()
 	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 
 			$this->load->view('screen/screen_dash');
-		} else 
-		{
+		} else {
 			echo "no";
 		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	public function create_screen()
 	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 
 			$sdata['username'] = $this->session->userdata('logged_in')['username'];
 			$sdata['email'] = $this->session->userdata('logged_in')['email'];
@@ -35,27 +32,21 @@ class Screen extends Layout_Controller
 			$this->data = $sdata;
 			$this->page = "screen/create_screen";
 			$this->layout();
-
-			// $this->load->view('screen/create_screen', $sdata);
-		} 
-		else 
-		{
+		} else {
 			echo "no";
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////
 	public function screen_save()
 	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 			///////////////////////////////////////////////////////			
 
 			$this->form_validation->set_rules('screen_name', 'Screen name', 'trim|required');
 			$this->form_validation->set_rules('city', 'City', 'trim|required');
 			$this->form_validation->set_rules('price', 'Price', 'numeric|required');
 
-			if ($this->form_validation->run() == true) 
-			{
+			if ($this->form_validation->run() == true) {
 
 				$cr_date = date("Y/m/d");
 				$sc_data = array(
@@ -75,13 +66,9 @@ class Screen extends Layout_Controller
 					'sc_cr_date' => $cr_date
 				);
 				$this->screenmodel->insert_screen_data('screen', $sc_data);
-				// redirect($_SERVER['HTTP_REFERER']);
-				//$ttdata['infomsg'] = "yes" ;	
-				//$this->load->view('create_asp',$ttdata);
+
 				$sdata['msg'] = 1;
-			} 
-			else 
-			{
+			} else {
 				$sdata['msg'] = 0;
 			}
 			$sdata['username'] = $this->session->userdata('logged_in')['username'];
@@ -93,12 +80,10 @@ class Screen extends Layout_Controller
 			$this->data = $sdata;
 			$this->page = "screen/create_screen";
 			$this->layout();
-
 		}
 		///////////////////////////////////////////////////////////////////				
 
-		else 
-		{
+		else {
 			$this->sess_out();
 		}
 	}
@@ -106,13 +91,10 @@ class Screen extends Layout_Controller
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	function _alpha_dash_space($str_in = '')
 	{
-		if (!preg_match("/^([-a-z0-9_ ])+$/i", $str_in)) 
-		{
+		if (!preg_match("/^([-a-z0-9_ ])+$/i", $str_in)) {
 			$this->form_validation->set_message('_alpha_dash_space', 'The %s field may only contain alpha-numeric characters, spaces, underscores, and dashes.');
 			return FALSE;
-		} 
-		else 
-		{
+		} else {
 			return TRUE;
 		}
 	}
@@ -123,8 +105,7 @@ class Screen extends Layout_Controller
 	}
 	public function list_screen()
 	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 			$sc_list['username'] = $this->session->userdata('logged_in')['username'];
 			$sc_list['email'] = $this->session->userdata('logged_in')['email'];
 			$sc_list['scdata'] = $this->screenmodel->screen_list_profile();
@@ -133,19 +114,14 @@ class Screen extends Layout_Controller
 			$this->data = $sc_list;
 			$this->page = "screen/list_screen";
 			$this->layout();
-
-			// $this->load->view('screen/list_screen', $sc_list);
-		} 
-		else 
-		{
+		} else {
 			echo "no";
 		}
 	}
 
 	public function screen_edit()
 	{
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 			$sc_id = $this->uri->segment(3);
 			$edit_sc['username'] = $this->session->userdata('logged_in')['username'];
 			$edit_sc['email'] = $this->session->userdata('logged_in')['email'];
@@ -156,26 +132,19 @@ class Screen extends Layout_Controller
 			$this->data = $edit_sc;
 			$this->page = "screen/edit_sc";
 			$this->layout();
-
-			// $this->load->view('screen/edit_sc', $edit_sc);
-
-		} 
-		else 
-		{
+		} else {
 			$this->sess_out();
 		}
 	}
 	public function screen_update()
 	{
 		$scid = $this->input->post('sc_id');
-		if (isset($this->session->userdata['logged_in'])) 
-		{
+		if (isset($this->session->userdata['logged_in'])) {
 			$this->form_validation->set_rules('screen_name', 'Screen name', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('city', 'City', 'trim|required|callback__alpha_dash_space|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('price', 'Price', 'numeric|required|xss_clean');
 
-			if ($this->form_validation->run() == true) 
-			{
+			if ($this->form_validation->run() == true) {
 
 				$cr_date = date("Y/m/d");
 				$sc_data = array(
@@ -195,21 +164,15 @@ class Screen extends Layout_Controller
 					'sc_cr_date' => $cr_date
 				);
 				$this->screenmodel->update_screen_data('screen', $scid, $sc_data);
-				// redirect($_SERVER['HTTP_REFERER']); 
-				// redirect('screen/list_screen');
+
 				$url = 'screen/list_screen';
 				echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
-			} 
-			else 
-			{
+			} else {
 				$sc_list['scdata'] = $this->screenmodel->screen_list_profile();
 				$this->load->view('screen/list_screen', $sc_list);
 			}
-		} 
-		else 
-		{
+		} else {
 			$this->sess_out();
 		}
 	}
-
 }

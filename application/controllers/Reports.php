@@ -46,7 +46,6 @@ class Reports extends Layout_Controller
 
                 if ($report == "advertiser") {
                     $advId = $this->input->post('ad_name');
-                    //$result = $this->Report->advertiserReport('invo_reg_line', $advId);
                     $result = $this->Report->advertiserReport('invoice_reg', $advId);
                     $adv = $this->Report->advertiserName($advId);
 

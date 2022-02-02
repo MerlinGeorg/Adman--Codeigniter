@@ -35,8 +35,6 @@ class Advertiser extends Layout_Controller
 			$this->data = $advdata;
 			$this->page = "advertiser/create_advt";
 			$this->layout();
-
-			// $this->load->view('advertiser/create_advt', $advdata);
 		} else {
 			echo "no";
 		}
@@ -55,9 +53,7 @@ class Advertiser extends Layout_Controller
 			$this->data = $advldata;
 			$this->page = "advertiser/list_advt";
 			$this->layout();
-			// $this->load->view('advertiser/list_advt', $advldata);
-
-
+		
 
 		} else {
 			echo "no";
@@ -150,8 +146,6 @@ class Advertiser extends Layout_Controller
 			$this->page = "advertiser/edit_adv";
 			$this->layout();
 
-			// $this->load->view('advertiser/edit_adv', $edit_adv);
-
 		} else {
 			$this->sess_out();
 		}
@@ -182,8 +176,6 @@ class Advertiser extends Layout_Controller
 
 
 		$this->advertisermodel->update_id('adv_reg', $advid, $adv_dataup);
-	    //$url = base_url() . "advertiser/list_advt";
-		//redirect($url);
 		$url = 'advertiser/list_advt';
 		echo '<script>window.location.href = "' . base_url() . 'index.php?/' . $url . '";</script>';
 	}
