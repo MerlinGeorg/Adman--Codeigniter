@@ -362,10 +362,10 @@
                     </div>
 
 
-                    <div class="panel-heading table-responsive">
+                    <div class="panel-heading ">
 
 
-                        <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="font-size: 10px;">
+                        <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline table-respoonsive" style="font-size: 10px;">
                             <thead>
                                 <tr>
                                     <th>NO:</th>
@@ -379,7 +379,7 @@
                             </tr>
                         </TABLE>
 
-                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
+                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline table-respoonsive" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
 
 
                         </table>
