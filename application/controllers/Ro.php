@@ -99,7 +99,7 @@ class Ro extends Layout_Controller
 					'adv_id' => $ro->adv_id,
 					'asp' => $asp_id,
 					'est_name' => $ro->name,
-					'campaignDuration' => $duration,
+					'campaignDuration' => $duration,//contentDuration
 					'content_id' => $ro->content_id,
 					'package' => $ro->package,
 					'cr_date' => $cr_date,

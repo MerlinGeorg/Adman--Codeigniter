@@ -125,7 +125,7 @@
                                         <label>Campaign Duration</label>
                                         <input class="form-control" name="duration" id="duration" readonly> <!--Weeks-->
                                         <input class="form-control" name="durationHidden" id="durationHidden" style="display: none;"><!--Days-->
-
+                                        <input class="form-control" name="contentDurationHidden" id="contentDurationHidden" style="display: none;">
                                     </div>
 
                                 </div>
@@ -204,8 +204,8 @@
                         </div>
                     </div>
 
-                    <div class="panel-heading table-responsive">
-                        <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="font-size: 10px;">
+                    <div class="panel-heading ">
+                        <TABLE id="dataTable" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline " style="font-size: 10px;">
                             <thead>
                                 <tr>
                                     <th>NO:</th>
@@ -217,14 +217,14 @@
                             </thead>
                             </tr>
                         </TABLE>
-                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
+                        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline " id="dataTable" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;margin-bottom: -14px;">
 
 
                         </table>
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user,ad_date,material); return false;">Save</button>
+                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,contentDurationHidden,user,ad_date,material); return false;">Save</button>
                     </div>
 
                 </div>
@@ -318,6 +318,7 @@
             success: function(data){
                 $('#duration').val(data['tp_name']);
                $('#durationHidden').val(data['days']);
+               $('#contentDurationHidden').val(data['duration']);
 
                days_to_add=$('#durationHidden').val();
                publish_date=$('#ad_date').val();

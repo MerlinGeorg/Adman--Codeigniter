@@ -424,7 +424,7 @@ class Romodel extends CI_Model
 
 	public function getCampaignDuration($asp, $camp)
 	{
-		$this->db->select('days,tp_name');
+		$this->db->select('days,tp_name,duration');
 		$this->db->from('est_line');
 		$this->db->where('est_id', $camp);
 		$this->db->where('est_line.asp', $asp);
