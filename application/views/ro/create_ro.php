@@ -125,7 +125,7 @@
                                         <label>Campaign Duration</label>
                                         <input class="form-control" name="duration" id="duration" readonly> <!--Weeks-->
                                         <input class="form-control" name="durationHidden" id="durationHidden" style="display: none;"><!--Days-->
-
+                                        <input class="form-control" name="contentDurationHidden" id="contentDurationHidden" style="display: none;">
                                     </div>
 
                                 </div>
@@ -224,7 +224,7 @@
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,duration,user,ad_date,material); return false;">Save</button>
+                        <button type="submit" class="btn mt-4 btn-submit" id="savero" onclick="gatherData(campId,aspId,contentDurationHidden,user,ad_date,material); return false;">Save</button>
                     </div>
 
                 </div>
@@ -318,6 +318,7 @@
             success: function(data){
                 $('#duration').val(data['tp_name']);
                $('#durationHidden').val(data['days']);
+               $('#contentDurationHidden').val(data['duration']);
 
                days_to_add=$('#durationHidden').val();
                publish_date=$('#ad_date').val();
