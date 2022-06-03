@@ -46,7 +46,7 @@
                 <div id="page-wrapper">
             <div class="row card">
                 <div class="card-header">
-                    Select Logo
+                    Edit Logo
                     <!-- <a class="js-arrow" href="<?php echo site_url('camp/g')?>">
 <img  src="<?php echo base_url('Assets/img/icon/plus.png'); ?>" class=" img_icon" title="Remove"></a> -->
 
@@ -62,36 +62,25 @@
                             <div class="row">
                                  <div class="col-lg-12 text-center">
                                         <div class="form-group">
-                                            <label>SELECT LOGO</label>
+                                            <label>SELECT USER</label>
                                             <select class="form-control" name="logo" id="logo" onchange="details(this)">
-                                            <option>select your logo</option> 
-                                            <?php if($this->session->userdata('logo_id'))
-                                            {
-                                               $lgid= $this->session->userdata('logo_id')
-                                            ?>
+                                             <option>select your logo</option>
                                             
-                                     <?php foreach($logodata as $list_logo) { ?>
-                                     <option <?php if($lgid==$list_logo['logo_id']) {?> selected <?php } ?> data-subtext="<img width='10px' height='10px''  src='<?=base_url("Assets/img/logo/".$list_logo['logo_name']);?>'>"  
-    value="<?php echo $list_logo['logo_id']; ?>"  ><?php echo $list_logo['company_name']; ?></option>
+                                            
+                                            <?php foreach($logodata->result() as $list_logo) { ?>
+                                     <option data-subtext="<img width='10px' height='10px''  src='<?=base_url("Assets/img/logo/".$list_logo->logo_name);?>'>"  
+    value="<?php echo $list_logo->logo_id; ?>"  ><?php echo $list_logo->company_name; ?></option>
                                           <?php 
                                             }
                                              
-                                            }
-                                            else{
-                                                
-                                            ?>
-                                                
-                                                <?php foreach($logodata as $list_logo) { ?>
-                                                    <option data-subtext="<img width='10px' height='10px''  src='<?=base_url("Assets/img/logo/".$list_logo['logo_name']);?>'>"  
-    value="<?php echo $list_logo['logo_id']; ?>"  ><?php echo $list_logo['company_name']; ?></option>
-                                                    <?php 
-                                                    }
-                                                }
+                                          //  }
+                                            
                                                     ?>
                                             </select>
                                             
                                             <div style="color: red;"><?php echo form_error('asp_name'); ?></div>            
                                         </div>
+                                        
                                 </div>
                                 <div class="col-lg-12 text-center dtlc" id="dtl" style="display:none;">
                                    
@@ -99,6 +88,9 @@
                                 
                                 
                                 <div class="col-lg-12 text-center " id="hidata" style="display:none;">
+                                   
+                                   </div> 
+                                   <div class="col-lg-12 text-center " id="logodata" style="display:none;">
                                    
                                    </div> 
                                 <!-- <div class="alert"></div> -->
@@ -130,7 +122,7 @@
                     </div>
                     <script src="<?php echo base_url('Assets/js/jquery.min.js'); ?>"></script> 
                <script>
-              $(document).ready(function() {
+              $(document).ready(function() {                
                   var loid=$('#logo').val();
                   if (loid != '') {
                                   $.ajax({
@@ -146,6 +138,7 @@
                                             
                                             $("#dtl").html("<img src='<?php echo base_url() ?>/assets/img/logo/"+data.logo_name+"' height='40px' width='40px'> <p style='font-size: 2.0em;'>"+data.company_name+"</p><br><p>"+data.address+"</p>");
                                             $("#hidata").html("<input type='text' name='imgnm' value='"+data.logo_name+"'> <input name='cpmnm' value='"+data.company_name+"'><input name='cmpadrs' value='"+data.address+"'><input name='phone' value='"+data.phone+"'><input name='email' value='"+data.email+"'>");
+                                            $("#logodata").html("<input class='form-control' name='file' id='imgInp' type='file'>");
                                         }
                                     })  
        
@@ -171,7 +164,9 @@
                        
                        $("#dtl").html("<img src='<?php echo base_url() ?>/assets/img/logo/"+data.logo_name+"' height='40px' width='40px'> <p style='font-size: 2.0em;'>"+data.company_name+"</p><br><p>"+data.address+"</p>");
                        $("#hidata").html("<input type='text' name='imgnm' value='"+data.logo_name+"'> <input name='cpmnm' value='"+data.company_name+"'><input name='cmpadrs' value='"+data.address+"'><input name='phone' value='"+data.phone+"'><input name='email' value='"+data.email+"'>");
-                   }
+                       $("#logodata").show();
+                       $("#logodata").html("<div class='form-group'><input class='form-control' name='file' id='imgInp' type='file'></div>");
+                    }
                })       
                
                    

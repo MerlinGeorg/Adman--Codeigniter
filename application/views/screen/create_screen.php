@@ -46,6 +46,11 @@
                 <div class="card-header">
                     Create Screen
                 </div>
+                <?php if($msg==1) { $a = "block";} else { $a = "none" ;} ?>
+					<div class="alert alert-success" style="display:<?php echo $a ; ?>;" >
+						<h5>Screen has been saved</h5>
+                         
+                            </div>
  <!-- /////////////////////////////////////////////////////////.panel-body -->     
   
   <!-- <div class="row"> -->
@@ -106,11 +111,18 @@
                                         </div> 
                                         <div class="col-lg-6">
                                                 <div class="form-group">
+                                                    <label>Web Code</label>
+                                                    <input class="form-control" placeholder="Enter Web code" type="text" name="web_code" value="<?php echo set_value('webcode'); ?>" >
+                                                    <div style="color: red;"><?php echo form_error('webcode'); ?></div>
+                                                </div> 
+                                        </div>
+                                        <div class="col-lg-6">
+                                                <div class="form-group">
                                                     <label>Price</label>
                                                     <input class="form-control" placeholder="Enter Price" type="number" name="price" value="<?php echo set_value('price'); ?>" >
                                                     <div style="color: red;"><?php echo form_error('price'); ?></div>
                                                 </div> 
-                                        </div>
+                                        </div>                                       
                                         <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>CGST</label>
@@ -134,12 +146,11 @@
                                                     <label>Local Tax</label>
                                                     <input class="form-control"  type="number" name="ltax" value="0" >
                                                 </div> 
-                                        </div>
-                                                              
-                                        <div class="col-lg-12">
+                                        </div>                                                              
+                                        <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Screen Info</label>
-                                                    <textarea class="form-control" rows="2" name="screen_info" ></textarea>
+                                                    <textarea class="form-control" rows="1" name="screen_info" ></textarea>
                                                 </div>          
                                         </div>
                                         <div class="col-lg-12 text-center">
@@ -173,3 +184,4 @@
                   
                
 
+                                        </div>

@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8008/adman/';
+$config['base_url'] = 'http://localhost/flotilla/Adman/';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -136,7 +137,7 @@ $config['subclass_prefix'] = 'Layout_';//'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -432,7 +433,7 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

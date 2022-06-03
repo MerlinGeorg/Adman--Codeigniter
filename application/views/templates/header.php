@@ -1,4 +1,22 @@
-        <!-- HEADER MOBILE-->
+<style type="text/css">
+@media screen and (max-width: 992px){
+    #mobileDisplay{
+        display: none;
+    }  
+   /*  #desktopDisplay{
+        display: none;
+    }  */
+}
+@media screen {
+    #mobileDisplay{
+        display: block;
+    }  
+    #desktopDisplay{
+        display: none;
+    } 
+}
+</style>    
+    <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
                 <div class="container-fluid">
@@ -16,7 +34,7 @@
             </div>
             <nav class="navbar-mobile">
                 <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
+                    <ul class="navbar-mobile__list list-unstyled" id="desktopDisplay">
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
@@ -109,6 +127,107 @@
                                 </li>
                             </ul>
                         </li> -->
+                    </ul>
+
+                    <ul class="navbar-mobile__list list-unstyled" id="mobileDisplay">
+                    <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-handshake-o"></i>Campaign</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('camp/create_camp'); ?>">Create Campaign</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('camp/list_estimates'); ?>">Estimates</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('camp/list_outward_invoiced'); ?>">Invoiced</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-clipboard-list"></i>Advertiser</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('advertiser/create_advt'); ?>">Create Advertiser</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('advertiser/list_advt'); ?>">List All Advertisers</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-envelope"></i>ASP</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('asp/create_asp'); ?>">Create ASP</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('asp/list_asp'); ?>">List All ASP</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="far fa-check-square"></i>Release Order</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('ro/create_ro'); ?>">Create Release Orders</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('ro/list_ro'); ?>">List All Release Orders</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('ro/oldlist_ro'); ?>">Old Release Orders</a>
+                                </li>
+                            </ul>    
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-file-alt"></i>Invoice</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                               <li>
+                                    <a href="<?php echo site_url('invoice/create_inward_invoice'); ?>">Create Inward Invoices</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('invoice/list_inward_invoice'); ?>">Inward Invoices</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('invoice/list_outward_invoice'); ?>">Outward Invoices</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Screen</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('screen/create_screen'); ?>">Create Screen</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('screen/list_screen'); ?>">List All Screen</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <!-- <a class="js-arrow" href="<?php //echo site_url('settings'); ?>"> -->
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-cog"></i>Settings</a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('newlogo'); ?>">Add Users</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('settings'); ?>">List Users</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="<?php echo site_url('Reports'); ?>">
+                                <i class="fas fa-copy"></i>Reports</a>
+                        </li>
                     </ul>
                 </div>
             </nav>

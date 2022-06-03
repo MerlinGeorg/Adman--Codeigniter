@@ -66,6 +66,9 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-file-alt"></i>Invoice</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               <li>
+                                    <a href="<?php echo site_url('invoice/create_inward_invoice'); ?>">Create Inward Invoices</a>
+                                </li>
                                 <li>
                                     <a href="<?php echo site_url('invoice/list_inward_invoice'); ?>">Inward Invoices</a>
                                 </li>
@@ -87,11 +90,20 @@
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="<?php echo site_url('settings'); ?>">
+                            <!-- <a class="js-arrow" href="<?php //echo site_url('settings'); ?>"> -->
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-cog"></i>Settings</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="<?php echo site_url('newlogo'); ?>">Add Users</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('settings'); ?>">List Users</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="<?php echo site_url('Reports'); ?>">
                                 <i class="fas fa-copy"></i>Reports</a>
                         </li>
                         <!-- <li class="has-sub">
